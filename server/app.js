@@ -1,5 +1,6 @@
 var _s = {};
 _s.oDirname = __dirname; // current dir
+console.log(_s.oDirname);
 _s.oServerN = process.argv[3]; // severName - not required
 _s.port = process.argv[2] || 8001; // server port - required
 _s.oReq = require('./lib/requiredFiles.js')(); // require files.
