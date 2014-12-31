@@ -171,7 +171,7 @@ _s.oReq.http.listen(_s.port || 8000, function(){
 
 
 
-
+/*
 var s = {
     oReq : require('./lib/requiredFiles.js'),
     oGlobal : require('./lib/serverGlobal.js'),
