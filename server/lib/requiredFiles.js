@@ -12,7 +12,6 @@ module.exports = function(){
     this.primusRooms = require('primus-rooms');
     this.primusResource = require('primus-resource');
     this.primusMultiplex = require('primus-multiplex');
-    this.io = require('socket.io');
     this.Promise = require('bluebird');
     this.mongoose = this.Promise.promisifyAll(require('mongoose'));
     this.redis = require('redis');
