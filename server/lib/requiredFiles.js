@@ -5,6 +5,7 @@ module.exports = function(){
     this.fs = require('fs');
     this.app = this.express();
     this.http = require('http').Server(this.app);
+    this.path = require('path');
     this.jade = require('jade');
     this.Primus = require('primus');
     this.primusCluster = require('primus-cluster');
