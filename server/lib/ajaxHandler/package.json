@@ -1,0 +1,17 @@
+{
+    "name": "ajaxHandler",
+    "version": "0.0.0",
+    "description": "DSP API CLASS",
+    "main": "ajaxHandler.js",
+    "scripts": {
+        "test": "(none)"
+    },
+    "repository": {
+        "type": "git",
+        "url": "(non)"
+    },
+    "dependencies": {
+    },
+    "author": "yaniv kalfa",
+    "license": "IT"
+}

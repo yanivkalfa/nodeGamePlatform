@@ -1,0 +1,137 @@
+.pageWrap{
+    width:800px;
+    height:600px;
+    margin:0 auto;
+    border:1px solid black;
+    background-color: #F3CF55;
+}
+.leftSite{
+    float:left;
+    width:648px;
+    height:537px;
+}
+.rightSide{
+    float:left;
+    width:149px;
+    height:537px;
+    border-left:1px solid black;
+    background-color: #F3CF55;
+}
+.loginWrap{
+    width:200px;
+    height:100px;
+    margin:250px auto;
+}
+
+.loadingWrap{
+    width:200px;
+    height:100px;
+    margin:250px auto;
+}
+
+.displayNone{
+    display: none;
+}
+.msgWrap{
+    width:100%;
+    height:487px;
+    border-bottom:1px solid black;
+    background-color: #FFFEAD;
+    overflow: auto;
+}
+.msgWrap ul{
+    width:100%;
+    margin:0px;
+    padding:0px;
+}
+
+.msgWrap ul li{
+    margin-left:10px;
+    list-style: none;
+    padding:1px 0px;
+    font-size: 12px;
+    font-weight: 600;
+}
+
+.inputWrap{
+    width:100%;
+    height:50px;
+}
+
+.msg{
+    height: 43px;
+    width: 80%;
+}
+.submitMsg{
+    height: 49px;
+    width: 19%;
+}
+
+.fLeft, .fRight{
+    padding:1px 10px;
+}
+
+.fLeft{
+    float:left;
+}
+
+.fRight{
+    float:right;
+}
+
+.fLeft img {
+    float:left;
+}
+.clearFix{
+    clear:both;
+ }
+.statusBar {
+    border-bottom: 1px solid black;
+    padding: 2px 0px;
+    font-size: 14px;
+}
+
+.logout{
+    cursor: pointer;
+    color: cornflowerblue;
+    text-decoration: underline;
+}
+
+ul.stats,
+ul.singlePlayerGamesList,
+ul.multiPlayerGamesList
+{
+    position: absolute;
+    background-color: #F3CF55;
+    margin: -2px 0px 0px;
+    list-style: none outside none;
+    padding: 5px;
+    z-index: 9999999999;
+}
+
+ul.stats li,
+ul.singlePlayerGamesList li,
+ul.multiPlayerGamesList li{
+    margin-bottom: 5px;
+    padding: 0px 10px;
+}
+.msgSegment{
+    margin-right:10px;
+}
+
+.roomNotification{
+    display: inline-block;
+    margin-left: 3px;
+}
+
+.leaveRoom {
+    cursor: pointer;
+    display: inline-block;
+    margin-left: 15px;
+    padding: 0 5px;
+    background-color: lightgrey;
+}
+
+.leaveRoom:hover {
+    background-color: lightgreen;
+}

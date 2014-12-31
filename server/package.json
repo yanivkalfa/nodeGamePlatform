@@ -1,0 +1,32 @@
+{
+    "name": "nodeGamePlatform",
+    "version": "0.0.1",
+    "description": "Node Game Platform",
+    "dependencies": {
+        "jsonwebtoken" : "~3.2.0",
+        "lodash" : "~2.4.1",
+        "mongoose" : "~3.8.21",
+        "redis" : "~0.12.1",
+        "connect-redis" : "~2.1.0",
+        "express": "~4.10.6",
+        "express-session" : "~1.9.3",
+        "jade": "~1.6.0",
+        "body-parser": "~1.10.0",
+        "primus": "~2.4.12",
+        "primus-cluster" : "~1.1.0",
+        "primus-emitter" : "~3.0.3",
+        "primus-rooms" : "~3.1.0",
+        "primus-resource" : "~2.0.6",
+        "primus-multiplex" : "~3.0.3",
+        "engine.io": "~1.4.3",
+        "bluebird" : "~2.5.3"
+    },
+    "repository": {
+        "type" : "git",
+        "url" : "https://github.com/yanivkalfa/nodeGamePlatform.git"
+    },
+    "author": {
+        "name" : "Yaniv Kalfa",
+        "email" : "netameta1@yahoo.com"
+    }
+}
