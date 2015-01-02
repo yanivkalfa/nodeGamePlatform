@@ -25,65 +25,27 @@ module.exports = function(_s){
     });
 
     _s.oReq.app.get('/css/:name', function (req, res) {
-        console.log(_s.sClientDirname + '/css/' + req.params.name);
-
-        _s.oReq.fs.exists(_s.sClientDirname + '/css/' + req.params.name, function(exists) {
-            if (exists) {
-                res.sendFile(_s.sClientDirname + '/css/' + req.params.name);
-            }
-            else
-            {
-                res.status(404).send('404 page !!!!');
-            }
-        });
+        _s.uf.routFiles(req, res, '/css/', req.params.name);
     });
 
     _s.oReq.app.get('/css/images/:name', function (req, res) {
-        _s.oReq.fs.exists(_s.sClientDirname + '/css/images/' + req.params.name, function(exists) {
-            if (exists) {
-                res.sendFile(_s.sClientDirname + '/css/images/' + req.params.name);
-            }
-            else
-            {
-                res.status(404).send('404 page !!!!');
-            }
-        });
+        _s.uf.routFiles(req, res, '/css/images/', req.params.name);
     });
 
     _s.oReq.app.get('/images/:name', function (req, res) {
-        _s.oReq.fs.exists(_s.sClientDirname + '/images/' + req.params.name, function(exists) {
-            if (exists) {
-                res.sendFile(_s.sClientDirname + '/images/' + req.params.name);
-            }
-            else
-            {
-                res.status(404).send('404 page !!!!');
-            }
-        });
+        _s.uf.routFiles(req, res, '/images/', req.params.name);
     });
 
     _s.oReq.app.get('/js/:name', function (req, res) {
-        _s.oReq.fs.exists(_s.sClientDirname + '/js/' + req.params.name, function(exists) {
-            if (exists) {
-                res.sendFile(_s.sClientDirname + '/js/' + req.params.name);
-            }
-            else
-            {
-                res.status(404).send('404 page !!!!');
-            }
-        });
+        _s.uf.routFiles(req, res, '/js/', req.params.name);
+    });
+
+    _s.oReq.app.get('/lib/:name', function (req, res) {
+        _s.uf.routFiles(req, res, '/lib/', req.params.name);
     });
 
     _s.oReq.app.get('/js/lib/:name', function (req, res) {
-        _s.oReq.fs.exists(_s.sClientDirname + '/js/lib/' + req.params.name, function(exists) {
-            if (exists) {
-                res.sendFile(_s.sClientDirname + '/js/lib/' + req.params.name);
-            }
-            else
-            {
-                res.status(404).send('404 page !!!!');
-            }
-        });
+        _s.uf.routFiles(req, res, '/js/lib/', req.params.name);
     });
 
 
