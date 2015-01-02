@@ -3,12 +3,13 @@ module.exports = function(_s){
 
     _s.oReq.app.use(_s.oReq.bodyParser.json());
     _s.oReq.app.use(_s.oReq.bodyParser.urlencoded({ extended: true }));
+    /*
     _s.oReq.app.use(_s.oReq.express.static(_s.sClientDirname + '/css'));
     _s.oReq.app.use(_s.oReq.express.static(_s.sClientDirname + '/js'));
     _s.oReq.app.use(_s.oReq.express.static(_s.sClientDirname + '/lib'));
     _s.oReq.app.use(_s.oReq.express.static(_s.sClientDirname + '/api'));
-    _s.oReq.app.use(_s.oReq.express.static(_s.sClientDirname + '/api/'));
-    //_s.oReq.app.use(_s.oReq.express.static(_s.sClientDirname));
+    _s.oReq.app.use(_s.oReq.express.static(_s.sClientDirname + '/api/'));*/
+    _s.oReq.app.use(_s.oReq.express.static(_s.sClientDirname));
 
 
     _s.oReq.app.set('views', _s.sServerDirname + '/tpl');
@@ -27,7 +28,7 @@ module.exports = function(_s){
             }
         });
     });
-
+    /*
     _s.oReq.app.get('/css/:name', function (req, res) {
         _s.uf.routFiles(req, res, '/css/', req.params.name);
     });
@@ -50,7 +51,7 @@ module.exports = function(_s){
 
     _s.oReq.app.get('/js/lib/:name', function (req, res) {
         _s.uf.routFiles(req, res, '/js/lib/', req.params.name);
-    });
+    });*/
 
 
     _s.oReq.app.get("/", function(req, res){
