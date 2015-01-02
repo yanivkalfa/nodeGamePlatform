@@ -23,8 +23,10 @@ module.exports = function(_s){
             }
         });
     });
-    console.log(_s.sCliDirname);
+
     _s.oReq.app.get('/css/:name', function (req, res) {
+        console.log(_s.sCliDirname + '/css/' + req.params.name);
+
         _s.oReq.fs.exists(_s.sCliDirname + '/css/' + req.params.name, function(exists) {
             if (exists) {
                 res.sendFile(_s.sCliDirname + '/css/' + req.params.name);
