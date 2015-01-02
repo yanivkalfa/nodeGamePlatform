@@ -1,3 +1,4 @@
+/*
 angular.module(ngp.const.app.name, ['ui.router'])
     .config(['$stateProvider', '$urlRouterProvider',
         function($stateProvider, $urlRouterProvider) {
@@ -92,5 +93,5 @@ angular.module(ngp.const.app.name, ['ui.router'])
                 }
             });
         }
-    ]);
+    ]);*/
 
