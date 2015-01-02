@@ -8,6 +8,7 @@ module.exports = function(_s){
 
 
     _s.oReq.app.set('views', _s.sSerDirname + '/tpl');
+
     _s.oReq.app.set('view engine', "jade");
     _s.oReq.app.engine('jade', _s.oReq.jade.__express);
 
