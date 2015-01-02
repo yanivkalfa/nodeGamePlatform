@@ -30,9 +30,22 @@ module.exports = function(_s){
 
         res.render('main');
     });
-
+    /*
     _s.oReq.app.get('/login', function (req, res) {
         res.render('login');
+    });*/
+
+    _s.oReq.app.get('/contents/:content', function (req, res) {
+        console.log('posted');
+        if(_s.uf.loginRequired(req.params.content)){
+            if(_s.uf.isLoggedIn()){
+                res.render('/contents/' + req.params.content + '.jade');
+            }else{
+                res.status(404);
+            }
+        }else{
+            res.render('/contents/' + req.params.content + '.jade');
+        }
     });
 
     _s.oReq.app.post('/login', function (req, res) {
@@ -65,19 +78,6 @@ module.exports = function(_s){
         });
 
         res.redirect('/');
-    });
-
-    _s.oReq.app.get('/contents/:content', function (req, res) {
-        console.log('posted');
-        if(_s.uf.loginRequired(req.params.content)){
-            if(_s.uf.isLoggedIn()){
-                res.render('/contents/' + req.params.content + '.jade');
-            }else{
-                res.status(404);
-            }
-        }else{
-            res.render('/contents/' + req.params.content + '.jade');
-        }
     });
 
 

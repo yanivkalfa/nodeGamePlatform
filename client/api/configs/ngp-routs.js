@@ -3,8 +3,6 @@ angular.module(ngp.const.app.name)
 
 function siteRouts($stateProvider, $urlRouterProvider) {
 
-    console.log('asasfasdf');
-
     $urlRouterProvider.otherwise('/');
 
     $stateProvider.state('home', {
