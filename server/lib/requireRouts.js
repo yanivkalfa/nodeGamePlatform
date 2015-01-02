@@ -6,7 +6,7 @@ module.exports = function(_s){
     _s.oReq.app.use(_s.oReq.express.static(_s.sClientDirname + '/css'));
     _s.oReq.app.use(_s.oReq.express.static(_s.sClientDirname + '/js'));
     _s.oReq.app.use(_s.oReq.express.static(_s.sClientDirname + '/api'));
-    _s.oReq.app.use(_s.oReq.express.static(_s.sClientDirname));
+    //_s.oReq.app.use(_s.oReq.express.static(_s.sClientDirname));
 
 
     _s.oReq.app.set('views', _s.sServerDirname + '/tpl');
