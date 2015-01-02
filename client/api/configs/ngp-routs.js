@@ -1,4 +1,4 @@
-angular.module(ngp.const.app.name, ['ui.router'])
+angular.module(ngp.const.app.name)
     .config(['$stateProvider', '$urlRouterProvider', siteRouts]);
 
 function siteRouts ($stateProvider, $urlRouterProvider) {
