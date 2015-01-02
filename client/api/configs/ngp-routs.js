@@ -3,6 +3,8 @@ angular.module('main', ['ui.router'])
 
 function siteRouts ($stateProvider, $urlRouterProvider) {
 
+    console.log('asasfasdf');
+
     $urlRouterProvider.otherwise('/');
 
     $stateProvider.state('home', {
