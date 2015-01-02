@@ -1,7 +1,7 @@
 /**
  * Created by Yaniv-Kalfa on 1/2/15.
  */
-angular.module('main', ['ui.router']).factory('principal', [
+angular.module(ngp.const.app.name, ['ui.router']).factory('principal', [
     '$q',
     '$http',
     '$timeout',

@@ -2,7 +2,7 @@
  * Created by Yaniv-Kalfa on 1/2/15.
  */
 
-angular.module('main', ['ui.router']).factory('authorization', [
+angular.module(ngp.const.app.name, ['ui.router']).factory('authorization', [
     '$rootScope',
     '$state',
     'principal',
