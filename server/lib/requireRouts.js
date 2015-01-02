@@ -39,12 +39,12 @@ module.exports = function(_s){
         console.log('posted');
         if(_s.uf.loginRequired(req.params.content)){
             if(_s.uf.isLoggedIn()){
-                res.render('/contents/' + req.params.content + '.jade');
+                res.render(_s.sServerDirname + '/tpl/contents/' + req.params.content + '.jade');
             }else{
                 res.status(404);
             }
         }else{
-            res.render('/contents/' + req.params.content + '.jade');
+            res.render(_s.sServerDirname + '/tpl/contents/' + req.params.content + '.jade');
         }
     });
 
