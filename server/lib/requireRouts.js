@@ -68,6 +68,7 @@ module.exports = function(_s){
     });
 
     _s.oReq.app.post('/contents/:content', function (req, res) {
+        console.log('posted');
         if(_s.uf.loginRequired(req.params.content)){
             if(_s.uf.isLoggedIn()){
                 res.render('/contents/' + req.params.content + '.jade');
