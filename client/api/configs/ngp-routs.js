@@ -1,7 +1,7 @@
-angular.module(ngp.const.app.name)
+angular.module(ngp.const.app.name, ['ui.router'])
     .config(['$stateProvider', '$urlRouterProvider', siteRouts]);
 
-function siteRouts ($stateProvider, $urlRouterProvider) {
+function siteRouts($stateProvider, $urlRouterProvider) {
 
     console.log('asasfasdf');
 
