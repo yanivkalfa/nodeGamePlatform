@@ -1,12 +1,13 @@
 /**
  * Created by Yaniv-Kalfa on 1/2/15.
  */
-angular.module(ngp.const.app.name).factory('principal', [
-    '$q',
-    '$http',
-    '$timeout',
-    principalFactory
-]);
+angular.module(ngp.const.app.name)
+    .factory('principal', [
+        '$q',
+        '$http',
+        '$timeout',
+        principalFactory
+    ]);
 
 function principalFactory($q, $http, $timeout) {
     var _identity = undefined,
