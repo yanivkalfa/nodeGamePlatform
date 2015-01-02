@@ -1,6 +1,14 @@
 module.exports = function(_s){
     return {
 
+        isLoggedIn : function(){
+            return true;
+        },
+
+        loginRequired : function(path){
+            return false;
+        },
+
         login : function(credentials){
             console.log(credentials);
             return new _s.oReq.Promise(function(resolve, reject) {
