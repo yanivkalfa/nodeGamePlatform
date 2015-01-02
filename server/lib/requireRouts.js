@@ -3,17 +3,10 @@ module.exports = function(_s){
 
     _s.oReq.app.use(_s.oReq.bodyParser.json());
     _s.oReq.app.use(_s.oReq.bodyParser.urlencoded({ extended: true }));
-    /*
-    _s.oReq.app.use(_s.oReq.express.static(_s.sClientDirname + '/css'));
-    _s.oReq.app.use(_s.oReq.express.static(_s.sClientDirname + '/js'));
-    _s.oReq.app.use(_s.oReq.express.static(_s.sClientDirname + '/lib'));
-    _s.oReq.app.use(_s.oReq.express.static(_s.sClientDirname + '/api'));
-    _s.oReq.app.use(_s.oReq.express.static(_s.sClientDirname + '/api/'));*/
     _s.oReq.app.use(_s.oReq.express.static(_s.sClientDirname));
 
 
     _s.oReq.app.set('views', _s.sServerDirname + '/tpl');
-
     _s.oReq.app.set('view engine', "jade");
     _s.oReq.app.engine('jade', _s.oReq.jade.__express);
 
@@ -28,31 +21,6 @@ module.exports = function(_s){
             }
         });
     });
-    /*
-    _s.oReq.app.get('/css/:name', function (req, res) {
-        _s.uf.routFiles(req, res, '/css/', req.params.name);
-    });
-
-    _s.oReq.app.get('/css/images/:name', function (req, res) {
-        _s.uf.routFiles(req, res, '/css/images/', req.params.name);
-    });
-
-    _s.oReq.app.get('/images/:name', function (req, res) {
-        _s.uf.routFiles(req, res, '/images/', req.params.name);
-    });
-
-    _s.oReq.app.get('/js/:name', function (req, res) {
-        _s.uf.routFiles(req, res, '/js/', req.params.name);
-    });
-
-    _s.oReq.app.get('/lib/:name', function (req, res) {
-        _s.uf.routFiles(req, res, '/lib/', req.params.name);
-    });
-
-    _s.oReq.app.get('/js/lib/:name', function (req, res) {
-        _s.uf.routFiles(req, res, '/js/lib/', req.params.name);
-    });*/
-
 
     _s.oReq.app.get("/", function(req, res){
         res.locals.user = {};
@@ -99,7 +67,6 @@ module.exports = function(_s){
         res.redirect('/');
     });
 
-    /*
     _s.oReq.app.post('/contents/:content', function (req, res) {
         if(_s.uf.loginRequired(req.params.content)){
             if(_s.uf.isLoggedIn()){
@@ -110,7 +77,7 @@ module.exports = function(_s){
         }else{
             res.render('/contents/' + req.params.content + '.jade');
         }
-    });*/
+    });
 
 
 

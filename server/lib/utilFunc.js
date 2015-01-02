@@ -19,6 +19,7 @@ module.exports = function(_s){
             });
         },
 
+        /*
         routFiles : function(req, res, location, fileName){
             _s.oReq.fs.exists(_s.sClientDirname + location + fileName, function(exists) {
                 if (exists) {
@@ -29,7 +30,7 @@ module.exports = function(_s){
                     res.status(404).send('404 page !!!!');
                 }
             });
-        },
+        },*/
 
         CallRouter : function(oSocket){
             var _this = this;
