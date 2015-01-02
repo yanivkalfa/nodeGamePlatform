@@ -3,8 +3,8 @@ module.exports = function(_s){
 
     _s.oReq.app.use(_s.oReq.bodyParser.json());
     _s.oReq.app.use(_s.oReq.bodyParser.urlencoded({ extended: true }));
-    _s.oReq.app.use(_s.oReq.express.static(_s.sClientDirname + '/css'));
-    _s.oReq.app.use(_s.oReq.express.static(_s.sClientDirname + '/js'));
+    //_s.oReq.app.use(_s.oReq.express.static(_s.sClientDirname + '/css'));
+    //_s.oReq.app.use(_s.oReq.express.static(_s.sClientDirname + '/js'));
 
 
     _s.oReq.app.set('views', _s.sServerDirname + '/tpl');
@@ -132,6 +132,7 @@ module.exports = function(_s){
         res.redirect('/');
     });
 
+    /*
     _s.oReq.app.post('/contents/:content', function (req, res) {
         if(_s.uf.loginRequired(req.params.content)){
             if(_s.uf.isLoggedIn()){
@@ -142,7 +143,7 @@ module.exports = function(_s){
         }else{
             res.render('/contents/' + req.params.content + '.jade');
         }
-    });
+    });*/
 
 
 
