@@ -33,7 +33,7 @@ module.exports = function(_s){
             }
             else
             {
-                res.status(403).send('404 page !!!!');
+                res.status(404).send('404 page !!!!');
             }
         });
     });
