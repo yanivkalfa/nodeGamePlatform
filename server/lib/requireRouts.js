@@ -3,18 +3,18 @@ module.exports = function(_s){
 
     _s.oReq.app.use(_s.oReq.bodyParser.json());
     _s.oReq.app.use(_s.oReq.bodyParser.urlencoded({ extended: true }));
-    _s.oReq.app.use(_s.oReq.express.static(_s.oDirname + '/css'));
-    _s.oReq.app.use(_s.oReq.express.static(_s.oDirname + '/js'));
+    _s.oReq.app.use(_s.oReq.express.static(_s.sCliDirname + '/css'));
+    _s.oReq.app.use(_s.oReq.express.static(_s.sCliDirname + '/js'));
 
 
-    _s.oReq.app.set('views', _s.oDirname + '/tpl');
+    _s.oReq.app.set('views', _s.sCliDirname + '/tpl');
     _s.oReq.app.set('view engine', "jade");
     _s.oReq.app.engine('jade', _s.oReq.jade.__express);
 
     _s.oReq.app.get('/assets/:name', function (req, res) {
-        _s.oReq.fs.exists(_s.oDirname + '/assets/' + req.params.name, function(exists) {
+        _s.oReq.fs.exists(_s.sCliDirname + '/assets/' + req.params.name, function(exists) {
             if (exists) {
-                res.sendFile(_s.oDirname + '/assets/' + req.params.name);
+                res.sendFile(_s.sCliDirname + '/assets/' + req.params.name);
             }
             else
             {
@@ -24,9 +24,9 @@ module.exports = function(_s){
     });
 
     _s.oReq.app.get('/css/:name', function (req, res) {
-        _s.oReq.fs.exists(_s.oDirname + '/css/' + req.params.name, function(exists) {
+        _s.oReq.fs.exists(_s.sCliDirname + '/css/' + req.params.name, function(exists) {
             if (exists) {
-                res.sendFile(_s.oDirname + '/css/' + req.params.name);
+                res.sendFile(_s.sCliDirname + '/css/' + req.params.name);
             }
             else
             {
@@ -36,9 +36,9 @@ module.exports = function(_s){
     });
 
     _s.oReq.app.get('/css/images/:name', function (req, res) {
-        _s.oReq.fs.exists(_s.oDirname + '/css/images/' + req.params.name, function(exists) {
+        _s.oReq.fs.exists(_s.sCliDirname + '/css/images/' + req.params.name, function(exists) {
             if (exists) {
-                res.sendFile(_s.oDirname + '/css/images/' + req.params.name);
+                res.sendFile(_s.sCliDirname + '/css/images/' + req.params.name);
             }
             else
             {
@@ -48,9 +48,9 @@ module.exports = function(_s){
     });
 
     _s.oReq.app.get('/images/:name', function (req, res) {
-        _s.oReq.fs.exists(_s.oDirname + '/images/' + req.params.name, function(exists) {
+        _s.oReq.fs.exists(_s.sCliDirname + '/images/' + req.params.name, function(exists) {
             if (exists) {
-                res.sendFile(_s.oDirname + '/images/' + req.params.name);
+                res.sendFile(_s.sCliDirname + '/images/' + req.params.name);
             }
             else
             {
@@ -60,9 +60,9 @@ module.exports = function(_s){
     });
 
     _s.oReq.app.get('/js/:name', function (req, res) {
-        _s.oReq.fs.exists(_s.oDirname + '/js/' + req.params.name, function(exists) {
+        _s.oReq.fs.exists(_s.sCliDirname + '/js/' + req.params.name, function(exists) {
             if (exists) {
-                res.sendFile(_s.oDirname + '/js/' + req.params.name);
+                res.sendFile(_s.sCliDirname + '/js/' + req.params.name);
             }
             else
             {
@@ -72,9 +72,9 @@ module.exports = function(_s){
     });
 
     _s.oReq.app.get('/js/lib/:name', function (req, res) {
-        _s.oReq.fs.exists(_s.oDirname + '/js/lib/' + req.params.name, function(exists) {
+        _s.oReq.fs.exists(_s.sCliDirname + '/js/lib/' + req.params.name, function(exists) {
             if (exists) {
-                res.sendFile(_s.oDirname + '/js/lib/' + req.params.name);
+                res.sendFile(_s.sCliDirname + '/js/lib/' + req.params.name);
             }
             else
             {
