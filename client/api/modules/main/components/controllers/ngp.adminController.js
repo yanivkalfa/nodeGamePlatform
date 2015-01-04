@@ -2,10 +2,10 @@
  * Created by Yaniv-Kalfa on 1/2/15.
  */
 angular.module(ngp.const.app.name)
-    .controller('homeController', [
+    .controller('adminController', [
         '$scope',
         '$state',
-        homeController
+        adminController
     ]);
 
-function homeController($scope, $state, principal) {}
+function adminController($scope, $state, principal) {}

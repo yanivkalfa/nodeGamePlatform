@@ -1,2 +1,36 @@
-div(class="someclass") whatever mother fucker
-
+div.pageWrap
+    div(class="gameWrap displayNone")
+    div(class="loadingWrap displayNone")
+        p Loading...
+        img(src="http://something.com/ajaxloader")
+    div(class="loginWrap displayNone")
+        label(for="nickname") Please choose nickname:
+        br
+        input(type="text" id="nickname" name="nickname" placeholder="Nickname")
+        br
+        button(id="submit" name="submit") Submit
+    div(class="statusBar displayNone")
+        div(class="userDetails fLeft") Hey&nbsp;
+            span(class="userNickName" id="userNickName")
+        div(class="singlePlayer fLeft")
+            img(src="http://something.com")
+            span(class="singlePlayerLabel") play Single Player
+            ul(class="singlePlayerGamesList fLeft displayNone")
+        div(class="multiPlayer fLeft")
+            img(src="http://something.com")
+            span(class="multiPlayerLabel") Queue for MultiPlayer
+            ul(class="multiPlayerGamesList fLeft displayNone")
+        div(class="statsDiv fLeft") Stats
+            ul(class="stats fLeft displayNone")
+                li latency:&nbsp;
+                    span(class="latency" id="latency")
+                li Total Members:&nbsp;
+                    span(class="totalMembers" id="totalMembers")
+                li Total Games:&nbsp;
+                    span(class="totalGames" id="totalGames")
+        div(class="serverTimeWrap fLeft") Server Time:&nbsp;
+            span(class="serverTime")
+        div(class="logout fRight") Logout
+        div.clearFix
+    div(class="tabs displayNone" id="tabs")
+        ul.tabsContainer

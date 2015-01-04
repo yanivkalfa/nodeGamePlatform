@@ -2,10 +2,10 @@
  * Created by Yaniv-Kalfa on 1/2/15.
  */
 angular.module(ngp.const.app.name)
-    .controller('homeController', [
+    .controller('gameController', [
         '$scope',
         '$state',
-        homeController
+        gameController
     ]);
 
-function homeController($scope, $state, principal) {}
+function gameController($scope, $state, principal) {}
