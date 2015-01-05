@@ -79,6 +79,13 @@ module.exports = function(_s){
         res.redirect('/');
     });
 
+    _s.oReq.app.get('/*', function (req, res) {
+        res.locals.user = {};
+        if(req.session.user){
+            res.locals.user = req.session.user;
+        }
 
+        res.render('main');
+    });
 
 };
