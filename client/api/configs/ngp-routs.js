@@ -1,7 +1,9 @@
 angular.module(ngp.const.app.name)
-    .config(['$stateProvider', '$urlRouterProvider', siteRouts]);
+    .config(['$stateProvider', '$urlRouterProvider', '$locationProvider', siteRouts]);
 
-function siteRouts($stateProvider, $urlRouterProvider) {
+function siteRouts($stateProvider, $urlRouterProvider, $locationProvider) {
+
+    $locationProvider.html5Mode(true);
 
     $urlRouterProvider.otherwise('/');
 
