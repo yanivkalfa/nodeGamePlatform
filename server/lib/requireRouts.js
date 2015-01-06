@@ -33,6 +33,15 @@ module.exports = function(_s){
         res.render('main');
     });*/
 
+    _s.oReq.app.get('/ajaxHandler', function (req, res) {
+        res.json({req:req, res:res});
+    });
+
+    _s.oReq.app.post('/ajaxHandler', function (req, res) {
+        res.json({req:req, res:res});
+    });
+
+
     _s.oReq.app.get('/contents/:content', function (req, res) {
         if(_s.uf.loginRequired(req.params.content)){
             if(_s.uf.isLoggedIn()){
