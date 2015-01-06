@@ -8,7 +8,8 @@
     ngp.const = {
         app: {
             name: 'node-game-platform',
-            url : 'http://mygametests.info'
+            url : 'http://mygametests.info',
+            ajaxUrl : 'http://mygametests.info/ajaxHandler'
         }
     };
 }(window));
