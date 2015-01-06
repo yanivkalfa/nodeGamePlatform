@@ -34,11 +34,12 @@ module.exports = function(_s){
     });*/
 
     _s.oReq.app.get('/ajaxHandler', function (req, res) {
-        res.json({req:req, res:res});
+        console.log('got here');
+        res.json(req);
     });
 
     _s.oReq.app.post('/ajaxHandler', function (req, res) {
-        res.json({req:req, res:res});
+        res.json(req);
     });
 
 
@@ -96,22 +97,3 @@ module.exports = function(_s){
     });
 
 };
-
-
-function intHostGet(host){
-    var deferred = $q.defer();
-
-    Inthosts.get({inthostId: host._id}, function(host){
-        deferred.resolve(host);
-    });
-
-    return deferred.promise;
-}
-
-function getHosts(hosts) {
-    var promises = hosts.map(function(host) {
-        return intHostGet(host);
-    });
-
-    return $q.all(promises);
-}

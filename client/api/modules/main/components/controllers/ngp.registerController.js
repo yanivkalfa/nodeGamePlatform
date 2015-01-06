@@ -19,7 +19,10 @@ function registerController($scope, $state, $location, apiFactory) {
 
     function RegisterController(){
         this.api = apiFactory.createNewApi(ngp.const.app.ajaxUrl, 'get');
-        console.log(this.api.doRequest());
+        this.api.doRequest().then(function(a,b,c,d,e){
+            console.log(a,b,c,d,e);
+        });
+
     }
     RegisterController.prototype.printSomething = function(){};
 
