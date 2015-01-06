@@ -12,21 +12,21 @@ angular.module(ngp.const.app.name)
 
 function apiFactory($http, $q) {
 
-    function ApiFunction(method,url,params,options){
-        this._method = method || false;
+    function ApiFunction(url, method, params, options){
         this._url = url || false;
+        this._method = method || false;
         this._params = params || false;
         this._options = options || false;
     }
 
     ApiFunction.prototype = {
         setOptions : function(options){ this._options = options; },
-        setMethod : function(method){ this._method = method; },
         setURL : function(url){ this._url = url; },
+        setMethod : function(method){ this._method = method; },
         setParams : function(params){ this._params = params; },
         getOptions : function(){ return this._options; },
-        getMethod : function(){ return this._method; },
         getURL : function(){ return this._url; },
+        getMethod : function(){ return this._method; },
         getParams : function(){ return this._params; },
         doRequest : function(succ,err){
             var deferred = $q.defer();
@@ -42,7 +42,7 @@ function apiFactory($http, $q) {
             {
                 $http(this._options).success(succ).error(err);
             }
-            else if(this._method && this._url)
+            else if(this._url && this._method)
             {
                 $http[this._method](this._url, this._params).success(succ).error(err);
             }
@@ -51,5 +51,5 @@ function apiFactory($http, $q) {
         }
     };
 
-    return { createNewApi : function(method,url,params,options){ return new ApiFunction(method,url,params,options); } }
+    return { createNewApi : function(url, method, params, options){ return new ApiFunction(url, method, params, options); } }
 }
