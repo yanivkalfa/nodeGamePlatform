@@ -18,9 +18,11 @@ function registerController($scope, $state, $location, apiFactory) {
 
     function RegisterController(){
         this.something = 'something';
+
+        console.log(this);
     }
     RegisterController.prototype.printSomething = function(){
-        console.log(this.something, this);
+        console.log(this.something);
     };
 
     return new RegisterController();
