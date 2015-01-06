@@ -4,32 +4,46 @@
 
 angular.module(ngp.const.app.name)
     .factory('apiFactory', [
-        '$rootScope',
+        '$http',
+        '$q',
         '$state',
-        'principal',
+        '$location',
         apiFactory
     ]);
 
-function apiFactory($rootScope, $state, principal) {
+function apiFactory($http, $q) {
+
+    var _method, _url, _params = false, _options = false;
+
     return {
-        authorize: function() {
-            return principal.identity()
-                .then(function() {
-                    var isAuthenticated = principal.isAuthenticated();
+        setOptions : function(options){ _options = options; },
+        setMethod : function(method){ _method = method; },
+        setURL : function(url){ _url = url; },
+        setParams : function(params){ _params = params; },
+        getMethod : function(){ return _method; },
+        getOptions : function(){ return _options; },
+        getURL : function(){ return _url; },
+        getParams : function(){ return _params; },
+        doRequest : function(succ,err){
+            var deferred = $q.defer();
 
-                    if ($rootScope.toState.data.roles && $rootScope.toState.data.roles.length > 0 && !principal.isInAnyRole($rootScope.toState.data.roles)) {
-                        if (isAuthenticated) $state.go('accessdenied'); // user is signed in but not authorized for desired state
-                        else {
-                            // user is not authenticated. stow the state they wanted before you
-                            // send them to the signin state, so you can return them when you're done
-                            $rootScope.returnToState = $rootScope.toState;
-                            $rootScope.returnToStateParams = $rootScope.toStateParams;
+            succ = succ || function(data, status, headers, config) {
+                deferred.resolve(data, status, headers, config);
+            };
+            err = err || function(data, status, headers, config) {
+                deferred.reject(data, status, headers, config);
+            };
 
-                            // now, send them to the signin state so they can log in
-                            $state.go('signin');
-                        }
-                    }
-                });
+            if(_options)
+            {
+                $http(_options).success(succ).error(err);
+            }
+            else if(_method && _url)
+            {
+                $http[_method](_url, _params).success(succ).error(err);
+            }
+
+            return deferred.promise;
         }
     };
 }
