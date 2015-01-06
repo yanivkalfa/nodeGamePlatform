@@ -17,7 +17,7 @@ function registerController($scope, $state, $location, apiFactory) {
     console.log(apiFactory);
 
     function RegisterController(){
-        this.api = apiFactory.createNewApi('ngp.const.app.url');
+        this.api = apiFactory.createNewApi(ngp.const.app.url, 'get');
 
         console.log(this);
     }
