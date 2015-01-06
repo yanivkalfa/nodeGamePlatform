@@ -35,11 +35,11 @@ module.exports = function(_s){
 
     _s.oReq.app.get('/ajaxHandler', function (req, res) {
         console.log('got here');
-        res.json(req);
+        res.json({got:'here'});
     });
 
     _s.oReq.app.post('/ajaxHandler', function (req, res) {
-        res.json(req);
+        res.json({got:'here'});
     });
 
 
