@@ -87,3 +87,22 @@ module.exports = function(_s){
     });
 
 };
+
+
+function intHostGet(host){
+    var deferred = $q.defer();
+
+    Inthosts.get({inthostId: host._id}, function(host){
+        deferred.resolve(host);
+    });
+
+    return deferred.promise;
+}
+
+function getHosts(hosts) {
+    var promises = hosts.map(function(host) {
+        return intHostGet(host);
+    });
+
+    return $q.all(promises);
+}
