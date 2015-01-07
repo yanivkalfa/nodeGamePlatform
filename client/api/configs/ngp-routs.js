@@ -37,7 +37,8 @@ function siteRouts($stateProvider, $urlRouterProvider, $locationProvider) {
         views: {
             'main@': {
                 templateUrl: ngp.const.app.url + '/contents/register',
-                controller: 'registerController'
+                controller: 'registerController',
+                controllerAs : 'register'
             }
         }
     }).state('admin', {

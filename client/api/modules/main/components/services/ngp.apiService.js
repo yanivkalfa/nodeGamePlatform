@@ -20,10 +20,10 @@ function apiFactory($http, $q) {
     }
 
     ApiFunction.prototype = {
-        setOptions : function(options){ this._options = options; },
-        setURL : function(url){ this._url = url; },
-        setMethod : function(method){ this._method = method; },
-        setParams : function(params){ this._params = params; },
+        setOptions : function(options){ this._options = options; return this; },
+        setURL : function(url){ this._url = url; return this; },
+        setMethod : function(method){ this._method = method; return this; },
+        setParams : function(params){ this._params = params; return this; },
         getOptions : function(){ return this._options; },
         getURL : function(){ return this._url; },
         getMethod : function(){ return this._method; },

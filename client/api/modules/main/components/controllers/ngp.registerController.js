@@ -18,13 +18,22 @@ function registerController($scope, $state, $location, apiFactory) {
     console.log(apiFactory);*/
 
     function RegisterController(){
-        this.api = apiFactory.createNewApi(ngp.const.app.ajaxUrl, 'post', {item:51});
+        this.api = apiFactory.createNewApi(ngp.const.app.ajaxUrl);
+        this.registerForm = {
+            username : false,
+            password : false,
+            rePassword : false
+        };
+    }
+    RegisterController.prototype.register = function(){
+        console.log('blaaaaaa');
+        return;
+
+        this.api.setMethod('post').setParams(this.registerForm);
         this.api.doRequest().then(function(a){
             console.log(a);
         });
-
-    }
-    RegisterController.prototype.printSomething = function(){};
+    };
 
     return new RegisterController();
 }
