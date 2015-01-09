@@ -112,6 +112,12 @@ primus.on('leaveallrooms', function (rooms, spark) {
     // works when the client closes the connection
 });
 
+User.find().then( function (res) {
+    console.log(res);
+},  function (err) {
+    if(err)console.log('err', err);
+});
+
 
 /*
  var schema = new _s.oReq.mongoose.Schema({ name: 'string', size: 'string' });
