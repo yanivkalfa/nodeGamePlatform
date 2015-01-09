@@ -52,7 +52,7 @@ function siteRouts($stateProvider, $urlRouterProvider, $locationProvider) {
             ]
         },
         data: {
-            roles: ['User']
+            roles: ['registered']
         },
         views: {
             'main@': {

@@ -6,14 +6,14 @@ angular.module(ngp.const.app.name)
     .factory('authorization', [
         '$rootScope',
         '$state',
-        'principal',
+        'User',
         authorizationFactory
     ]);
 
-function authorizationFactory($rootScope, $state, principal) {
+function authorizationFactory($rootScope, $state, User) {
     return {
         authorize: function() {
-            return principal.identity()
+            return principal.setUser()
                 .then(function() {
                     var isAuthenticated = principal.isAuthenticated();
 
@@ -26,7 +26,7 @@ function authorizationFactory($rootScope, $state, principal) {
                             $rootScope.returnToStateParams = $rootScope.toStateParams;
 
                             // now, send them to the signin state so they can log in
-                            $state.go('signin');
+                            $state.go('login');
                         }
                     }
                 });
