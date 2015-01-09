@@ -1,5 +1,5 @@
 // export the class
-module.exports = function(req, res) {
+module.exports = function(_s,req, res) {
     //console.log(a,b,c,d);
     console.log(this);
 
