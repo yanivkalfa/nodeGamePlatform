@@ -30,6 +30,7 @@ function registerController($scope, $state, $location, apiFactory) {
         });
         this.api.doRequest().then(function(resp){
             if(resp.payload.success){
+                console.log('asdf');
                 $state.go('login');
             }else{
                 // notify
