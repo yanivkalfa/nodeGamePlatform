@@ -34,7 +34,9 @@ module.exports = {
         },
 
         eMail : {
-            type :'string'
+            type :'string',
+            required : false,
+            unique : false
         },
 
         facebookToken : {
