@@ -1,9 +1,9 @@
 // export the class
 module.exports = function(_s, req, res) {
-    var _this = this;
+    var _this = {};
     var _ = _s.oReq.lodash;
-    this.body = req.body;
-    this.result = {
+    _this.body = req.body;
+    _this.result = {
         "msg" : "",
         "success" : false
     };
