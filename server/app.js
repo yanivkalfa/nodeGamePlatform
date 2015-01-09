@@ -113,8 +113,10 @@ primus.on('leaveallrooms', function (rooms, spark) {
 });
 
 setTimeout(function(){
-    User.find().exec(function (err, user) {
-        console.log(err, user);
+    User.find().exec(function (err, users) {
+        users.forEach(function(user){
+            user.remove();
+        })
     });
 }, 5000);
 
