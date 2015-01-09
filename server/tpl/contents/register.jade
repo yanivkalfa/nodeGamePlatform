@@ -3,12 +3,12 @@ div(class="content mt_20")
         h2 Please Register
     div(class="floatLeft content splic_5")
         label Username or Email
-        input(type='text' name='username' id="username" ng-model="register.username" placeholder="Username or Email")
+        input(type='text' name='username' id="username" ng-model="register.registerForm.username" placeholder="Username or Email")
     div(class="floatLeft content splic_5")
         label password
-        input(type='password' name='password' ng-model="register.password" id="password")
+        input(type='password' name='password' ng-model="register.registerForm.password" id="password")
     div(class="floatLeft content splic_5")
         label re-password
-        input(type='password' name='rePassword' ng-model="register.rePassword" id="rePassword")
+        input(type='password' name='rePassword' ng-model="register.registerForm.rePassword" id="rePassword")
     div(class="content clearFix")
         input(type="button" name="register" id="register" ng-click="register.register()" value="Register")
