@@ -28,7 +28,6 @@ function loginController($scope, $state, $location, apiFactory) {
         });
         this.api.doRequest().then(function(resp){
             if(resp.payload.success){
-                console.log(data , '- in' );
                 $state.go('admin');
             }else{
                 // notify
