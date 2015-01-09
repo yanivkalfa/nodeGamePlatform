@@ -28,9 +28,12 @@ function registerController($scope, $state, $location, apiFactory) {
             "success" : false,
             "data" : this.registerForm
         });
-        this.api.doRequest().then(function(a){
-            console.log(a);
-            //$state
+        this.api.doRequest().then(function(data, statusCode){
+            if(data.success){
+                $state.go('/login');
+            }else{
+                // notify
+            }
         });
     };
 

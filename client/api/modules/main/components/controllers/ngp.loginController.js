@@ -27,7 +27,11 @@ function loginController($scope, $state, $location, apiFactory) {
             "data" : this.registerForm
         });
         this.api.doRequest().then(function(a){
-            console.log(a);
+            if(data.success){
+                $state.go('/admin');
+            }else{
+                // notify
+            }
         });
     };
 
