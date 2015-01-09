@@ -34,7 +34,8 @@ module.exports = {
         },
 
         roles : {
-            type : 'Array'
+            type : 'Array',
+            default : ['registered']
         },
 
         facebookToken : {
