@@ -1,6 +1,6 @@
 // export the class
-module.exports = function(_s,req, res) {
-    //console.log(a,b,c,d);
+module.exports = function(req, res, _s) {
+    console.log(_s);
     console.log(this);
 
     return res.json({got:'here'});
