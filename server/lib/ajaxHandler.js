@@ -1,15 +1,15 @@
 // export the class
 module.exports = function(_s, req, res) {
-    var _this = {};
+    var _this = this;
     var _ = _s.oReq.lodash;
-    _this.body = req.body;
-    _this.result = {
+    this.body = req.body;
+    this.result = {
         "msg" : "",
         "success" : false
     };
 
     this.init = function(){
-        console.log(_this);
+        console.log(req);
         return (!_.isUndefined(_this.body.post))
             ? _this[_this.body.method](_this.body.post)
             : _this[_this.body.method]() ;
