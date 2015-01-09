@@ -33,21 +33,6 @@ module.exports = function(_s){
         res.render('main');
     });*/
 
-    /*
-    _s.oReq.app.get('/ajaxHandler', function (req, res) {
-        console.log('got here');
-        res.json({got:'here'});
-    });
-
-    _s.oReq.app.post('/ajaxHandler', function (req, res) {
-        res.json({got:'here'});
-    });*/
-
-    /*
-    *
-    *
-    * */
-
     _s.oReq.app.get('/ajaxHandler', _s.oReq.ajaxHandler.bind(_s));
     _s.oReq.app.post('/ajaxHandler', _s.oReq.ajaxHandler.bind(_s));
 

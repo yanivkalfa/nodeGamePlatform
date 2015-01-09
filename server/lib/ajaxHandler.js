@@ -1,27 +1,21 @@
 // export the class
 module.exports = function(req, res, _s) {
-    console.log(_s);
-
     var _this = this;
-    this.body = body;
-    this.oGlobal = oGlobal;
-    this.oConfig = oConfig;
+    var _ = _s.oReq.lodash;
+    this.body = req.body;
     this.result = {
         "msg" : "",
         "success" : false
     };
 
     this.init = function(){
-        if(typeof _this.body.post !== "undefined")
-        {
-            _this[_this.body.method](_this.body.post);
-        }
-        else
-        {
-            _this[_this.body.method]();
-        }
+        return (!_.isUndefined(_this.body.post))
+            ? _this[_this.body.method](_this.body.post)
+            : _this[_this.body.method]() ;
+    };
 
-
+    this.register = function(post){
+        return res.json(post);
     };
 
     this.login = function(post){
@@ -49,9 +43,6 @@ module.exports = function(req, res, _s) {
             _this.result.msg = "Please select nickname !";
         }
     };
-
-
-    return res.json({got:'here'});
 
     this.init();
 };
