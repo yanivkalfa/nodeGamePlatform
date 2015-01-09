@@ -16,7 +16,6 @@ module.exports = {
         },
 
         passwordHash : {
-            type :'string',
             required : true
         },
 
