@@ -51,34 +51,33 @@ module.exports = function(_s, req, res) {
         };
 
         delete userDetails.rePassword;
-        console.log(userDetails);
         User.create(userDetails).then(success,failed);
     };
 
-    this.login = function(post){
-        if(post.nickName)
-        {
-            if(_this.oGlobal.badNickNames.indexOf(post.nickName) === -1)
+    this.login = function(userDetails){
+
+        _s.uf.login(userDetails).then(function(user){
+            if(user)
             {
-                if(post.nickName.length < _this.oConfig.maxNickNameLength)
-                {
-                    _this.result.msg = post.nickName;
-                    _this.result.success = true;
-                }
-                else{
-                    _this.result.msg = "The nickname you've chosen is too big max max letter is " + _this.oConfig.maxNickNameLength + "!";
-                }
+                var payLoard = { userId : user.id }
+                    , options = {
+                        algorithm: 'HS512',
+                        expiresInMinutes : _s.oConfig.session.maxAge / 1000 / 60
+                    };
+                user.token = _s.oReq.jwt.sign(payLoard , _s.oConfig.session.secret, options);
+                req.session.user = user;
+                _this._setResp(user, true);
+                return res.json(_this.toReturn);
             }
             else
             {
-                _this.result.msg = "The nickname you've chosen is taken please select another!";
+                _this._setResp("User with this email does not exist!", false);
+                return res.json(_this.toReturn);
             }
-
-        }
-        else
-        {
-            _this.result.msg = "Please select nickname !";
-        }
+        }).catch(function(err){
+            _this._setResp("Some Error Occur please try again later", false);
+            return res.json(_this.toReturn);
+        });
     };
 
     this.init();

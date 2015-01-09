@@ -11,11 +11,6 @@ angular.module(ngp.const.app.name)
     ]);
 
 function registerController($scope, $state, $location, apiFactory) {
-    /*
-    console.log($scope);
-    console.log($state);
-    console.log($location);
-    console.log(apiFactory);*/
 
     function RegisterController(){
         this.api = apiFactory.createNewApi(ngp.const.app.ajaxUrl);
@@ -35,6 +30,7 @@ function registerController($scope, $state, $location, apiFactory) {
         });
         this.api.doRequest().then(function(a){
             console.log(a);
+            //$state
         });
     };
 

@@ -26,7 +26,8 @@ function siteRouts($stateProvider, $urlRouterProvider, $locationProvider) {
         views: {
             'main@': {
                 templateUrl: ngp.const.app.url + '/contents/login',
-                controller: 'loginController'
+                controller: 'loginController',
+                controllerAs : 'login'
             }
         }
     }).state('register', {
