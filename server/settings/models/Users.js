@@ -6,44 +6,44 @@ module.exports = {
     schema : {
 
         username : {
-            type :'String',
+            type :'string',
             required : true
         },
 
         password : {
-            type :'String',
+            type :'string',
             required : true
         },
 
         passwordHash : {
-            type :'String'
+            type :'string'
         },
 
         firName : {
-            type : 'String'
+            type : 'string'
         },
 
         lastName : {
-            type : 'String'
+            type : 'string'
         },
 
         email : {
-            type :'String',
+            type :'string',
             required : true,
             unique : true
         },
 
         roles : {
-            type : 'Array',
+            type : 'array',
             default : ['registered']
         },
 
         facebookToken : {
-            type : 'String'
+            type : 'string'
         },
 
         token : {
-            type : 'String'
+            type : 'string'
         }
     }
 };
