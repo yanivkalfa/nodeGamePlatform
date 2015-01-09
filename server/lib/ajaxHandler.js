@@ -1,9 +1,7 @@
 // export the class
 module.exports = function(req, res, _s) {
     console.log(_s);
-    console.log(this);
 
-    return res.json({got:'here'});
     var _this = this;
     this.body = body;
     this.oGlobal = oGlobal;
@@ -52,6 +50,8 @@ module.exports = function(req, res, _s) {
         }
     };
 
+
+    return res.json({got:'here'});
 
     this.init();
 };
