@@ -112,6 +112,8 @@ primus.on('leaveallrooms', function (rooms, spark) {
     // works when the client closes the connection
 });
 
+
+/*
 setTimeout(function(){
     User.find().exec(function (err, users) {
         users.forEach(function(user){
@@ -121,6 +123,8 @@ setTimeout(function(){
         console.log('users', users);
     });
 }, 5000);
+*/
+
 
 
 /*
