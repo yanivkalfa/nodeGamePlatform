@@ -5,12 +5,17 @@ module.exports = {
 
     schema : {
 
-        userName : {
+        username : {
             type :'string',
             required : true
         },
 
         password : {
+            type :'string',
+            required : true
+        },
+
+        passwordHash : {
             type :'string',
             required : true
         },
@@ -23,7 +28,7 @@ module.exports = {
             type : 'string'
         },
 
-        eMail : {
+        email : {
             type :'string',
             required : true,
             unique : true

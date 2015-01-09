@@ -20,9 +20,10 @@ function registerController($scope, $state, $location, apiFactory) {
     function RegisterController(){
         this.api = apiFactory.createNewApi(ngp.const.app.ajaxUrl);
         this.registerForm = {
-            username : false,
-            password : false,
-            rePassword : false
+            username : '',
+            email : '',
+            password : '',
+            rePassword : ''
         };
     }
     RegisterController.prototype.register = function(){

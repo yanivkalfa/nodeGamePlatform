@@ -48,6 +48,8 @@ module.exports = function(_s, req, res) {
             _this._setResp(err, false);
             return res.json(_this.toReturn);
         };
+
+        delete userDetails.rePassword;
         User.create(userDetails).then(success,failed);
     };
 
