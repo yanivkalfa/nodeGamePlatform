@@ -31,7 +31,7 @@ primus.use('rooms', _s.oReq.primusRooms);
 primus.use('emitter', _s.oReq.primusEmitter);
 primus.use('cluster', _s.oReq.primusCluster);
 
-app.use(_s.oReq.session({
+_s.oReq.app.use(_s.oReq.session({
     store: new _s.oReq.RedisStore({
         port : _s.oConfig.connections[sessCon].port,
         host : _s.oConfig.connections[sessCon].host
