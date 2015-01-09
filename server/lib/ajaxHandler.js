@@ -2,6 +2,8 @@
 module.exports = function(a,b,c,d) {
     console.log(a,b,c,d);
     console.log(this);
+
+    return res.json({got:'here'});
     var _this = this;
     this.body = body;
     this.oGlobal = oGlobal;
