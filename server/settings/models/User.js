@@ -33,6 +33,10 @@ module.exports = {
             unique : true
         },
 
+        eMail : {
+            type :'string'
+        },
+
         facebookToken : {
             type : 'string'
         },
