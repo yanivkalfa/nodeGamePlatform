@@ -49,6 +49,8 @@ module.exports = function(_s){
     * */
 
 
+    console.log('_s.oReq.ajaxHandler', _s.oReq.ajaxHandler);
+
     _s.oReq.app.get('/ajaxHandler', _s.oReq.ajaxHandler.bind(_s));
     _s.oReq.app.post('/ajaxHandler', _s.oReq.ajaxHandler.bind(_s));
 
