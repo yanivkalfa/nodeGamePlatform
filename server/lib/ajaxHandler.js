@@ -1,5 +1,7 @@
 // export the class
-module.exports = function(body, oGlobal, oConfig) {
+module.exports = function(a,b,c,d) {
+    console.log(a,b,c,d);
+    console.log(this);
     var _this = this;
     this.body = body;
     this.oGlobal = oGlobal;

@@ -19,6 +19,7 @@ module.exports = function(){
     this.session = require('express-session');
     this.RedisStore = require('connect-redis')(this.session);
     this.jwt = require('jsonwebtoken');
+    this.ajaxHandler = require('./ajaxHandler.js');
 
     return this;
 };

@@ -19,6 +19,37 @@ module.exports = function(_s){
             });
         },
 
+        ajaxHandler : function(req, res){
+            var ajaxHandler = _s.oReq.ajaxHandler();
+            return ajaxHandler.handle(req, res, _s);
+            /*
+                profile, result = ajaxHandlerInit.result,
+                resp = {
+                    "success" : false
+                };
+
+            if(result.success)
+            {
+                profile = {
+                    "id" : s.oGlobal.LastId,
+                    "nickName" : result.msg
+                };
+                resp.success = true;
+                resp.msg = {
+                    "token" : s.oReq.jwt.sign(profile, s.oReq.jwt_secret, { expiresInMinutes: 60 * s.oConfig.cookieExpiration }),
+                    "id" : s.oGlobal.LastId,
+                    "nickName" : result.msg
+                };
+                s.oGlobal.LastId++;
+            }
+            else
+            {
+                resp.msg =  result.msg
+            }
+            res.json(resp);
+            */
+        },
+
         /*
         routFiles : function(req, res, location, fileName){
             _s.oReq.fs.exists(_s.sClientDirname + location + fileName, function(exists) {
