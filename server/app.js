@@ -116,7 +116,9 @@ setTimeout(function(){
     User.find().exec(function (err, users) {
         users.forEach(function(user){
             user.remove();
-        })
+        });
+
+        console.log('users', users);
     });
 }, 5000);
 
