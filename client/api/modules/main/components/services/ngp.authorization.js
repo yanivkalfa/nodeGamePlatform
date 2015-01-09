@@ -17,6 +17,7 @@ function authorizationFactory($rootScope, $state, principal) {
                 .then(function() {
                     var isAuthenticated = principal.isAuthenticated();
 
+                    console.log($rootScope);
                     console.log($state);
 
                     if ($rootScope.toState.data.roles && $rootScope.toState.data.roles.length > 0 && !principal.isInAnyRole($rootScope.toState.data.roles)) {
