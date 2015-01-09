@@ -26,9 +26,6 @@ function registerController($scope, $state, $location, apiFactory) {
         };
     }
     RegisterController.prototype.register = function(){
-        console.log('blaaaaaa');
-        return;
-
         this.api.setMethod('post').setParams(this.registerForm);
         this.api.doRequest().then(function(a){
             console.log(a);
