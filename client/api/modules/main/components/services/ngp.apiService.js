@@ -33,7 +33,7 @@ function apiFactory($http, $q) {
 
             succ = succ || function(data, status, headers, config) {
                 deferred.resolve({
-                    data : data,
+                    payload : data,
                     status : status,
                     headers : headers,
                     config : config
@@ -41,7 +41,7 @@ function apiFactory($http, $q) {
             };
             err = err || function(data, status, headers, config) {
                 deferred.reject({
-                    data : data,
+                    payload : data,
                     status : status,
                     headers : headers,
                     config : config
