@@ -30,7 +30,7 @@ function registerController($scope, $state, $location, apiFactory) {
         });
         this.api.doRequest().then(function(data, statusCode){
             if(data.success){
-                $state.go('/login');
+                $state.go('login');
             }else{
                 // notify
             }
