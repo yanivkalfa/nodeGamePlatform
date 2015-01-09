@@ -21,49 +21,6 @@ module.exports = function(_s){
         checkUserDetails : function(userDetails){
             return true;
         },
-        ajaxHandler : function(req, res){
-            var ajaxHandler = _s.oReq.ajaxHandler();
-            return ajaxHandler.handle(req, res, _s);
-            /*
-                profile, result = ajaxHandlerInit.result,
-                resp = {
-                    "success" : false
-                };
-
-            if(result.success)
-            {
-                profile = {
-                    "id" : s.oGlobal.LastId,
-                    "nickName" : result.msg
-                };
-                resp.success = true;
-                resp.msg = {
-                    "token" : s.oReq.jwt.sign(profile, s.oReq.jwt_secret, { expiresInMinutes: 60 * s.oConfig.cookieExpiration }),
-                    "id" : s.oGlobal.LastId,
-                    "nickName" : result.msg
-                };
-                s.oGlobal.LastId++;
-            }
-            else
-            {
-                resp.msg =  result.msg
-            }
-            res.json(resp);
-            */
-        },
-
-        /*
-        routFiles : function(req, res, location, fileName){
-            _s.oReq.fs.exists(_s.sClientDirname + location + fileName, function(exists) {
-                if (exists) {
-                    res.sendFile(_s.sClientDirname + location + fileName);
-                }
-                else
-                {
-                    res.status(404).send('404 page !!!!');
-                }
-            });
-        },*/
 
         CallRouter : function(oSocket){
             var _this = this;
@@ -182,6 +139,19 @@ module.exports = function(_s){
 
     };
 };
+
+/*
+ routFiles : function(req, res, location, fileName){
+ _s.oReq.fs.exists(_s.sClientDirname + location + fileName, function(exists) {
+ if (exists) {
+ res.sendFile(_s.sClientDirname + location + fileName);
+ }
+ else
+ {
+ res.status(404).send('404 page !!!!');
+ }
+ });
+ },*/
 
 
 /*
