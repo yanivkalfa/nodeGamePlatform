@@ -26,7 +26,7 @@ function loginController($scope, $state, $location, apiFactory) {
             "success" : false,
             "data" : this.registerForm
         });
-        this.api.doRequest().then(function(a){
+        this.api.doRequest().then(function(data, statusCode){
             if(data.success){
                 $state.go('/admin');
             }else{
