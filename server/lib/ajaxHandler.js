@@ -2,18 +2,19 @@
 module.exports = function(_s, req, res) {
     var _this = this;
     var _ = _s.oReq.lodash;
-    this.toReturn = _.cloneDeep({
-        "status" : 0,
-        "success" : false,
-        "method" : _this.body.method,
-        "data" : {}
-    });
 
     this.body = req.body;
     this.result = {
         "msg" : "",
         "success" : false
     };
+
+    this.toReturn = _.cloneDeep({
+        "status" : 0,
+        "success" : false,
+        "method" : _this.body.method,
+        "data" : {}
+    });
 
     this.init = function(){
         return (!_.isUndefined(_this.body.data))
