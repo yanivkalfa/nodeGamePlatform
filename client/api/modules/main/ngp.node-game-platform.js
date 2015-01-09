@@ -13,3 +13,9 @@ function runFactory($rootScope, $state, $stateParams, authorization, principal) 
         if (principal.isIdentityResolved()) authorization.authorize();
     });
 }
+
+/*
+$cookieStore.put('aCookie', {a:5, b:10});
+console.log($cookieStore.get('aCookie'));
+$cookieStore.remove('aCookie');
+*/

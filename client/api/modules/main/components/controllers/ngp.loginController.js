@@ -19,10 +19,6 @@ function loginController($scope, $state, $location, $cookieStore, apiFactory) {
             email : '',
             password : ''
         };
-
-        $cookieStore.put('aCookie', {a:5, b:10});
-        console.log($cookieStore.get('aCookie'));
-        $cookieStore.remove('aCookie');
     }
     LoginController.prototype.login = function(){
         this.api.setMethod('post').setParams({
@@ -33,9 +29,10 @@ function loginController($scope, $state, $location, $cookieStore, apiFactory) {
         });
         this.api.doRequest().then(function(resp){
             if(resp.payload.success){
+                $cookieStore.put('user', resp.payload.data);
                 $state.go('admin');
             }else{
-                // notify
+                $cookieStore.remove('user');
             }
         });
     };
