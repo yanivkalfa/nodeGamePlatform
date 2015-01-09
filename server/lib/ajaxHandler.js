@@ -2,6 +2,13 @@
 module.exports = function(_s, req, res) {
     var _this = this;
     var _ = _s.oReq.lodash;
+    this.toReturn = _.cloneDeep({
+        "status" : 0,
+        "success" : false,
+        "method" : _this.body.method,
+        "data" : {}
+    });
+
     this.body = req.body;
     this.result = {
         "msg" : "",
@@ -9,13 +16,39 @@ module.exports = function(_s, req, res) {
     };
 
     this.init = function(){
-        return (!_.isUndefined(_this.body.post))
-            ? _this[_this.body.method](_this.body.post)
+        return (!_.isUndefined(_this.body.data))
+            ? _this[_this.body.method](_this.body.data)
             : _this[_this.body.method]() ;
     };
 
-    this.register = function(post){
-        return res.json(post);
+    this._setResp = function(data,success){
+        _this.toReturn.success = success;
+        _this.toReturn.data = data;
+    };
+
+    this.register = function(userDetails){
+        var success
+            , failed
+            , wrongUserDetails
+            ;
+
+        wrongUserDetails = function(){
+            _this._setResp('There was an error with user details', false);
+            return res.json(_this.toReturn);
+        };
+        if(!_s.uf.checkUserDetails(userDetails)) wrongUserDetails();
+
+        success = function(user){
+            _this._setResp(user, true);
+            return res.json(_this.toReturn);
+        };
+
+        failed = function(err){
+            if(err)console.log('err', err);
+            _this._setResp(err, false);
+            return res.json(_this.toReturn);
+        };
+        User.create(userDetails).then(success,failed);
     };
 
     this.login = function(post){

@@ -19,6 +19,9 @@ module.exports = function(_s){
             });
         },
 
+        checkUserDetails : function(userDetails){
+            return true;
+        },
         ajaxHandler : function(req, res){
             var ajaxHandler = _s.oReq.ajaxHandler();
             return ajaxHandler.handle(req, res, _s);
