@@ -51,6 +51,7 @@ module.exports = function(_s, req, res) {
         };
 
         delete userDetails.rePassword;
+        console.log(userDetails);
         User.create(userDetails).then(success,failed);
     };
 
