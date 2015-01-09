@@ -27,8 +27,7 @@ function loginController($scope, $state, $location, apiFactory) {
             "data" : this.registerForm
         });
         this.api.doRequest().then(function(resp){
-            console.log(resp.payload.data);
-            if(resp.payload.data.success){
+            if(resp.payload.success){
                 console.log(data , '- in' );
                 $state.go('admin');
             }else{
