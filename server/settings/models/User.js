@@ -27,16 +27,16 @@ module.exports = {
             type : 'string'
         },
 
-        email : {
-            type :'string',
-            required : true,
-            unique : true
-        },
-
         eMail : {
             type :'string',
             required : false,
             unique : false
+        },
+
+        email : {
+            type :'string',
+            required : true,
+            unique : true
         },
 
         facebookToken : {
