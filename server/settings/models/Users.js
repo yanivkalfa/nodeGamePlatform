@@ -1,7 +1,7 @@
 
 module.exports = {
 
-    name : "User",
+    name : "Users",
 
     schema : {
 
@@ -25,12 +25,6 @@ module.exports = {
 
         lastName : {
             type : 'string'
-        },
-
-        eMail : {
-            type :'string',
-            required : false,
-            unique : false
         },
 
         email : {

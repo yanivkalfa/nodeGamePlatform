@@ -1,4 +1,4 @@
 
-module.exports = {
-    "User" : require('./User.js')
-};
+module.exports = [
+    require('./Users.js')
+];

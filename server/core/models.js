@@ -1,12 +1,11 @@
 module.exports = function(_s, connection){
     var models = require('../settings/models'),modelsSchema, modelName, schema, model = [];
 
-    for(modelName in models){
-        //console.log(modelName);
-        schema = new _s.oReq.mongoose.Schema(models[modelName].schema);
-        global[modelName] = connection.model(modelName, schema);
-        model.push(global[modelName]);
-    }
+    models.forEach(function(model){
+        schema = new _s.oReq.mongoose.Schema(model.schema);
+        global[model.name] = connection.model(model.name, schema);
+        model.push(global[model.name]);
+    });
 
-    return model;
+    return this;
 };
