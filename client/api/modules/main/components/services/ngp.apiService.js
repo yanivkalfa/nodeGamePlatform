@@ -32,10 +32,20 @@ function apiFactory($http, $q) {
             var deferred = $q.defer();
 
             succ = succ || function(data, status, headers, config) {
-                deferred.resolve([data, status, headers, config]);
+                deferred.resolve({
+                    data : data,
+                    status : status,
+                    headers : headers,
+                    config : config
+                });
             };
             err = err || function(data, status, headers, config) {
-                deferred.reject([data, status, headers, config]);
+                deferred.reject({
+                    data : data,
+                    status : status,
+                    headers : headers,
+                    config : config
+                });
             };
 
             if(this._options)
