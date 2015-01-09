@@ -1,6 +1,6 @@
 // export the class
-module.exports = function(req, res, _s, a) {
-    console.log(_s, a);
+module.exports = function(req, res, _s) {
+    console.log(_s);
     var _this = this;
     var _ = _s.oReq.lodash;
     this.body = req.body;

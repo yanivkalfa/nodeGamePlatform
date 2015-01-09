@@ -1,5 +1,6 @@
 
 module.exports = function(_s){
+    var _ = _s.oReq.lodash;
 
     _s.oReq.app.use(_s.oReq.bodyParser.json());
     _s.oReq.app.use(_s.oReq.bodyParser.urlencoded({ extended: true }));
@@ -33,8 +34,8 @@ module.exports = function(_s){
         res.render('main');
     });*/
 
-    _s.oReq.app.get('/ajaxHandler', _s.oReq.ajaxHandler.bind(_s));
-    _s.oReq.app.post('/ajaxHandler', _s.oReq.ajaxHandler.bind(_s));
+    _s.oReq.app.get('/ajaxHandler', _.partial(_s.oReq.ajaxHandler, _s));
+    _s.oReq.app.post('/ajaxHandler', _.partial(_s.oReq.ajaxHandler, _s));
 
     _s.oReq.app.get('/contents/:content', function (req, res) {
         if(_s.uf.loginRequired(req.params.content)){
