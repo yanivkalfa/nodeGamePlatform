@@ -6,11 +6,12 @@ angular.module(ngp.const.app.name)
         '$scope',
         '$state',
         '$location',
+        '$cookieStore',
         'apiFactory',
         loginController
     ]);
 
-function loginController($scope, $state, $location, apiFactory) {
+function loginController($scope, $state, $location, $cookieStore, apiFactory) {
 
     function LoginController(){
         this.api = apiFactory.createNewApi(ngp.const.app.ajaxUrl);
@@ -18,6 +19,10 @@ function loginController($scope, $state, $location, apiFactory) {
             email : '',
             password : ''
         };
+
+        $cookieStore.put('aCookie', {a:5, b:10});
+        console.log($cookieStore.get('aCookie'));
+        $cookieStore.remove('aCookie');
     }
     LoginController.prototype.login = function(){
         this.api.setMethod('post').setParams({
