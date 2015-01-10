@@ -29,3 +29,4 @@ html(lang="en")
     body(ng-app="node-game-platform")
         audio(id="notification" src="/assets/roomNotification.mp3" preload="auto")
         div(ui-view='main' class='pageWrap')
+            div(ng-show="$root.notify.show" ng-class="$root.notify.class") {{$root.notify.msg}}
