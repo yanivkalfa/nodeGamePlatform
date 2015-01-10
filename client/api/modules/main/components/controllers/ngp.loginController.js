@@ -54,7 +54,7 @@ function loginController(
                     $state.go('admin');
                 }
             }else{
-                notify.error('Login Failed :', resp.payload.data);
+                notify.error('Login Failed: ' + resp.payload.data);
                 $cookieStore.remove('user');
             }
         });

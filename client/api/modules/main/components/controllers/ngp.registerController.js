@@ -33,7 +33,7 @@ function registerController($scope, $state, $location, apiFactory, notify) {
             if(resp.payload.success){
                 $state.go('login');
             }else{
-                notify.error('registration Failed :', resp.payload.data);
+                notify.error('registration Failed: ' + resp.payload.data);
             }
         });
     };
