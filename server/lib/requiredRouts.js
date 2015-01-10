@@ -38,15 +38,11 @@ module.exports = function(_s){
     _s.oReq.app.post('/ajaxHandler', _.partial(_s.oReq.ajaxHandler, _s));
 
     _s.oReq.app.get('/contents/:content', function (req, res) {
-        console.log('a');
         if(_s.oConfig.routs.loginRequired(req.params.content)){
-            console.log('b');
             _s.oReq.User.init(req.session.user, _s.oConfig.routs.getRout(req.params.content));
-            console.log('c');
             if(_s.oReq.User.isAuthenticated()){
                 res.render(_s.sServerDirname + '/tpl/contents/' + req.params.content + '.jade');
             }else{
-                console.log('d');
                 res.render(_s.sServerDirname + '/tpl/contents/restricted' + '.jade');
             }
         }else{
