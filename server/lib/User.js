@@ -1,6 +1,6 @@
 module.exports = function(rf){
-    console.log(rf);
     var _user = undefined,
+        _rout = undefined,
         _authenticated = false,
         _ = rf.lodash;
 
@@ -16,26 +16,28 @@ module.exports = function(rf){
             _user = user;
         },
 
-        init: function(user) {
+        init: function(user, rout) {
             _user = user;
-            _authenticated = !_.isUndefined(_user);
-
-            return _user;
+            _rout = rout;
+            this.authenticate();
         },
 
         isResolved: function() {
             return !_.isUndefined(_user);
         },
+
+        authenticate: function() {
+            return _authenticated = (this.isInAnyRole(_rout.roles || []) && !_.isUndefined(_user))
+        },
+
         isAuthenticated: function() {
             return _authenticated;
         },
         isInRole: function(role) {
-            if (!_authenticated || !_user.roles) return false;
-
             return _user.roles.indexOf(role) != -1;
         },
         isInAnyRole: function(roles) {
-            if (!_authenticated || !_user.roles) return false;
+            if(roles.length <= 0) return true;
 
             for (var i = 0; i < roles.length; i++) {
                 if (this.isInRole(roles[i])) return true;

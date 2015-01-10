@@ -38,8 +38,9 @@ module.exports = function(_s){
     _s.oReq.app.post('/ajaxHandler', _.partial(_s.oReq.ajaxHandler, _s));
 
     _s.oReq.app.get('/contents/:content', function (req, res) {
-        if(_s.uf.loginRequired(req.params.content)){
-            if(_s.uf.isLoggedIn(req, res)){
+        if(_s.oConfig.loginRequired(req.params.content)){
+            _s.oReq.User.init(req.session.user, _s.oConfig.getRout(req.params.content));
+            if(_s.oReq.User.isAuthenticated()){
                 res.render(_s.sServerDirname + '/tpl/contents/' + req.params.content + '.jade');
             }else{
                 res.status(404);

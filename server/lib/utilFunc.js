@@ -6,11 +6,6 @@ module.exports = function(_s){
             return true;
         },
 
-        loginRequired : function(path){
-
-            //_s.oConfig.routs[path]
-            return false;
-        },
 
         login : function(credentials){
             return new _s.oReq.Promise(function(resolve, reject) {
