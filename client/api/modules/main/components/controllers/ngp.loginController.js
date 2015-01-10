@@ -29,7 +29,7 @@ function loginController(
             email : '',
             password : ''
         };
-        console.log($cookieStore.get('user'));
+        console.log(User.getUser());
         console.log($rootScope.returnToState);
     }
     LoginController.prototype.login = function(){
