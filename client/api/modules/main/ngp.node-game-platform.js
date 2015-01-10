@@ -6,6 +6,11 @@ angular.module(ngp.const.app.name, ['ui.router', 'ngCookies']).run(['$rootScope'
 function runFactory($rootScope, $state, $stateParams, authorization, User) {
     $rootScope.$on('$stateChangeStart', function(event, toState, toStateParams) {
 
+        $rootScope.notify = {
+            show : true,
+            class : 'success',
+            msg : 'yaniv !'
+        };
         $rootScope.toState = toState;
         $rootScope.toStateParams = toStateParams;
 
