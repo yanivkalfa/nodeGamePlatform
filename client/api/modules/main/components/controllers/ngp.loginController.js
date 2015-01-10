@@ -30,7 +30,8 @@ function loginController(
             password : ''
         };
 
-        console.log(User.getUser());
+        console.log(User.setUser());
+        console.log(User.getuser());
     }
     LoginController.prototype.login = function(){
         this.api.setMethod('post').setParams({
