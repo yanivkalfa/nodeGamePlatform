@@ -27,8 +27,8 @@ function notifyFactory($rootScope) {
             $rootScope.notify.show = true;
         };
 
-    function NotifyFactory(){
-        //_notify(msg);
+    function NotifyFactory(msg){
+        return _notify;
     }
 
     NotifyFactory.prototype = {
