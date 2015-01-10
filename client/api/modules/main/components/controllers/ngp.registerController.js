@@ -7,10 +7,11 @@ angular.module(ngp.const.app.name)
         '$state',
         '$location',
         'apiFactory',
+        'notify',
         registerController
     ]);
 
-function registerController($scope, $state, $location, apiFactory) {
+function registerController($scope, $state, $location, apiFactory, notify) {
 
     function RegisterController(){
         this.api = apiFactory.createNewApi(ngp.const.app.ajaxUrl);
@@ -32,7 +33,7 @@ function registerController($scope, $state, $location, apiFactory) {
             if(resp.payload.success){
                 $state.go('login');
             }else{
-                // notify
+                notify.error('registration Failed :', resp.payload.data);
             }
         });
     };

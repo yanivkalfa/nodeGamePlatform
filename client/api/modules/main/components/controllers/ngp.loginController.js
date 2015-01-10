@@ -31,7 +31,6 @@ function loginController(
             email : '',
             password : ''
         };
-        notify.error('some message');
     }
     LoginController.prototype.login = function(){
 
@@ -55,7 +54,7 @@ function loginController(
                     $state.go('admin');
                 }
             }else{
-                // notify
+                notify.error('Login Failed :', resp.payload.data);
                 $cookieStore.remove('user');
             }
         });
