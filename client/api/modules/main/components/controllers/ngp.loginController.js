@@ -29,9 +29,8 @@ function loginController(
             email : '',
             password : ''
         };
-
+        console.log($cookieStore.get('user'));
         console.log(User.setUser());
-        console.log(User.getuser());
     }
     LoginController.prototype.login = function(){
         this.api.setMethod('post').setParams({
