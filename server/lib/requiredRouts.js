@@ -38,6 +38,7 @@ module.exports = function(_s){
     _s.oReq.app.post('/ajaxHandler', _.partial(_s.oReq.ajaxHandler, _s));
 
     _s.oReq.app.get('/contents/:content', function (req, res) {
+        console.log(req.session.user);
         if(_s.oConfig.routs.loginRequired(req.params.content)){
             _s.oReq.User.init(req.session.user, _s.oConfig.routs.getRout(req.params.content));
             if(_s.oReq.User.isAuthenticated()){

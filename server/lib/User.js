@@ -27,7 +27,7 @@ module.exports = function(rf){
         },
 
         authenticate: function() {
-            return _authenticated = (this.isInAnyRole(_rout.roles || []) && !_.isUndefined(_user))
+            return _authenticated = (!_.isUndefined(_user) && this.isInAnyRole(_rout.roles || []))
         },
 
         isAuthenticated: function() {

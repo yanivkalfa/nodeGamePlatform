@@ -29,6 +29,8 @@ function loginController(
             email : '',
             password : ''
         };
+
+        $cookieStore.remove('user');
     }
     LoginController.prototype.login = function(){
 
