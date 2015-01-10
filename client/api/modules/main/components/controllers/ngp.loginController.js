@@ -29,17 +29,16 @@ function loginController(
             email : '',
             password : ''
         };
-        User.setUser()
-        console.log(User.getUser());
-        console.log($rootScope.returnToState);
     }
     LoginController.prototype.login = function(){
+
         this.api.setMethod('post').setParams({
             "method" : 'login',
             "status" : 0,
             "success" : false,
             "data" : this.registerForm
         });
+
         this.api.doRequest().then(function(resp){
             if(resp.payload.success){
                 $cookieStore.put('user', resp.payload.data);

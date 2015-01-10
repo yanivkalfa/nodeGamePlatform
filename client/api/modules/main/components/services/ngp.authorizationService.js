@@ -13,7 +13,7 @@ angular.module(ngp.const.app.name)
 function authorizationFactory($rootScope, $state, User) {
     return {
         authorize: function() {
-            return User.setUser()
+            return User.init()
                 .then(function() {
                     var isAuthenticated = User.isAuthenticated();
 

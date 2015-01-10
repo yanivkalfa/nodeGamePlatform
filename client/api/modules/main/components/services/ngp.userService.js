@@ -15,15 +15,18 @@ function userFactory($q, $http, $timeout, $cookieStore) {
         _authenticated = false;
 
     return {
-        getUser: function() {
+        get: function() {
             return _user;
         },
-        getUserRoles: function() {
+        getRoles: function() {
             return _user.roles;
         },
 
+        set: function(user) {
+            _user = user;
+        },
 
-        setUser: function(force) {
+        init: function(force) {
             var deferred = $q.defer();
             if (force === true) _user = undefined;
 
