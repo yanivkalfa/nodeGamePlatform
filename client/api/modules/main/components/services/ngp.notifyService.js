@@ -27,6 +27,7 @@ function notifyFactory($rootScope) {
             console.log(this, 'happeneing');
             this.msg = '';
             this.show = false;
+            $rootScope.$apply()
         },
 
         success : function(msg) {
@@ -46,8 +47,7 @@ function notifyFactory($rootScope) {
             this.msg = msg;
             this.show = true;
             if(this.options.timeout){
-                console.log('setting timeout',this.options.timeout);
-                setTimeout(_.bind(_self.reset, $rootScope.notify),_self.options.timeout);
+                setTimeout(_self.reset,_self.options.timeout);
             }
         }
     };
