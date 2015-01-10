@@ -12,13 +12,8 @@ function notifyFactory($rootScope) {
 
 
     function NotifyFactory(){
-        this.options = {
-            timeout : 3000
-        };
-
-        this.show = false;
-        this.class = 'notify-success';
-        this.msg = '';
+        this.options = { timeout : 3000 };
+        this.reset();
     }
 
     NotifyFactory.prototype =  {
@@ -27,7 +22,6 @@ function notifyFactory($rootScope) {
             this.msg = '';
             this.class = 'notify-success';
             this.show = false;
-            console.log(this);
         },
 
         success : function(msg) {
@@ -50,7 +44,6 @@ function notifyFactory($rootScope) {
                 setTimeout(function(){
                     _self.reset();
                     $rootScope.$apply();
-                   // _.bind(_self.reset, $rootScope.notify)
                 },_self.options.timeout);
             }
         }
