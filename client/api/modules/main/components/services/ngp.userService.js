@@ -24,11 +24,20 @@ function userFactory($q, $http, $timeout, $cookieStore) {
 
 
         setUser: function(force) {
+            var deferred = $q.defer();
             if (force === true) _user = undefined;
-            if (angular.isDefined(_user)) return _user;
+            if (angular.isDefined(_user))
+            {
+                deferred.resolve(_user);
+
+                return deferred.promise;
+            }
+
             _user = $cookieStore.get("user");
             this.authenticate(_user);
-            return _user;
+            deferred.resolve(_user);
+
+            return deferred.promise;
         },
 
         authenticate: function(user) {

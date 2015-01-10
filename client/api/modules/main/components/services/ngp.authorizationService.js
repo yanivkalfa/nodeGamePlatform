@@ -13,29 +13,6 @@ angular.module(ngp.const.app.name)
 function authorizationFactory($rootScope, $state, User) {
     return {
         authorize: function() {
-            var user = User.setUser();
-            console.log(user);
-
-            if ($rootScope.toState.data.roles && $rootScope.toState.data.roles.length > 0 && !User.isInAnyRole($rootScope.toState.data.roles)) {
-                console.log('a');
-                if (User.isAuthenticated())
-                {
-                    //return  $state.go('accessdenied');
-                    console.log('b');
-                }
-                else
-                {
-
-                    $rootScope.returnToState = $rootScope.toState;
-                    $rootScope.returnToStateParams = $rootScope.toStateParams;
-
-                    //return $state.go('login');
-
-                    console.log('c');
-                }
-            }
-            return user;
-            /*
             return User.setUser()
                 .then(function() {
                     var isAuthenticated = User.isAuthenticated();
@@ -51,7 +28,6 @@ function authorizationFactory($rootScope, $state, User) {
                         }
                     }
                 });
-                */
         }
     };
 }
