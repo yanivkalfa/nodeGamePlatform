@@ -43,7 +43,7 @@ module.exports = function(_s){
             if(_s.oReq.User.isAuthenticated()){
                 res.render(_s.sServerDirname + '/tpl/contents/' + req.params.content + '.jade');
             }else{
-                res.render(_s.sServerDirname + '/tpl/contents/restricted' + '.jade');
+                res.redirect('/');
             }
         }else{
             res.render(_s.sServerDirname + '/tpl/contents/' + req.params.content + '.jade');
