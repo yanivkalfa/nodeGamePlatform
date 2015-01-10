@@ -31,8 +31,7 @@ function loginController(
             email : '',
             password : ''
         };
-        notify('adsf');
-        console.log(notify.success);
+        notify.success('some message');
     }
     LoginController.prototype.login = function(){
 
