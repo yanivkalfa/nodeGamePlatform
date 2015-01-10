@@ -31,11 +31,6 @@ function loginController(
             email : '',
             password : ''
         };
-
-        //
-
-        notify('aasda');
-        notify('aasda');
         console.log(notify);
     }
     LoginController.prototype.login = function(){
