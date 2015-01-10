@@ -47,9 +47,7 @@ function notifyFactory($rootScope) {
             this.show = true;
             if(this.options.timeout){
                 console.log('setting timeout',this.options.timeout);
-                setTimeout(function(){
-                    _self.reset();
-                },_self.options.timeout);
+                setTimeout(_.bind(_self.reset, $rootScope.notify),_self.options.timeout);
             }
         }
     };
