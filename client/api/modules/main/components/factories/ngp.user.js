@@ -12,57 +12,61 @@ function userFactory(
     $q,
     $cookieStore
     ) {
-    var _user = undefined,
-        _authenticated = false;
 
-    return {
+    function UserFactory(){
+        this._user = undefined;
+        this._authenticated = false;
+        this.init();
+    }
+
+    UserFactory.prototype =  {
         get: function() {
-            return _user;
+            return this._user;
         },
         getRoles: function() {
-            return _user.roles;
+            return this._user.roles;
         },
 
         set: function(user) {
-            _user = user;
+            this._user = user;
         },
 
         init: function(force) {
             var deferred = $q.defer();
-            if (force === true) _user = undefined;
+            if (force === true) this._user = undefined;
 
-            if (angular.isDefined(_user))
+            if (angular.isDefined(this._user))
             {
-                deferred.resolve(_user);
+                deferred.resolve(this._user);
                 return deferred.promise;
             }
 
             this.authenticate();
-            deferred.resolve(_user);
+            deferred.resolve(this._user);
 
             return deferred.promise;
         },
 
         authenticate: function(user) {
-            _user = user || $cookieStore.get("user");
-            _authenticated = angular.isDefined(_user);
+            this._user = user || $cookieStore.get("user");
+            this._authenticated = angular.isDefined(this._user);
 
-            if (!angular.isDefined(_user)) $cookieStore.remove("user");
+            if (!angular.isDefined(this._user)) $cookieStore.remove("user");
         },
 
         isResolved: function() {
-            return angular.isDefined(_user);
+            return angular.isDefined(this._user);
         },
         isAuthenticated: function() {
-            return _authenticated;
+            return this._authenticated;
         },
         isInRole: function(role) {
-            if (!_authenticated || !_user.roles) return false;
+            if (!this._authenticated || !this._user.roles) return false;
 
-            return _user.roles.indexOf(role) != -1;
+            return this._user.roles.indexOf(role) != -1;
         },
         isInAnyRole: function(roles) {
-            if (!_authenticated || !_user.roles) return false;
+            if (!this._authenticated || !this._user.roles) return false;
 
             for (var i = 0; i < roles.length; i++) {
                 if (this.isInRole(roles[i])) return true;
@@ -71,4 +75,6 @@ function userFactory(
             return false;
         }
     };
+
+    return new UserFactory();
 }
