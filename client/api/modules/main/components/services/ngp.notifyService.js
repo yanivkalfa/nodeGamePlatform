@@ -12,7 +12,7 @@ function notifyFactory($rootScope) {
 
 
     function NotifyFactory(){
-        this.options = { timeout : 3000 };
+        //this.options = { timeout : 3000 };
         this.reset();
     }
 
