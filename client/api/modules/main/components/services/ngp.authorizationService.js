@@ -17,7 +17,7 @@ function authorizationFactory($rootScope, $state, User) {
                 .then(function() {
                     var isAuthenticated = User.isAuthenticated();
 
-                    if ($rootScope.toState.data.roles && $rootScope.toState.data.roles.length > 0 && !principal.isInAnyRole($rootScope.toState.data.roles)) {
+                    if ($rootScope.toState.data.roles && $rootScope.toState.data.roles.length > 0 && !User.isInAnyRole($rootScope.toState.data.roles)) {
                         if (isAuthenticated) $state.go('accessdenied'); // user is signed in but not authorized for desired state
                         else {
 
