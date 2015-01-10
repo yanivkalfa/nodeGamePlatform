@@ -31,7 +31,7 @@ function loginController(
             email : '',
             password : ''
         };
-        notify.success('some message');
+        notify.error('some message');
     }
     LoginController.prototype.login = function(){
 
