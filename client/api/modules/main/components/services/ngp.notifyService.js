@@ -41,10 +41,12 @@ function notifyFactory($rootScope) {
             this.message(msg);
         },
         message : function(msg) {
+            var _self = this;
             this.msg = msg;
             this.show = true;
             if(this.options.timeout){
-                setTimeout(this.reset,this.options.timeout);
+                console.log('setting timeout');
+                setTimeout(_self.reset,_self.options.timeout);
             }
         }
     };
