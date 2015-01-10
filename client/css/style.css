@@ -66,6 +66,27 @@
     border:1px solid black;
     background-color: #F3CF55;
 }
+
+.notifyWindow{
+    position:absolute;
+    top:20px;
+    width:600px;
+    margin:0 auto;
+    border:1px solid black;
+    opacity: 0.8;
+    z-index: 9999;
+}
+
+.notify-success{
+    background-color: greenyellow;
+}
+.notify-failed{
+    background-color: red;
+}
+.notify-warning{
+    background-color: yellow;
+}
+
 .leftSite{
     float:left;
     width:648px;
