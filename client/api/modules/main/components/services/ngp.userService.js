@@ -27,11 +27,11 @@ function userFactory($q, $http, $timeout, $cookieStore) {
             if (force === true) _user = undefined;
             if (angular.isDefined(_user)) return _user;
             _user = $cookieStore.get("user") || false;
-            this.authenticateUser(_user);
+            this.authenticate(_user);
             return _user;
         },
 
-        authenticateUser: function(user) {
+        authenticate: function(user) {
             _user = user;
             _authenticated = user != null;
 
@@ -39,7 +39,7 @@ function userFactory($q, $http, $timeout, $cookieStore) {
             else $cookieStore.remove("user");
         },
 
-        isUserResolved: function() {
+        isResolved: function() {
             return angular.isDefined(_user);
         },
         isAuthenticated: function() {

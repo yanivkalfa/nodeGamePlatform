@@ -10,7 +10,7 @@ function runFactory($rootScope, $state, $stateParams, authorization, User) {
         $rootScope.toStateParams = toStateParams;
         // if the principal is resolved, do an authorization check immediately. otherwise,
         // it'll be done when the state it resolved.
-        if (principal.isUserResolved()) authorization.authorize();
+        if (User.isResolved()) authorization.authorize();
     });
 }
 

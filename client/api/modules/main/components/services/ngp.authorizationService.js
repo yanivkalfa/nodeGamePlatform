@@ -13,9 +13,9 @@ angular.module(ngp.const.app.name)
 function authorizationFactory($rootScope, $state, User) {
     return {
         authorize: function() {
-            return principal.setUser()
+            return User.setUser()
                 .then(function() {
-                    var isAuthenticated = principal.isAuthenticated();
+                    var isAuthenticated = User.isAuthenticated();
 
                     if ($rootScope.toState.data.roles && $rootScope.toState.data.roles.length > 0 && !principal.isInAnyRole($rootScope.toState.data.roles)) {
                         if (isAuthenticated) $state.go('accessdenied'); // user is signed in but not authorized for desired state
