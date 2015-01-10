@@ -45,9 +45,9 @@ function siteRouts($stateProvider, $urlRouterProvider, $locationProvider) {
     }).state('admin', {
         url: '/admin',
         resolve: {
-            authorize: ['authorization',
-                function(authorization) {
-                    return authorization.authorize();
+            authorize: ['Authorization',
+                function(Authorization) {
+                    return Authorization.authorize();
                 }
             ]
         },
