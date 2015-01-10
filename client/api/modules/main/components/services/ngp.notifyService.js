@@ -24,6 +24,7 @@ function notifyFactory($rootScope) {
     NotifyFactory.prototype =  {
 
         reset : function() {
+            console.log(this, 'happeneing');
             this.msg = '';
             this.show = false;
         },
