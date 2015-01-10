@@ -29,6 +29,8 @@ function loginController(
             email : '',
             password : ''
         };
+
+        console.log(User);
     }
     LoginController.prototype.login = function(){
         this.api.setMethod('post').setParams({
