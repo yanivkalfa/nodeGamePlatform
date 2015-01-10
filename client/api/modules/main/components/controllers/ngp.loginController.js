@@ -29,9 +29,8 @@ function loginController(
             email : '',
             password : ''
         };
-        console.log(User);
-        console.log($rootScope.toState);
-        console.log($rootScope.toStateParams);
+        console.log($rootScope.returnToState);
+        console.log($rootScope.returnToStateParams);
     }
     LoginController.prototype.login = function(){
         this.api.setMethod('post').setParams({
@@ -43,7 +42,15 @@ function loginController(
         this.api.doRequest().then(function(resp){
             if(resp.payload.success){
                 $cookieStore.put('user', resp.payload.data);
-                $state.go('admin');
+
+                if(angular.isDefined($rootScope.returnToState))
+                {
+                    $state.go($rootScope.returnToState.name, $rootScope.returnToStateParams);
+                }
+                else
+                {
+                    $state.go('admin');
+                }
             }else{
                 $cookieStore.remove('user');
             }
