@@ -40,6 +40,7 @@ function userFactory($q, $http, $timeout, $cookieStore) {
         },
 
         isResolved: function() {
+            console.log(_user);
             return angular.isDefined(_user);
         },
         isAuthenticated: function() {
