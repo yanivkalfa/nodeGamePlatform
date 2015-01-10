@@ -26,7 +26,7 @@ function userFactory($q, $http, $timeout, $cookieStore) {
         setUser: function(force) {
             if (force === true) _user = undefined;
             if (angular.isDefined(_user)) return _user;
-            _user = $cookieStore.get("user") || false;
+            _user = $cookieStore.get("user");
             this.authenticate(_user);
             return _user;
         },
