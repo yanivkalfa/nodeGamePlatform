@@ -57,7 +57,8 @@ function siteRouts($stateProvider, $urlRouterProvider, $locationProvider) {
         views: {
             'main@': {
                 templateUrl: ngp.const.app.url + '/contents/admin',
-                controller: 'adminController'
+                controller: 'adminController',
+                controllerAs : 'admin'
             }
         }
     }).state('game', {
