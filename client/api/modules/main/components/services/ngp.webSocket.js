@@ -14,11 +14,24 @@ function webSocket($rootScope, User) {
 
     function WebSocket(){
         this.Primus = false;
+        this.init();
     }
 
     WebSocket.prototype =  {
+
         init : function(){
-            this.Primus = Primus.connect('ws://mygametests.info/?token=' + token);
+
+            if(!User.isAuthenticated) return false;
+
+            var token = User.get().token;
+            this.Primus = Primus.connect('ws://' + ngp.const.app.domain + '/?token=' + token);
+
+            this.Primus.on('msg', function(msg){
+                this[msg.method](msg.data);
+
+            });
+
+            return true;
         }
 
     };
