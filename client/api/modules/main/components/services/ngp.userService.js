@@ -41,7 +41,7 @@ function userFactory($q, $http, $timeout, $cookieStore) {
 
         authenticate: function(user) {
             _user = user || $cookieStore.get("user");
-            _authenticated = angular.isDefined(user);
+            _authenticated = angular.isDefined(_user);
 
             if (!angular.isDefined(_user)) $cookieStore.remove("user");
         },
