@@ -52,6 +52,7 @@ function loginController(
                     $state.go('admin');
                 }
             }else{
+                // notify
                 $cookieStore.remove('user');
             }
         });
