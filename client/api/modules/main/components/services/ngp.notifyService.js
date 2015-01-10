@@ -9,38 +9,49 @@ angular.module(ngp.const.app.name)
     ]);
 
 function notifyFactory($rootScope) {
-    console.log(arguments);
-    $rootScope.notify = {
-        show : false,
-        class : 'notify-success',
-        msg : ''
-    };
-    var options = {
-            timeout : 3000,
-            click : true
-        },
-        _reset = function(){
 
-        },
-        _notify = function(msg){
-            $rootScope.notify.msg = msg;
-            $rootScope.notify.show = true;
+
+    function NotifyFactory(){
+        this.options = {
+            timeout : 3000
         };
 
-    function NotifyFactory(msg){
-        return _notify;
+        this.show = false;
+        this.class = 'notify-success';
+        this.msg = '';
     }
 
-    NotifyFactory.prototype = {
+    NotifyFactory.prototype =  {
+
+        reset : function() {
+            this.msg = '';
+            this.show = false;
+        },
+
         success : function(msg) {
-            $rootScope.notify.class = 'notify-success';
-            _notify(msg);
+            this.class = 'notify-success';
+            this.message(msg);
         },
         error : function(msg) {
-            $rootScope.notify.class = 'notify-failed';
-            _notify(msg);
+            this.class = 'notify-failed';
+            this.message(msg);
+        },
+        warning : function(msg) {
+            this.class = 'notify-warning';
+            this.message(msg);
+        },
+        message : function(msg) {
+            this.msg = msg;
+            this.show = true;
+            if(this.options.timeout){
+                setTimeout(this._reset,this.options.timeout);
+            }
         }
     };
 
-    return new NotifyFactory();
+    var notify = new NotifyFactory();
+
+    $rootScope.notify = notify;
+
+    return notify;
 }
