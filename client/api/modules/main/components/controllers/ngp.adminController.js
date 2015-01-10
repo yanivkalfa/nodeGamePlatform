@@ -37,6 +37,8 @@ function adminController(
             console.log('a');
         };
 
+        this.WebSocket = new WebSocket();
+
 
     }
 
