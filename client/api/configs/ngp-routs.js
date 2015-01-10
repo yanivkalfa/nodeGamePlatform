@@ -64,7 +64,7 @@ function siteRouts($stateProvider, $urlRouterProvider, $locationProvider) {
         parent: 'admin',
         url: '/game',
         data: {
-            roles: ['superAdmin']
+            roles: ['registered']
         },
         views: {
             'main@': {
@@ -76,7 +76,7 @@ function siteRouts($stateProvider, $urlRouterProvider, $locationProvider) {
         parent: 'admin',
         url: '/restricted',
         data: {
-            roles: ['Admin']
+            roles: ['registered']
         },
         views: {
             'main@': {
