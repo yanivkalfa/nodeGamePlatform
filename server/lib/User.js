@@ -1,4 +1,5 @@
 module.exports = function(_s){
+    console.log(_s);
     var _user = undefined,
         _authenticated = false,
         _ = _s.oReq.lodash;

@@ -21,7 +21,7 @@ module.exports = function(_s){
     rf.RedisStore = require('connect-redis')(rf.session);
     rf.jwt = require('jsonwebtoken');
     rf.ajaxHandler = require('./ajaxHandler.js');
-    rf.User = require('./User.js')(_s);
+    rf.User = require('./User.js')(rf);
 
     return rf;
 };
