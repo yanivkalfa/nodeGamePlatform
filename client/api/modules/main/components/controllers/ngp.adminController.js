@@ -27,9 +27,8 @@ function adminController(
 
     function AdminController(){
         this.api = Api.createNewApi(ngp.const.app.ajaxUrl);
-        User.init();
         this.User = User.get();
-
+        console.log(this.User);
     }
 
     AdminController.prototype.login = function(){
