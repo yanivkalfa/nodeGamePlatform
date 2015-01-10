@@ -32,7 +32,7 @@ function authorizationFactory($rootScope, $state, User) {
                     $state.go('login');
                 }
             }
-
+            console.log('d');
             return user;
             /*
             return User.setUser()
