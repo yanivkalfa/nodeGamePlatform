@@ -29,6 +29,7 @@ function loginController(
             email : '',
             password : ''
         };
+        User.setUser()
         console.log(User.getUser());
         console.log($rootScope.returnToState);
     }
