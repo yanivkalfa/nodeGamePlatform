@@ -30,7 +30,7 @@ function loginController(
             password : ''
         };
         console.log($cookieStore.get('user'));
-        console.log(User.setUser());
+        console.log($rootScope.returnToState);
     }
     LoginController.prototype.login = function(){
         this.api.setMethod('post').setParams({
