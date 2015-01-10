@@ -5,32 +5,42 @@
 angular.module(ngp.const.app.name)
     .factory('notify', [
         '$rootScope',
-        '$state',
-        'User',
         notifyFactory
     ]);
 
 function notifyFactory($rootScope) {
-    var _msg = ''
-        , _show = false
-        ;
-    return {
-        authorize: function() {
-            return User.init()
-                .then(function() {
-                    var isAuthenticated = User.isAuthenticated();
+    console.log(arguments);
+    $rootScope.notify = {
+        show : false,
+        class : 'notify-success',
+        msg : ''
+    };
+    var options = {
+            timeout : 3000,
+            click : true
+        },
+        _reset = function(){
 
-                    if ($rootScope.toState.data.roles && $rootScope.toState.data.roles.length > 0 && !User.isInAnyRole($rootScope.toState.data.roles)) {
-                        if (isAuthenticated) $state.go('accessdenied');
-                        else {
+        },
+        _notify = function(msg){
+            $rootScope.notify.msg = msg;
+            $rootScope.notify.show = true;
+        };
 
-                            $rootScope.returnToState = $rootScope.toState;
-                            $rootScope.returnToStateParams = $rootScope.toStateParams;
+    function NotifyFactory(){
+        _notify(msg);
+    }
 
-                            $state.go('login');
-                        }
-                    }
-                });
+    NotifyFactory.prototype = {
+        success : function(msg) {
+            $rootScope.notify.class = 'notify-success';
+            _notify(msg);
+        },
+        error : function(msg) {
+            $rootScope.notify.class = 'notify-failed';
+            _notify(msg);
         }
     };
+
+    return new NotifyFactory();
 }

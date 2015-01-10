@@ -10,6 +10,7 @@ angular.module(ngp.const.app.name)
         '$cookieStore',
         'apiFactory',
         'User',
+        'notify',
         loginController
     ]);
 
@@ -20,7 +21,8 @@ function loginController(
     $location,
     $cookieStore,
     apiFactory,
-    User
+    User,
+    notify
     ) {
 
     function LoginController(){
@@ -29,6 +31,8 @@ function loginController(
             email : '',
             password : ''
         };
+
+        notify('aasda');
     }
     LoginController.prototype.login = function(){
 
