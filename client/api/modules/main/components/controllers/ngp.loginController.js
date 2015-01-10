@@ -9,7 +9,7 @@ angular.module(ngp.const.app.name)
         '$location',
         '$cookieStore',
         'apiFactory',
-        'user',
+        'User',
         loginController
     ]);
 
@@ -20,7 +20,7 @@ function loginController(
     $location,
     $cookieStore,
     apiFactory,
-    user
+    User
     ) {
 
     function LoginController(){
@@ -29,7 +29,7 @@ function loginController(
             email : '',
             password : ''
         };
-        console.log(user);
+        console.log(User);
         console.log($rootScope.toState);
         console.log($rootScope.toStateParams);
     }
