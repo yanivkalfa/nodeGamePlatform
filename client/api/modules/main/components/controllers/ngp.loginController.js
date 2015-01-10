@@ -32,7 +32,7 @@ function loginController(
             password : ''
         };
 
-        notify('aasda');
+        //notify('aasda');
     }
     LoginController.prototype.login = function(){
 
