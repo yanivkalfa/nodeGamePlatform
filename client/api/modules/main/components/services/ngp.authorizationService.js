@@ -20,7 +20,7 @@ function authorizationFactory($rootScope, $state, User) {
                 console.log('a');
                 if (User.isAuthenticated())
                 {
-                    return  $state.go('accessdenied');
+                    //return  $state.go('accessdenied');
                     console.log('b');
                 }
                 else
@@ -29,7 +29,7 @@ function authorizationFactory($rootScope, $state, User) {
                     $rootScope.returnToState = $rootScope.toState;
                     $rootScope.returnToStateParams = $rootScope.toStateParams;
 
-                    return $state.go('login');
+                    //return $state.go('login');
 
                     console.log('c');
                 }
