@@ -25,8 +25,9 @@ function notifyFactory($rootScope) {
 
         reset : function() {
             this.msg = '';
+            this.class = 'notify-success';
             this.show = false;
-            $rootScope.$apply()
+            console.log(this);
         },
 
         success : function(msg) {
@@ -46,7 +47,11 @@ function notifyFactory($rootScope) {
             this.msg = msg;
             this.show = true;
             if(this.options.timeout){
-                setTimeout(_.bind(_self.reset, $rootScope.notify),_self.options.timeout);
+                setTimeout(function(){
+                    _self.reset();
+                    $rootScope.$apply();
+                   // _.bind(_self.reset, $rootScope.notify)
+                },_self.options.timeout);
             }
         }
     };
