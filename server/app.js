@@ -1,8 +1,7 @@
 var _s = {};
-
 _s.oServerN = process.argv[3]; // severName - not required
 _s.port = process.argv[2] || 8001; // server port - required
-_s.oReq = require('./lib/requiredFiles.js')(); // require files.
+_s.oReq = require('./lib/requiredFiles.js')(_s); // require files.
 _s.sServerDirname = __dirname; // Server dir
 _s.sClientDirname = _s.oReq.path.resolve(__dirname, '..') + '/client'; //Client dir
 _s.oConfig = require('./settings/config'); // require config files.
@@ -42,7 +41,7 @@ _s.oReq.app.use(_s.oReq.session({
     cookie: { maxAge: sessMaxAge }
 }));
 
-_s.oRouts = require('./lib/requireRouts.js')(_s);
+_s.oRouts = require('./lib/requiredRouts.js')(_s);
 
 primus.on('connection', function (spark) {
 

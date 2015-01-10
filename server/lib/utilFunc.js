@@ -2,10 +2,13 @@ module.exports = function(_s){
     return {
 
         isLoggedIn : function(){
+            //req.session.user
             return true;
         },
 
         loginRequired : function(path){
+
+            //_s.oConfig.routs[path]
             return false;
         },
 

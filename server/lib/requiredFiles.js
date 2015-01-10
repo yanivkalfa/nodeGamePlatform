@@ -1,4 +1,4 @@
-module.exports = function(){
+module.exports = function(_s){
     var rf = {};
     rf.express = require('express');
     rf.lodash = require('lodash');
@@ -21,6 +21,7 @@ module.exports = function(){
     rf.RedisStore = require('connect-redis')(rf.session);
     rf.jwt = require('jsonwebtoken');
     rf.ajaxHandler = require('./ajaxHandler.js');
+    rf.User = require('./User.js')(_s);
 
     return rf;
 };

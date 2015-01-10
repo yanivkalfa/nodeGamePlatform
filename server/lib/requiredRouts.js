@@ -39,7 +39,7 @@ module.exports = function(_s){
 
     _s.oReq.app.get('/contents/:content', function (req, res) {
         if(_s.uf.loginRequired(req.params.content)){
-            if(_s.uf.isLoggedIn()){
+            if(_s.uf.isLoggedIn(req, res)){
                 res.render(_s.sServerDirname + '/tpl/contents/' + req.params.content + '.jade');
             }else{
                 res.status(404);
