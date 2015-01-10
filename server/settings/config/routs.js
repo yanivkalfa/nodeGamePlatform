@@ -13,7 +13,7 @@ module.exports = {
         roles : []
     },
     login : {
-        roles : []
+        roles : ['registered']
     },
     register : {
         roles : []
