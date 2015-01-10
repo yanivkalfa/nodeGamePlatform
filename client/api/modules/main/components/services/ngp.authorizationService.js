@@ -30,6 +30,7 @@ function authorizationFactory($rootScope, $state, User) {
                     $rootScope.returnToStateParams = $rootScope.toStateParams;
 
                     return $state.go('login');
+
                     console.log('c');
                 }
             }
