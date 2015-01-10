@@ -29,7 +29,6 @@ function loginController(
             email : '',
             password : ''
         };
-        $cookieStore.remove('user');
         console.log($cookieStore.get('user'));
         console.log($rootScope.returnToState);
     }
