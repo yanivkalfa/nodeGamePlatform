@@ -8,9 +8,9 @@ angular.module(ngp.const.app.name)
         '$state',
         '$location',
         '$cookieStore',
-        'apiFactory',
+        'Api',
         'User',
-        'notify',
+        'Notify',
         adminController
     ]);
 
@@ -20,13 +20,13 @@ function adminController(
     $state,
     $location,
     $cookieStore,
-    apiFactory,
+    Api,
     User,
-    notify
+    Notify
     ) {
 
     function AdminController(){
-        this.api = apiFactory.createNewApi(ngp.const.app.ajaxUrl);
+        this.api = Api.createNewApi(ngp.const.app.ajaxUrl);
         User.init();
         this.User = User.get();
 

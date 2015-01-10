@@ -2,15 +2,16 @@
  * Created by Yaniv-Kalfa on 1/2/15.
  */
 angular.module(ngp.const.app.name)
-    .factory('apiFactory', [
+    .factory('Api', [
         '$http',
         '$q',
-        '$state',
-        '$location',
         apiFactory
     ]);
 
-function apiFactory($http, $q) {
+function apiFactory(
+    $http,
+    $q
+    ) {
 
     function ApiFunction(url, method, params, options){
         this._url = url || false;

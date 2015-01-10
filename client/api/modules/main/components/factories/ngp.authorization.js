@@ -3,14 +3,19 @@
  */
 
 angular.module(ngp.const.app.name)
-    .factory('authorization', [
+    .factory('Authorization', [
         '$rootScope',
         '$state',
         'User',
         authorizationFactory
     ]);
 
-function authorizationFactory($rootScope, $state, User) {
+function authorizationFactory(
+    $rootScope,
+    $state,
+    User
+    ) {
+
     return {
         authorize: function() {
             return User.init()

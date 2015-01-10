@@ -3,7 +3,7 @@
  */
 
 angular.module(ngp.const.app.name)
-    .factory('notify', [
+    .factory('Notify', [
         '$rootScope',
         notifyFactory
     ]);

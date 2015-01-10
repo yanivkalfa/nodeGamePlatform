@@ -8,4 +8,4 @@ angular.module(ngp.const.app.name)
         homeController
     ]);
 
-function homeController($scope, $state, principal) {}
+function homeController($scope, $state) {}

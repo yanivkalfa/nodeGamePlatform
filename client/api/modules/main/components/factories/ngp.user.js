@@ -4,13 +4,14 @@
 angular.module(ngp.const.app.name)
     .factory('User', [
         '$q',
-        '$http',
-        '$timeout',
         '$cookieStore',
         userFactory
     ]);
 
-function userFactory($q, $http, $timeout, $cookieStore) {
+function userFactory(
+    $q,
+    $cookieStore
+    ) {
     var _user = undefined,
         _authenticated = false;
 

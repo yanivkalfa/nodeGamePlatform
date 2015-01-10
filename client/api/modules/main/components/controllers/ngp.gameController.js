@@ -8,4 +8,4 @@ angular.module(ngp.const.app.name)
         gameController
     ]);
 
-function gameController($scope, $state, principal) {}
+function gameController($scope, $state) {}

@@ -4,29 +4,23 @@
 angular.module(ngp.const.app.name)
     .controller('loginController', [
         '$rootScope',
-        '$scope',
         '$state',
-        '$location',
         '$cookieStore',
-        'apiFactory',
-        'User',
-        'notify',
+        'Api',
+        'Notify',
         loginController
     ]);
 
 function loginController(
     $rootScope,
-    $scope,
     $state,
-    $location,
     $cookieStore,
-    apiFactory,
-    User,
-    notify
+    Api,
+    Notify
     ) {
 
     function LoginController(){
-        this.api = apiFactory.createNewApi(ngp.const.app.ajaxUrl);
+        this.api = Api.createNewApi(ngp.const.app.ajaxUrl);
         this.registerForm = {
             email : '',
             password : ''
@@ -54,7 +48,7 @@ function loginController(
                     $state.go('admin');
                 }
             }else{
-                notify.error('Login Failed: ' + resp.payload.data);
+                Notify.error('Login Failed: ' + resp.payload.data);
                 $cookieStore.remove('user');
             }
         });
