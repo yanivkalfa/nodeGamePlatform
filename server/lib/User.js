@@ -1,8 +1,8 @@
-module.exports = function(_s){
-    console.log(_s);
+module.exports = function(rf){
+    console.log(rf);
     var _user = undefined,
         _authenticated = false,
-        _ = _s.oReq.lodash;
+        _ = rf.lodash;
 
     return {
         get: function() {
