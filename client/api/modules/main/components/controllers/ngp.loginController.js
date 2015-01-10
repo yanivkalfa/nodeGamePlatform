@@ -29,8 +29,6 @@ function loginController(
             email : '',
             password : ''
         };
-        console.log($rootScope.returnToState);
-        console.log($rootScope.returnToStateParams);
     }
     LoginController.prototype.login = function(){
         this.api.setMethod('post').setParams({
