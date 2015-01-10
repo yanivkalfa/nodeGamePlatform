@@ -31,11 +31,13 @@ function adminController(
         this.api = Api.createNewApi(ngp.const.app.ajaxUrl);
         this.User = User.get();
         console.log(this.User);
+
+        console.log(WebSocket);
         WebSocket.prototype.newa = function(data){
             console.log('a');
         };
 
-        console.log(WebSocket);
+
     }
 
     AdminController.prototype.login = function(){
