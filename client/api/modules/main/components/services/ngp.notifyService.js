@@ -44,7 +44,7 @@ function notifyFactory($rootScope) {
             this.msg = msg;
             this.show = true;
             if(this.options.timeout){
-                setTimeout(this._reset,this.options.timeout);
+                setTimeout(this.reset,this.options.timeout);
             }
         }
     };
