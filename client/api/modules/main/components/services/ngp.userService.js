@@ -33,14 +33,13 @@ function userFactory($q, $http, $timeout, $cookieStore) {
 
         authenticate: function(user) {
             _user = user;
-            _authenticated = user != null;
+            _authenticated = angular.isDefined(user);
 
             if (user) $cookieStore.put("user", user);
             else $cookieStore.remove("user");
         },
 
         isResolved: function() {
-            console.log(_user);
             return angular.isDefined(_user);
         },
         isAuthenticated: function() {
