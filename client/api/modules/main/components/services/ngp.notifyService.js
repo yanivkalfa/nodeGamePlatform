@@ -45,8 +45,10 @@ function notifyFactory($rootScope) {
             this.msg = msg;
             this.show = true;
             if(this.options.timeout){
-                console.log('setting timeout');
-                setTimeout(_self.reset,_self.options.timeout);
+                console.log('setting timeout',this.options.timeout);
+                setTimeout(function(){
+                    _self.reset();
+                },_self.options.timeout);
             }
         }
     };
