@@ -68,14 +68,13 @@
 }
 
 .notifyWindow{
-    position:absolute;
-    top:20px;
     width:600px;
-    margin:0 auto;
+    margin:-550px auto 0;
     border:1px solid black;
     opacity: 0.8;
     z-index: 9999;
     color: white;
+    padding:5px 10px;
 }
 
 .notify-success{
