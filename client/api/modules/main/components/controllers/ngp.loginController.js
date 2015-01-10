@@ -3,15 +3,25 @@
  */
 angular.module(ngp.const.app.name)
     .controller('loginController', [
+        '$rootScope',
         '$scope',
         '$state',
         '$location',
         '$cookieStore',
         'apiFactory',
+        'user',
         loginController
     ]);
 
-function loginController($scope, $state, $location, $cookieStore, apiFactory) {
+function loginController(
+    $rootScope,
+    $scope,
+    $state,
+    $location,
+    $cookieStore,
+    apiFactory,
+    user
+    ) {
 
     function LoginController(){
         this.api = apiFactory.createNewApi(ngp.const.app.ajaxUrl);
@@ -19,6 +29,9 @@ function loginController($scope, $state, $location, $cookieStore, apiFactory) {
             email : '',
             password : ''
         };
+        console.log(user);
+        console.log($rootScope.toState);
+        console.log($rootScope.toStateParams);
     }
     LoginController.prototype.login = function(){
         this.api.setMethod('post').setParams({
