@@ -48,6 +48,8 @@ function adminController(
 
         };
 
+        console.log(WebSocket);
+
         /*
         WebSocket.then(function(webSocket){
             WebSocket = webSocket;
