@@ -11,8 +11,8 @@ angular.module(ngp.const.app.name)
 
 function WebSocket($rootScope, User) {
     this.Primus = false;
-    this.init();
     this.user = User;
+    this.init();
 
 }
 
