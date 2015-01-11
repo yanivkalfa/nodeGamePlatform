@@ -34,13 +34,9 @@ function adminController(
 
         console.log('extending');
 
-        var extend = {
-            aMethod : function(){
-                console.log(self.User);
-            }
+        WebSocket.aMethod = function(){
+            console.log(self.User);
         };
-
-        WebSocket = _.assign(WebSocket, extend);
 
 
     }
