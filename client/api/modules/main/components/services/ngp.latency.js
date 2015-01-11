@@ -28,6 +28,8 @@ function latencyService(WebSocket) {
 
         init : function(){
             if(!WebSocket.isConnected()) return;
+
+            console.log('asdf');
             
             this.reset();
             this.pingServer();
