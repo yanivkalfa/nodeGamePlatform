@@ -11,7 +11,7 @@ angular.module(ngp.const.app.name)
         'Api',
         'User',
         'Notify',
-        //'WebSocket',
+        'WebSocket',
         //'Latency',
         adminController
     ]);
@@ -24,8 +24,8 @@ function adminController(
     $cookieStore,
     Api,
     User,
-    Notify
-    //WebSocket
+    Notify,
+    WebSocket
     //Latency,
     ) {
 
@@ -40,9 +40,9 @@ function adminController(
             }
 
         };
-        WebSocket.then(function(aaa){
-            console.log(WebSocket, aaa);
-        });
+
+        console.log(WebSocket);
+        console.log(WebSocketService);
 
 
         /*
