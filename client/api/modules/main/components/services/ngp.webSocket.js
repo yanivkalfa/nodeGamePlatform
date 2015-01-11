@@ -40,9 +40,7 @@ function webSocket($rootScope, User) {
 
         end : function(){ this.Primus.end(); },
 
-        isConnected : function(){
-            return this.connected;
-        }
+        isConnected : function(){ return this.connected; }
 
     };
 
