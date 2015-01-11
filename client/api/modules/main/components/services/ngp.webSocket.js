@@ -6,36 +6,31 @@ angular.module(ngp.const.app.name)
     .service('WebSocket', [
         '$rootScope',
         'User',
-        webSocket
+        WebSocket
     ]);
 
-function webSocket($rootScope, User) {
+function WebSocket($rootScope, User) {
+    this.Primus = false;
+    this.init();
+    this.user = User;
 
+}
 
-    function WebSocket(){
-        this.Primus = false;
-        this.init();
+WebSocket.prototype =  {
+
+    init : function(){
+
+        if(!this.user.isAuthenticated) return false;
+
+        var token = this.user.get().token;
+        this.Primus = Primus.connect('ws://' + ngp.const.app.domain + '/?token=' + token);
+
+        this.Primus.on('msg', function(msg){
+            this[msg.method](msg.data);
+
+        });
+
+        return true;
     }
 
-    WebSocket.prototype =  {
-
-        init : function(){
-
-            if(!User.isAuthenticated) return false;
-
-            var token = User.get().token;
-            this.Primus = Primus.connect('ws://' + ngp.const.app.domain + '/?token=' + token);
-
-            this.Primus.on('msg', function(msg){
-                this[msg.method](msg.data);
-
-            });
-
-            return true;
-        }
-
-    };
-
-
-    return new WebSocket();
-}
+};
