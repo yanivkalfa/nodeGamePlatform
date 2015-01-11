@@ -10,7 +10,6 @@ angular.module(ngp.const.app.name)
 function latencyService(WebSocket) {
 
     function LatencyService(){
-        var self = this;
         this._pingSent = 0;
         this._pingreturn = 0;
         this._latency = 0;
@@ -23,14 +22,7 @@ function latencyService(WebSocket) {
         this.pingInterval = false;
 
         console.log(WebSocket);
-        /*9
-
-        WebSocket.then(function(webSocket){
-            WebSocket = webSocket;
-            self.init();
-        });*/
-
-
+        this.init();
     }
 
     LatencyService.prototype =  {
