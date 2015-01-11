@@ -43,12 +43,14 @@ function adminController(
 
         console.log(WebSocket);
 
+
+        /*
         WebSocket.ping = function(data){
             Latency.calculateLatency(data);
             self.bar.stats.latency = Latency.getLatency();
             $scope.$apply();
 
-        };
+        };*/
 
         /*
         WebSocket.then(function(webSocket){
