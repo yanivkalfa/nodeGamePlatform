@@ -32,6 +32,8 @@ function adminController(
         this.api = Api.createNewApi(ngp.const.app.ajaxUrl);
         this.User = User.get();
 
+        console.log('extending');
+
         var extend = {
             aMethod : function(){
                 console.log(self.User);
