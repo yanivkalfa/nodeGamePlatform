@@ -40,7 +40,9 @@ function adminController(
             }
 
         };
-        console.log(WebSocket);
+        WebSocket.then(function(aaa){
+            console.log(WebSocket, aaa);
+        });
 
 
         /*
