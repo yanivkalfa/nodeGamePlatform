@@ -51,13 +51,23 @@ function siteRouts($stateProvider, $urlRouterProvider, $locationProvider) {
                 }
             ],
 
-            WebSocket: ['WebSocket',
-                function(WebSocket) {
-                    WebSocket.init().then(function(webSocket){
-                        return webSocket;
+            aService: ['WebSocket', function(WebSocket) {
+                WebSocket.init().then(function(webSocket){
+                    return WebSocket;
+                });
+            }]
+/*
+            resolve: {
+                aService: ['MyAsyncLoadingService',function(MyAsyncLoadingService){
+//async init
+                    MyAsyncLoadingService.initialize().then(function(){
+//return the original service
+                        return MyAsyncLoadingService;
                     });
-                }
-            ]
+                }]
+            }
+
+            */
         },
         data: {
             roles: ['registered']
