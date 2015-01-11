@@ -21,11 +21,12 @@ function latencyService(WebSocket) {
         this.cycleTime = 60*60*1000;
         this.pingEvery = 30*1000;
         this.pingInterval = false;
+        /*9
 
         WebSocket.then(function(webSocket){
             WebSocket = webSocket;
             self.init();
-        });
+        });*/
 
 
     }
