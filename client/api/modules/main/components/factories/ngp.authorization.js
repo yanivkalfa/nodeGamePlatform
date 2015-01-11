@@ -32,6 +32,8 @@ function authorizationFactory(
                             $state.go('login');
                         }
                     }
+                }).catch(function(err){
+                    $state.go('login');
                 });
         }
     };
