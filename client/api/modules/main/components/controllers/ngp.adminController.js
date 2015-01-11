@@ -40,8 +40,8 @@ function adminController(
             }
 
         };
-
-        console.log(WebSocket, aService);
+        console.log(WebSocket);
+        console.log(aService);
 
 
         /*
