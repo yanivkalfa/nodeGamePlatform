@@ -21,8 +21,6 @@ function latencyService(WebSocket) {
         this.pingEvery = 30*1000;
         this.pingInterval = false;
 
-
-        console.log(WebSocket);
         this.init();
     }
 
@@ -37,7 +35,7 @@ function latencyService(WebSocket) {
 
         pingServer : function(){
             this._pingSent = Date.now();
-            WebSocket.Primus.write({"method": "ping", "data":"ping"});
+            WebSocket.Primus.write({"m": "ping", "d":"p"});
 
             if(this.cycleTime <= this._timeElapsed){
                 this.init();

@@ -44,7 +44,7 @@ _s.oReq.app.use(_s.oReq.session({
 _s.oRouts = require('./lib/requiredRouts.js')(_s);
 var ab = {
     ping : function(spark, data){
-        spark.write({"method": "ping", "data":"ping"});
+        spark.write({"m": "ping", "d":"p"});
     }
 };
 primus.on('connection', function (spark) {
@@ -89,7 +89,7 @@ primus.on('connection', function (spark) {
 
 
     spark.on('data', function (msg) {
-        ab[msg.method](spark, msg.data);
+        ab[msg.m](spark, msg.d);
     });
 });
 
