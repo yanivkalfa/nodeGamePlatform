@@ -13,6 +13,7 @@ angular.module(ngp.const.app.name)
         'Notify',
         'WebSocket',
         'Latency',
+        'aService',
         adminController
     ]);
 
