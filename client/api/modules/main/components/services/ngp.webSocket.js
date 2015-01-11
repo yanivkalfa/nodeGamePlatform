@@ -38,7 +38,7 @@ function webSocket($rootScope, $q, User) {
 
             this.Primus.on('open', function open() {
                 self.connected = true;
-                deferred.resolve( tmp );
+                deferred.resolve( self );
             });
 
             this.Primus.on('error', function error(err) {
