@@ -12,6 +12,7 @@ angular.module(ngp.const.app.name)
         'User',
         'Notify',
         'WebSocket',
+        'Latency',
         adminController
     ]);
 
@@ -24,7 +25,8 @@ function adminController(
     Api,
     User,
     Notify,
-    WebSocket
+    WebSocket,
+    Latency
     ) {
 
     function AdminController(){
@@ -35,8 +37,8 @@ function adminController(
             statusHover : false
         };
 
-        WebSocket.aMethod = function(){
-            console.log(self.User);
+        WebSocket.ping = function(data){
+            Latency.calculateLatency(data);
         };
 
 

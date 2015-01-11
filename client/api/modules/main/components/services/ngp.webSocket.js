@@ -14,6 +14,7 @@ function webSocket($rootScope, User) {
 
     function WebSocket(){
         this.Primus = false;
+        this.connected = false;
         this.init();
     }
 
@@ -30,7 +31,17 @@ function webSocket($rootScope, User) {
                 self[msg.method](msg.data);
             });
 
+            this.primus.on('open', function open() { self.connected = true; });
+
+            this.primus.on('end', function end() { self.connected = false; });
+
             return true;
+        },
+
+        end : function(){ this.Primus.end(); },
+
+        isConnected : function(){
+            return this.connected;
         }
 
     };

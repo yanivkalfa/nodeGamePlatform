@@ -42,7 +42,11 @@ _s.oReq.app.use(_s.oReq.session({
 }));
 
 _s.oRouts = require('./lib/requiredRouts.js')(_s);
-
+var ab = {
+    ping : function(spark, data){
+        spark.write({"method": "ping", "data":"ping"});
+    }
+};
 primus.on('connection', function (spark) {
 
     _s.oReq.jwt.verify(spark.query.token, sessSecret, function(err, decoded) {
@@ -82,20 +86,9 @@ primus.on('connection', function (spark) {
     });
 
 
-    spark.on('data', function (data) {
-        console.log('received data from the client', data);
-
-        //
-        // Always close the connection if we didn't receive our secret imaginary
-        // handshake.
-        //
-        if ('foo' !== data.secrethandshake) spark.end();
-        spark.write({ foo: 'bar' });
-        spark.write('banana');
+    spark.on('data', function (msg) {
+        ab[msg.method](spark, msg.data);
     });
-
-    var msg = {method : 'aMethod', "data" : 'a'};
-    spark.write(msg);
 });
 
 
