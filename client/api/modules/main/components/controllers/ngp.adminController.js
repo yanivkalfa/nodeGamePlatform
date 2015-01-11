@@ -41,7 +41,7 @@ function adminController(
 
         };
 
-        console.log(aService, WebSocket);
+        console.log(WebSocket, aService);
 
 
         /*
