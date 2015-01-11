@@ -34,7 +34,9 @@ function webSocket($rootScope, User) {
             });
 
 
-            this.Primus.on('open', function open() { self.connected = true; });
+            this.Primus.on('open', function open() {
+                console.log('aaa');
+                self.connected = true; });
 
             this.Primus.on('end', function end() { self.connected = false; });
 
