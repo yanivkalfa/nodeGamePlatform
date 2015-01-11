@@ -46,6 +46,9 @@ function adminController(
             WebSocket.ping = function(data){
                 Latency.calculateLatency(data);
                 self.bar.stats.latency = Latency.getLatency();
+                console.log(self.bar.stats.latency);
+                $scope.$apply();
+
             };
         });
 
