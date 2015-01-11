@@ -18,8 +18,10 @@ function authorizationFactory(
 
     return {
         authorize: function() {
+            console.log('aaaa');
             return User.init()
-                .then(function() {
+                .then(function(aaa) {
+                    console.log(aaa);
                     var isAuthenticated = User.isAuthenticated();
 
                     if ($rootScope.toState.data.roles && $rootScope.toState.data.roles.length > 0 && !User.isInAnyRole($rootScope.toState.data.roles)) {
@@ -32,7 +34,8 @@ function authorizationFactory(
                             $state.go('login');
                         }
                     }
-                }).catch(function(err){
+                },function(err){
+                    console.log(err);
                     $state.go('login');
                 });
         }
