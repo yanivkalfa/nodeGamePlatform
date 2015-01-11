@@ -5,23 +5,24 @@ angular.module(ngp.const.app.name)
     .service('User', [
         '$q',
         '$cookieStore',
-        userFactory
+        userService
     ]);
 
-function userFactory(
+function userService(
     $q,
     $cookieStore
     ) {
 
-    function UserFactory(){
+    function UserService(){
         this._user = undefined;
         this._authenticated = false;
     }
 
-    UserFactory.prototype =  {
+    UserService.prototype =  {
         get: function() {
             return this._user;
         },
+
         getRoles: function() {
             return this._user.roles;
         },
@@ -75,5 +76,5 @@ function userFactory(
         }
     };
 
-    return new UserFactory();
+    return new UserService();
 }

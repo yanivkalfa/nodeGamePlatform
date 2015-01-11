@@ -28,17 +28,13 @@ function adminController(
     ) {
 
     function AdminController(){
+        var self = this;
         this.api = Api.createNewApi(ngp.const.app.ajaxUrl);
         this.User = User.get();
-        console.log(this.User);
 
-        WebSocket.aNewFunction = function(){
-            console.log(this);
-
+        WebSocket.aMethod = function(){
+            console.log(self.User);
         };
-
-        WebSocket.aNewFunction();
-
     }
 
     AdminController.prototype.login = function(){

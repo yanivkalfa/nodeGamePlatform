@@ -94,7 +94,8 @@ primus.on('connection', function (spark) {
         spark.write('banana');
     });
 
-    spark.write('Hello world');
+    var msg = {method : 'aMethod', "data" : 'a'};
+    spark.write(msg);
 });
 
 

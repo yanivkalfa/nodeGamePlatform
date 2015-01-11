@@ -5,11 +5,9 @@ angular.module(ngp.const.app.name)
     .controller('gameController', [
         '$scope',
         '$state',
-        'User',
         gameController
     ]);
 
-function gameController($scope, $state, User) {
-    console.log(User.get());
+function gameController($scope, $state ) {
 
 }
