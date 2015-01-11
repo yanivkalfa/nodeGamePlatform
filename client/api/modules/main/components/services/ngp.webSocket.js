@@ -15,8 +15,6 @@ function webSocket($rootScope, $q, User) {
     var deferred = $q.defer(),
         webSocketInit ;
 
-    webSocketInit = new WebSocket();
-
     function WebSocket(){
         this.Primus = false;
         this.connected = false;
@@ -57,6 +55,7 @@ function webSocket($rootScope, $q, User) {
 
     };
 
+    webSocketInit = new WebSocket();
 
     return deferred.promise;
 }
