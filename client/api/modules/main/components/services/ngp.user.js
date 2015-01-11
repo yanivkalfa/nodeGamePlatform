@@ -2,7 +2,7 @@
  * Created by Yaniv-Kalfa on 1/2/15.
  */
 angular.module(ngp.const.app.name)
-    .factory('User', [
+    .service('User', [
         '$q',
         '$cookieStore',
         userFactory
@@ -16,7 +16,6 @@ function userFactory(
     function UserFactory(){
         this._user = undefined;
         this._authenticated = false;
-        this.init();
     }
 
     UserFactory.prototype =  {
