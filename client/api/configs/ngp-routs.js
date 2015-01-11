@@ -46,15 +46,15 @@ function siteRouts($stateProvider, $urlRouterProvider, $locationProvider) {
         url: '/admin',
         resolve: {
 
-            WebSocket: ['WebSocket',
-                function(WebSocket) {
-                    return WebSocket.init();
-                }
-            ],
-
             authorize: ['Authorization',
                 function(Authorization) {
                     return Authorization.authorize();
+                }
+            ],
+
+            WebSocket: ['WebSocket',
+                function(WebSocket) {
+                    return WebSocket.init();
                 }
             ]
         },
