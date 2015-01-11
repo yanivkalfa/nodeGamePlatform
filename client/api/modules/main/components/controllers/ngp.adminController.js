@@ -37,10 +37,16 @@ function adminController(
             statusHover : false
         };
 
-        WebSocket.ping = function(data){
-            Latency.calculateLatency(data);
-            console.log(Latency.getLatency());
-        };
+        this.WebSocket = WebSocket.then(function(webSocket){
+            self.WebSocket = webSocket;
+
+            self.WebSocket.ping = function(data){
+                Latency.calculateLatency(data);
+                console.log(Latency.getLatency());
+            };
+        });
+
+
 
 
     }
