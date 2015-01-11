@@ -8,6 +8,7 @@ angular.module(ngp.const.app.name)
         '$cookieStore',
         'Api',
         'Notify',
+        'WebSocket',
         loginController
     ]);
 
@@ -16,7 +17,8 @@ function loginController(
     $state,
     $cookieStore,
     Api,
-    Notify
+    Notify,
+    WebSocket
     ) {
 
     function LoginController(){
@@ -25,6 +27,7 @@ function loginController(
             email : '',
             password : ''
         };
+        console.log(WebSocket);
     }
     LoginController.prototype.login = function(){
 
