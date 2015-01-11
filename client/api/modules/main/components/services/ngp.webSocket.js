@@ -57,5 +57,5 @@ function webSocket($rootScope, $q, User) {
 
     };
 
-    return new WebSocket();
+    return WebSocket;
 }
