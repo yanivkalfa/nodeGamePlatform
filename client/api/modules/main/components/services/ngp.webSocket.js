@@ -39,6 +39,7 @@ function webSocket($rootScope, $q, User) {
 
             this.Primus.on('open', function open() {
                 self.connected = true;
+                console.log('asdfasdf');
                 deferred.resolve( webSocketInit );
             });
 
