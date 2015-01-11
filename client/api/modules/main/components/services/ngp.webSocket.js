@@ -19,6 +19,7 @@ function WebSocket($rootScope, User) {
 WebSocket.prototype =  {
 
     init : function(){
+        console.log(this);
 
         if(!this.user.isAuthenticated) return false;
 
