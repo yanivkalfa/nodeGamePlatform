@@ -31,11 +31,11 @@ function webSocket($rootScope, User) {
                 self[msg.method](msg.data);
             });
 
-            /*
+
             this.primus.on('open', function open() { self.connected = true; });
 
             this.primus.on('end', function end() { self.connected = false; });
-            */
+
 
             return true;
         }
