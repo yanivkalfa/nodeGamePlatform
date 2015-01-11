@@ -34,15 +34,18 @@ function adminController(
         this.api = Api.createNewApi(ngp.const.app.ajaxUrl);
         this.User = User.get();
         this.bar = {
-            statusHover : false
+            stats : {
+                hover : false,
+                latency : 0
+            }
+
         };
+        WebSocket.then(function(webSocket){
+            WebSocket = webSocket;
 
-        this.WebSocket = WebSocket.then(function(webSocket){
-            self.WebSocket = webSocket;
-
-            self.WebSocket.ping = function(data){
+            WebSocket.ping = function(data){
                 Latency.calculateLatency(data);
-                console.log(Latency.getLatency());
+                self.bar.stats.latency = Latency.getLatency();
             };
         });
 

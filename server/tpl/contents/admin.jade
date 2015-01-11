@@ -8,10 +8,10 @@ div(class="statusBar")
         img(src="http://something.com")
         span(class="multiPlayerLabel") Queue for MultiPlayer
         ul(class="multiPlayerGamesList fLeft displayNone")
-    div(class="statsDiv fLeft" ng-mouseenter="admin.bar.statusHover = true" ng-mouseleave="admin.bar.statusHover = false") Stats
-        ul(class="stats fLeft" ng-show="admin.bar.statusHover")
+    div(class="statsDiv fLeft" ng-mouseenter="admin.bar.stats.hover = true" ng-mouseleave="admin.bar.stats.hover = false") Stats
+        ul(class="stats fLeft" ng-show="admin.bar.stats.hover")
             li latency:&nbsp;
-                span(class="latency" id="latency")
+                span(class="latency" id="latency") {{ admin.bar.stats.latency }}
             li Total Members:&nbsp;
                 span(class="totalMembers" id="totalMembers")
             li Total Games:&nbsp;
