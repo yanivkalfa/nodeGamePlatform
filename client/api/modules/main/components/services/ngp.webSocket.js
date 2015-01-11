@@ -20,7 +20,6 @@ function webSocket($rootScope, $q, User) {
         this.connected = false;
 
         this.init();
-        console.log(this);
     }
 
     WebSocket.prototype =  {
@@ -39,8 +38,12 @@ function webSocket($rootScope, $q, User) {
 
             this.Primus.on('open', function open() {
                 self.connected = true;
-                console.log('asdfasdf');
                 deferred.resolve( webSocketInit );
+            });
+
+            this.Primus..on('error', function error(err) {
+                self.connected = false;
+                deferred.reject( err );
             });
 
             this.Primus.on('end', function end() { self.connected = false; });

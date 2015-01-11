@@ -23,6 +23,7 @@ function latencyService(WebSocket) {
         this.pingInterval = false;
 
         WebSocket.then(function(webSocket){
+            WebSocket = webSocket;
             self.init();
         });
     }
