@@ -35,9 +35,11 @@ function adminController(
             console.log('a');
         };
 
-        this.WebSocket = new WebSocket();
+        WebSocket.aNewFunction = function(){
 
-        console.log(this.WebSocket);
+        };
+
+        console.log(WebSocket);
 
     }
 
