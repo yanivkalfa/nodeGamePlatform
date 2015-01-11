@@ -52,8 +52,8 @@ function siteRouts($stateProvider, $urlRouterProvider, $locationProvider) {
             ],
 
             aService: ['WebSocket', function(WebSocket) {
-                console.log(WebSocket);
                 WebSocket.init().then(function(){
+                    console.log(WebSocket)
                     return WebSocket;
                 });
             }]
