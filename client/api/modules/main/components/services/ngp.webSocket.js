@@ -14,12 +14,10 @@ function webSocket($rootScope, $q, User) {
     var deferred = $q.defer(),
         tmp;
 
-    tmp = new WebSocket();
+
     function WebSocket(){
         this.Primus = false;
         this.connected = false;
-
-        this.init();
     }
 
     WebSocket.prototype =  {
@@ -39,7 +37,7 @@ function webSocket($rootScope, $q, User) {
             this.Primus.on('open', function open() {
                 console.log('open');
                 self.connected = true;
-                deferred.resolve( tmp );
+                deferred.resolve( 'aaaa' );
             });
 
             this.Primus.on('error', function error(err) {
@@ -60,7 +58,8 @@ function webSocket($rootScope, $q, User) {
 
     };
 
-
+    tmp = new WebSocket();
+    tmp.init();
 
     return deferred.promise;
 }
