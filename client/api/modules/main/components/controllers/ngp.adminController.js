@@ -31,6 +31,9 @@ function adminController(
         var self = this;
         this.api = Api.createNewApi(ngp.const.app.ajaxUrl);
         this.User = User.get();
+        this.bar = {
+            statusHover : false
+        };
 
         WebSocket.aMethod = function(){
             console.log(self.User);
