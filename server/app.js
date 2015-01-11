@@ -64,6 +64,7 @@ primus.on('connection', function (spark) {
         }
     });
 
+    /*
     spark.join("aRoomName", function () {
 
         // send message to this client
@@ -84,6 +85,7 @@ primus.on('connection', function (spark) {
             console.log("spark room", rooms);
         });
     });
+    */
 
 
     spark.on('data', function (msg) {
