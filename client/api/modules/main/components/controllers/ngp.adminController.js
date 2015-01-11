@@ -31,9 +31,6 @@ function adminController(
         this.api = Api.createNewApi(ngp.const.app.ajaxUrl);
         this.User = User.get();
         console.log(this.User);
-        WebSocket.prototype.newa = function(data){
-            console.log('a');
-        };
 
         WebSocket.aNewFunction = function(){
 
