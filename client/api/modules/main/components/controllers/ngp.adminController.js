@@ -39,6 +39,7 @@ function adminController(
 
         WebSocket.ping = function(data){
             Latency.calculateLatency(data);
+            console.log(Latency.getLatency());
         };
 
 
