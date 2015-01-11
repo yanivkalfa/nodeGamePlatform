@@ -41,8 +41,15 @@ function userService(
                 return deferred.promise;
             }
 
-            this.authenticate();
-            deferred.resolve(this._user);
+            if(this.authenticate())
+            {
+                deferred.resolve(this._user);
+            }
+            else
+            {
+                deferred.reject(false);
+            }
+
 
             return deferred.promise;
         },
@@ -51,7 +58,15 @@ function userService(
             this._user = user || $cookieStore.get("user");
             this._authenticated = angular.isDefined(this._user);
 
-            if (!angular.isDefined(this._user)) $cookieStore.remove("user");
+            if (!angular.isDefined(this._user))
+            {
+                $cookieStore.remove("user");
+                return false;
+            }
+            else
+            {
+                return true;
+            }
         },
 
         isResolved: function() {
