@@ -26,7 +26,8 @@ function adminController(
     User,
     Notify,
     WebSocket,
-    Latency
+    Latency,
+    aService
     ) {
 
     function AdminController(){
