@@ -14,7 +14,7 @@ function webSocket($rootScope, $q, User) {
     var deferred = $q.defer(),
         tmp;
 
-
+    tmp = new WebSocket();
     function WebSocket(){
         this.Primus = false;
         this.connected = false;
@@ -39,7 +39,7 @@ function webSocket($rootScope, $q, User) {
             this.Primus.on('open', function open() {
                 console.log('open');
                 self.connected = true;
-                deferred.resolve( self );
+                deferred.resolve( tmp );
             });
 
             this.Primus.on('error', function error(err) {
@@ -60,7 +60,7 @@ function webSocket($rootScope, $q, User) {
 
     };
 
-    tmp = new WebSocket();
+
 
     return deferred.promise;
 }
