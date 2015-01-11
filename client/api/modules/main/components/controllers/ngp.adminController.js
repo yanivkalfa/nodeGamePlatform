@@ -33,10 +33,11 @@ function adminController(
         console.log(this.User);
 
         WebSocket.aNewFunction = function(){
+            console.log(this);
 
         };
 
-        console.log(WebSocket);
+        WebSocket.aNewFunction();
 
     }
 
