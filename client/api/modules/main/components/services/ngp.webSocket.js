@@ -32,19 +32,18 @@ function webSocket($rootScope, User) {
             });
 
 
-            this.primus.on('open', function open() { self.connected = true; });
+            this.Primus.on('open', function open() { self.connected = true; });
 
-            this.primus.on('end', function end() { self.connected = false; });
+            this.Primus.on('end', function end() { self.connected = false; });
 
 
             return true;
-        }
+        },
 
-        /*
         end : function(){ this.Primus.end(); },
 
         isConnected : function(){ return this.connected; }
-        */
+
 
     };
 

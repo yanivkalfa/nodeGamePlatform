@@ -12,7 +12,7 @@ angular.module(ngp.const.app.name)
         'User',
         'Notify',
         'WebSocket',
-        //'Latency',
+        'Latency',
         adminController
     ]);
 
@@ -25,8 +25,8 @@ function adminController(
     Api,
     User,
     Notify,
-    WebSocket
-    //Latency
+    WebSocket,
+    Latency
     ) {
 
     function AdminController(){
@@ -38,7 +38,7 @@ function adminController(
         };
 
         WebSocket.ping = function(data){
-            //Latency.calculateLatency(data);
+            Latency.calculateLatency(data);
         };
 
 
