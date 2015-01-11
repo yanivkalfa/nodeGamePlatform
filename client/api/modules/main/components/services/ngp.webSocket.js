@@ -11,19 +11,19 @@ angular.module(ngp.const.app.name)
     ]);
 
 function webSocket($rootScope, $q, User) {
-    var deferred = $q.defer(),
-        tmp;
-
 
     function WebSocket(){
         this.Primus = false;
         this.connected = false;
+
+        this.init();
     }
 
     WebSocket.prototype =  {
 
         init : function(){
-            var self = this;
+            var deferred = $q.defer(),
+                self = this;
 
             if(!User.isAuthenticated) return false;
 
@@ -48,7 +48,7 @@ function webSocket($rootScope, $q, User) {
             this.Primus.on('end', function end() { self.connected = false; });
 
 
-            return true;
+            return deferred.promise;
         },
 
         end : function(){ this.Primus.end(); },
@@ -58,8 +58,5 @@ function webSocket($rootScope, $q, User) {
 
     };
 
-    tmp = new WebSocket();
-    tmp.init();
-
-    return deferred.promise;
+    return new WebSocket();
 }
