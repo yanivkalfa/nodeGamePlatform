@@ -14,12 +14,7 @@ function webSocket($rootScope, User) {
 
     function WebSocket(){
         this.Primus = false;
-        this.init();
-    }
-
-    WebSocket.prototype =  {
-
-        init : function(){
+        this.init = function(){
 
             if(!User.isAuthenticated) return false;
 
@@ -32,9 +27,10 @@ function webSocket($rootScope, User) {
             });
 
             return true;
-        }
+        };
 
-    };
+        this.init();
+    }
 
 
     return new WebSocket();
