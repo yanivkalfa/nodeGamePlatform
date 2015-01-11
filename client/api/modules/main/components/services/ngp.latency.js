@@ -27,9 +27,8 @@ function latencyService(WebSocket) {
     LatencyService.prototype =  {
 
         init : function(){
+            console.log(WebSocket);
             if(!WebSocket.isConnected()) return;
-
-            console.log('asdf');
             
             this.reset();
             this.pingServer();
