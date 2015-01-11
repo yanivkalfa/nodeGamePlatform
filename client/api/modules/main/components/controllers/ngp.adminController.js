@@ -32,9 +32,15 @@ function adminController(
         this.api = Api.createNewApi(ngp.const.app.ajaxUrl);
         this.User = User.get();
 
-        WebSocket.aMethod = function(){
-            console.log(self.User);
+        var extend = {
+            aMethod : function(){
+                console.log(self.User);
+            }
         };
+
+        WebSocket = _.assign(WebSocket, extend);
+
+
     }
 
     AdminController.prototype.login = function(){
