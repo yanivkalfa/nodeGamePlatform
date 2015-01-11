@@ -49,6 +49,12 @@ function siteRouts($stateProvider, $urlRouterProvider, $locationProvider) {
                 function(Authorization) {
                     return Authorization.authorize();
                 }
+            ],
+
+            WebSocket: ['WebSocket',
+                function(WebSocket) {
+                    return WebSocket();
+                }
             ]
         },
         data: {
