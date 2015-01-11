@@ -63,7 +63,7 @@ primus.on('connection', function (spark) {
     spark.join("aRoomName", function () {
 
         // send message to this client
-        spark.write('you joined room ' + "aRoomName");
+        //spark.write('you joined room ' + "aRoomName");
 
         // send message to all clients except this one
         spark.room("aRoomName").except(spark.id).write(spark.id + ' joined room ' + "aRoomName");
