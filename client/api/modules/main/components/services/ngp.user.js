@@ -80,7 +80,7 @@ function userService(
             var options = {
                 method: 'post',
                 url: ngp.const.app.ajaxUrl,
-                data: {
+                params: {
                     "method" : 'authenticateUser',
                     "status" : 0,
                     "success" : false,
