@@ -70,6 +70,9 @@ _s.primus.on('connection', function (spark) {
                 else
                 {
 
+                    _s.primus.forEach(function(spark){
+                        console.log(spark);
+                    })
                     for(var i=0; i < _s.primus.length; i++){
                         console.log(_s.primus[i]);
                     }
