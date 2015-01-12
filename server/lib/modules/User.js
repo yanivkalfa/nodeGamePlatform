@@ -40,13 +40,24 @@ module.exports = function(_s){
         logout : function(req, res){
             //console.log(_s.primus);
 
+            /*
             _s.primus.forEach(function(spark, next){
                 console.log(spark.userId);
                 if(spark.userId == req.session.user.id){
                     spark.end();
                     next(undefined, false);
                 }
+            });*/
+
+            _s.primus.forEach(function (spark, next) {
+                if(spark.userId == req.session.user.id){
+                    spark.end();
+                    next(undefined, false);
+                }
+            }, function (err) {
+                console.log('We are done');
             });
+
             console.log('got here');
             req.session.user = {};
         },
