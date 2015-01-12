@@ -86,8 +86,6 @@ primus.on('connection', function (spark) {
 
         });
 
-        console.log(primus);
-
         /*
 
         primus.rooms(spark.id,function(err, rooms){
@@ -99,6 +97,8 @@ primus.on('connection', function (spark) {
         });
         */
     });
+
+    console.log(primus);
 
     /*
     spark.join("aRoomName", function () {
