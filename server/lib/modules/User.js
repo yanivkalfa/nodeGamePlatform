@@ -55,7 +55,7 @@ module.exports = function(_s){
         },
 
         isInRole: function(role) {
-            if(!_user.roles) return -1;
+            if(_.isUndefined(_user.roles)) return -1;
             return _user.roles.indexOf(role) != -1;
         },
 
