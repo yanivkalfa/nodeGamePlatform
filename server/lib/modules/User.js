@@ -38,8 +38,14 @@ module.exports = function(_s){
         },
 
         logout : function(req, res){
+            var i;
+            for(i=0; i<_s.sparkList.length; i++){
+                if(_s.sparkList[i].userId == req.session.user.id){
+                    _s.sparkList[i].end();
+                    break;
+                }
+            }
             req.session.user = {};
-            // spark.end();
         },
 
         checkUserDetails : function(userDetails){

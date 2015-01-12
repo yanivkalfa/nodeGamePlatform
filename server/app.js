@@ -75,8 +75,30 @@ primus.on('connection', function (spark) {
                     var webSocket = new _s.oModules.WebSocket(_s, primus, spark);
 
                     webSocket.ping = function(spark, data){
-                        spark.write({"m": "ping", "d":"p"});
+
                     };
+
+
+                    var router = new s.utilFunc.CallRouter(socket);
+                    var msgRouter = new s.utilFunc.MsgRouter(c.oVars.oRoomHandler);
+                    var roomRouter = new s.utilFunc.roomRouter(c.oVars.oRoomHandler);
+
+
+                    var RouterExtender = function(){};
+                    var extendRouterWith = {
+                        ping : function(msg){
+                            spark.write({"m": "ping", "d":"p"});
+                        },
+                        msg : function(msg){
+                            c.oVars.oMsgRouter.routMsg(msg);
+                        },
+                        roomDo : function(msg){
+                            c.oVars.oRoomRouter.routRoom(msg);
+                        }
+                    };
+                    RouterExtender.prototype = c.oVars.oRouter;
+                    s.utilFunc.extend(RouterExtender, extendRouterWith);
+                    new RouterExtender();
                 }
 
             }).catch(function(err){
@@ -161,7 +183,7 @@ primus.on('end', function () {
 });
 
 primus.on('disconnection', function () {
-    console.log('disconnection');
+    console.log(arguments);
 });
 
 primus.on('leaveallrooms', function (rooms, spark) {
