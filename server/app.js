@@ -86,6 +86,8 @@ primus.on('connection', function (spark) {
 
         });
 
+        console.log(primus);
+
         /*
 
         primus.rooms(spark.id,function(err, rooms){
