@@ -15,8 +15,6 @@ function webSocket($rootScope, $q, User) {
     function WebSocket(){
         this.Primus = false;
         this.connected = false;
-
-        this.init();
     }
 
     WebSocket.prototype =  {
