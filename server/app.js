@@ -69,7 +69,7 @@ _s.primus.on('connection', function (spark) {
                 }
                 else
                 {
-
+                    console.log(decoded.userId);
                     spark.userId = decoded.userId;
                     console.log('decoded');
                     /*
