@@ -9,7 +9,6 @@ global.oCore = require('./core')(_s); // require core files.
 //_s.uf = require('./lib/utilFunc.js')(_s); // require utility functions
 _s.oModules = require('./lib/modules')(_s); // require utility functions
 
-console.log(_s.oModules);
 var _ = _s.oReq.lodash,
     sessCon = _s.oConfig.session.connection,
     sessSecret = _s.oConfig.session.secret,
