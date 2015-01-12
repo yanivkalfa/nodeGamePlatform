@@ -69,6 +69,7 @@ primus.on('connection', function (spark) {
                     spark.end({"method" : "disconnect", msg : "Could not authenticate user."} );
                 }
                 spark.userId = decoded.userId;
+                console.log('continue');
             }).catch(function(err){
                 if(err) spark.end({"method" : "disconnect", msg : "Could not authenticate user."} );
             });
