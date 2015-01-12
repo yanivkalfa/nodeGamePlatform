@@ -48,6 +48,7 @@ var ab = {
     }
 };
 primus.on('connection', function (spark) {
+    console.log('connected');
 
     _s.oReq.jwt.verify(spark.query.token, sessSecret, function(err, decoded) {
         if(!_.isUndefined(decoded) && !_.isUndefined(decoded.userId)){
