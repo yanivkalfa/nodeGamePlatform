@@ -53,9 +53,12 @@ module.exports = function(_s){
         isAuthenticated: function() {
             return _authenticated;
         },
+
         isInRole: function(role) {
+            if(!_user.roles) return -1;
             return _user.roles.indexOf(role) != -1;
         },
+
         isInAnyRole: function(roles) {
             if(roles.length <= 0) return true;
 
