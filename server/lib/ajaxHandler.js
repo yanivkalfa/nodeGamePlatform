@@ -30,7 +30,7 @@ module.exports = function(_s, req, res) {
     this.authenticateUser = function(userDetails){
         _this._setResp('User is not logged in', false);
         if(req.session.user && userDetails && req.session.user.token == userDetails.token){
-            _this._setResp(userDetails, true);
+            _this._setResp(true, true);
         }
         return res.json(_this.toReturn);
     };
