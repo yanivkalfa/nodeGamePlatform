@@ -7,7 +7,7 @@ _s.sClientDirname = _s.oReq.path.resolve(__dirname, '..') + '/client'; //Client 
 _s.oConfig = require('./settings/config'); // require config files.
 global.oCore = require('./core')(_s); // require core files.
 _s.oModules = require('./lib/modules')(_s); // require utility functions
-_.sparkList = [];
+_s.sparkList = [];
 
 var _ = _s.oReq.lodash,
     sessCon = _s.oConfig.session.connection,
@@ -78,9 +78,9 @@ primus.on('connection', function (spark) {
     });
 
 
-    _.sparkList.push(spark);
+    _s.sparkList.push(spark);
 
-    console.log(_.sparkList);
+    console.log(_s.sparkList);
 
     spark.join("aRoomName", function () {
 
@@ -90,6 +90,8 @@ primus.on('connection', function (spark) {
         // send message to all clients except this one
         //spark.room("aRoomName").except(spark.id).write(spark.id + ' joined room ' + "aRoomName");
 
+
+        /*
         primus.rooms(function(err, rooms){
             console.log("primus rooms", rooms);
 
@@ -99,6 +101,8 @@ primus.on('connection', function (spark) {
                 });
             });
         });
+
+        */
 
 
 
