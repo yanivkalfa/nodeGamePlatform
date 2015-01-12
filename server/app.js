@@ -61,10 +61,6 @@ primus.rooms(function(err, rooms){
 primus.on('connection', function (spark) {
     console.log('connected');
 
-    var continuFn = function(){
-        console.log(_s.sparkList[0].end());
-    };
-
     _s.oReq.jwt.verify(spark.query.token, sessSecret, function(err, decoded) {
         if(!_.isUndefined(decoded) && !_.isUndefined(decoded.userId)){
             _s.oModules.User.login({"_id" : decoded.userId}).then(function(user){
@@ -76,7 +72,11 @@ primus.on('connection', function (spark) {
                 {
                     spark.userId = decoded.userId;
                     _s.sparkList.push(spark);
-                    continuFn();
+                    var webSocket = new _s.oModules.WebSocket(_s, primus, spark);
+
+                    webSocket.ping = function(spark, data){
+                        spark.write({"m": "ping", "d":"p"});
+                    };
                 }
 
             }).catch(function(err){
