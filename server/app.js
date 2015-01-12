@@ -65,6 +65,11 @@ primus.on('connection', function (spark) {
         }
     });
 
+    console.log(primus.rooms());
+    primus.rooms(function(err, rooms){
+        console.log("primus room", rooms);
+    });
+
     /*
     spark.join("aRoomName", function () {
 
