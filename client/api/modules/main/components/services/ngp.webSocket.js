@@ -28,6 +28,7 @@ function webSocket($rootScope, $q, User) {
             if(!User.isAuthenticated) return false;
 
             var token = User.get().token;
+            console.log('aaaa');
             this.Primus = Primus.connect('ws://' + ngp.const.app.domain + '/?token=' + token);
             this.Primus.on('data', function(msg){
                 self[msg.m](msg.d);
