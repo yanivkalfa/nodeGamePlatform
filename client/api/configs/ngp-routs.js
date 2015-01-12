@@ -3,6 +3,8 @@ angular.module(ngp.const.app.name)
 
 function siteRouts($stateProvider, $urlRouterProvider, $locationProvider) {
 
+    console.log('configs');
+
     $locationProvider.html5Mode(true);
 
     $urlRouterProvider.otherwise('/');

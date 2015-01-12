@@ -29,7 +29,9 @@ function apiFactory(
         getURL : function(){ return this._url; },
         getMethod : function(){ return this._method; },
         getParams : function(){ return this._params; },
-        doRequest : function(succ,err){
+        doRequest : function(options, succ,err){
+            if(options) this.setOptions(options);
+
             var deferred = $q.defer();
 
             succ = succ || function(data, status, headers, config) {

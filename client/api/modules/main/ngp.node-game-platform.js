@@ -14,6 +14,9 @@ function runFactory(
     Authorization,
     User
     ) {
+    ////this.authenticateUser().then(function())
+
+    //{fn: '', f :fun,  args : p, execEvery : 1000, lastExec : 102020202, ref : false}
 
     $rootScope.$on('$stateChangeStart', function(event, toState, toStateParams) {
 

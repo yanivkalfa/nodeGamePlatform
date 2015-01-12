@@ -5,17 +5,20 @@ angular.module(ngp.const.app.name)
     .service('User', [
         '$q',
         '$cookieStore',
+        'Api',
         userService
     ]);
 
 function userService(
     $q,
-    $cookieStore
+    $cookieStore,
+    Api
     ) {
 
     function UserService(){
         this._user = undefined;
         this._authenticated = false;
+        this.api = Api.createNewApi();
     }
 
     UserService.prototype =  {
@@ -67,6 +70,31 @@ function userService(
             {
                 return true;
             }
+        },
+
+        authenticateUser: function() {
+            var deferred = $q.defer();
+
+            var options = {
+                method: 'post',
+                url: ngp.const.app.ajaxUrl,
+                data: {
+                    "method" : 'authenticateUser',
+                    "status" : 0,
+                    "success" : false,
+                    "data" : this._user
+                }
+            };
+
+            this.api.doRequest(options).then(function(resp){
+                if(resp.payload.success){
+                    deferred.resolve(resp.payload.data);
+                }else{
+                    deferred.reject(resp.payload.data);
+                }
+            });
+
+            return deferred.promise;
         },
 
         isResolved: function() {
