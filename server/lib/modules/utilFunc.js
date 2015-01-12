@@ -1,25 +1,6 @@
 module.exports = function(_s){
     return {
 
-        isLoggedIn : function(){
-            //req.session.user
-            return true;
-        },
-
-
-        login : function(credentials){
-            return new _s.oReq.Promise(function(resolve, reject) {
-                Users.findOne(credentials).exec(function (err, user) {
-                    if(err) return reject(err);
-                    return resolve(user);
-                });
-            });
-        },
-
-        checkUserDetails : function(userDetails){
-            return true;
-        },
-
         CallRouter : function(oSocket){
             var _this = this;
             this.oSocket = oSocket;

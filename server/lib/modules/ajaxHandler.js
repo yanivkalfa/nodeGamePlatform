@@ -35,6 +35,12 @@ module.exports = function(_s, req, res) {
         return res.json(_this.toReturn);
     };
 
+    this.logout = function(){
+        _s.oModules.User.logout(req, res);
+        _this._setResp(true, true);
+        return res.json(_this.toReturn);
+    };
+
     this.register = function(userDetails){
         var success
             , failed
@@ -45,7 +51,7 @@ module.exports = function(_s, req, res) {
             _this._setResp('There was an error with user details', false);
             return res.json(_this.toReturn);
         };
-        if(!_s.uf.checkUserDetails(userDetails)) wrongUserDetails();
+        if(!_s.oModules.User.checkUserDetails(userDetails)) wrongUserDetails();
 
         success = function(user){
             _this._setResp(user, true);
@@ -64,7 +70,7 @@ module.exports = function(_s, req, res) {
 
     this.login = function(userDetails){
 
-        _s.uf.login(userDetails).then(function(user){
+        _s.oModules.User.login(userDetails).then(function(user){
             if(user)
             {
                 var payLoard = { userId : user.id }

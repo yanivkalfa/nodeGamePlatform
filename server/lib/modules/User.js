@@ -16,6 +16,8 @@ module.exports = function(_s){
             _user = user;
         },
 
+
+
         init: function(user, rout) {
             _user = user;
             _rout = rout;
@@ -24,6 +26,24 @@ module.exports = function(_s){
 
         isResolved: function() {
             return !_.isUndefined(_user);
+        },
+
+        login : function(credentials){
+            return new _s.oReq.Promise(function(resolve, reject) {
+                Users.findOne(credentials).exec(function (err, user) {
+                    if(err) return reject(err);
+                    return resolve(user);
+                });
+            });
+        },
+
+        logout : function(req, res){
+            req.session.user = null;
+            // spark.end();
+        },
+
+        checkUserDetails : function(userDetails){
+            return true;
         },
 
         authenticate: function() {
