@@ -47,6 +47,21 @@ var ab = {
         spark.write({"m": "ping", "d":"p"});
     }
 };
+
+//primus.room(room).empty()
+
+primus.rooms(function(err, rooms){
+    console.log("primus rooms", rooms);
+
+    /*
+
+    rooms.forEach(function(room){
+        primus.room(room).clients(function(err, cs){
+            console.log(err, cs);
+        });
+    });
+    */
+});
 primus.on('connection', function (spark) {
     console.log('connected');
 
