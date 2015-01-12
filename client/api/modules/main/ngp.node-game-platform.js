@@ -17,7 +17,7 @@ function runFactory(
     CronJobs
     ) {
 
-    CronJobs.add({fn: 'authenticateUser', f :User.authenticateUser,  args : '', execEvery : 3000, lastExec : false, ref : false});
+    CronJobs.add({fn: 'authenticateUser', f : _.bind(User.authenticateUser, User),  args : '', execEvery : 3000, lastExec : false, ref : false});
 
     $rootScope.$on('$stateChangeStart', function(event, toState, toStateParams) {
 
