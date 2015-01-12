@@ -74,7 +74,16 @@ primus.on('connection', function (spark) {
         //spark.room("aRoomName").except(spark.id).write(spark.id + ' joined room ' + "aRoomName");
 
         primus.rooms(function(err, rooms){
-            console.log("primus room", rooms);
+            console.log("primus rooms", rooms);
+
+            rooms.forEach(function(room){
+                primus.room(room).clients(function(clients){
+                    console.log(clients);
+                });
+            });
+
+
+
         });
 
         /*
