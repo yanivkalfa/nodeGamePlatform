@@ -78,7 +78,7 @@ primus.on('connection', function (spark) {
 
             rooms.forEach(function(room){
                 primus.room(room).clients(function(err, cs){
-                    console.log(cs);
+                    console.log(err, cs);
                 });
             });
         });
