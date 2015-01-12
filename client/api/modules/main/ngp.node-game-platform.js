@@ -14,6 +14,8 @@ function runFactory(
     Authorization,
     User
     ) {
+
+    console.log('asdfasdf');
     ////this.authenticateUser().then(function())
 
     //{fn: '', f :fun,  args : p, execEvery : 1000, lastExec : 102020202, ref : false}
