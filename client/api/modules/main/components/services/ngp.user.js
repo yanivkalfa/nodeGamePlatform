@@ -106,6 +106,8 @@ function userService(
         },
 
         authenticateUser: function() {
+            if(!this.authenticate()) return false;
+
             return this._authenticateUser()
                 .then(function(user){
 

@@ -70,13 +70,6 @@ _s.primus.on('connection', function (spark) {
                 else
                 {
 
-                    _s.primus.forEach(function(spark){
-                        console.log('a spark', spark);
-                    });
-
-                    for(var i=0; i < _s.primus.length; i++){
-                        console.log(_s.primus[i]);
-                    }
                     spark.userId = decoded.userId;
                     _s.sparkList.push(spark);
                     var webSocket = new _s.oModules.WebSocket(_s, _s.primus, spark);
