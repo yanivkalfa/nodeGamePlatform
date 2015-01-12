@@ -21,3 +21,4 @@ module.exports = function(_s, Primus, spark) {
 
     return WebSocket;
 };
+
