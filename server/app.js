@@ -186,7 +186,7 @@ _s.primus.on('end', function () {
 });
 
 _s.primus.on('disconnection', function (spark) {
-    console.log(spark);
+    //console.log(spark);
 });
 
 _s.primus.on('leaveallrooms', function (rooms, spark) {
