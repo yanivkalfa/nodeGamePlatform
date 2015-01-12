@@ -98,7 +98,7 @@ primus.on('connection', function (spark) {
         */
     });
 
-    console.log(primus);
+    //console.log(primus);
 
     /*
     spark.join("aRoomName", function () {
