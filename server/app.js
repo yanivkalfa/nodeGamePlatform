@@ -182,8 +182,8 @@ primus.on('end', function () {
     console.log('end');
 });
 
-primus.on('disconnection', function () {
-    console.log(arguments);
+primus.on('disconnection', function (spark) {
+    console.log(spark);
 });
 
 primus.on('leaveallrooms', function (rooms, spark) {
