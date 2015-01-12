@@ -50,9 +50,10 @@ module.exports = function(_s){
             });*/
 
             _s.primus.forEach(function (spark, next) {
+                console.log(spark.id);
                 if(spark.userId == req.session.user.id){
                     spark.end();
-                    next(undefined, false);
+                    next();
                 }
             }, function (err) {
                 console.log('We are done');
