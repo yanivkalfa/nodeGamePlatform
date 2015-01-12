@@ -18,10 +18,13 @@ function runFactory(
     ) {
 
     var cfn = {fn: 'authenticateUser', f :User.authenticateUser,  args : '', execEvery : 3000, lastExec : false, ref : User};
-    CronJobs.addCron(cfn);
+    CronJobs.add(cfn);
 
-    var cfn = {fn: 'authenticateUser', f :function(){console.log('aaaaa');},  args : '', execEvery : 1000, lastExec : false, ref : false};
-    CronJobs.addCron(cfn);
+    var cfn = {fn: 'test', f : function(){console.log('aaaaa');},  args : '', execEvery : 1000, lastExec : false, ref : false};
+    CronJobs.add(cfn);
+
+    var cfn = {fn: 'test', f : function(){console.log('bbbb');},  args : '', execEvery : 1000, lastExec : false, ref : false};
+    CronJobs.add(cfn);
 
     $rootScope.$on('$stateChangeStart', function(event, toState, toStateParams) {
 

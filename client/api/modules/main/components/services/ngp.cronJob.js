@@ -52,14 +52,14 @@ function cronJobs() {
             return false
         },
 
-        addCron : function(cfn){
+        add : function(cfn){
             if(this.findCfn(cfn.fn)) return false;
 
             this.cronFunctions.push(cfn);
             return true;
         },
 
-        updateCron : function(cfn){
+        update : function(cfn){
             var index = this.findCfn(cfn.fn);
             if(!index ) return false;
 
@@ -67,7 +67,7 @@ function cronJobs() {
             return true;
         },
 
-        removeCron : function(fn){
+        remove : function(fn){
             var index = this.findCfn(fn);
             if(!index ) return false;
 
