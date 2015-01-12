@@ -7,6 +7,7 @@ _s.sClientDirname = _s.oReq.path.resolve(__dirname, '..') + '/client'; //Client 
 _s.oConfig = require('./settings/config'); // require config files.
 global.oCore = require('./core')(_s); // require core files.
 _s.oModules = require('./lib/modules')(_s); // require utility functions
+_.sparkList = [];
 
 var _ = _s.oReq.lodash,
     sessCon = _s.oConfig.session.connection,
@@ -67,6 +68,7 @@ primus.on('connection', function (spark) {
                 {
                     spark.end({"method" : "disconnect", msg : "Could not authenticate user."} );
                 }
+                spark.userId = decoded.userId;
             }).catch(function(err){
                 if(err) spark.end({"method" : "disconnect", msg : "Could not authenticate user."} );
             });
@@ -74,6 +76,11 @@ primus.on('connection', function (spark) {
             spark.end({"method" : "disconnect", msg : "Could not authenticate user."} );
         }
     });
+
+
+    _.sparkList.push(spark);
+
+    console.log(_.sparkList);
 
     spark.join("aRoomName", function () {
 
