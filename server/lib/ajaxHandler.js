@@ -27,6 +27,15 @@ module.exports = function(_s, req, res) {
         _this.toReturn.data = data;
     };
 
+    this.authenticateUser = function(userDetails){
+        console.log(userDetails);
+        _this._setResp('User is not logged in', false);
+        if(req.session.user == userDetails){
+            _this._setResp(userDetails, true);
+        }
+        return res.json(_this.toReturn);
+    };
+
     this.register = function(userDetails){
         var success
             , failed
