@@ -53,8 +53,10 @@ module.exports = function(_s){
                 console.log(spark.userId);
                 if(spark.userId == req.session.user.id){
                     spark.end();
-                    //next(null, false);
+                    //
                 }
+
+                next(null, false);
             }, function (err) {
                 console.log('We are done');
             });
