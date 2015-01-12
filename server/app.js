@@ -58,7 +58,6 @@ _s.primus.rooms(function(err, rooms){
     });
 });
 _s.primus.on('connection', function (spark) {
-    console.log('connected');
 
     _s.oReq.jwt.verify(spark.query.token, sessSecret, function(err, decoded) {
         if(!_.isUndefined(decoded) && !_.isUndefined(decoded.userId)){
@@ -71,7 +70,6 @@ _s.primus.on('connection', function (spark) {
                 {
                     console.log(decoded.userId);
                     spark.userId = decoded.userId;
-                    console.log('decoded');
                     /*
                     var webSocket = new _s.oModules.WebSocket(_s, _s.primus, spark);
 
