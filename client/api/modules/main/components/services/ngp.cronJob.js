@@ -49,11 +49,11 @@ function cronJobs() {
                 if(this.cronFunctions[i].fn == fn) return i;
             }
 
-            return false
+            return -1
         },
 
         add : function(cfn){
-            if(this.findCfn(cfn.fn)) return false;
+            if(this.findCfn(cfn.fn) > -1) return false;
 
             this.cronFunctions.push(cfn);
             return true;
@@ -61,7 +61,7 @@ function cronJobs() {
 
         update : function(cfn){
             var index = this.findCfn(cfn.fn);
-            if(!index ) return false;
+            if(index < 0 ) return false;
 
             this.cronFunctions[index] = cfn;
             return true;
@@ -69,7 +69,7 @@ function cronJobs() {
 
         remove : function(fn){
             var index = this.findCfn(fn);
-            if(!index ) return false;
+            if( index < 0 ) return false;
 
             this.cronFunctions.splice(index, 1);
             return true;
