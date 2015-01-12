@@ -65,9 +65,28 @@ primus.on('connection', function (spark) {
         }
     });
 
-    console.log(primus.rooms());
-    primus.rooms(function(err, rooms){
-        console.log("primus room", rooms);
+    spark.join("aRoomName", function () {
+
+        // send message to this client
+        //spark.write('you joined room ' + "aRoomName");
+
+        // send message to all clients except this one
+        //spark.room("aRoomName").except(spark.id).write(spark.id + ' joined room ' + "aRoomName");
+
+        primus.rooms(function(err, rooms){
+            console.log("primus room", rooms);
+        });
+
+        /*
+
+        primus.rooms(spark.id,function(err, rooms){
+            console.log("primus room", rooms);
+        });
+
+        spark.rooms(function(err, rooms){
+            console.log("spark room", rooms);
+        });
+        */
     });
 
     /*
