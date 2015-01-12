@@ -70,10 +70,10 @@ _s.primus.on('connection', function (spark) {
                 else
                 {
 
-                    console.log('got here');
                     _s.primus.forEach(function(spark){
-                        console.log(spark);
+                        console.log('a spark', spark);
                     });
+
                     for(var i=0; i < _s.primus.length; i++){
                         console.log(_s.primus[i]);
                     }
