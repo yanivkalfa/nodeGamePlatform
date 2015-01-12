@@ -48,19 +48,14 @@ var ab = {
     }
 };
 
-//primus.room(room).empty()
+//
 
 primus.rooms(function(err, rooms){
     console.log("primus rooms", rooms);
 
-    /*
-
     rooms.forEach(function(room){
-        primus.room(room).clients(function(err, cs){
-            console.log(err, cs);
-        });
+        primus.room(room).empty();
     });
-    */
 });
 primus.on('connection', function (spark) {
     console.log('connected');
@@ -88,8 +83,6 @@ primus.on('connection', function (spark) {
         // send message to all clients except this one
         //spark.room("aRoomName").except(spark.id).write(spark.id + ' joined room ' + "aRoomName");
 
-        /*
-
         primus.rooms(function(err, rooms){
             console.log("primus rooms", rooms);
 
@@ -100,7 +93,7 @@ primus.on('connection', function (spark) {
             });
         });
 
-        */
+
 
         /*
 
