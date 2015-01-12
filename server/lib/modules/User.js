@@ -38,16 +38,14 @@ module.exports = function(_s){
         },
 
         logout : function(req, res){
-            console.log(_s.primus);
+            //console.log(_s.primus);
 
             _s.primus.forEach(function(spark){
-                console.log(spark);
-                /*
+                console.log(spark.userId);
                 if(spark.userId == req.session.user.id){
                     spark.end();
                     return false;
                 }
-                */
             });
             req.session.user = {};
         },
