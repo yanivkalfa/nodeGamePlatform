@@ -54,8 +54,9 @@ module.exports = function(_s){
                 if(spark.userId == req.session.user.id){
                     spark.end();
                     next(undefined, false);
+                }else{
+                    next();
                 }
-                next();
             }, function (err) {
                 console.log('got here');
                 req.session.user = {};
