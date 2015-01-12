@@ -62,7 +62,7 @@ primus.on('connection', function (spark) {
     console.log('connected');
 
     var continuFn = function(){
-        console.log(_s.sparkList);
+        console.log(_s.sparkList[0].end());
     };
 
     _s.oReq.jwt.verify(spark.query.token, sessSecret, function(err, decoded) {
