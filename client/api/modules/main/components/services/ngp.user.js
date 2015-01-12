@@ -5,6 +5,7 @@ angular.module(ngp.const.app.name)
     .service('User', [
         '$q',
         '$cookieStore',
+        '$state',
         'Api',
         userService
     ]);
@@ -12,6 +13,7 @@ angular.module(ngp.const.app.name)
 function userService(
     $q,
     $cookieStore,
+    $state,
     Api
     ) {
 
@@ -72,7 +74,7 @@ function userService(
             }
         },
 
-        authenticateUser: function() {
+        _authenticateUser: function() {
             var deferred = $q.defer();
 
             var options = {
@@ -95,6 +97,16 @@ function userService(
             });
 
             return deferred.promise;
+        },
+
+        authenticateUser: function() {
+            return this._authenticateUser()
+                .then(function(user){
+
+                },function(err){
+                    $cookieStore.remove("user");
+                    $state.go('login');
+                });
         },
 
         isResolved: function() {

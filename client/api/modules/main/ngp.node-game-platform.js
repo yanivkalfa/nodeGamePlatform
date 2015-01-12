@@ -6,19 +6,19 @@ angular.module(ngp.const.app.name, ['ui.router', 'ngCookies'])
         '$rootScope',
         'Authorization',
         'User',
+        'CronJobs',
         runFactory
     ]);
 
 function runFactory(
     $rootScope,
     Authorization,
-    User
+    User,
+    CronJobs
     ) {
 
-    console.log('asdfasdf');
-    ////this.authenticateUser().then(function())
-
-    //{fn: '', f :fun,  args : p, execEvery : 1000, lastExec : 102020202, ref : false}
+    var cfn = {fn: 'authenticateUser', f :User.authenticateUser,  args : '', execEvery : 3000, lastExec : false, ref : User};
+    CronJobs.addCron(cfn);
 
     $rootScope.$on('$stateChangeStart', function(event, toState, toStateParams) {
 

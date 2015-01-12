@@ -13,6 +13,8 @@ function cronJobs() {
 
         this.interval = 1000;
         this.cronFunctions = [];
+
+        this.init();
     }
 
     CronJobs.prototype =  {
