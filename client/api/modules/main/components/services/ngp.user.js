@@ -78,6 +78,11 @@ function userService(
             var deferred = $q.defer(),
                 self = this;
 
+            if(!this.authenticate()) {
+                deferred.reject('User Does not exist');
+                return deferred.promise;
+            }
+
             var options = {
                 method: 'post',
                 url: ngp.const.app.ajaxUrl,
