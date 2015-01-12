@@ -61,6 +61,10 @@ primus.rooms(function(err, rooms){
 primus.on('connection', function (spark) {
     console.log('connected');
 
+    var continuFn = function(){
+        console.log(_s.sparkList);
+    };
+
     _s.oReq.jwt.verify(spark.query.token, sessSecret, function(err, decoded) {
         if(!_.isUndefined(decoded) && !_.isUndefined(decoded.userId)){
             _s.oModules.User.login({"_id" : decoded.userId}).then(function(user){
@@ -68,8 +72,13 @@ primus.on('connection', function (spark) {
                 {
                     spark.end({"method" : "disconnect", msg : "Could not authenticate user."} );
                 }
-                spark.userId = decoded.userId;
-                console.log('continue');
+                else
+                {
+                    spark.userId = decoded.userId;
+                    _s.sparkList.push(spark);
+                    continuFn();
+                }
+
             }).catch(function(err){
                 if(err) spark.end({"method" : "disconnect", msg : "Could not authenticate user."} );
             });
@@ -78,10 +87,6 @@ primus.on('connection', function (spark) {
         }
     });
 
-
-    _s.sparkList.push(spark);
-
-    console.log(_s.sparkList[0].userId);
 
     spark.join("aRoomName", function () {
 
