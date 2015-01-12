@@ -48,26 +48,25 @@ function adminController(
 
         };
 
-        /*
-        WebSocket.then(function(webSocket){
-            WebSocket = webSocket;
-
-            WebSocket.ping = function(data){
-                Latency.calculateLatency(data);
-                self.bar.stats.latency = Latency.getLatency();
-                $scope.$apply();
-
-            };
-        });
-
-        */
-
-
-
-
     }
 
-    AdminController.prototype.login = function(){
+    AdminController.prototype.logout = function(){
+        this.api.setMethod('post').setParams({
+            "method" : 'logout',
+            "status" : 0,
+            "success" : false,
+            "data" : {}
+        });
+
+        this.api.doRequest().then(function(resp){
+            if(resp.payload.success){
+                $cookieStore.remove('user');
+                WebSocket.end();
+                $state.go('login');
+            }else{
+                Notify.error('Login Failed: ' + resp.payload.data);
+            }
+        });
     };
 
     return new AdminController();
