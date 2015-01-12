@@ -7,7 +7,6 @@ _s.sClientDirname = _s.oReq.path.resolve(__dirname, '..') + '/client'; //Client 
 _s.oConfig = require('./settings/config'); // require config files.
 global.oCore = require('./core')(_s); // require core files.
 _s.oModules = require('./lib/modules')(_s); // require utility functions
-_s.sparkList = [];
 
 var _ = _s.oReq.lodash,
     sessCon = _s.oConfig.session.connection,
@@ -22,14 +21,14 @@ var _ = _s.oReq.lodash,
             }
         },
         transformer: 'engine.io'
-    },
-    primus = new _s.oReq.Primus(_s.oReq.http, primusOptions);
+    };
+_s.primus = new _s.oReq.Primus(_s.oReq.http, primusOptions);
 
-primus.use('multiplex', _s.oReq.primusMultiplex);
-primus.use('resource', _s.oReq.primusResource);
-primus.use('rooms', _s.oReq.primusRooms);
-primus.use('emitter', _s.oReq.primusEmitter);
-primus.use('cluster', _s.oReq.primusCluster);
+_s.primus.use('multiplex', _s.oReq.primusMultiplex);
+_s.primus.use('resource', _s.oReq.primusResource);
+_s.primus.use('rooms', _s.oReq.primusRooms);
+_s.primus.use('emitter', _s.oReq.primusEmitter);
+_s.primus.use('cluster', _s.oReq.primusCluster);
 
 _s.oReq.app.use(_s.oReq.session({
     store: new _s.oReq.RedisStore({
@@ -51,14 +50,14 @@ var ab = {
 
 //
 
-primus.rooms(function(err, rooms){
+_s.primus.rooms(function(err, rooms){
     console.log("primus rooms", rooms);
 
     rooms.forEach(function(room){
-        primus.room(room).empty();
+        _s.primus.room(room).empty();
     });
 });
-primus.on('connection', function (spark) {
+_s.primus.on('connection', function (spark) {
     console.log('connected');
 
     _s.oReq.jwt.verify(spark.query.token, sessSecret, function(err, decoded) {
@@ -70,9 +69,13 @@ primus.on('connection', function (spark) {
                 }
                 else
                 {
+
+                    for(var i=0; i < _s.primus.length; i++){
+                        console.log(_s.primus[i]);
+                    }
                     spark.userId = decoded.userId;
                     _s.sparkList.push(spark);
-                    var webSocket = new _s.oModules.WebSocket(_s, primus, spark);
+                    var webSocket = new _s.oModules.WebSocket(_s, _s.primus, spark);
 
                     webSocket.ping = function(spark, data){
 
@@ -178,15 +181,15 @@ primus.on('connection', function (spark) {
 });
 
 
-primus.on('end', function () {
+_s.primus.on('end', function () {
     console.log('end');
 });
 
-primus.on('disconnection', function (spark) {
+_s.primus.on('disconnection', function (spark) {
     console.log(spark);
 });
 
-primus.on('leaveallrooms', function (rooms, spark) {
+_s.primus.on('leaveallrooms', function (rooms, spark) {
     console.log('leaving all rooms');
     // works when the client closes the connection
 });
