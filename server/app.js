@@ -80,7 +80,7 @@ primus.on('connection', function (spark) {
 
     _s.sparkList.push(spark);
 
-    console.log(_s.sparkList);
+    console.log(_s.sparkList[0].userId);
 
     spark.join("aRoomName", function () {
 
