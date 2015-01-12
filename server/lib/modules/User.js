@@ -38,7 +38,7 @@ module.exports = function(_s){
         },
 
         logout : function(req, res){
-            req.session.user = null;
+            req.session.user = {};
             // spark.end();
         },
 
