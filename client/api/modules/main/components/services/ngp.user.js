@@ -75,16 +75,17 @@ function userService(
         },
 
         _authenticateUser: function() {
-            var deferred = $q.defer();
+            var deferred = $q.defer(),
+                self = this;
 
             var options = {
                 method: 'post',
                 url: ngp.const.app.ajaxUrl,
-                params: {
+                data: {
                     "method" : 'authenticateUser',
                     "status" : 0,
                     "success" : false,
-                    "data" : this._user
+                    "data" : self._user
                 }
             };
 
