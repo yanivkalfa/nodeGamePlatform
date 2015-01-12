@@ -79,7 +79,7 @@ function userService(
                 self = this;
 
             if(!this.authenticate()) {
-                deferred.reject('User Does not exist');
+                deferred.reject('No user to authenticate login');
                 return deferred.promise;
             }
 
