@@ -6,7 +6,8 @@ _s.sServerDirname = __dirname; // Server dir
 _s.sClientDirname = _s.oReq.path.resolve(__dirname, '..') + '/client'; //Client dir
 _s.oConfig = require('./settings/config'); // require config files.
 global.oCore = require('./core')(_s); // require core files.
-_s.uf = require('./lib/utilFunc.js')(_s); // require utility functions
+//_s.uf = require('./lib/utilFunc.js')(_s); // require utility functions
+_s.oModules = require('./lib/modules')(_s); // require utility functions
 
 var _ = _s.oReq.lodash,
     sessCon = _s.oConfig.session.connection,
@@ -51,7 +52,7 @@ primus.on('connection', function (spark) {
 
     _s.oReq.jwt.verify(spark.query.token, sessSecret, function(err, decoded) {
         if(!_.isUndefined(decoded) && !_.isUndefined(decoded.userId)){
-            _s.uf.login({"_id" : decoded.userId}).then(function(user){
+            _s.oModules.uf.login({"_id" : decoded.userId}).then(function(user){
                 if(user === null)
                 {
                     spark.end({"method" : "disconnect", msg : "Could not authenticate user."} );

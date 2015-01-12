@@ -11,13 +11,13 @@ module.exports = function(_s){
     _s.oReq.app.set('view engine', "jade");
     _s.oReq.app.engine('jade', _s.oReq.jade.__express);
 
-    _s.oReq.app.get('/ajaxHandler', _.partial(_s.oReq.ajaxHandler, _s));
-    _s.oReq.app.post('/ajaxHandler', _.partial(_s.oReq.ajaxHandler, _s));
+    _s.oReq.app.get('/ajaxHandler', _.partial(_s.oModules.ajaxHandler, _s));
+    _s.oReq.app.post('/ajaxHandler', _.partial(_s.oModules.ajaxHandler, _s));
 
     _s.oReq.app.get('/contents/:content', function (req, res) {
         if(_s.oConfig.routs.loginRequired(req.params.content)){
-            _s.oReq.User.init(req.session.user, _s.oConfig.routs.getRout(req.params.content));
-            if(_s.oReq.User.isAuthenticated()){
+            _s.oModules.User.init(req.session.user, _s.oConfig.routs.getRout(req.params.content));
+            if(_s.oModules.User.isAuthenticated()){
                 res.render(_s.sServerDirname + '/tpl/contents/' + req.params.content + '.jade');
             }else{
                 res.render(_s.sServerDirname + '/tpl/contents/restricted' + '.jade');
@@ -37,28 +37,3 @@ module.exports = function(_s){
     });
 
 };
-
-
-
-/*
- _s.oReq.app.get('/assets/:name', function (req, res) {
- _s.oReq.fs.exists(_s.sClientDirname + '/assets/' + req.params.name, function(exists) {
- if (exists) {
- res.sendFile(_s.sClientDirname + '/assets/' + req.params.name);
- }
- else
- {
- res.status(404).send('404 page !!!!');
- }
- });
- });
- */
-/*
- _s.oReq.app.get("/", function(req, res){
- res.locals.user = {};
- if(req.session.user){
- res.locals.user = req.session.user;
- }
-
- res.render('main');
- });*/
