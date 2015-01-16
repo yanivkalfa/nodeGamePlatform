@@ -23,7 +23,10 @@ function webSocket($rootScope, $q, User) {
             var deferred = $q.defer(),
                 self = this;
 
-            if(!User.isAuthenticated) return false;
+            if(!User.isAuthenticated) {
+                deferred.reject( 'User is not authenticated' );
+                return deferred.promise;
+            }
 
             var token = User.get().token;
             this.Primus = Primus.connect('ws://' + ngp.const.app.domain + '/?token=' + token);
