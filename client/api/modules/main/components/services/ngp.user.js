@@ -48,12 +48,10 @@ function userService(
 
             if(this.authenticate())
             {
-                console.log('aaaa');
                 deferred.resolve(this._user);
             }
             else
             {
-                console.log('bbbbb');
                 deferred.reject(false);
             }
 
@@ -65,11 +63,8 @@ function userService(
             this._user = user || $cookieStore.get("user");
             this._authenticated = angular.isDefined(this._user);
 
-            console.log(this._user);
-
             if (!angular.isDefined(this._user))
             {
-                console.log('false');
                 $cookieStore.remove("user");
                 return false;
             }
