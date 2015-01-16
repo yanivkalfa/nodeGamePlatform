@@ -24,7 +24,7 @@ function webSocket($rootScope, $q, User) {
                 self = this;
 
             if(!User.isAuthenticated) {
-                console.log('aaa');
+                console.log('ccc');
                 deferred.reject( 'User is not authenticated' );
                 return deferred.promise;
             }
