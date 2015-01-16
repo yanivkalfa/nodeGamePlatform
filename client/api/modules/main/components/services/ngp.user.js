@@ -52,7 +52,7 @@ function userService(
             }
             else
             {
-                deferred.reject(false);
+                deferred.reject('User is not authenticated');
             }
 
 
@@ -70,7 +70,6 @@ function userService(
             }
             else
             {
-                console.log('true');
                 return true;
             }
         },
