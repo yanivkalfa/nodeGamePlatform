@@ -24,6 +24,9 @@ function runFactory(
         $rootScope.toState = toState;
         $rootScope.toStateParams = toStateParams;
 
-        if (User.isResolved()) Authorization.authorize();
+        if (User.isResolved()) {
+            console.log('resolved');
+            Authorization.authorize();
+        }
     });
 }
