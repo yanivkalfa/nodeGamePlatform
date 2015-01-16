@@ -28,6 +28,7 @@ module.exports = function(_s, req, res) {
     };
 
     this.authenticateUser = function(userDetails){
+        console.log('req.session.user', req.session.user);
         _this._setResp('User is not logged in', false);
         if(req.session.user && userDetails && req.session.user.token == userDetails.token){
             _this._setResp(true, true);
