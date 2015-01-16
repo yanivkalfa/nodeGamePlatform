@@ -33,9 +33,10 @@ function authorizationFactory(
                             $state.go('login');
                         }
                     }
-                }).catch(function(a){
-                    console.log('aa');
                 });
+                /*.catch(function(a){
+                    console.log('aa');
+                });*/
         }
     };
 }
