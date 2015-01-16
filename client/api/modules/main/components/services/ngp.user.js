@@ -63,6 +63,8 @@ function userService(
             this._user = user || $cookieStore.get("user");
             this._authenticated = angular.isDefined(this._user);
 
+            console.log(this._user);
+
             if (!angular.isDefined(this._user))
             {
                 $cookieStore.remove("user");

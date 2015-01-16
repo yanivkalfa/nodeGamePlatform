@@ -16,6 +16,7 @@ module.exports = function(_s, Primus, spark) {
             self.spark.on('data', function (msg) {
                 self[msg.m](self.spark, msg.d);
             });
+
         }
     };
 
