@@ -31,6 +31,7 @@ function adminController(
 
     function AdminController(){
         var self = this;
+        console.log('aaaa');
         this.api = Api.createNewApi(ngp.const.app.ajaxUrl);
         this.User = User.get();
         this.bar = {
@@ -50,6 +51,7 @@ function adminController(
 
         $scope.tabs = [
             {
+                id : '',
                 title:'Dynamic Title 1',
                 content:{
                     msg : [
@@ -61,6 +63,7 @@ function adminController(
                 }
             },
             {
+                id : '',
                 title:'Dynamic Title 2',
                 content:{
                     msg : [
