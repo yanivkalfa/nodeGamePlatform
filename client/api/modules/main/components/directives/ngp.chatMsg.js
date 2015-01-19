@@ -2,10 +2,9 @@
  * Created by Yaniv-Kalfa on 1/19/15.
  */
 angular.module(ngp.const.app.name)
-    .directive('ngpChatMsg',['$scope',ngpChatMsg]);
+    .directive('ngpChatMsg',[ngpChatMsg]);
 
-function ngpChatMsg($scope) {
-    console.log($scope);
+function ngpChatMsg() {
     return {
         scope: {
             msg: '='
