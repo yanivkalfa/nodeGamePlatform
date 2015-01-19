@@ -93,6 +93,10 @@
     height:520px;
 }
 
+.inputContainer{
+    margin-left: 0.5%;
+}
+
 .leftSide{
     float:left;
     width:648px;
