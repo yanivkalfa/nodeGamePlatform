@@ -53,7 +53,7 @@ function adminController(
                 title:'Dynamic Title 1',
                 content:{
                     msg : [
-                        {id:"01",from:"SomeOne", data: moment(new Date(1421700566413)).format('HH:mm:ss'), content : "This is a message", toType: "room"},
+                        {id:"01",from:"SomeOne", data: moment(new Date(1421700566413)).format('HH:mm:ss'), content : "This is a message", toType: "private"},
                         {id:"02",from:"SomeOne", data: moment(new Date(1421700569382)).format('HH:mm:ss'), content : "message 2" , toType: "room"},
                         {id:"03",from:"SomeOne", data: moment(new Date(1421700502938)).format('HH:mm:ss'), content : "message 3" , toType: "room"}
                     ],
