@@ -22,6 +22,6 @@ div(class="statusBar")
     div.clearFix
 div(class="tabs" id="tabs")
     tabset
-        tab(heading="Static title") Static content
-        tab(heading="secondTab") second tab content
-        tab(ng-repeat="tab in tabs" heading="{{tab.title}}" active="tab.active" disabled="tab.disabled") {{tab.content}}
+        tab(ng-repeat="tab in tabs" heading="{{tab.title}}" active="tab.active" disabled="tab.disabled")
+            div(ng-tab-content)
+                <div data-ngp-tab-content="tab.content"></div>
