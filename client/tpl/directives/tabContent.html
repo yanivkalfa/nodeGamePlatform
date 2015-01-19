@@ -1,1 +1,14 @@
-<div> {{content}} </div>
+<div class="leftSite">
+    <div class="msgWrap">
+        <ul>
+            <li ng-repeat="msg in content.msg"> <ngp-chat-msg ng-class="msg.toType" msg="msg"></ngp-chat-msg></li>
+        </ul>
+    </div>
+</div>
+
+<div class="rightSide">
+    <ul>
+        <li></li>
+    </ul>
+</div>
+<div class="clearFix"></div>

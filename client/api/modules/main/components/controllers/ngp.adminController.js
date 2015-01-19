@@ -49,8 +49,28 @@ function adminController(
         };
 
         $scope.tabs = [
-            { title:'Dynamic Title 1', content:'Dynamic content 1' },
-            { title:'Dynamic Title 2', content:'Dynamic content 2' }
+            {
+                title:'Dynamic Title 1',
+                content:{
+                    msg : [
+                        {id:"01",from:"SomeOne", data: 1421700566413, content : "This is a message", toType: "room"},
+                        {id:"02",from:"SomeOne", data: 1421700569382, content : "message 2" , toType: "room"},
+                        {id:"03",from:"SomeOne", data: 1421700502938, content : "message 3" , toType: "room"}
+                    ],
+                    members:['SomeOne', 'someone2', 'someone3']
+                }
+            },
+            {
+                title:'Dynamic Title 2',
+                content:{
+                    msg : [
+                        {id:"01",from:"SomeOne", data: 1421700566413, content : "This is a message", toType: "room"},
+                        {id:"02",from:"SomeOne", data: 1421700569382, content : "message 2" , toType: "room"},
+                        {id:"03",from:"SomeOne", data: 1421700502938, content : "message 3" , toType: "room"}
+                    ],
+                    members:['SomeOne', 'someone2', 'someone3']
+                }
+            }
         ];
 
     }
