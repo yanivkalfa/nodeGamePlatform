@@ -7,6 +7,9 @@ angular.module(ngp.const.app.name)
 function ngpTabContent() {
 
     return {
+        scope: {
+            content: '='
+        },
         templateUrl: ngp.const.app.url + '/tpl/directives/tabContent.html'
     };
 }
