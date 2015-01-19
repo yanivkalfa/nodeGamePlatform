@@ -24,4 +24,4 @@ div(class="tabs" id="tabs")
     tabset
         tab(ng-repeat="tab in tabs" heading="{{tab.title}}" active="tab.active" disabled="tab.disabled")
             div(ng-tab-content)
-                <div data-ngp-tab-content="tab.content"></div>
+                div(ng-ngp-tab-content="tab.content")
