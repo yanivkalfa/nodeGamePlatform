@@ -93,10 +93,6 @@
     height:520px;
 }
 
-.inputContainer{
-    margin-left: 1%;
-}
-
 .leftSide{
     float:left;
     width:648px;
@@ -156,7 +152,7 @@
 }
 .submitMsg{
     height: 45px;
-    width: 18%;
+    width: 20%;
 }
 
 .fLeft, .fRight{
