@@ -7,7 +7,7 @@ angular.module(ngp.const.app.name)
 function ngpTabsMembers() {
     return {
         scope: {
-            msg: '='
+            member: '='
         },
         templateUrl: ngp.const.app.url + '/tpl/directives/tabsMembers.html'
     };
