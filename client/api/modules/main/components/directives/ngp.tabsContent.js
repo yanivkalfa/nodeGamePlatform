@@ -2,10 +2,11 @@
  * Created by Yaniv-Kalfa on 1/19/15.
  */
 angular.module(ngp.const.app.name)
-    .directive('ngpTabContent', function() {
+    .directive('ngpTabContent',[ngpTabContent]);
 
-    console.log(ngp.const.app.url + '/tpl/directives/tabContent.html');
+function ngpTabContent() {
+
     return {
         templateUrl: ngp.const.app.url + '/tpl/directives/tabContent.html'
     };
-});
+}
