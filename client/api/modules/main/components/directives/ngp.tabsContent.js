@@ -10,6 +10,6 @@ function ngpTabContent() {
         scope: {
             content: '='
         },
-        templateUrl: ngp.const.app.url + '/tpl/directives/tabContent.html'
+        templateUrl: ngp.const.app.url + '/tpl/directives/tabsContent.html'
     };
 }
