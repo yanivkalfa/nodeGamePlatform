@@ -20,7 +20,10 @@ div(class="statusBar")
         span(class="serverTime")
     div(class="logout fRight" ng-click="admin.logout()") Logout
     div.clearFix
-div(class="tabs" id="tabs")
-    tabset
-        tab(ng-repeat="tab in tabs" heading="{{tab.title}}" active="tab.active" disabled="tab.disabled")
-            ngp-tab-content(content="tab.content")
+div.tabContainer
+    div(class="tabs" id="tabs")
+        tabset
+            tab(ng-repeat="tab in tabs" heading="{{tab.title}}" active="tab.active" disabled="tab.disabled")
+                ngp-tab-content(content="tab.content")
+div.inputContainer
+    input(id="msg" placeholder="enter a message" class="msg")
