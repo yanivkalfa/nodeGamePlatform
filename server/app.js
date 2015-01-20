@@ -132,8 +132,8 @@ _s.primus.on('connection', function (spark) {
     });
 
 
-    var webSocket = new _s.oModules.WebSocket(_s, _s.primus, spark);
-    console.log(webSocket);
+    var webSocket = _s.oModules.WebSocket(_s, _s.primus, spark);
+    var WebSocket = new webSocket();
 
 
     spark.join("aRoomName", function () {
