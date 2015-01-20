@@ -13,11 +13,14 @@ angular.module(ngp.const.app.name)
 
 function initChat($q, $scope, WebSocket,User) {
 
-    function InitChat(){}
+    function InitChat(){
+        console.log('aaaaaa');
+    }
 
     InitChat.prototype =  {
 
         init : function(){
+
             var deferred = $q.defer(),
                 self = this;
 
