@@ -17,8 +17,8 @@ function authorizationFactory(
     ) {
 
     function isNotAuthenticated(){
-        $rootScope.returnToState = $rootScope.toState;
-        $rootScope.returnToStateParams = $rootScope.toStateParams;
+        $rootScope.ngp.returnToState = $rootScope.ngp.toState;
+        $rootScope.ngp.returnToStateParams = $rootScope.ngp.toStateParams;
 
         return $state.go('login');
     }
@@ -29,7 +29,7 @@ function authorizationFactory(
                 .then(function() {
                     var isAuthenticated = User.isAuthenticated();
 
-                    if ($rootScope.toState.data.roles && $rootScope.toState.data.roles.length > 0 && !User.isInAnyRole($rootScope.toState.data.roles)) {
+                    if ($rootScope.ngp.toState.data.roles && $rootScope.ngp.toState.data.roles.length > 0 && !User.isInAnyRole($rootScope.ngp.toState.data.roles)) {
                         if (isAuthenticated) return $state.go('accessdenied');
                         else { return isNotAuthenticated();}
                     }

@@ -46,4 +46,4 @@ html(lang="en")
     body(ng-app="node-game-platform")
         audio(id="notification" src="/assets/roomNotification.mp3" preload="auto")
         div(ui-view='main' class='pageWrap')
-        div(ng-show="$root.notify.show" class="notifyWindow" ng-class="$root.notify.class" ng-click="$root.notify.reset()") {{$root.notify.msg}}
+        div(ng-show="$root.ngp.notify.show" class="notifyWindow" ng-class="$root.ngp.notify.class" ng-click="$root.ngp.notify.reset()") {{$root.ngp.notify.msg}}

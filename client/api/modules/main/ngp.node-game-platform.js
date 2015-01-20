@@ -16,13 +16,16 @@ function runFactory(
     User,
     CronJobs
     ) {
+    $rootScope.ngp = {};
 
     CronJobs.add({fn: 'authenticateUser', f : '',  args : '', execEvery : 300000, lastExec : false, ref : User});
 
+
+
     $rootScope.$on('$stateChangeStart', function(event, toState, toStateParams) {
 
-        $rootScope.toState = toState;
-        $rootScope.toStateParams = toStateParams;
+        $rootScope.ngp.toState = toState;
+        $rootScope.ngp.toStateParams = toStateParams;
 
         if (User.isResolved()) {
             Authorization.authorize();

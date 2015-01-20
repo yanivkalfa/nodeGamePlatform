@@ -4,12 +4,13 @@
 angular.module(ngp.const.app.name)
     .service('InitChat', [
         '$q',
+        '$rootScope',
         'WebSocket',
         'User',
         InitChat
     ]);
 
-function InitChat($q, WebSocket,User) {
+function InitChat($q, $rootScope, WebSocket,User) {
 
     console.log('aaaa');
 
@@ -27,10 +28,10 @@ function InitChat($q, WebSocket,User) {
             WebSocket.Primus.write({"m": "initChat", "d":""});
 
 
-            ngp.const.app.rootScope.initChat = false;
+            $rootScope.ngp.initChat = false;
 
             setTimeout(function(){
-                if(!ngp.const.app.rootScope.initChat) {
+                if(!$rootScope.ngp.initChat) {
                     console.log('aaaa');
                     deferred.reject( 'There is some error with sockets' );
                     return deferred.promise;
@@ -39,8 +40,8 @@ function InitChat($q, WebSocket,User) {
 
 
             WebSocket.initChat = function(data){
-                ngp.const.app.rootScope.initChat = true;
-                ngp.const.app.rootScope.channels = data;
+                $rootScope.ngp.initChat = true;
+                $rootScope.ngp.channel = data;
                 deferred.resolve( data );
             };
 

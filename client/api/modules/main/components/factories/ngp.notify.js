@@ -51,7 +51,7 @@ function notifyFactory($rootScope) {
 
     var notify = new NotifyFactory();
 
-    $rootScope.notify = notify;
+    $rootScope.ngp.notify = notify;
 
     return notify;
 }

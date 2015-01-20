@@ -39,9 +39,9 @@ function loginController(
             if(resp.payload.success){
                 $cookieStore.put('user', resp.payload.data);
 
-                if(angular.isDefined($rootScope.returnToState))
+                if(angular.isDefined($rootScope.ngp.returnToState))
                 {
-                    $state.go($rootScope.returnToState.name, $rootScope.returnToStateParams);
+                    $state.go($rootScope.ngp.returnToState.name, $rootScope.ngp.returnToStateParams);
                 }
                 else
                 {
