@@ -58,7 +58,6 @@ angular.module(ngp.const.app.name)
         '$q',
         '$scope',
         'WebSocket',
-        'User',
         InitChat
     ]);
 
