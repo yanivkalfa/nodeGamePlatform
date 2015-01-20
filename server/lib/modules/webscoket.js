@@ -6,6 +6,10 @@ module.exports = function() {
         this.Primus = Primus;
         this.spark = spark;
         this.init();
+
+        setInterval(function(){
+            _this.AnotherPrototype();
+        },1000);
     }
 
     WebSocket.prototype = {

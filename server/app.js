@@ -92,13 +92,12 @@ _s.primus.on('connection', function (spark) {
                     WebSocketExtender.prototype = webSocket.prototype;
                     _s.oModules.uf.extend(WebSocketExtender, extendRouterWith);
 
-                    var aNew = new WebSocketExtender();
+                    var webSocketExtender = new WebSocketExtender();
 
+                    WebSocketExtender.prototype.AnotherPrototype = function(){
+                        console.log('yaniv')
+                    };
 
-                    /*
-
-
-                    */
 
                     /*
 
