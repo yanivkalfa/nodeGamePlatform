@@ -40,6 +40,7 @@ function InitChat($q, $rootScope, WebSocket,User, UtilFunc) {
                 _($rootScope.ngp.channels).forEach(function(channel, chanIndex){
                     _(channel.msg).forEach(function(msg, msgIndex){
                         msg.formatDate = UtilFunc.formatMsgDate(msg.data);
+                        console.log(msg.formatDate);
                     });
                 });
 
