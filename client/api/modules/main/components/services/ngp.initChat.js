@@ -62,7 +62,7 @@ angular.module(ngp.const.app.name)
         InitChat
     ]);
 
-function InitChat($q,$scope, WebSocket, User) {
+function InitChat($q,$scope, WebSocket) {
 
     function InitChatService(){
 
