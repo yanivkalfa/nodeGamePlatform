@@ -70,10 +70,10 @@ _s.primus.on('connection', function (spark) {
                 {
                     spark.userId = decoded.userId;
                     var webSocket = new _s.oModules.WebSocket(_s, _s.primus, spark);
-
+                    console.log(webSocket);
 
                     /*
-                    console.log(webSocket);
+
                     var WebSocketExtender = function(){};
                     var extendRouterWith = {
                         ping : function(spark, data){
