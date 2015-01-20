@@ -82,6 +82,18 @@ function siteRouts($stateProvider, $urlRouterProvider, $locationProvider) {
                 controllerAs : 'admin'
             }
         }
+    }).state('adminhome', {
+        parent: 'admin',
+        url: '/',
+        data: {
+            roles: ['registered']
+        },
+        views: {
+            'admin@': {
+                templateUrl: ngp.const.app.url + '/contents/adminhome',
+                controller: 'adminHomeController'
+            }
+        }
     }).state('game', {
         parent: 'admin',
         url: '/game',
