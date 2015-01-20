@@ -88,10 +88,9 @@ _s.primus.on('connection', function (spark) {
                             c.oVars.oRoomRouter.routRoom(msg);
                         }
                     };
-                    WebSocketExtender.prototype = webSocket;
+                    //WebSocketExtender.prototype = webSocket;
                     //s.utilFunc.extend();
-                    _.assign(WebSocketExtender, extendRouterWith);
-                    new WebSocketExtender();
+                    _.assign(webSocket.prototype, extendRouterWith);
 
 
                     /*
