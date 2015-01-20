@@ -27,6 +27,8 @@ function initChat($q, $scope, WebSocket,User) {
                 self = this;
 
             WebSocket.Primus.write({"m": "initChat", "d":""});
+
+            /*
             $scope.initChat = false;
 
             setTimeout(function(){
@@ -36,6 +38,7 @@ function initChat($q, $scope, WebSocket,User) {
                     return deferred.promise;
                 }
             }, 3000);
+            */
 
             WebSocket.initChat = function(data){
                 $scope.initChat = true;
