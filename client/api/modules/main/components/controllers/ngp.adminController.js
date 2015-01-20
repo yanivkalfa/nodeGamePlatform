@@ -32,6 +32,7 @@ function adminController(
     ) {
 
     function AdminController(){
+        console.log('aaa');
         var self = this;
         this.api = Api.createNewApi(ngp.const.app.ajaxUrl);
         this.User = User.get();

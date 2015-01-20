@@ -4,6 +4,8 @@ module.exports = function(_s){
     rf.uf = require('./utilFunc.js')(_s);
     rf.ajaxHandler = require('./ajaxHandler.js');
     rf.WebSocket = require('./webscoket.js');
+    rf.msgRouter = require('./msgRouter.js');
+    rf.roomRouter = require('./roomRouter.js');
 
     return rf;
 };

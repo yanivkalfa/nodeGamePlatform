@@ -120,7 +120,6 @@ _s.primus.on('connection', function (spark) {
                     _s.oModules.uf.extend(WebSocketExtender, extendRouterWith);
 
                     var webSocketExtender = new WebSocketExtender();
-
                     webSocketExtender.initChat(spark);
 
                     /*

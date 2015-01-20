@@ -22,9 +22,8 @@ function InitChat($q, $rootScope, WebSocket,User, UtilFunc) {
             var deferred = $q.defer(),
                 self = this;
 
-            if(!$rootScope.ngp.initChat){
-                WebSocket.Primus.write({"m": "initChat", "d":""});
-            }
+            WebSocket.Primus.write({"m": "initChat", "d":""});
+            $rootScope.ngp.initChat = false;
 
 
             setTimeout(function(){
