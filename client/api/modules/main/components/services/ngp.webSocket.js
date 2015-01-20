@@ -49,6 +49,7 @@ function webSocket($rootScope, $q, User) {
             this.Primus.on('end', function end() {
                 self.connected = false;
                 $rootScope.ngp.initChat = false;
+                console.log('end');
             });
 
 
