@@ -11,7 +11,7 @@ angular.module(ngp.const.app.name)
         'Api',
         'User',
         'Notify',
-        //'WebSocket',
+        'WebSocket',
         'Latency',
         'InitChat',
         adminController
@@ -26,7 +26,7 @@ function adminController(
     Api,
     User,
     Notify,
-    //WebSocket,
+    WebSocket,
     Latency,
     InitChat
     ) {
@@ -36,19 +36,6 @@ function adminController(
         this.api = Api.createNewApi(ngp.const.app.ajaxUrl);
         this.User = User.get();
 
-        setTimeout(function(){console.log(WebSocket);},5000)
-
-        //$rootScope.ngp
-
-        /*
-        WebSocket.ping = function(data){
-            console.log('aaaaa');
-            Latency.calculateLatency(data);
-         $rootScope.ngp.bar.stats.latency = Latency.getLatency();
-            $scope.$apply();
-
-        };
-        */
 
     }
 

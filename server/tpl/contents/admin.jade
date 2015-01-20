@@ -20,11 +20,13 @@ div(class="statusBar")
         span(class="serverTime")
     div(class="logout fRight" ng-click="admin.logout()") Logout
     div.clearFix
-div.tabContainer
-    div(class="tabs" id="tabs")
-        tabset
-            tab(ng-repeat="channel in $root.ngp.channels" heading="{{channel.title}}" active="channel.active" disabled="channel.disabled")
-                ngp-channel-content(content="channel.content")
-div.inputContainer
-    input(id="msg" placeholder="enter a message" class="msg")
-    button(class="submitMsg") Submit
+
+div(ui-view='admin' class='pageWrap')
+    div.tabContainer
+        div(class="tabs" id="tabs")
+            tabset
+                tab(ng-repeat="channel in $root.ngp.channels" heading="{{channel.title}}" active="channel.active" disabled="channel.disabled")
+                    ngp-channel-content(content="channel.content")
+    div.inputContainer
+        input(id="msg" placeholder="enter a message" class="msg")
+        button(class="submitMsg") Submit
