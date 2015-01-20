@@ -77,6 +77,7 @@ _s.primus.on('connection', function (spark) {
                     var WebSocketExtender = function(){};
                     var extendRouterWith = {
                         ping : function(spark, data){
+                            console.log('ponging');
                             spark.write({"m": "ping", "d":"p"});
                         },
                         initChat : function(spark, data){
@@ -194,10 +195,11 @@ _s.primus.on('connection', function (spark) {
     });
     */
 
-    console.log('not good ');
+    /*
     spark.on('data', function (msg) {
         try{ab[msg.m](spark, msg.d);}catch(e){}
     });
+    */
 });
 
 
