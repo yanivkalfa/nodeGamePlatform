@@ -11,7 +11,7 @@ angular.module(ngp.const.app.name)
         'Api',
         'User',
         'Notify',
-        //'WebSocket',
+        'WebSocket',
         'Latency',
         'InitChat',
         adminController
@@ -26,7 +26,7 @@ function adminController(
     Api,
     User,
     Notify,
-    //WebSocket,
+    WebSocket,
     Latency,
     InitChat
     ) {
