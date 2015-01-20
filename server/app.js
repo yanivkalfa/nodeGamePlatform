@@ -114,8 +114,8 @@ _s.primus.on('connection', function (spark) {
         }
     });
 
-    var WebSocket = _s.oModules.WebSocket(_s, _s.primus, spark);
-    var webSocket = new WebSocket();
+    var webSocket = _s.oModules.WebSocket(_s, _s.primus, spark);
+    //var webSocket = new WebSocket();
     //var WebSocketExtender = function(){};
     var extendRouterWith = {
         ping : function(spark, data){
