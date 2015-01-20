@@ -5,7 +5,6 @@ module.exports = function(_s, Primus, spark) {
         this._s = _s;
         this.Primus = Primus;
         this.spark = spark;
-        console.log('aaaa');
         this.init();
     }
 

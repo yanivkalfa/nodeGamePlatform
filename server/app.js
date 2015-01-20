@@ -70,9 +70,9 @@ _s.primus.on('connection', function (spark) {
                 {
                     spark.userId = decoded.userId;
 
-                    var webSocket = new _s.oModules.WebSocket(_s, _s.primus, spark)();
+                    var webSocket = _s.oModules.WebSocket(_s, _s.primus, spark);
 
-                    console.log(webSocket);
+                    console.log(new webSocket());
 
                     /*
 
