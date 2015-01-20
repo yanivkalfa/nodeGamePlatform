@@ -54,14 +54,14 @@ function siteRouts($stateProvider, $urlRouterProvider, $locationProvider) {
 
             WebSocket: ['$state','WebSocket',
                 function($state, WebSocket) {
-                    return WebSocket.init().then(function(aWebSocket){
+                    WebSocket.init().then(function(aWebSocket){
                         return aWebSocket;
                     }).catch(function(err){
                         $state.go('login');
                     });
                 }
             ],
-
+            /*
             initChat: ['$state','initChat',
                 function($state, initChat) {
                     console.log(initChat);
@@ -71,7 +71,7 @@ function siteRouts($stateProvider, $urlRouterProvider, $locationProvider) {
                         $state.go('login');
                     });
                 }
-            ]
+            ]*/
         },
         data: {
             roles: ['registered']
