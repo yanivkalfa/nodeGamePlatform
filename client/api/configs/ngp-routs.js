@@ -52,9 +52,19 @@ function siteRouts($stateProvider, $urlRouterProvider, $locationProvider) {
                 }
             ],
 
-            WebSocket: ['WebSocket',
-                function(WebSocket) {
-                    return WebSocket.init();
+            WebSocket: ['$state','WebSocket',
+                function($state, WebSocket) {
+                    return WebSocket.init().catch(function(err){
+                        $state.go('login');
+                    });
+                }
+            ],
+
+            initChat: ['$state','initChat',
+                function($state, initChat) {
+                    return initChat.init().catch(function(err){
+                        $state.go('login');
+                    });
                 }
             ]
         },

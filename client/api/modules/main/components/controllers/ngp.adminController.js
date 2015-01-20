@@ -31,7 +31,6 @@ function adminController(
 
     function AdminController(){
         var self = this;
-        console.log('aaaa');
         this.api = Api.createNewApi(ngp.const.app.ajaxUrl);
         this.User = User.get();
         this.bar = {
