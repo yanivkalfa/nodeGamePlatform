@@ -8,18 +8,18 @@ angular.module(ngp.const.app.name)
         '$scope',
         'WebSocket',
         'User',
-        initChat
+        InitChat
     ]);
 
-function initChat($q, $scope, WebSocket,User) {
+function InitChat($q, $scope, WebSocket,User) {
 
     console.log('aaaa');
 
-    function InitChat(){
+    function InitChatService(){
         console.log('aaaaaa');
     }
 
-    InitChat.prototype =  {
+    InitChatService.prototype =  {
 
         init : function(){
 
@@ -50,5 +50,5 @@ function initChat($q, $scope, WebSocket,User) {
         }
     };
 
-    return new InitChat();
+    return new InitChatService();
 }
