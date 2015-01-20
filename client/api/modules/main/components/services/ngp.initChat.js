@@ -1,17 +1,15 @@
 /**
  * Created by Yaniv-Kalfa on 1/2/15.
  */
-/*
 angular.module(ngp.const.app.name)
     .service('InitChat', [
         '$q',
-        '$scope',
         'WebSocket',
         'User',
         InitChat
     ]);
 
-function InitChat($q, $scope, WebSocket,User) {
+function InitChat($q, WebSocket,User) {
 
     console.log('aaaa');
 
@@ -29,10 +27,10 @@ function InitChat($q, $scope, WebSocket,User) {
             WebSocket.Primus.write({"m": "initChat", "d":""});
 
 
-            $scope.initChat = false;
+            ngp.const.app.rootScope.initChat = false;
 
             setTimeout(function(){
-                if(!$scope.initChat) {
+                if(!ngp.const.app.rootScope.initChat) {
                     console.log('aaaa');
                     deferred.reject( 'There is some error with sockets' );
                     return deferred.promise;
@@ -41,38 +39,12 @@ function InitChat($q, $scope, WebSocket,User) {
 
 
             WebSocket.initChat = function(data){
-                $scope.initChat = true;
-                $scope.channel = data;
+                ngp.const.app.rootScope.initChat = true;
+                ngp.const.app.rootScope.channels = data;
                 deferred.resolve( data );
             };
 
             return deferred.promise;
-        }
-    };
-
-    return new InitChatService();
-}
-*/
-angular.module(ngp.const.app.name)
-    .service('InitChat', [
-        '$q',
-        '$rootScope',
-        'WebSocket',
-        'User',
-        InitChat
-    ]);
-
-function InitChat($q, $rootScope, WebSocket, User) {
-
-    function InitChatService(){
-
-        this.init();
-    }
-
-    InitChatService.prototype =  {
-
-        init : function(){
-            console.log(WebSocket);
         }
     };
 
