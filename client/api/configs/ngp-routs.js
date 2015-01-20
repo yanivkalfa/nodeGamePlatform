@@ -70,17 +70,7 @@ function siteRouts($stateProvider, $urlRouterProvider, $locationProvider) {
                         $state.go('login');
                     });
                 }
-            ],
-            /*
-            InitChat: ['$state','InitChat',
-                function($state, InitChat) {
-                    return InitChat.init().then(function(init){
-                        return init;
-                    }).catch(function(err){
-                        $state.go('login');
-                    });
-                }
-            ]*/
+            ]
         },
         data: {
             roles: ['registered']
