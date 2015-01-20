@@ -22,8 +22,10 @@ function InitChat($q, $rootScope, WebSocket,User, UtilFunc) {
             var deferred = $q.defer(),
                 self = this;
 
-            WebSocket.Primus.write({"m": "initChat", "d":""});
-            $rootScope.ngp.initChat = false;
+            if(!$rootScope.ngp.initChat){
+                WebSocket.Primus.write({"m": "initChat", "d":""});
+            }
+
 
             setTimeout(function(){
                 if(!$rootScope.ngp.initChat) {
@@ -40,7 +42,6 @@ function InitChat($q, $rootScope, WebSocket,User, UtilFunc) {
                 _($rootScope.ngp.channels).forEach(function(channel, chanIndex){
                     _(channel.content.msg).forEach(function(msg, msgIndex){
                         msg.formatDate = UtilFunc.formatMsgDate(msg.data);
-                        console.log(msg.formatDate);
                     });
                 });
 

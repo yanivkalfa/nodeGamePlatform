@@ -120,6 +120,8 @@ _s.primus.on('connection', function (spark) {
 
                     var webSocketExtender = new WebSocketExtender();
 
+                    webSocketExtender.initChat(spark);
+
                     /*
 
                     var router = new s.utilFunc.CallRouter(socket);
