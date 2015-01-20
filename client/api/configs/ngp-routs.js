@@ -62,13 +62,12 @@ function siteRouts($stateProvider, $urlRouterProvider, $locationProvider) {
                     });
                 }
             ],
-            /*
-            chatInit: ['$state','InitChat',
+            InitChat: ['$state','InitChat',
                 function($state, InitChat) {
                     console.log('aaaaaa');
                     return InitChat.init()
                 }
-            ]*/
+            ]
         },
         data: {
             roles: ['registered']
