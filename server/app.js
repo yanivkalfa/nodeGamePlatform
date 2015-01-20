@@ -68,9 +68,9 @@ _s.primus.on('connection', function (spark) {
                 }
                 else
                 {
-                    console.log(decoded.userId);
                     spark.userId = decoded.userId;
 
+                    console.log('happenedining ');
                     var webSocket = new _s.oModules.WebSocket(_s, _s.primus, spark);
 
 
@@ -194,7 +194,7 @@ _s.primus.on('connection', function (spark) {
     });
     */
 
-
+    console.log('not good ');
     spark.on('data', function (msg) {
         try{ab[msg.m](spark, msg.d);}catch(e){}
     });

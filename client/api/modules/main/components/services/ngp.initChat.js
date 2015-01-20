@@ -26,7 +26,6 @@ function InitChat($q, $rootScope, WebSocket,User) {
 
             setTimeout(function(){
                 if(!$rootScope.ngp.initChat) {
-                    console.log('aaaa');
                     deferred.reject( 'There is some error with sockets' );
                     return deferred.promise;
                 }
