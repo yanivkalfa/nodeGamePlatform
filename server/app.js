@@ -91,6 +91,8 @@ _s.primus.on('connection', function (spark) {
                     //WebSocketExtender.prototype = webSocket;
                     _s.oModules.uf.extend(webSocket, extendRouterWith);
 
+                    console.log(webSocket.roomDo);
+
 
                     /*
 
