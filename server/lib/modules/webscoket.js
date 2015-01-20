@@ -14,6 +14,7 @@ module.exports = function(_s, Primus, spark) {
             var self = this;
 
             self.spark.on('data', function (msg) {
+                console.log('something');
                 self[msg.m](self.spark, msg.d);
             });
 
