@@ -107,7 +107,12 @@ _s.primus.on('connection', function (spark) {
                                 }
                             ];
 
-                            spark.write({"m": "initChat", "d":channels});
+                            var data = {
+                                m : 'initChat',
+                                d : channels
+                            };
+
+                            spark.write({"m": "chat", "d":data});
                         },
                         msg : function(msg){
                             c.oVars.oMsgRouter.routMsg(msg);

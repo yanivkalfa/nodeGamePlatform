@@ -13,42 +13,54 @@ angular.module(ngp.const.app.name)
 
 function InitChat($q, $rootScope, WebSocket,User, UtilFunc) {
 
-    function InitChatService(){}
+    function InitChatService(){ }
 
     InitChatService.prototype =  {
 
         init : function(){
+            var deferred = $q.defer(), self = this;
 
-            var deferred = $q.defer(),
-                self = this;
+            WebSocket.chat = function(msg){ self[msg.m](msg.d); };
 
-            WebSocket.Primus.write({"m": "initChat", "d":""});
-            $rootScope.ngp.initChat = false;
-
-
-            setTimeout(function(){
-                if(!$rootScope.ngp.initChat) {
-                    deferred.reject( 'There is some error with sockets' );
-                    return deferred.promise;
-                }
-            }, 3000);
-
-
-            WebSocket.initChat = function(data){
-                $rootScope.ngp.initChat = true;
-                $rootScope.ngp.channels = data;
-
-                _($rootScope.ngp.channels).forEach(function(channel, chanIndex){
-                    _(channel.content.msg).forEach(function(msg, msgIndex){
-                        msg.formatDate = UtilFunc.formatMsgDate(msg.data);
-                    });
-                });
-
-                deferred.resolve( data );
-            };
-
+            deferred.resolve( this );
             return deferred.promise;
+        },
+
+        initChat : function(data){
+            $rootScope.ngp.channels = data;
+
+            _($rootScope.ngp.channels).forEach(function(channel, chanIndex){
+                _(channel.content.msg).forEach(function(msg, msgIndex){
+                    msg.formatDate = UtilFunc.formatMsgDate(msg.data);
+                });
+            });
+        },
+
+        getChanDetails : function(data){
+            /*
+            $rootScope.ngp.channels = data;
+
+            _($rootScope.ngp.channels).forEach(function(channel, chanIndex){
+                _(channel.content.msg).forEach(function(msg, msgIndex){
+                    msg.formatDate = UtilFunc.formatMsgDate(msg.data);
+                });
+            });
+
+            */
+        },
+
+        join : function(data){
+
+        },
+
+        leave : function(data){
+
+        },
+
+        message : function(data){
+
         }
+
     };
 
     return new InitChatService();
