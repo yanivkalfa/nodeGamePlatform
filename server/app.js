@@ -69,7 +69,8 @@ _s.primus.on('connection', function (spark) {
                 else
                 {
                     spark.userId = decoded.userId;
-                    /*
+
+                    var webSocket = new _s.oModules.WebSocket(_s, _s.primus, spark)();
 
                     var WebSocketExtender = function(){};
                     var extendRouterWith = {
@@ -91,6 +92,11 @@ _s.primus.on('connection', function (spark) {
                     //s.utilFunc.extend();
                     _.assign(WebSocketExtender, extendRouterWith);
                     new WebSocketExtender();
+
+
+                    /*
+
+
                     */
 
                     /*
@@ -130,10 +136,6 @@ _s.primus.on('connection', function (spark) {
             spark.end({"method" : "disconnect", msg : "Could not authenticate user."} );
         }
     });
-
-
-    var webSocket = _s.oModules.WebSocket(_s, _s.primus, spark);
-    var WebSocket = new webSocket();
 
 
     spark.join("aRoomName", function () {
