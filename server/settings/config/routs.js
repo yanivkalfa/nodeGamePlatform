@@ -3,6 +3,9 @@ module.exports = {
     admin : {
         roles : ['registered']
     },
+    adminhome : {
+        roles : ['registered']
+    },
     denied : {
         roles : []
     },
