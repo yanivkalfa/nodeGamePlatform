@@ -62,6 +62,7 @@ function siteRouts($stateProvider, $urlRouterProvider, $locationProvider) {
                     });
                 }
             ],
+            /*
             initChat: ['$state','InitChat',
                 function($state, InitChat) {
                     console.log('aaaaaa');
@@ -72,6 +73,7 @@ function siteRouts($stateProvider, $urlRouterProvider, $locationProvider) {
                     });
                 }
             ]
+            */
         },
         data: {
             roles: ['registered']
