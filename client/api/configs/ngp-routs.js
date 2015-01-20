@@ -71,7 +71,7 @@ function siteRouts($stateProvider, $urlRouterProvider, $locationProvider) {
                     });
                 }
             ],
-
+            /*
             InitChat: ['$state','InitChat',
                 function($state, InitChat) {
                     return InitChat.init().then(function(init){
@@ -80,7 +80,7 @@ function siteRouts($stateProvider, $urlRouterProvider, $locationProvider) {
                         $state.go('login');
                     });
                 }
-            ]
+            ]*/
         },
         data: {
             roles: ['registered']
