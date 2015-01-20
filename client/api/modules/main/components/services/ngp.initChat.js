@@ -26,6 +26,7 @@ function initChat($q, $scope, WebSocket,User) {
 
             setTimeout(function(){
                 if(!$scope.initChat) {
+                    console.log('aaaa');
                     deferred.reject( 'There is some error with sockets' );
                     return deferred.promise;
                 }
