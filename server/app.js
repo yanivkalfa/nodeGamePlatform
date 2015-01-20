@@ -69,6 +69,7 @@ _s.primus.on('connection', function (spark) {
                 else
                 {
                     spark.userId = decoded.userId;
+                    console.log('aaaa');
 
                     var WebSocket = _s.oModules.WebSocket(_s, _s.primus, spark);
                     var webSocket = new WebSocket();
