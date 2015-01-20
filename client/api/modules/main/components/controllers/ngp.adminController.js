@@ -12,6 +12,7 @@ angular.module(ngp.const.app.name)
         'User',
         'Notify',
         'WebSocket',
+        'initChat',
         'Latency',
         adminController
     ]);
@@ -26,6 +27,7 @@ function adminController(
     User,
     Notify,
     WebSocket,
+    initChat,
     Latency
     ) {
 
