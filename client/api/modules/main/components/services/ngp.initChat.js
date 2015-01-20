@@ -22,7 +22,7 @@ function InitChat($q, $rootScope, WebSocket,User, UtilFunc) {
 
             WebSocket.chat = function(msg){ self[msg.m](msg.d); };
 
-            deferred.resolve( this );
+            deferred.resolve( self );
             return deferred.promise;
         },
 

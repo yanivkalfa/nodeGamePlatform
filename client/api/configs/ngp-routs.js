@@ -70,6 +70,16 @@ function siteRouts($stateProvider, $urlRouterProvider, $locationProvider) {
                         $state.go('login');
                     });
                 }
+            ],
+
+            Latency: ['$state','Latency',
+                function($state, Latency) {
+                    return Latency.init().then(function(Latency){
+                        return Latency;
+                    }).catch(function(err){
+                        $state.go('login');
+                    });
+                }
             ]
         },
         data: {
