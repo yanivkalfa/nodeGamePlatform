@@ -89,7 +89,7 @@ function siteRouts($stateProvider, $urlRouterProvider, $locationProvider) {
             roles: ['registered']
         },
         views: {
-            'admin@': {
+            'admin': {
                 templateUrl: ngp.const.app.url + '/contents/adminhome',
                 controller: 'adminHomeController'
             }
@@ -101,7 +101,7 @@ function siteRouts($stateProvider, $urlRouterProvider, $locationProvider) {
             roles: ['registered']
         },
         views: {
-            'admin@': {
+            'admin': {
                 templateUrl: ngp.const.app.url + '/contents/game',
                 controller: 'gameController'
             }
