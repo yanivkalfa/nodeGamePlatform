@@ -1,6 +1,6 @@
 // export the class
-module.exports = function(_s, Primus, spark) {
-    function WebSocket(){
+module.exports = function() {
+    function WebSocket(_s, Primus, spark){
         var _this = this;
         this._s = _s;
         this.Primus = Primus;
@@ -21,6 +21,6 @@ module.exports = function(_s, Primus, spark) {
         }
     };
 
-    return new WebSocket();
+    return WebSocket;
 };
 

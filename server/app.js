@@ -114,9 +114,11 @@ _s.primus.on('connection', function (spark) {
         }
     });
 
-    var webSocket = _s.oModules.WebSocket(_s, _s.primus, spark);
+    var webSocket = _s.oModules.WebSocket();
     //var webSocket = new WebSocket();
-    //var WebSocketExtender = function(){};
+    var WebSocketExtender = function(){
+        webSocket.call(this,_s, _s.primus, spark);
+    };
     var extendRouterWith = {
         ping : function(spark, data){
             console.log('ponging');
@@ -132,9 +134,10 @@ _s.primus.on('connection', function (spark) {
             c.oVars.oRoomRouter.routRoom(msg);
         }
     };
-    //WebSocketExtender.prototype = webSocket;
-    _s.oModules.uf.extend(webSocket, extendRouterWith);
+    WebSocketExtender.prototype = webSocket.prototype;
+    _s.oModules.uf.extend(WebSocketExtender, extendRouterWith);
 
+    new WebSocketExtender();
     console.log(webSocket.roomDo);
 
 
