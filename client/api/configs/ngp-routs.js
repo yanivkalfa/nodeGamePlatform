@@ -61,17 +61,15 @@ function siteRouts($stateProvider, $urlRouterProvider, $locationProvider) {
                     });
                 }
             ],
-            /*
             initChat: ['$state','initChat',
                 function($state, initChat) {
-                    console.log(initChat);
                     return initChat.init().then(function(init){
                         return init;
                     }).catch(function(err){
-                        $state.go('login');
+                        return $state.go('login');
                     });
                 }
-            ]*/
+            ]
         },
         data: {
             roles: ['registered']
