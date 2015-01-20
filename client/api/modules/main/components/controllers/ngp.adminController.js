@@ -32,7 +32,6 @@ function adminController(
     ) {
 
     function AdminController(){
-        console.log(InitChat);
         var self = this;
         this.api = Api.createNewApi(ngp.const.app.ajaxUrl);
         this.User = User.get();
