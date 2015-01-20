@@ -70,6 +70,30 @@ _s.primus.on('connection', function (spark) {
                 {
                     spark.userId = decoded.userId;
 
+                    var webSocket = _s.oModules.WebSocket();
+                    //var webSocket = new WebSocket();
+                    var WebSocketExtender = function(){
+                        webSocket.call(this,_s, _s.primus, spark);
+                    };
+                    var extendRouterWith = {
+                        ping : function(spark, data){
+                            spark.write({"m": "ping", "d":"p"});
+                        },
+                        initChat : function(spark, data){
+                            spark.write({"m": "initChat", "d":[]});
+                        },
+                        msg : function(msg){
+                            c.oVars.oMsgRouter.routMsg(msg);
+                        },
+                        roomDo : function(msg){
+                            c.oVars.oRoomRouter.routRoom(msg);
+                        }
+                    };
+                    WebSocketExtender.prototype = webSocket.prototype;
+                    _s.oModules.uf.extend(WebSocketExtender, extendRouterWith);
+
+                    var aNew = new WebSocketExtender();
+
 
                     /*
 
@@ -114,31 +138,6 @@ _s.primus.on('connection', function (spark) {
         }
     });
 
-    var webSocket = _s.oModules.WebSocket();
-    //var webSocket = new WebSocket();
-    var WebSocketExtender = function(){
-        webSocket.call(this,_s, _s.primus, spark);
-    };
-    var extendRouterWith = {
-        ping : function(spark, data){
-            console.log('ponging');
-            spark.write({"m": "ping", "d":"p"});
-        },
-        initChat : function(spark, data){
-            spark.write({"m": "initChat", "d":[]});
-        },
-        msg : function(msg){
-            c.oVars.oMsgRouter.routMsg(msg);
-        },
-        roomDo : function(msg){
-            c.oVars.oRoomRouter.routRoom(msg);
-        }
-    };
-    WebSocketExtender.prototype = webSocket.prototype;
-    _s.oModules.uf.extend(WebSocketExtender, extendRouterWith);
-
-    var aNew = new WebSocketExtender();
-    console.log(aNew.roomDo);
 
 
     spark.join("aRoomName", function () {
