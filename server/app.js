@@ -72,6 +72,7 @@ _s.primus.on('connection', function (spark) {
                     var webSocket = new _s.oModules.WebSocket(_s, _s.primus, spark);
 
 
+                    /*
                     console.log(webSocket);
                     var WebSocketExtender = function(){};
                     var extendRouterWith = {
@@ -93,6 +94,7 @@ _s.primus.on('connection', function (spark) {
                     //s.utilFunc.extend();
                     _.assign(WebSocketExtender, extendRouterWith);
                     new WebSocketExtender();
+                    */
 
                     /*
 
