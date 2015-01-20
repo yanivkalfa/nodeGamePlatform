@@ -89,8 +89,7 @@ _s.primus.on('connection', function (spark) {
                         }
                     };
                     //WebSocketExtender.prototype = webSocket;
-                    //s.utilFunc.extend();
-                    _.assign(webSocket.prototype, extendRouterWith);
+                    _s.oModules.uf.extend(webSocket, extendRouterWith);
 
 
                     /*
