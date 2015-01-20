@@ -7,10 +7,11 @@ angular.module(ngp.const.app.name)
         '$rootScope',
         'WebSocket',
         'User',
+        'UtilFunc',
         InitChat
     ]);
 
-function InitChat($q, $rootScope, WebSocket,User) {
+function InitChat($q, $rootScope, WebSocket,User, UtilFunc) {
 
     function InitChatService(){}
 
@@ -36,8 +37,10 @@ function InitChat($q, $rootScope, WebSocket,User) {
                 $rootScope.ngp.initChat = true;
                 $rootScope.ngp.channels = data;
 
-                _($rootScope.ngp.channels).forEach(function(channel){
-                    console.log(channel);
+                _($rootScope.ngp.channels).forEach(function(channel, chanIndex){
+                    _(channel.msg).forEach(function(msg, msgIndex){
+                        msg.formatDate = UtilFunc.formatMsgDate(msg.data);
+                    });
                 });
 
                 deferred.resolve( data );

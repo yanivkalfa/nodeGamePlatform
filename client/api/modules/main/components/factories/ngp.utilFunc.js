@@ -14,9 +14,8 @@ function UtilFunc() {
 
     UtilFuncFactory.prototype =  {
 
-        formatMsgDate : function() {
-            moment(new Date(1421700566413)).format('HH:mm:ss')
-        }
+        formatMsgDate : function(unixDate) { return moment(new Date(unixDate)).format('HH:mm:ss'); }
+
     };
 
     return new UtilFuncFactory();
