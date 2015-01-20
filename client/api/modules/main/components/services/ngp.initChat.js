@@ -53,19 +53,16 @@ function InitChat($q, $scope, WebSocket,User) {
     return new InitChatService();
 }
 */
-
-
-
-/**
- * Created by Yaniv-Kalfa on 1/2/15.
- */
 angular.module(ngp.const.app.name)
     .service('InitChat', [
+        '$q',
+        '$scope',
         'WebSocket',
+        'User',
         InitChat
     ]);
 
-function InitChat(WebSocket) {
+function InitChat($q,$scope, WebSocket, User) {
 
     function InitChatService(){
 
