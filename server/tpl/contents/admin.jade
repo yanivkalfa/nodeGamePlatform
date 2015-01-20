@@ -22,7 +22,11 @@ div(class="statusBar")
     div.clearFix
 a(ui-sref='game') game&nbsp;
 div(ui-view='admin')
-    div content one
+    div.tabContainer
+        div(class="tabs" id="tabs")
+            tabset
+                tab(ng-repeat="channel in $root.ngp.channels" heading="{{channel.title}}" active="channel.active" disabled="channel.disabled")
+                    ngp-channel-content(content="channel.content")
     div.inputContainer
         input(id="msg" placeholder="enter a message" class="msg")
         button(class="submitMsg") Submit

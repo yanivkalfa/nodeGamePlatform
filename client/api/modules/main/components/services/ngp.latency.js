@@ -4,6 +4,7 @@
 angular.module(ngp.const.app.name)
     .service('Latency', [
         '$rootScope',
+        '$q',
         'WebSocket',
         latencyService
     ]);
@@ -27,6 +28,7 @@ function latencyService($rootScope, WebSocket) {
     LatencyService.prototype =  {
 
         init : function(){
+
             this.reset();
             this.bindPing();
             this.pingServer();
