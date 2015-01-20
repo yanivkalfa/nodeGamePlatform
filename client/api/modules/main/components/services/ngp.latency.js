@@ -3,11 +3,12 @@
  */
 angular.module(ngp.const.app.name)
     .service('Latency', [
+        '$rootScope',
         'WebSocket',
         latencyService
     ]);
 
-function latencyService(WebSocket) {
+function latencyService($rootScope, WebSocket) {
 
     function LatencyService(){
         var self = this;
@@ -22,13 +23,11 @@ function latencyService(WebSocket) {
         this.pingEvery = 30*1000;
         this.pingInterval = false;
 
-        /*
         WebSocket.ping = function(data){
             self.calculateLatency(data);
-            self.bar.stats.latency = self.getLatency();
-            $scope.$apply();
+            $rootScope.ngp.bar.stats.latency = self.getLatency();
+            $rootScope.$apply();
         };
-        */
 
         this.init();
     }

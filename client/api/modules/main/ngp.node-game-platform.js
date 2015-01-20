@@ -16,7 +16,15 @@ function runFactory(
     User,
     CronJobs
     ) {
-    $rootScope.ngp = {};
+    $rootScope.ngp = {
+        bar : {
+            stats : {
+                hover : false,
+                latency : 0
+            }
+        },
+        channels : []
+    };
 
     CronJobs.add({fn: 'authenticateUser', f : '',  args : '', execEvery : 300000, lastExec : false, ref : User});
 

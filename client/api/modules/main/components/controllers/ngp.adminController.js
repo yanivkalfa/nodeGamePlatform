@@ -35,21 +35,19 @@ function adminController(
         var self = this;
         this.api = Api.createNewApi(ngp.const.app.ajaxUrl);
         this.User = User.get();
-        this.bar = {
-            stats : {
-                hover : false,
-                latency : 0
-            }
 
-        };
 
+        //$rootScope.ngp
+
+        /*
         WebSocket.ping = function(data){
             console.log('aaaaa');
             Latency.calculateLatency(data);
-            self.bar.stats.latency = Latency.getLatency();
+         $rootScope.ngp.bar.stats.latency = Latency.getLatency();
             $scope.$apply();
 
         };
+        */
 
     }
 
