@@ -10,6 +10,7 @@ angular.module(ngp.const.app.name)
 function latencyService(WebSocket) {
 
     function LatencyService(){
+        var self = this;
         this._pingSent = 0;
         this._pingreturn = 0;
         this._latency = 0;
@@ -20,6 +21,14 @@ function latencyService(WebSocket) {
         this.cycleTime = 60*60*1000;
         this.pingEvery = 30*1000;
         this.pingInterval = false;
+
+        /*
+        WebSocket.ping = function(data){
+            self.calculateLatency(data);
+            self.bar.stats.latency = self.getLatency();
+            $scope.$apply();
+        };
+        */
 
         this.init();
     }
@@ -64,6 +73,8 @@ function latencyService(WebSocket) {
         getLatency : function(){
             return Math.round(this._latency);
         }
+
+
     };
 
     return new LatencyService();

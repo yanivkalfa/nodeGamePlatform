@@ -32,7 +32,6 @@ function adminController(
     ) {
 
     function AdminController(){
-        console.log('aaa');
         var self = this;
         this.api = Api.createNewApi(ngp.const.app.ajaxUrl);
         this.User = User.get();
@@ -45,6 +44,7 @@ function adminController(
         };
 
         WebSocket.ping = function(data){
+            console.log('aaaaa');
             Latency.calculateLatency(data);
             self.bar.stats.latency = Latency.getLatency();
             $scope.$apply();
