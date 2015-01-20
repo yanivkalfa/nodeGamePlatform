@@ -24,11 +24,6 @@ function InitChat($q, $rootScope, WebSocket,User) {
             WebSocket.Primus.write({"m": "initChat", "d":""});
             $rootScope.ngp.initChat = false;
 
-            if(!$rootScope.ngp.initChat) {
-                deferred.reject( 'There is some error with sockets' );
-                return deferred.promise;
-            }
-
             setTimeout(function(){
                 if(!$rootScope.ngp.initChat) {
                     deferred.reject( 'There is some error with sockets' );
@@ -38,6 +33,8 @@ function InitChat($q, $rootScope, WebSocket,User) {
 
 
             WebSocket.initChat = function(data){
+
+                console.log('data', data);
                 $rootScope.ngp.initChat = true;
                 $rootScope.ngp.channel = data;
                 deferred.resolve( data );
