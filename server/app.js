@@ -137,8 +137,8 @@ _s.primus.on('connection', function (spark) {
     WebSocketExtender.prototype = webSocket.prototype;
     _s.oModules.uf.extend(WebSocketExtender, extendRouterWith);
 
-    new WebSocketExtender();
-    console.log(webSocket.roomDo);
+    var aNew = new WebSocketExtender();
+    console.log(aNew.roomDo);
 
 
     spark.join("aRoomName", function () {
