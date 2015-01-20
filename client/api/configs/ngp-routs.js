@@ -54,7 +54,7 @@ function siteRouts($stateProvider, $urlRouterProvider, $locationProvider) {
 
             WebSocket: ['$state','WebSocket',
                 function($state, WebSocket) {
-                    WebSocket.init().then(function(aWebSocket){
+                    return WebSocket.init().then(function(aWebSocket){
                         return aWebSocket;
                     }).catch(function(err){
                         $state.go('login');
