@@ -57,30 +57,12 @@ function siteRouts($stateProvider, $urlRouterProvider, $locationProvider) {
                     return WebSocket.init().then(function(WebSocket){
                         return WebSocket;
                     }).catch(function(err){
-                        console.log('bbbbb');
                         $state.go('login');
                     });
                 }
             ],
-            InitChat: ['$state','InitChat',
-                function($state, InitChat) {
-                    return InitChat.init().then(function(init){
-                        return init;
-                    }).catch(function(err){
-                        $state.go('login');
-                    });
-                }
-            ],
-
-            Latency: ['$state','Latency',
-                function($state, Latency) {
-                    return Latency.init().then(function(Latency){
-                        return Latency;
-                    }).catch(function(err){
-                        $state.go('login');
-                    });
-                }
-            ]
+            InitChat: ['$state','InitChat', function($state, InitChat) { return InitChat.init(); } ],
+            Latency: ['$state','Latency', function($state, Latency) { return Latency.init(); } ]
         },
         data: {
             roles: ['registered']

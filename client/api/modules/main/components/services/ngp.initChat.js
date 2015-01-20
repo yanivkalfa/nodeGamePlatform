@@ -18,12 +18,9 @@ function InitChat($q, $rootScope, WebSocket,User, UtilFunc) {
     InitChatService.prototype =  {
 
         init : function(){
-            var deferred = $q.defer(), self = this;
-
+            var self = this;
             WebSocket.chat = function(msg){ self[msg.m](msg.d); };
-
-            deferred.resolve( self );
-            return deferred.promise;
+            return self;
         },
 
         initChat : function(data){

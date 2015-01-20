@@ -28,8 +28,7 @@ function latencyService($rootScope, $q, WebSocket) {
     LatencyService.prototype =  {
 
         init : function(){
-            var deferred = $q.defer(),
-                self = this;
+            var self = this;
 
             this.reset();
             this.bindPing();
@@ -37,8 +36,7 @@ function latencyService($rootScope, $q, WebSocket) {
             clearInterval(this.pingInterval);
             this.pingInterval = setInterval(_.bind(this.pingServer, this),this.pingEvery);
 
-            deferred.resolve( self );
-            return deferred.promise;
+            return self;
         },
 
         pingServer : function(){
