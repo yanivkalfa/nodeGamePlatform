@@ -46,7 +46,10 @@ function webSocket($rootScope, $q, User) {
                 deferred.reject( err );
             });
 
-            this.Primus.on('end', function end() { self.connected = false; });
+            this.Primus.on('end', function end() {
+                self.connected = false;
+                $rootScope.ngp.initChat = false;
+            });
 
 
             return deferred.promise;
