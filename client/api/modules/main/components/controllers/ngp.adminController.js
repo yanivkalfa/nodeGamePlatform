@@ -11,9 +11,6 @@ angular.module(ngp.const.app.name)
         'Api',
         'User',
         'Notify',
-        'WebSocket',
-        'Latency',
-        'InitChat',
         adminController
     ]);
 
@@ -25,10 +22,7 @@ function adminController(
     $cookieStore,
     Api,
     User,
-    Notify,
-    WebSocket,
-    Latency,
-    InitChat
+    Notify
     ) {
 
     function AdminController(){
