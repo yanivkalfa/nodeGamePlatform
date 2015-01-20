@@ -27,6 +27,7 @@ function latencyService($rootScope, WebSocket) {
             self.calculateLatency(data);
             $rootScope.ngp.bar.stats.latency = self.getLatency();
             $rootScope.$apply();
+            console.log($rootScope.ngp.bar.stats.latency);
         };
 
         this.init();
