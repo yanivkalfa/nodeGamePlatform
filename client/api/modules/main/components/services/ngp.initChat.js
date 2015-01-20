@@ -12,11 +12,7 @@ angular.module(ngp.const.app.name)
 
 function InitChat($q, $rootScope, WebSocket,User) {
 
-    console.log('aaaa');
-
-    function InitChatService(){
-        console.log('aaaaaa');
-    }
+    function InitChatService(){}
 
     InitChatService.prototype =  {
 
@@ -26,8 +22,6 @@ function InitChat($q, $rootScope, WebSocket,User) {
                 self = this;
 
             WebSocket.Primus.write({"m": "initChat", "d":""});
-
-
             $rootScope.ngp.initChat = false;
 
             setTimeout(function(){

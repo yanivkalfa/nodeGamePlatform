@@ -10,7 +10,7 @@
             name: 'node-game-platform',
             domain : 'mygametests.info',
             url : 'http://mygametests.info',
-            ajaxUrl : 'http://mygametests.info/ajaxHandler',
+            ajaxUrl : 'http://mygametests.info/ajaxHandler'
         }
     };
 }(window));

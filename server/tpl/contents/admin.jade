@@ -23,8 +23,8 @@ div(class="statusBar")
 div.tabContainer
     div(class="tabs" id="tabs")
         tabset
-            tab(ng-repeat="tab in tabs" heading="{{tab.title}}" active="tab.active" disabled="tab.disabled")
-                ngp-tab-content(content="tab.content")
+            tab(ng-repeat="channel in $toot.ngp.channels" heading="{{channel.title}}" active="channel.active" disabled="channel.disabled")
+                ngp-tab-content(content="channel.content")
 div.inputContainer
     input(id="msg" placeholder="enter a message" class="msg")
     button(class="submitMsg") Submit

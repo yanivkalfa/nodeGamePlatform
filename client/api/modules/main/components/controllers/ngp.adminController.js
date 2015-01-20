@@ -51,7 +51,7 @@ function adminController(
 
         };
 
-        $scope.tabs = [
+        $rootScope.ngp.channels = [
             {
                 id : '',
                 title:'Dynamic Title 1',
