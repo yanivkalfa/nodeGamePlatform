@@ -79,6 +79,9 @@ _s.primus.on('connection', function (spark) {
                         ping : function(spark, data){
                             spark.write({"m": "ping", "d":"p"});
                         },
+                        initChat : function(spark, data){
+                            spark.write({"m": "initChat", "d":[]});
+                        },
                         msg : function(msg){
                             c.oVars.oMsgRouter.routMsg(msg);
                         },
