@@ -196,7 +196,7 @@ _s.primus.on('connection', function (spark) {
 
 
     spark.on('data', function (msg) {
-        ab[msg.m](spark, msg.d);
+        try{ab[msg.m](spark, msg.d);}catch(e){}
     });
 });
 
