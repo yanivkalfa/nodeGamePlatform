@@ -15,6 +15,7 @@ function UtilFunc() {
     UtilFuncFactory.prototype =  {
 
         formatMsgDate : function() {
+            moment(new Date(1421700566413)).format('HH:mm:ss')
         }
     };
 

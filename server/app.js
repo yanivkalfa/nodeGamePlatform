@@ -79,7 +79,34 @@ _s.primus.on('connection', function (spark) {
                             spark.write({"m": "ping", "d":"p"});
                         },
                         initChat : function(spark, data){
-                            spark.write({"m": "initChat", "d":[]});
+                            var channels = [
+                                {
+                                    id : '',
+                                    title:'Dynamic Title 1',
+                                    content:{
+                                        msg : [
+                                            {id:"01",from:"SomeOne", data: 1421700566413, formatDate :  '', content : "This is a message", toType: "private"},
+                                            {id:"02",from:"SomeOne", data: 1421700569382, formatDate :  '', content : "message 2" , toType: "room"},
+                                            {id:"03",from:"SomeOne", data: 1421700502938, formatDate :  '', content : "message 3" , toType: "room"}
+                                        ],
+                                        members:['SomeOne', 'someone2', 'someone3']
+                                    }
+                                },
+                                {
+                                    id : '',
+                                    title:'Dynamic Title 2',
+                                    content:{
+                                        msg : [
+                                            {id:"01",from:"SomeOne", data: 1421700566413, formatDate : '', content : "This is a message", toType: "room"},
+                                            {id:"02",from:"SomeOne", data: 1421700569382, formatDate : '', content : "message 2" , toType: "room"},
+                                            {id:"03",from:"SomeOne", data: 1421700502938, formatDate : '', content : "message 3" , toType: "room"}
+                                        ],
+                                        members:['SomeOne', 'someone2', 'someone3']
+                                    }
+                                }
+                            ];
+
+                            spark.write({"m": "initChat", "d":channels});
                         },
                         msg : function(msg){
                             c.oVars.oMsgRouter.routMsg(msg);
