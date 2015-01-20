@@ -52,7 +52,7 @@ function siteRouts($stateProvider, $urlRouterProvider, $locationProvider) {
                 }
             ],
 
-            aebSocket: ['$state','WebSocket',
+            WebSocket: ['$state','WebSocket',
                 function($state, WebSocket) {
                     return WebSocket.init().then(function(WebSocket){
                         return WebSocket;
@@ -62,6 +62,16 @@ function siteRouts($stateProvider, $urlRouterProvider, $locationProvider) {
                     });
                 }
             ],
+            InitChat: ['$state','InitChat',
+                function($state, InitChat) {
+                    return InitChat.init().then(function(init){
+                        return init;
+                    }).catch(function(err){
+                        $state.go('login');
+                    });
+                }
+            ],
+
             InitChat: ['$state','InitChat',
                 function($state, InitChat) {
                     return InitChat.init().then(function(init){

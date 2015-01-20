@@ -38,6 +38,7 @@ function latencyService($rootScope, WebSocket) {
 
         pingServer : function(){
             this._pingSent = Date.now();
+            console.log(WebSocket);
             WebSocket.Primus.write({"m": "ping", "d":"p"});
 
             if(this.cycleTime <= this._timeElapsed){
