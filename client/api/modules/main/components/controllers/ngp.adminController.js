@@ -50,6 +50,8 @@ function adminController(
 
         };
 
+        console.log($rootScope.ngp.channels);
+
     }
 
     AdminController.prototype.logout = function(){

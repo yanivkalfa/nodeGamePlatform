@@ -34,9 +34,9 @@ function InitChat($q, $rootScope, WebSocket,User) {
 
             WebSocket.initChat = function(data){
                 $rootScope.ngp.initChat = true;
-                $rootScope.ngp.channel = data;
+                $rootScope.ngp.channels = data;
 
-                _($rootScope.ngp.channel).forEach(function(channel){
+                _($rootScope.ngp.channels).forEach(function(channel){
                     console.log(channel);
                 });
 
