@@ -54,7 +54,9 @@ function siteRouts($stateProvider, $urlRouterProvider, $locationProvider) {
 
             WebSocket: ['$state','WebSocket',
                 function($state, WebSocket) {
-                    return WebSocket.init().catch(function(err){
+                    return WebSocket.init().then(function(aWebSocket){
+                        return aWebSocket;
+                    }).catch(function(err){
                         $state.go('login');
                     });
                 }
@@ -62,7 +64,10 @@ function siteRouts($stateProvider, $urlRouterProvider, $locationProvider) {
 
             initChat: ['$state','initChat',
                 function($state, initChat) {
-                    return initChat.init().catch(function(err){
+                    console.log(initChat);
+                    return initChat.init().then(function(init){
+                        return init;
+                    }).catch(function(err){
                         $state.go('login');
                     });
                 }
