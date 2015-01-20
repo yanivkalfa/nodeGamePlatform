@@ -12,7 +12,6 @@ angular.module(ngp.const.app.name)
         'User',
         'Notify',
         'WebSocket',
-        'initChat',
         'Latency',
         adminController
     ]);
@@ -27,12 +26,10 @@ function adminController(
     User,
     Notify,
     WebSocket,
-    initChat,
     Latency
     ) {
 
     function AdminController(){
-        console.log('aaaa');
         var self = this;
         this.api = Api.createNewApi(ngp.const.app.ajaxUrl);
         this.User = User.get();

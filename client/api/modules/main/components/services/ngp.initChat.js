@@ -3,7 +3,7 @@
  */
 
 angular.module(ngp.const.app.name)
-    .service('initChat', [
+    .service('InitChat', [
         '$q',
         '$scope',
         'WebSocket',
@@ -12,6 +12,8 @@ angular.module(ngp.const.app.name)
     ]);
 
 function initChat($q, $scope, WebSocket,User) {
+
+    console.log('aaaa');
 
     function InitChat(){
         console.log('aaaaaa');

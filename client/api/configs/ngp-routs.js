@@ -62,10 +62,10 @@ function siteRouts($stateProvider, $urlRouterProvider, $locationProvider) {
                     });
                 }
             ],
-            initChat: ['$state','initChat',
-                function($state, initChat) {
+            initChat: ['$state','InitChat',
+                function($state, InitChat) {
                     console.log('aaaaaa');
-                    return initChat.init().then(function(init){
+                    return InitChat.init().then(function(init){
                         return init;
                     }).catch(function(err){
                         return $state.go('login');
