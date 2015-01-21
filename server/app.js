@@ -76,7 +76,7 @@ _s.primus.on('connection', function (spark) {
                         webSocket.call(this,_s, _s.primus, spark);
                     };
 
-                    var chat = _s.oModules.chat();
+                    var chat = _s.oModules.chat(_s, _s.primus, spark);
                     console.log(chat);
 
                     var extendRouterWith = {
