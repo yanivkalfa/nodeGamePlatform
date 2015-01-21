@@ -51,6 +51,15 @@ module.exports = function(_s){
             });
         },
 
+        updateSpark : function(credentials, sparkId){
+            return new _s.oReq.Promise(function(resolve, reject) {
+                Users.update(credentials, {spark : sparkId}).exec(function (err, user) {
+                    if(err) return reject(err);
+                    return resolve(user);
+                });
+            });
+        },
+
         checkUserDetails : function(userDetails){
             return true;
         },

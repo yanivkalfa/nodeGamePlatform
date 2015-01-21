@@ -68,8 +68,9 @@ _s.primus.on('connection', function (spark) {
                 }
                 else
                 {
-                    spark.userId = decoded.userId;
-
+                    _s.oModules.User.updateSpark({"_id" : decoded.userId}, spark.id).then(function(user){
+                        console.log(user);
+                    });
                     var webSocket = _s.oModules.WebSocket();
 
                     var WebSocketExtender = function(){

@@ -49,7 +49,7 @@ function ChatOut($q, $rootScope, WebSocket,User, UtilFunc) {
                 "d" : {
                     "toType" : toType,
                     "to" : args[0],
-                    "from" : User.get().id,
+                    "from" : User.get()._id,
                     "date" : Date.now(),
                     "msg" : args.splice(1).join(" ")
                 }

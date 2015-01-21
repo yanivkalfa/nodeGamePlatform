@@ -14,7 +14,10 @@ module.exports = function(_s, Primus, spark){
             self[msg.a](self.spark, msg);
         },
 
-        add : function(spark, params){
+        add : function(spark, args){
+
+
+
             _s.primus.forEach(function (spark, next) {
                 if(spark.userId == req.session.user.id){
                     spark.end();
@@ -27,7 +30,7 @@ module.exports = function(_s, Primus, spark){
             });
         },
 
-        remove : function(spark, params){
+        remove : function(spark, args){
 
         }
     };

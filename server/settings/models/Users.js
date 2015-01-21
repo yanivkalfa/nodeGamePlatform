@@ -33,6 +33,10 @@ module.exports = {
             unique : true
         },
 
+        spark : {
+            type :'string'
+        },
+
         roles : {
             type : 'array',
             default : ['registered']
