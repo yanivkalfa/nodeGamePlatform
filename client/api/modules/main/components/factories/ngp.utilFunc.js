@@ -46,9 +46,11 @@ function UtilFunc($rootScope) {
         },
 
         addMsg : function(msg, channel){
+            var self = this;
             var index = UtilFunc.indexOf($rootScope.ngp.channels, channel, 'id');
             if(index == -1) return false;
             $rootScope.ngp.channels[index].msg.push(msg);
+            self.updateChannelsNotification(index);
             return true;
         },
 
@@ -65,14 +67,10 @@ function UtilFunc($rootScope) {
             var self = this;
             if(!$rootScope.ngp.channels[index].active) {
                 self.addNotification(index);
+                var notification = document.getElementById('notification');
+                notification.currentTime = 0;
+                notification.play();
             }
-
-
-            /*
-            _this.s.oBinds.notification.currentTime = 0;
-            _this.s.oBinds.notification.play();
-
-            */
         },
 
         addMember : function(member,channel){
