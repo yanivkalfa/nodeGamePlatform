@@ -29,7 +29,7 @@ _s.primus.use('resource', _s.oReq.primusResource);
 _s.primus.use('rooms', _s.oReq.primusRooms);
 _s.primus.use('emitter', _s.oReq.primusEmitter);
 _s.primus.use('cluster', _s.oReq.primusCluster);
-console.log(_s.oReq.primusCluster);
+console.log(_s.oReq.primusRooms);
 
 _s.oReq.app.use(_s.oReq.session({
     store: new _s.oReq.RedisStore({
