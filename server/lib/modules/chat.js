@@ -8,8 +8,6 @@ module.exports = function(_s, Primus, spark){
 
         this.msgRouter = _s.oModules.msgRouter(_s, _s.primus, spark);
         this.roomRouter = _s.oModules.roomRouter(_s, _s.primus, spark);
-
-        console.log(this.msgRouter);
     }
 
     Chat.prototype =  {

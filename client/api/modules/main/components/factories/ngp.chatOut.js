@@ -40,24 +40,16 @@ function ChatOut($q, $rootScope, WebSocket,User, UtilFunc) {
         },
 
 
-        leave : function(data){
-            $rootScope.ngp.channels = data;
-
-            _($rootScope.ngp.channels).forEach(function(channel, chanIndex){
-                _(channel.content.msg).forEach(function(msg, msgIndex){
-                    msg.formatDate = UtilFunc.formatMsgDate(msg.data);
-                });
-            });
-        },
+        leave : function(data){ },
 
         msg : function(args, action, toType){
             var toEmit = {
                 "m" : 'msg',
-                "action" : action,
-                "data" : {
+                "a" : action,
+                "d" : {
                     "toType" : toType,
                     "to" : args[0],
-                    "from" : User.get().token,
+                    "from" : User.get().id,
                     "date" : Date.now(),
                     "msg" : args.splice(1).join(" ")
                 }

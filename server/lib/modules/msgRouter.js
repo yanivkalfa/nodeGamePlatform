@@ -11,18 +11,23 @@ module.exports = function(_s, Primus, spark){
 
         rout: function(msg){
             var self = this;
-            self[msg.m](self.spark, msg.d);
+            self[msg.a](self.spark, msg);
         },
 
-        getRooms : function(spark, params){
-
+        add : function(spark, params){
+            _s.primus.forEach(function (spark, next) {
+                if(spark.userId == req.session.user.id){
+                    spark.end();
+                    next(undefined, false);
+                }else{
+                    next();
+                }
+            }, function (err) {
+                req.session.user = {};
+            });
         },
 
-        join : function(spark, params){
-
-        },
-
-        leave : function(spark, params){
+        remove : function(spark, params){
 
         }
     };
