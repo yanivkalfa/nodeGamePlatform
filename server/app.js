@@ -127,6 +127,7 @@ _s.primus.on('connection', function (spark) {
                     };
 
                     _.assign(webSocket, extendRouterWith);
+                    console.log(webSocket);
                     webSocket.init(_s, _s.primus, spark);
                     webSocket.initChat(spark);
                     /*
