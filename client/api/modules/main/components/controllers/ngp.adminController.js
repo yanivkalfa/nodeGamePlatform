@@ -50,5 +50,11 @@ function adminController(
         });
     };
 
+    AdminController.prototype.channelSelected = function(){
+        console.log($rootScope.ngp.channels);
+    };
+
+
+
     return new AdminController();
 }
