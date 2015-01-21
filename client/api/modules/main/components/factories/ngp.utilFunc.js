@@ -61,11 +61,14 @@ function UtilFunc($rootScope) {
             return true;
         },
 
-        checkChannel : function(){
+        updateChannelsNotification : function(index){
+            var self = this;
+            if(!$rootScope.ngp.channels[index].active) {
+                self.addNotification(index);
+            }
+
 
             /*
-            ///notification : 0
-
             _this.s.oBinds.notification.currentTime = 0;
             _this.s.oBinds.notification.play();
 
@@ -78,6 +81,15 @@ function UtilFunc($rootScope) {
 
         removeMember : function(member,channel){
 
+        },
+
+        resetNotification : function(index){
+            $rootScope.ngp.channels[index].notification = '';
+        },
+
+        addNotification : function(index){
+            if(!$rootScope.ngp.channels[index].notification) $rootScope.ngp.channels[index].notification = 0;
+            $rootScope.ngp.channels[index].notification++;
         }
 
     };

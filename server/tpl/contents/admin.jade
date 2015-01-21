@@ -25,7 +25,7 @@ div(ui-view='admin')
     div.tabContainer
         div(class="tabs" id="tabs")
             tabset
-                tab(ng-repeat="channel in $root.ngp.channels" select="admin.channelSelected()" heading="{{channel.title}}" active="channel.active" disabled="channel.disabled")
+                tab(ng-repeat="channel in $root.ngp.channels" select="admin.channelSelected()" heading="{{channel.title + ' ( ' + channel.notification + ' )'}}" active="channel.active" disabled="channel.disabled")
                     ngp-channel-content(content="channel.content")
     div.inputContainer
         input(id="msg" placeholder="enter a message" class="msg")
