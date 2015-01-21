@@ -30,7 +30,7 @@ function adminController(
         this.api = Api.createNewApi(ngp.const.app.ajaxUrl);
         this.User = User.get();
 
-        console.log(this.User._id);
+        console.log(this.User);
     }
 
     AdminController.prototype.logout = function(){
