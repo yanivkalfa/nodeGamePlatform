@@ -77,7 +77,6 @@ _s.primus.on('connection', function (spark) {
                     };
 
                     var chat = _s.oModules.chat(_s, _s.primus, spark);
-                    console.log(chat);
 
                     var extendRouterWith = {
                         ping : function(spark, data){
@@ -122,14 +121,7 @@ _s.primus.on('connection', function (spark) {
                         },
 
                         chat : function(msg){
-
-                        },
-
-                        msg : function(msg){
-                            c.oVars.oMsgRouter.routMsg(msg);
-                        },
-                        roomDo : function(msg){
-                            c.oVars.oRoomRouter.routRoom(msg);
+                            chat.rout(msg);
                         }
                     };
                     WebSocketExtender.prototype = webSocket.prototype;

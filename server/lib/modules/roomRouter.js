@@ -1,4 +1,4 @@
-module.exports = function(){
+module.exports = function(_s, Primus, spark){
 
     function RoomRouter (_s, Primus, spark){
         var _ = _s.oReq.lodash;
@@ -28,5 +28,5 @@ module.exports = function(){
     };
 
 
-    return RoomRouter;
+    return new RoomRouter(_s, Primus, spark);
 };

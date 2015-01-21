@@ -5,25 +5,23 @@ module.exports = function(_s, Primus, spark){
         this._s = _s;
         this.Primus = Primus;
         this.spark = spark;
+
+        this.msgRouter = _s.oModules.msgRouter(_s, _s.primus, spark);
+        this.roomRouter = _s.oModules.roomRouter(_s, _s.primus, spark);
     }
 
     Chat.prototype =  {
 
         rout: function(msg){
             var self = this;
-            self[msg.m](self.spark, msg.d);
+            self[msg.m](self.spark, msg);
         },
 
-        getRooms : function(spark, params){
-
+        msg : function(msg){
+            this.msgRouter.rout(msg);
         },
-
-        join : function(spark, params){
-
-        },
-
-        leave : function(spark, params){
-
+        roomDo : function(msg){
+            this.roomRouter.rout(msg);
         }
     };
 

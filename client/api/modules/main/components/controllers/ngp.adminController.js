@@ -51,7 +51,7 @@ function adminController(
     };
 
     AdminController.prototype.channelSelected = function(){
-
+        /*
         if(key === 13 && val){
             $(this).val("");
             rname = $(this).parents(".roomContainer").data("rName");
@@ -62,6 +62,7 @@ function adminController(
                 _this.s.oVars.oTerminal.analyseMessage(msg);
             }
         }
+        */
     };
 
 
