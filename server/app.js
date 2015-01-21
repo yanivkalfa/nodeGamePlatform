@@ -29,6 +29,7 @@ _s.primus.use('resource', _s.oReq.primusResource);
 _s.primus.use('rooms', _s.oReq.primusRooms);
 _s.primus.use('emitter', _s.oReq.primusEmitter);
 _s.primus.use('cluster', _s.oReq.primusCluster);
+console.log(_s.oReq.primusCluster);
 
 _s.oReq.app.use(_s.oReq.session({
     store: new _s.oReq.RedisStore({
@@ -68,9 +69,13 @@ _s.primus.on('connection', function (spark) {
                 }
                 else
                 {
-                    _s.oModules.User.updateSpark({"_id" : decoded.userId}, spark.id).then(function(user){
-                        console.log(user);
-                    });
+                    spark.userId = decoded.userId;
+                    var upSkSuccess = function (success){ };
+                    var upSkFail = function(err){
+                        if(err) _s.oModules.User.updateSpark({"_id" : decoded.userId}, spark.id).then(upSkSuccess).catch(upSkFail);
+                    };
+                    _s.oModules.User.updateSpark({"_id" : decoded.userId}, spark.id).then(upSkSuccess).catch(upSkFail);
+
                     var webSocket = _s.oModules.WebSocket();
 
                     var WebSocketExtender = function(){

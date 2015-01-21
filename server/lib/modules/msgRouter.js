@@ -16,18 +16,14 @@ module.exports = function(_s, Primus, spark){
 
         add : function(spark, args){
 
+            switch(args.toType){
+                case 'private':
 
+                    break;
+                case 'room':
+                    break;
 
-            _s.primus.forEach(function (spark, next) {
-                if(spark.userId == req.session.user.id){
-                    spark.end();
-                    next(undefined, false);
-                }else{
-                    next();
-                }
-            }, function (err) {
-                req.session.user = {};
-            });
+            }
         },
 
         remove : function(spark, args){

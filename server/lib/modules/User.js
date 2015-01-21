@@ -60,6 +60,15 @@ module.exports = function(_s){
             });
         },
 
+        getSparkId : function(credentials){
+            return new _s.oReq.Promise(function(resolve, reject) {
+                Users.findOne(credentials).exec(function (err, user) {
+                    if(err) return reject(err);
+                    return resolve(user.spark);
+                });
+            });
+        },
+
         checkUserDetails : function(userDetails){
             return true;
         },
