@@ -29,13 +29,11 @@ function latencyService($rootScope, $q, WebSocket) {
 
         init : function(){
             var self = this;
-
             this.reset();
             this.bindPing();
             this.pingServer();
             clearInterval(this.pingInterval);
             this.pingInterval = setInterval(_.bind(this.pingServer, this),this.pingEvery);
-
             return self;
         },
 
@@ -77,7 +75,6 @@ function latencyService($rootScope, $q, WebSocket) {
                 self.calculateLatency(data);
                 $rootScope.ngp.bar.stats.latency = self.getLatency();
                 $rootScope.$apply();
-                console.log($rootScope.ngp.bar.stats.latency);
             };
         }
 

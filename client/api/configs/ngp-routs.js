@@ -61,8 +61,8 @@ function siteRouts($stateProvider, $urlRouterProvider, $locationProvider) {
                     });
                 }
             ],
-            InitChat: ['$state','InitChat', function($state, InitChat) { return InitChat.init(); } ],
-            Latency: ['$state','Latency', function($state, Latency) { return Latency.init(); } ]
+            InitChat: ['InitChat', function(InitChat) { return InitChat.init(); } ],
+            Latency: ['Latency', function(Latency) { return Latency.init(); } ]
         },
         data: {
             roles: ['registered']

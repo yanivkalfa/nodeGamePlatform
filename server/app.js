@@ -91,7 +91,8 @@ _s.primus.on('connection', function (spark) {
                                             {id:"03",from:"SomeOne", data: 1421700502938, formatDate :  '', content : "message 3" , toType: "room"}
                                         ],
                                         members:['SomeOne', 'someone2', 'someone3']
-                                    }
+                                    },
+                                    active : true
                                 },
                                 {
                                     id : '',
@@ -103,7 +104,8 @@ _s.primus.on('connection', function (spark) {
                                             {id:"03",from:"SomeOne", data: 1421700502938, formatDate : '', content : "message 3" , toType: "room"}
                                         ],
                                         members:['SomeOne', 'someone2', 'someone3']
-                                    }
+                                    },
+                                    active : false
                                 }
                             ];
 

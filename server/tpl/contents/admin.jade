@@ -26,6 +26,7 @@ div(ui-view='admin')
         div(class="tabs" id="tabs")
             tabset
                 tab(ng-repeat="channel in $root.ngp.channels" heading="{{channel.title}}" active="channel.active" disabled="channel.disabled")
+                    div {{channel.active}}
                     ngp-channel-content(content="channel.content")
     div.inputContainer
         input(id="msg" placeholder="enter a message" class="msg")
