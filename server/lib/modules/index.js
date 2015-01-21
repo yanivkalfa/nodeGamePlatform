@@ -6,6 +6,7 @@ module.exports = function(_s){
     rf.WebSocket = require('./webscoket.js');
     rf.msgRouter = require('./msgRouter.js');
     rf.roomRouter = require('./roomRouter.js');
+    rf.chat = require('./chat.js');
 
     return rf;
 };
