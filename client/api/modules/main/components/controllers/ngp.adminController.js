@@ -11,6 +11,7 @@ angular.module(ngp.const.app.name)
         'Api',
         'User',
         'Notify',
+        'WebSocket',
         adminController
     ]);
 
@@ -22,15 +23,14 @@ function adminController(
     $cookieStore,
     Api,
     User,
-    Notify
+    Notify,
+    WebSocket
     ) {
 
     function AdminController(){
         var self = this;
         this.api = Api.createNewApi(ngp.const.app.ajaxUrl);
         this.User = User.get();
-
-        console.log(this.User);
     }
 
     AdminController.prototype.logout = function(){
