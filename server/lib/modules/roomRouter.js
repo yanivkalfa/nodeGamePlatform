@@ -9,9 +9,9 @@ module.exports = function(){
 
     RoomRouter.prototype =  {
 
-        rout: function(args){
+        rout: function(msg){
             var self = this;
-            self[args.action](self.spark, args.params);
+            self[msg.m](self.spark, msg.d);
         },
 
         getRooms : function(spark, params){

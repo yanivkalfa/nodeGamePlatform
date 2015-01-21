@@ -79,7 +79,6 @@ _s.primus.on('connection', function (spark) {
                             spark.write({"m": "ping", "d":"p"});
                         },
                         initChat : function(spark, data){
-                            console.log('initing');
                             var channels = [
                                 {
                                     id : '',

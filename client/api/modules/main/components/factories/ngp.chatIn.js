@@ -2,20 +2,20 @@
  * Created by Yaniv-Kalfa on 1/2/15.
  */
 angular.module(ngp.const.app.name)
-    .service('InitChat', [
+    .service('ChatIn', [
         '$q',
         '$rootScope',
         'WebSocket',
         'User',
         'UtilFunc',
-        InitChat
+        ChatIn
     ]);
 
-function InitChat($q, $rootScope, WebSocket,User, UtilFunc) {
+function ChatIn($q, $rootScope, WebSocket,User, UtilFunc) {
 
-    function InitChatService(){ }
+    function ChatInFactory(){ }
 
-    InitChatService.prototype =  {
+    ChatInFactory.prototype =  {
 
         init : function(){
             var self = this;
@@ -61,5 +61,5 @@ function InitChat($q, $rootScope, WebSocket,User, UtilFunc) {
 
     };
 
-    return new InitChatService();
+    return new ChatInFactory();
 }
