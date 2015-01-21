@@ -46,7 +46,7 @@ function InitChat($q, $rootScope, WebSocket,User, UtilFunc) {
             */
         },
 
-        join : function(channel){
+        join : function(data){
 
 
         },

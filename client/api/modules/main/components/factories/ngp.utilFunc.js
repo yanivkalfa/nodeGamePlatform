@@ -74,11 +74,19 @@ function UtilFunc($rootScope) {
         },
 
         addMember : function(member,channel){
-
+            var index = UtilFunc.indexOf($rootScope.ngp.channels, channel, 'id');
+            if(index == -1) return false;
+            $rootScope.ngp.channels[index].members.push(member);
+            return true;
         },
 
         removeMember : function(member,channel){
-
+            var cIndex = UtilFunc.indexOf($rootScope.ngp.channels, channel, 'id');
+            if(cIndex == -1) return false;
+            var mIndex = UtilFunc.indexOf($rootScope.ngp.channels[cIndex].members, member);
+            if(mIndex == -1) return false;
+            $rootScope.ngp.channels[cIndex].members.splice(mIndex,1);
+            return true;
         },
 
         resetNotification : function(index){
