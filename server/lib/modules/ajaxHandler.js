@@ -45,7 +45,7 @@ module.exports = function(_s, req, res) {
         var success
             , failed
             , wrongUserDetails
-            , visibleField = ['username', 'firName','lastName','email','roles', 'token']
+            , visibleField = _s.oModules.User.visibleField()
             ;
 
         wrongUserDetails = function(){
@@ -79,7 +79,7 @@ module.exports = function(_s, req, res) {
                         algorithm: 'HS512',
                         expiresInMinutes : _s.oConfig.session.maxAge / 1000 / 60
                     }
-                    , visibleField = ['username', 'firName','lastName','email','roles', 'token']
+                    , visibleField = _s.oModules.User.visibleField()
                     ;
 
                 user.token = _s.oReq.jwt.sign(payLoard , _s.oConfig.session.secret, options);
