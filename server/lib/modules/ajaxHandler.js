@@ -27,9 +27,9 @@ module.exports = function(_s, req, res) {
         _this.toReturn.data = data;
     };
 
-    this.authenticateUser = function(userDetails){
+    this.authenticateUser = function(token){
         _this._setResp('User is not logged in', false);
-        if(req.session.user && userDetails && req.session.user.token == userDetails.token){
+        if(req.session.user && token && req.session.user == token){
             _this._setResp(true, true);
         }
         return res.json(_this.toReturn);
@@ -45,6 +45,7 @@ module.exports = function(_s, req, res) {
         var success
             , failed
             , wrongUserDetails
+            , visibleField = ['username', 'firName','lastName','email','roles', 'token']
             ;
 
         wrongUserDetails = function(){
@@ -54,7 +55,7 @@ module.exports = function(_s, req, res) {
         if(!_s.oModules.User.checkUserDetails(userDetails)) wrongUserDetails();
 
         success = function(user){
-            _this._setResp(user, true);
+            _this._setResp(_.pick(user, visibleField), true);
             return res.json(_this.toReturn);
         };
 
@@ -77,10 +78,13 @@ module.exports = function(_s, req, res) {
                     , options = {
                         algorithm: 'HS512',
                         expiresInMinutes : _s.oConfig.session.maxAge / 1000 / 60
-                    };
+                    }
+                    , visibleField = ['username', 'firName','lastName','email','roles', 'token']
+                    ;
+
                 user.token = _s.oReq.jwt.sign(payLoard , _s.oConfig.session.secret, options);
-                req.session.user = user;
-                _this._setResp(user, true);
+                req.session.user = _.pick(user, visibleField);
+                _this._setResp(_.pick(user, visibleField), true);
                 return res.json(_this.toReturn);
             }
             else

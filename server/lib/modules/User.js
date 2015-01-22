@@ -16,8 +16,6 @@ module.exports = function(_s){
             _user = user;
         },
 
-
-
         init: function(user, rout) {
             _user = user;
             _rout = rout;
