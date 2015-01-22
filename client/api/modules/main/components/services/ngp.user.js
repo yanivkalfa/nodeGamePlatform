@@ -46,6 +46,8 @@ function userService(
                 return deferred.promise;
             }
 
+            console.log('aaa');
+
             if(this.authenticate())
             {
                 deferred.resolve(this._user);
