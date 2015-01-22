@@ -68,8 +68,9 @@ _s.primus.on('connection', function (spark) {
                 }
                 else
                 {
-                    // Joining terminal and lobby channels
-                    spark.join('terminal lobby', function(){});
+                    // Joining terminal, lobby  and user channels
+                    var userChannel = 'u_' + decoded.userId;
+                    spark.join('terminal lobby ' + userChannel, function(){});
 
                     // Attaching userId to spark - for logout and maybe future needs
                     spark.userId = decoded.userId;
@@ -80,11 +81,6 @@ _s.primus.on('connection', function (spark) {
                         if(err) _s.oModules.User.updateSpark({"_id" : decoded.userId}, spark.id).then(upSkSuccess).catch(upSkFail);
                     };
                     _s.oModules.User.updateSpark({"_id" : decoded.userId}, spark.id).then(upSkSuccess).catch(upSkFail);
-
-                    setTimeout(function(){
-                        var aspark = _s.primus.spark(spark.id);
-                        aspark.write('message');
-                    }, 5000);
 
                     // initiating socket router. and extending it.
                     var webSocket = _s.oModules.WebSocket();
