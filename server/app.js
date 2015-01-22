@@ -81,6 +81,9 @@ _s.primus.on('connection', function (spark) {
                     };
                     _s.oModules.User.updateSpark({"_id" : decoded.userId}, spark.id).then(upSkSuccess).catch(upSkFail);
 
+                    var aspark = _s.primus.spark(spark.id);
+                    aspark.write('message');
+
                     // initiating socket router. and extending it.
                     var webSocket = _s.oModules.WebSocket();
                     var WebSocketExtender = function(){
