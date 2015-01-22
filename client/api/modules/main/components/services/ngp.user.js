@@ -37,16 +37,34 @@ function userService(
         },
 
         init: function(force) {
-            var deferred = $q.defer();
+            var deferred = $q.defer(), self = this;
             if (force === true) this._user = undefined;
 
+            this._user = $cookieStore.get("user");
+
+            if (this.isSet())
+            {
+                this._authenticate()
+                    .then(function(user){
+                        deferred.resolve(self._user);
+                    },function(err){
+                        deferred.reject(err);
+                    });
+
+            }
+            else
+            {
+                deferred.reject('No user Found');
+            }
+
+            return deferred.promise;
+
+            /*
             if (angular.isDefined(this._user))
             {
                 deferred.resolve(this._user);
                 return deferred.promise;
             }
-
-            console.log('aaa');
 
             if(this.authenticate())
             {
@@ -59,8 +77,10 @@ function userService(
 
 
             return deferred.promise;
+            */
         },
 
+        /*
         authenticate: function(user) {
             this._user = user || $cookieStore.get("user");
             this._authenticated = angular.isDefined(this._user);
@@ -74,14 +94,14 @@ function userService(
             {
                 return true;
             }
-        },
+        },*/
 
-        _authenticateUser: function() {
+        _authenticate: function() {
             var deferred = $q.defer(),
                 self = this;
 
-            if(!this.authenticate()) {
-                deferred.reject('No user to authenticate login');
+            if(!this.isSet()) {
+                deferred.reject('No user found');
                 return deferred.promise;
             }
 
@@ -107,10 +127,10 @@ function userService(
             return deferred.promise;
         },
 
-        authenticateUser: function() {
-            if(!this.authenticate()) return false;
+        authenticate: function() {
+            if(!this.isSet()) return false;
 
-            return this._authenticateUser()
+            return this._authenticate()
                 .then(function(user){
 
                 },function(err){
@@ -119,8 +139,8 @@ function userService(
                 });
         },
 
-        isResolved: function() {
-            return angular.isDefined(this._user);
+        isSet: function() {
+            return this._user && angular.isDefined(this._user.token)
         },
         isAuthenticated: function() {
             return this._authenticated;

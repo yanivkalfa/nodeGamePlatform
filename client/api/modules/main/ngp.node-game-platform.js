@@ -26,7 +26,7 @@ function runFactory(
         channels : []
     };
 
-    CronJobs.add({fn: 'authenticateUser', f : '',  args : '', execEvery : 300000, lastExec : false, ref : User});
+    CronJobs.add({fn: 'authenticate', f : '',  args : '', execEvery : 300000, lastExec : false, ref : User});
 
 
 
@@ -35,7 +35,7 @@ function runFactory(
         $rootScope.ngp.toState = toState;
         $rootScope.ngp.toStateParams = toStateParams;
 
-        if (User.isResolved()) {
+        if (User.isSet()) {
             Authorization.authorize();
         }
     });
