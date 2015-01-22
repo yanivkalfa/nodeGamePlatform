@@ -170,7 +170,7 @@ _s.primus.on('connection', function (spark) {
 
 
 
-    spark.join("aRoomName", function () {
+    //spark.join("aRoomName", function () {
 
         // send message to this client
         //spark.write('you joined room ' + "aRoomName");
@@ -204,7 +204,8 @@ _s.primus.on('connection', function (spark) {
             console.log("spark room", rooms);
         });
         */
-    });
+    //});
+
 
     //console.log(primus);
 
