@@ -71,7 +71,10 @@ _s.primus.on('connection', function (spark) {
                     // Joining terminal and lobby channels
                     spark.join('terminal lobby', function(){
 
-                        _s.primus.room('terminal').write('hi');
+                        setTimeout(function(){
+                            console.log('writing a message');
+                            _s.primus.room('terminal').write('hi');
+                        }, 5000)
                     });
 
                     // Attaching userId to spark - for logout and maybe future needs
