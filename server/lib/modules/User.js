@@ -3,7 +3,7 @@ module.exports = function(_s){
         , _rout = undefined
         , _authenticated = false
         , _ = _s.oReq.lodash
-        , visibleField = ['_id','username', 'firName','lastName','email','roles', 'token']
+        , visibleField = ['id','username', 'firName','lastName','email','roles', 'token']
         ;
 
     return {
