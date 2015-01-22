@@ -46,6 +46,7 @@ function userService(
             {
                 this._authenticate()
                     .then(function(user){
+                        console.log('aa');
                         deferred.resolve(self._user);
                     },function(err){
                         deferred.reject(err);
