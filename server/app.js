@@ -61,7 +61,7 @@ _s.primus.on('connection', function (spark) {
 
     _s.oReq.jwt.verify(spark.query.token, sessSecret, function(err, decoded) {
         if(!_.isUndefined(decoded) && !_.isUndefined(decoded.userId)){
-            _s.oModules.User.login({"_id" : decoded.userId}).then(function(user){
+            _s.oModules.User.login({"id" : decoded.userId}).then(function(user){
                 if(user === null)
                 {
                     spark.end({"method" : "disconnect", msg : "Could not authenticate user."} );
