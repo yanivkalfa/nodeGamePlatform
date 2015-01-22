@@ -68,16 +68,24 @@ _s.primus.on('connection', function (spark) {
                 }
                 else
                 {
-                    spark.join('terminal lobby', function(){});
+                    // Joining terminal and lobby channels
+                    spark.join('terminal lobby', function(){
+
+                        _s.primus.room('terminal').write('hi');
+                    });
+
+                    // Attaching userId to spark - for logout and maybe future needs
                     spark.userId = decoded.userId;
-                    var upSkSuccess = function (success){ };
+
+                    // Update user's spark id in database - in-case its needed
+                    var upSkSuccess = function (success){};
                     var upSkFail = function(err){
                         if(err) _s.oModules.User.updateSpark({"_id" : decoded.userId}, spark.id).then(upSkSuccess).catch(upSkFail);
                     };
                     _s.oModules.User.updateSpark({"_id" : decoded.userId}, spark.id).then(upSkSuccess).catch(upSkFail);
 
+                    // initiating socket router. and extending it.
                     var webSocket = _s.oModules.WebSocket();
-
                     var WebSocketExtender = function(){
                         webSocket.call(this,_s, _s.primus, spark);
                     };
@@ -89,6 +97,7 @@ _s.primus.on('connection', function (spark) {
                             spark.write({"m": "ping", "d":"p"});
                         },
                         initChat : function(spark, data){
+                            /*
                             var channels = [
                                 {
                                     id : '',
@@ -124,6 +133,7 @@ _s.primus.on('connection', function (spark) {
                             };
 
                             spark.write({"m": "chat", "d":data});
+                            */
                         },
 
                         chat : function(msg){

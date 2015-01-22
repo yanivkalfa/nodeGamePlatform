@@ -18,6 +18,17 @@ module.exports = function(_s, Primus, spark){
 
             switch(args.toType){
                 case 'private':
+                    var toEmit = {
+                        "m" : 'msg',
+                        "a" : 'add',
+                        "d" : {
+                            "toType" : 'private',
+                            "to" : args[0],
+                            "from" : User.get()._id,
+                            "date" : Date.now(),
+                            "msg" : args.splice(1).join(" ")
+                        }
+                    };
 
                     break;
                 case 'room':
