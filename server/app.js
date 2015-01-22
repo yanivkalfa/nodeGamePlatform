@@ -69,13 +69,7 @@ _s.primus.on('connection', function (spark) {
                 else
                 {
                     // Joining terminal and lobby channels
-                    spark.join('terminal lobby', function(){
-
-                        setInterval(function(){
-                            console.log('writing a message');
-                            _s.primus.room('terminal').write('hi');
-                        }, 3000)
-                    });
+                    spark.join('terminal lobby', function(){});
 
                     // Attaching userId to spark - for logout and maybe future needs
                     spark.userId = decoded.userId;
