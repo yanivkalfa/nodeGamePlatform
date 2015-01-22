@@ -26,7 +26,7 @@ function runFactory(
         channels : []
     };
 
-    CronJobs.add({fn: 'authenticate', f : '',  args : '', execEvery : 300000, lastExec : false/*Date.now() + 300000*/, ref : User});
+    CronJobs.add({fn: 'authenticate', f : '',  args : '', execEvery : 300000, lastExec : Date.now() + 120000, ref : User});
 
 
 
