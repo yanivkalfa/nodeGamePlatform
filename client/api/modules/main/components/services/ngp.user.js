@@ -46,9 +46,10 @@ function userService(
             {
                 this._authenticate()
                     .then(function(user){
-                        self._authenticated = true;
+                        self.setAuthenticated();
                         deferred.resolve(self._user);
                     },function(err){
+                        self.setNotAuthenticated();
                         deferred.reject(err);
                     });
 
@@ -60,42 +61,7 @@ function userService(
 
             return deferred.promise;
 
-            /*
-            if (angular.isDefined(this._user))
-            {
-                deferred.resolve(this._user);
-                return deferred.promise;
-            }
-
-            if(this.authenticate())
-            {
-                deferred.resolve(this._user);
-            }
-            else
-            {
-                deferred.reject('User is not authenticated');
-            }
-
-
-            return deferred.promise;
-            */
         },
-
-        /*
-        authenticate: function(user) {
-            this._user = user || $cookieStore.get("user");
-            this._authenticated = angular.isDefined(this._user);
-
-            if (!angular.isDefined(this._user))
-            {
-                $cookieStore.remove("user");
-                return false;
-            }
-            else
-            {
-                return true;
-            }
-        },*/
 
         _authenticate: function() {
             var deferred = $q.defer(),
@@ -130,14 +96,24 @@ function userService(
 
         authenticate: function() {
             if(!this.isSet()) return false;
+            var self = this;
 
             return this._authenticate()
                 .then(function(user){
-
+                    this.setAuthenticated();
                 },function(err){
-                    $cookieStore.remove("user");
+                    self.setNotAuthenticated();
                     $state.go('login');
                 });
+        },
+
+        setAuthenticated : function(){
+            this._authenticated = true;
+        },
+
+        setNotAuthenticated : function(){
+            this._authenticated = false;
+            $cookieStore.remove("user");
         },
 
         isSet: function() {
