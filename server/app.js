@@ -4,7 +4,6 @@ _s.port = process.argv[2] || 8001; // server port - required
 _s.oReq = require('./lib/requiredFiles.js')(_s); // require files.
 _s.sServerDirname = __dirname; // Server dir
 _s.sClientDirname = _s.oReq.path.resolve(__dirname, '..') + '/client'; //Client dir
-console.log('aaaa');
 _s.oConfig = require('./settings/config'); // require config files.
 global.oCore = require('./core')(_s); // require core files.
 _s.oModules = require('./lib/modules')(_s); // require utility functions
