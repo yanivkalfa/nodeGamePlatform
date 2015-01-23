@@ -16,7 +16,7 @@ module.exports = function(_s, _rf){
     RegValidation.prototype.isValid = function(){
         console.log('bbbb');
 
-        return _super.apply(this, arguments);
+        return validation.prototype.isValid.apply(this, arguments);
     };
 
     return RegValidation;
