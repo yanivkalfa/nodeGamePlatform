@@ -6,15 +6,17 @@ angular.module(ngp.const.app.name)
     .service('WebSocket', [
         '$rootScope',
         '$q',
+        'RoutChat',
         'Authorization',
         webSocket
     ]);
 
-function webSocket($rootScope, $q, Authorization) {
+function webSocket($rootScope, $q, RoutChat,Authorization) {
 
     function WebSocketService(){
         this.Primus = false;
         this.connected = false;
+        this.RoutChat = new RoutChat();
     }
 
     WebSocketService.prototype =  {
@@ -30,10 +32,7 @@ function webSocket($rootScope, $q, Authorization) {
 
             var token = Authorization.getUser().token;
             this.Primus = Primus.connect('ws://' + ngp.const.app.domain + '/?token=' + token);
-            this.Primus.on('data', function(msg){
-                console.log(msg);
-                self[msg.m](msg.d);
-            });
+            this.Primus.on('data', function(msg){ self[msg.m](msg.d); });
 
 
             this.Primus.on('open', function open() {
@@ -52,6 +51,10 @@ function webSocket($rootScope, $q, Authorization) {
 
 
             return deferred.promise;
+        },
+
+        chat : function(msg){
+            this.RoutChat.rout(msg);
         },
 
         end : function(){ this.Primus.end(); },

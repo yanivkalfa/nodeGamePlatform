@@ -8,8 +8,8 @@ module.exports = function(_s){
     rf.ajaxHandler = require('./ajaxHandler.js');
     rf.WebSocket = require('./webscoket.js');
     rf.Router = require('./supers/router.js')(_s);
-    rf.RouterMsg = require('./routerMsg.js')(rf);
-    rf.RouterRoom = require('./routerRoom.js')(rf);
+    rf.RoutMsg = require('./routMsg.js')(rf);
+    rf.RoutRoom = require('./routRoom.js')(rf);
     rf.Chat = require('./chat.js')(rf);
 
     return rf;

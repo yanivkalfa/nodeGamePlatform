@@ -39,7 +39,7 @@ module.exports = function(_s){
         logout : function(req, res){
 
             _s.primus.forEach(function (spark, next) {
-                if(spark.userId == req.session.user.id){
+                if(spark.user.id == req.session.user.id){
                     spark.end();
                     next(undefined, false);
                 }else{

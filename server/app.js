@@ -66,7 +66,7 @@ _s.primus.on('connection', function (spark) {
                     spark.join('terminal lobby ' + userChannel, function(){});
 
                     // Attaching userId to spark - for logout and maybe future needs
-                    spark.userId = decoded.userId;
+                    spark.user = user;
 
                     // Update user's spark id in database - in-case its needed
                     var upSkSuccess = function (success){};
@@ -87,9 +87,6 @@ _s.primus.on('connection', function (spark) {
                         ping : function(spark, data){
                             spark.write({"m": "ping", "d":"p"});
                         },
-                        initChat : function(spark, data){
-
-                        },
 
                         chat : function(msg){
                             chat.rout(msg);
@@ -99,7 +96,14 @@ _s.primus.on('connection', function (spark) {
                     _s.oModules.uf.extend(WebSocketExtender, extendRouterWith);
 
                     var webSocketExtender = new WebSocketExtender();
-                    webSocketExtender.initChat(spark);
+                    var msg  = {
+                        "m" : 'roomDo',
+                        "d" : {
+                            "m" : 'getRooms',
+                            "d" : {}
+                        }
+                    };
+                    webSocketExtender.chat(spark,msg);
 
                 }
 

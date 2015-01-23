@@ -10,7 +10,7 @@ angular.module(ngp.const.app.name)
         'UtilFunc',
         ChatIn
     ]);
-
+//script(src="/api/modules/main/components/factories/ngp.chatIn.js" type="text/javascript")
 function ChatIn($q, $rootScope, WebSocket,Authorization, UtilFunc) {
 
     function ChatInFactory(){ }

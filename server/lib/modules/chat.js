@@ -5,19 +5,19 @@ module.exports = function(_rf){
     function Chat (Primus, spark){
         router.call(this,Primus, spark);
 
-        this.RouterMsg = new _rf.RouterMsg(Primus, spark);
-        this.RouterRoom = new _rf.RouterRoom(Primus, spark);
+        this.RoutMsg = new _rf.RoutMsg(Primus, spark);
+        this.RoutRoom = new _rf.RoutRoom(Primus, spark);
     }
 
     Chat.prototype = Object.create(router.prototype);
     Chat.prototype.constructor = Chat;
 
     Chat.prototype.msg = function(msg){
-        this.RouterMsg.rout(msg);
+        this.RoutMsg.rout(msg);
     };
 
     Chat.prototype.roomDo = function(msg){
-        this.RouterRoom.rout(msg);
+        this.RoutRoom.rout(msg);
     };
 
 
