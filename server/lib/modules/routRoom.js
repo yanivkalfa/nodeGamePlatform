@@ -36,7 +36,9 @@ module.exports = function(_s, _rf){
 
                 return _rf.RoomHandler.getSparksInRoom(room).then(function(index, sparks){
                         roomsForSpark[index].content.members = sparks;
+
                         console.log(index, sparks);
+
                     }.bind(this,index)).catch(function(err){
 
                 });
