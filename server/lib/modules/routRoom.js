@@ -34,8 +34,6 @@ module.exports = function(_s, _rf){
                     }
                 });
 
-                console.log('sparkList', sparkList);
-
 
                 _s.primus.forEach(function (spark, next) {
                     _(sparkList).forEach(function(singleSpark, sparkId) {
@@ -46,6 +44,8 @@ module.exports = function(_s, _rf){
                     });
                     next();
                 }, function (err) {
+
+                    console.log('sparkList', sparkList);
                     _(sparkList).forEach(function(singleSpark, sparkId) {
                         if(!singleSpark) inSparks.push(sparkId);
                     });
