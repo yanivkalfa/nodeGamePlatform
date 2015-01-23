@@ -8,7 +8,10 @@ module.exports = function(_s, _rf){
         validation.call(this,details);
     }
 
-    _.assign(RegValidation.prototype, validation.prototype);
+    RegValidation.prototype = Object.create(validation.prototype);
+    RegValidation.prototype.constructor = RegValidation;
+
+    //_.assign(RegValidation.prototype, validation.prototype);
 
     RegValidation.prototype.isValid = function(){
         console.log('bbbb');
