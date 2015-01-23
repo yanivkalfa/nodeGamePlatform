@@ -6,8 +6,9 @@ _s.sServerDirname = __dirname; // Server dir
 _s.sClientDirname = _s.oReq.path.resolve(__dirname, '..') + '/client'; //Client dir
 _s.oConfig = require('./settings/config'); // require config files.
 global.oCore = require('./core')(_s); // require core files.
-_s.oModules = require('./lib/modules')(_s); // require utility functions
 console.log('aaaa');
+_s.oModules = require('./lib/modules')(_s); // require utility functions
+
 var _ = _s.oReq.lodash,
     sessCon = _s.oConfig.session.connection,
     sessSecret = _s.oConfig.session.secret,
