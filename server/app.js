@@ -67,42 +67,41 @@ _s.primus.on('connection', function (spark) {
 
                     // Attaching userId to spark - for logout and maybe future needs
                     spark.user = user;
-
                     // Update user's spark id in database - in-case its needed
-                    var upSkSuccess = function (success){};
+                    var upSkSuccess = function (success){
+                        // initiating socket router. and extending it.
+                        var webSocket = _s.oModules.WebSocket();
+                        var WebSocketExtender = function(){
+                            webSocket.call(this,_s, _s.primus, spark);
+                        };
+
+                        var chat = new _s.oModules.Chat(_s.primus);
+                        var extendRouterWith = {
+                            ping : function(spark, data){
+                                spark.write({"m": "ping", "d":"p"});
+                            },
+
+                            chat : function(spark, msg){
+                                chat.rout(spark, msg);
+                            }
+                        };
+                        WebSocketExtender.prototype = webSocket.prototype;
+                        _s.oModules.uf.extend(WebSocketExtender, extendRouterWith);
+
+                        var webSocketExtender = new WebSocketExtender();
+                        var data  = {
+                            "m" : 'roomDo',
+                            "d" : {
+                                "m" : 'getRooms',
+                                "d" : {}
+                            }
+                        };
+                        webSocketExtender.chat(spark,data);
+                    };
                     var upSkFail = function(err){
                         if(err) _s.oModules.Authorization.updateSpark({"_id" : decoded.userId}, spark.id).then(upSkSuccess).catch(upSkFail);
                     };
                     _s.oModules.Authorization.updateSpark({"_id" : decoded.userId}, spark.id).then(upSkSuccess).catch(upSkFail);
-
-                    // initiating socket router. and extending it.
-                    var webSocket = _s.oModules.WebSocket();
-                    var WebSocketExtender = function(){
-                        webSocket.call(this,_s, _s.primus, spark);
-                    };
-
-                    var chat = new _s.oModules.Chat(_s.primus);
-                    var extendRouterWith = {
-                        ping : function(spark, data){
-                            spark.write({"m": "ping", "d":"p"});
-                        },
-
-                        chat : function(spark, msg){
-                            chat.rout(spark, msg);
-                        }
-                    };
-                    WebSocketExtender.prototype = webSocket.prototype;
-                    _s.oModules.uf.extend(WebSocketExtender, extendRouterWith);
-
-                    var webSocketExtender = new WebSocketExtender();
-                    var data  = {
-                        "m" : 'roomDo',
-                        "d" : {
-                            "m" : 'getRooms',
-                            "d" : {}
-                        }
-                    };
-                    webSocketExtender.chat(spark,data);
 
                 }
 
