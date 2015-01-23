@@ -12,12 +12,12 @@ module.exports = function(_rf){
     Chat.prototype = Object.create(router.prototype);
     Chat.prototype.constructor = Chat;
 
-    Chat.prototype.msg = function(msg){
-        this.RoutMsg.rout(msg);
+    Chat.prototype.msg = function(spark,msg){
+        this.RoutMsg.rout(spark,msg.d);
     };
 
-    Chat.prototype.roomDo = function(msg){
-        this.RoutRoom.rout(msg);
+    Chat.prototype.roomDo = function(spark, msg){
+        this.RoutRoom.rout(spark, msg.d);
     };
 
 

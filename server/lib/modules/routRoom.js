@@ -10,15 +10,15 @@ module.exports = function(_rf){
     RoutRoom.prototype.constructor = RoutRoom;
 
 
-    RoutRoom.prototype.getRooms = function(msg){
+    RoutRoom.prototype.getRooms = function(spark, msg){
 
     };
 
-    RoutRoom.prototype.join = function(msg){
+    RoutRoom.prototype.join = function(spark, msg){
 
     };
 
-    RoutRoom.prototype.leave = function(msg){
+    RoutRoom.prototype.leave = function(spark, msg){
 
     };
 

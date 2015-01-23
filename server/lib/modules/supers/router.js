@@ -10,7 +10,6 @@ module.exports = function(_s){
 
         rout: function(spark, msg){
             var self = this;
-            console.log(msg);
             self[msg.m](self.spark, msg.d);
         }
     };
