@@ -1,6 +1,5 @@
 module.exports = function(_s){
     var rf = {};
-
     rf.User = require('./user.js')(_s);
     rf.Authorization = require('./authorization.js')(_s);
     rf.Validation = require('./validation.js')(_s);
