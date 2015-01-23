@@ -61,11 +61,15 @@ module.exports = function(_s, _rf){
                             unique[singleSpark.id].count++;
                         });
 
+                        /*
                         _(unique).forEach(function(item, index) {
                             if(item.count > 1) delete sparkList[item.sparkId];
                         });
+                        */
 
-                        unique =  null;
+                        //unique =  null;
+
+                        console.log(roomsForSpark);
 
                         roomsForSpark.forEach(function(room){
                             if(!_.isArray(room.content.members)) return false;
@@ -73,6 +77,8 @@ module.exports = function(_s, _rf){
                                 room.content.members[i] = sparkList[room.content.members[i]];
                             }
                         });
+
+
 
                         var data  = {
                             "m" : 'roomDo',
