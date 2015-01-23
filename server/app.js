@@ -88,7 +88,7 @@ _s.primus.on('connection', function (spark) {
                         webSocket.call(this,_s, _s.primus, spark);
                     };
 
-                    var chat = _s.oModules.chat(_s, _s.primus, spark);
+                    var chat = new _s.oModules.chat( _s.primus, spark);
 
                     var extendRouterWith = {
                         ping : function(spark, data){
