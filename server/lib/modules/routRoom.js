@@ -86,7 +86,7 @@ module.exports = function(_s, _rf){
 
                         var endTime = Date.now();
 
-                        console.log(endTime-starTime /1000 );
+                        console.log(endTime-starTime);
                     };
 
                     if(inSparks.length) {
