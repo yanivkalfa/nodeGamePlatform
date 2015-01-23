@@ -42,13 +42,6 @@ _s.oReq.app.use(_s.oReq.session({
 }));
 
 _s.oRouts = require('./lib/requiredRouts.js')(_s);
-var ab = {
-    ping : function(spark, data){
-        spark.write({"m": "ping", "d":"p"});
-    }
-};
-
-//
 
 _s.primus.rooms(function(err, rooms){
     console.log("primus rooms", rooms);
@@ -68,8 +61,6 @@ _s.primus.on('connection', function (spark) {
                 }
                 else
                 {
-
-                    console.log('authenticated ?');
                     // Joining terminal, lobby  and user channels
                     var userChannel = 'u_' + decoded.userId;
                     spark.join('terminal lobby ' + userChannel, function(){});
@@ -113,7 +104,6 @@ _s.primus.on('connection', function (spark) {
                 }
 
             }).catch(function(err){
-                console.log(err);
                 if(err) spark.end({"method" : "disconnect", msg : "Could not authenticate user b."} );
             });
         }else{
@@ -121,7 +111,6 @@ _s.primus.on('connection', function (spark) {
         }
     });
 
-    console.log(spark.id);
 
 
     /*

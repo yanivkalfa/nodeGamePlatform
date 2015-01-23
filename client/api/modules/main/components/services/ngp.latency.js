@@ -28,6 +28,7 @@ function Latency($rootScope, $q, WebSocket) {
     LatencyService.prototype =  {
 
         init : function(){
+            console.log('latency init');
             var self = this;
             this.reset();
             this.bindPing();
