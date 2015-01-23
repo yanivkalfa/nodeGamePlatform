@@ -53,7 +53,7 @@ module.exports = function(_s, req, res) {
             return res.json(_this.toReturn);
         };
 
-        var validator = new _s.oModules.RegValidation.validate(userDetails);
+        var validator = new _s.oModules.RegValidation(userDetails);
         console.log(validator);
         if(!validator.isValid()) wrongUserDetails();
 
