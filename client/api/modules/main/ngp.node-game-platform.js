@@ -5,7 +5,6 @@ angular.module(ngp.const.app.name, ['ui.router', 'ngCookies', 'ui.bootstrap'])
     .run([
         '$rootScope',
         'Authorization',
-        'User',
         'CronJobs',
         runFactory
     ]);
@@ -13,7 +12,6 @@ angular.module(ngp.const.app.name, ['ui.router', 'ngCookies', 'ui.bootstrap'])
 function runFactory(
     $rootScope,
     Authorization,
-    //User,
     CronJobs
     ) {
     $rootScope.ngp = {
