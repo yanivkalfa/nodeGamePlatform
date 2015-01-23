@@ -27,7 +27,7 @@ module.exports = function(_s){
                         active : false
                     };
 
-                    console.log('ccc');
+                    console.log(room);
                     return resolve(room);
                 });
             });
