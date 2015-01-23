@@ -8,7 +8,7 @@ angular.module(ngp.const.app.name)
         '$rootScope',
         '$state',
         'Api',
-        'WebSocket',
+        //'WebSocket',
         'Notify',
         Authorization
     ]);
@@ -19,7 +19,7 @@ function Authorization(
     $rootScope,
     $state,
     Api,
-    WebSocket,
+    //WebSocket,
     Notify
     ) {
 
