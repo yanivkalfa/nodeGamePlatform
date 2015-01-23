@@ -9,7 +9,7 @@ angular.module(ngp.const.app.name)
         '$location',
         '$cookieStore',
         'Api',
-        'User',
+        'Authorization',
         'Notify',
         'WebSocket',
         adminController
@@ -22,7 +22,7 @@ function adminController(
     $location,
     $cookieStore,
     Api,
-    User,
+    Authorization,
     Notify,
     WebSocket
     ) {
@@ -30,7 +30,7 @@ function adminController(
     function AdminController(){
         var self = this;
         this.api = Api.createNewApi(ngp.const.app.ajaxUrl);
-        this.User = User.get();
+        this.Authorization = Authorization.get();
     }
 
     AdminController.prototype.logout = function(){

@@ -6,11 +6,11 @@ angular.module(ngp.const.app.name)
     .service('WebSocket', [
         '$rootScope',
         '$q',
-        'User',
+        'Authorization',
         webSocket
     ]);
 
-function webSocket($rootScope, $q, User) {
+function webSocket($rootScope, $q, Authorization) {
 
     function WebSocket(){
         this.Primus = false;
@@ -23,13 +23,13 @@ function webSocket($rootScope, $q, User) {
             var deferred = $q.defer(),
                 self = this;
 
-            if(!User.isAuthenticated) {
+            if(!Authorization.isAuthenticated) {
                 console.log('ccc');
                 deferred.reject( 'User is not authenticated' );
                 return deferred.promise;
             }
 
-            var token = User.get().token;
+            var token = Authorization.getUser().token;
             this.Primus = Primus.connect('ws://' + ngp.const.app.domain + '/?token=' + token);
             this.Primus.on('data', function(msg){
                 self[msg.m](msg.d);

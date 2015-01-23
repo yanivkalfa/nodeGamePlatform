@@ -13,7 +13,7 @@ angular.module(ngp.const.app.name, ['ui.router', 'ngCookies', 'ui.bootstrap'])
 function runFactory(
     $rootScope,
     Authorization,
-    User,
+    //User,
     CronJobs
     ) {
     $rootScope.ngp = {
@@ -26,7 +26,7 @@ function runFactory(
         channels : []
     };
 
-    CronJobs.add({fn: 'authenticate', f : '',  args : '', execEvery : 300000, lastExec : Date.now() + 120000, ref : User});
+    CronJobs.add({fn: 'authenticate', f : '',  args : '', execEvery : 300000, lastExec : Date.now() + 120000, ref : Authorization});
 
 
 
@@ -35,8 +35,10 @@ function runFactory(
         $rootScope.ngp.toState = toState;
         $rootScope.ngp.toStateParams = toStateParams;
 
-        if (User.isSet()) {
-            Authorization.authorize();
+        if (Authorization.isSet()) {
+            Authorization.init()
+                .then(_.bind(Authorization.authorized, Authorization))
+                .catch(_.bind(Authorization.notAuthorized, Authorization));
         }
     });
 }

@@ -6,12 +6,12 @@ angular.module(ngp.const.app.name)
         '$q',
         '$rootScope',
         'WebSocket',
-        'User',
+        'Authorization',
         'UtilFunc',
         ChatIn
     ]);
 
-function ChatIn($q, $rootScope, WebSocket,User, UtilFunc) {
+function ChatIn($q, $rootScope, WebSocket,Authorization, UtilFunc) {
 
     function ChatInFactory(){ }
 

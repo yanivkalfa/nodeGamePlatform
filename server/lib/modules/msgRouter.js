@@ -15,6 +15,9 @@ module.exports = function(_s, Primus, spark){
         },
 
         add : function(spark, args){
+            var dateNow = Date.now()
+                , randomId = Math.floor(Math.random()*300000)
+                ;
 
             switch(args.toType){
                 case 'private':
@@ -22,10 +25,11 @@ module.exports = function(_s, Primus, spark){
                         "m" : 'msg',
                         "a" : 'add',
                         "d" : {
+                            id : dateNow + randomId.toString(),
                             "toType" : 'private',
                             "to" : args[0],
-                            "from" : User.get()._id,
-                            "date" : Date.now(),
+                            "from" : User.get().id,
+                            "date" : dateNow,
                             "msg" : args.splice(1).join(" ")
                         }
                     };

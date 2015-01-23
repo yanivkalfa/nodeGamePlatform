@@ -9,7 +9,9 @@ angular.module(ngp.const.app.name)
         'User',
         authorizationFactory
     ]);
-
+/*
+script(src="/api/modules/main/components/factories/ngp.authorization.js" type="text/javascript")
+*/
 function authorizationFactory(
     $rootScope,
     $state,

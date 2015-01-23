@@ -2,37 +2,39 @@
  * Created by Yaniv-Kalfa on 1/2/15.
  */
 angular.module(ngp.const.app.name)
-    .service('User', [
+    .service('Authorization', [
         '$q',
         '$cookieStore',
+        '$rootScope',
         '$state',
         'Api',
-        userService
+        Authorization
     ]);
 
-function userService(
+function Authorization(
     $q,
     $cookieStore,
+    $rootScope,
     $state,
     Api
     ) {
 
-    function UserService(){
+    function AuthorizationService(){
         this._user = undefined;
         this._authenticated = false;
         this.api = Api.createNewApi();
     }
 
-    UserService.prototype =  {
-        get: function() {
+    AuthorizationService.prototype =  {
+        getUser: function() {
             return this._user;
         },
 
-        getRoles: function() {
+        getUserRoles: function() {
             return this._user.roles;
         },
 
-        set: function(user) {
+        setUser: function(user) {
             this._user = user;
         },
 
@@ -107,6 +109,24 @@ function userService(
                 });
         },
 
+        authorized : function(user){
+            var isAuthenticated = this.isAuthenticated();
+
+            if ($rootScope.ngp.toState.data.roles && $rootScope.ngp.toState.data.roles.length > 0 && !this.isInAnyRole($rootScope.ngp.toState.data.roles)) {
+                if (isAuthenticated) return $state.go('accessdenied');
+                else { return this.notAuthorized();}
+            }
+
+            return user;
+        },
+
+        notAuthorized : function(err){
+            $rootScope.ngp.returnToState = $rootScope.ngp.toState;
+            $rootScope.ngp.returnToStateParams = $rootScope.ngp.toStateParams;
+
+            return $state.go('login');
+        },
+
         setAuthenticated : function(){
             this._authenticated = true;
         },
@@ -138,5 +158,5 @@ function userService(
         }
     };
 
-    return new UserService();
+    return new AuthorizationService();
 }
