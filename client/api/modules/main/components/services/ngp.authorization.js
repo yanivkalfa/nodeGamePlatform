@@ -94,7 +94,7 @@ function Authorization(
 
             return this._authenticate()
                 .then(function(user){
-                    this.setAuthenticated();
+                    self.setAuthenticated();
                 },function(err){
                     self.setNotAuthenticated();
                     $state.go('login');
