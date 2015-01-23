@@ -11,11 +11,8 @@ module.exports = function(_s){
         },
 
         getSparksInRoom : function(room){
-            console.log(room);
             return new _s.oReq.Promise(function(resolve, reject) {
-                console.log('aaa');
                 _s.primus.room(room).clients(function(err, sparks){
-                    console.log('bbb');
                     if(err) return reject(err);
                     room = {
                         id :room,
@@ -26,8 +23,6 @@ module.exports = function(_s){
                         },
                         active : false
                     };
-
-                    console.log(room);
                     return resolve(room);
                 });
             });

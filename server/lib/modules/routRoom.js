@@ -24,7 +24,7 @@ module.exports = function(_s, _rf){
             var promiseRooms = rooms.filter(filter).map(_rf.RoomHandler.getSparksInRoom);
 
 
-            _s.primus.all(promiseRooms).then(function(NotImportant) {
+            _s.oReq.Promise.all(promiseRooms).then(function(NotImportant) {
                 console.log('NotImportant', NotImportant);
 
                 roomsForSpark.forEach(function(room){
