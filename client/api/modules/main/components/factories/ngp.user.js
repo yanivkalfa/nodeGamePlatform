@@ -21,10 +21,18 @@ function User(
     UserFactory.prototype =  {
 
         init : function(user){
-            var deferred = $q.defer(),
-                self = this;
+            if(typeof user !== 'object' || !user.id || !user.username) return false;
 
-            var id
+            this._user = user;
+
+            return true;
+        },
+
+        fetchUser : function(user){
+
+            var deferred = $q.defer(),
+                self = this
+                , id
                 , username
                 , credentials = {}
                 , success
@@ -34,36 +42,22 @@ function User(
             id = user.id || undefined;
             username = user.username || user || undefined;
 
-            if(!id && !username) return false
+            if(!id && !username) return false;
 
             if(id){ credentials = {"id" : id }; }
             if(username){ credentials = {"username" : username }; }
 
 
-
             fail = function(err){
-                if(err) {
-                    this._user = undefined;
-                    return deferred.reject(err);
-                }
+                this._user = undefined;
+                return deferred.reject(err);
             };
 
             success = function(user){
-                if(user){
-                    this._user = user;
-                    return deferred.resolve(user);
-                }
+                this._user = user;
+                return deferred.resolve(user);
             };
 
-            this.fetchUser(credentials).then(success).catch(fail);
-
-            return deferred.promise;
-        },
-
-        fetchUser : function(credentials){
-
-            var deferred = $q.defer(),
-                self = this;
 
             this.api.setMethod('post').setParams({
                 "method" : 'fetchUser',
@@ -73,18 +67,15 @@ function User(
             });
 
             this.api.doRequest().then(function(resp){
-                if(resp.payload.success){
-                    deferred.resolve(resp.payload.data);
-                }else{
-                    deferred.reject(resp.payload.data);
-                }
+                if(resp.payload.success) success(resp.payload.data);
+                else fail(resp.payload.data);
             });
 
             return deferred.promise;
         },
 
 
-        get: function() { return this._user; },
+        get: function() { return this._user; }
 
     };
 

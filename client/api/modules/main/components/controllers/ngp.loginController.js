@@ -3,6 +3,7 @@
  */
 angular.module(ngp.const.app.name)
     .controller('loginController', [
+        'Authorization',
         '$rootScope',
         '$state',
         '$cookieStore',
@@ -12,6 +13,7 @@ angular.module(ngp.const.app.name)
     ]);
 
 function loginController(
+    Authorization,
     $rootScope,
     $state,
     $cookieStore,
@@ -26,7 +28,10 @@ function loginController(
             password : ''
         };
     }
-    LoginController.prototype.login = function(){
+
+    LoginController.prototype.login = _.bind(Authorization.login, Authorization, this.registerForm);
+
+        /*function(){
 
         this.api.setMethod('post').setParams({
             "method" : 'login',
@@ -52,7 +57,7 @@ function loginController(
                 $cookieStore.remove('user');
             }
         });
-    };
+    };*/
 
     return new LoginController();
 }

@@ -7,11 +7,12 @@ angular.module(ngp.const.app.name)
         '$rootScope',
         'WebSocket',
         'Authorization',
+        'User',
         'UtilFunc',
         ChatOut
     ]);
 
-function ChatOut($q, $rootScope, WebSocket, Authorization, UtilFunc) {
+function ChatOut($q, $rootScope, WebSocket, Authorization,User, UtilFunc) {
 
     function ChatOutFactory(){ }
 
