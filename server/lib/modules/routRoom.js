@@ -34,9 +34,9 @@ module.exports = function(_s, _rf){
                     active : false
                 };
 
-                return _rf.RoomHandler.getSparksInRoom(room).then(function(sparks, index){
-                        console.log('sparks', sparks, 'index', index);
+                return _rf.RoomHandler.getSparksInRoom(room).then(function(index, sparks){
                         roomsForSpark[index].content.members = sparks;
+                        console.log(roomsForSpark);
                     }.bind(this,index)).catch(function(err){
 
                 });
