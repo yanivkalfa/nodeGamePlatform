@@ -88,8 +88,8 @@ _s.primus.on('connection', function (spark) {
                             spark.write({"m": "ping", "d":"p"});
                         },
 
-                        chat : function(msg){
-                            chat.rout(msg);
+                        chat : function(spark, msg){
+                            chat.rout(spark, msg);
                         }
                     };
                     WebSocketExtender.prototype = webSocket.prototype;
