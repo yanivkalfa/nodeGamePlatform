@@ -15,7 +15,11 @@ module.exports = function(_s, _rf){
 
     RoutRoom.prototype.getRooms = function(spark, msg){
 
-        var roomsForSpark = [], inSparks = [], sparkList = {}, unique = {};
+        var roomsForSpark = []
+            , inSparks = []
+            , sparkList = {}
+            , unique = {}
+            , finishSparks;
 
         _rf.RoomHandler.getRoomsForSpark(spark.id).then(function(rooms){
 
@@ -37,7 +41,7 @@ module.exports = function(_s, _rf){
 
                 _s.primus.forEach(function (spark, next) {
                     _(sparkList).forEach(function(singleSpark, sparkId) {
-                        if(spark.id == singleSpark){
+                        if(spark.id == sparkId){
                             sparkList[sparkId] = {username : spark.user.username, id : spark.user.id};
                             return false;
                         }
@@ -48,13 +52,7 @@ module.exports = function(_s, _rf){
                         if(!singleSpark) inSparks.push(sparkId);
                     });
 
-                    User.fetchUsers({ 'spark': { $in: inSparks }}).then(function(users){
-                        if(!_.isArray(users)) return false;
-                        users.forEach(function(user){
-                            sparkList[user.spark] = {username : user.username, id : user.id};
-                        });
-
-
+                    finishSparks = function(){
                         _(sparkList).forEach(function(singleSpark, sparkId) {
                             if(!singleSpark) delete sparkList[sparkId];
                             if(! unique[singleSpark.id] ) unique[singleSpark.id] = {count:0, sparkId : sparkId};
@@ -75,10 +73,6 @@ module.exports = function(_s, _rf){
                         });
 
 
-                        console.log(roomsForSpark[0].content.members);
-
-
-                        /*
                         var data  = {
                             "m" : 'roomDo',
                             "d" : {
@@ -88,10 +82,20 @@ module.exports = function(_s, _rf){
                         };
 
                         spark.write({"m": "chat", "d":data});
-                        */
-                    }).catch(err);
+                    };
 
+                    if(inSparks.length) {
+                        User.fetchUsers({ 'spark': { $in: inSparks }}).then(function(users){
+                            if(!_.isArray(users)) return false;
+                            users.forEach(function(user){
+                                sparkList[user.spark] = {username : user.username, id : user.id};
+                            });
 
+                            finishSparks();
+                        }).catch(err);
+                    }else{
+                        finishSparks();
+                    }
                 });
             });
 
