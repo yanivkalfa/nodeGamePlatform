@@ -5,7 +5,7 @@ module.exports = function(_rf){
         ;
 
     function RoutMsg (Primus, spark){
-        router.call(this,Primus, spark);
+        router.apply(this,arguments);
     }
 
     RoutMsg.prototype = Object.create(router.prototype);

@@ -82,7 +82,6 @@ _s.primus.on('connection', function (spark) {
                     };
 
                     var chat = new _s.oModules.Chat( _s.primus, spark);
-
                     var extendRouterWith = {
                         ping : function(spark, data){
                             spark.write({"m": "ping", "d":"p"});

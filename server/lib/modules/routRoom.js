@@ -3,7 +3,7 @@ module.exports = function(_rf){
     var router = _rf.Router;
 
     function RoutRoom (Primus, spark){
-        router.call(this,Primus, spark);
+        router.apply(this,arguments);
     }
 
     RoutRoom.prototype = Object.create(router.prototype);
