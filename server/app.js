@@ -95,14 +95,14 @@ _s.primus.on('connection', function (spark) {
                     _s.oModules.uf.extend(WebSocketExtender, extendRouterWith);
 
                     var webSocketExtender = new WebSocketExtender();
-                    var msg  = {
+                    var data  = {
                         "m" : 'roomDo',
                         "d" : {
                             "m" : 'getRooms',
                             "d" : {}
                         }
                     };
-                    webSocketExtender.chat(spark,msg);
+                    webSocketExtender.chat(spark,data);
 
                 }
 
@@ -115,46 +115,6 @@ _s.primus.on('connection', function (spark) {
             spark.end({"method" : "disconnect", msg : "Could not authenticate user c."} );
         }
     });
-
-
-
-    /*
-     var channels = [
-     {
-     id : '',
-     title:'Dynamic Title 1',
-     content:{
-     msg : [
-     {id:"01",from:"SomeOne", data: 1421700566413, formatDate :  '', content : "This is a message", toType: "private"},
-     {id:"02",from:"SomeOne", data: 1421700569382, formatDate :  '', content : "message 2" , toType: "room"},
-     {id:"03",from:"SomeOne", data: 1421700502938, formatDate :  '', content : "message 3" , toType: "room"}
-     ],
-     members:['SomeOne', 'someone2', 'someone3']
-     },
-     active : true
-     },
-     {
-     id : '',
-     title:'Dynamic Title 2',
-     content:{
-     msg : [
-     {id:"01",from:"SomeOne", data: 1421700566413, formatDate : '', content : "This is a message", toType: "room"},
-     {id:"02",from:"SomeOne", data: 1421700569382, formatDate : '', content : "message 2" , toType: "room"},
-     {id:"03",from:"SomeOne", data: 1421700502938, formatDate : '', content : "message 3" , toType: "room"}
-     ],
-     members:['SomeOne', 'someone2', 'someone3']
-     },
-     active : false
-     }
-     ];
-
-     var data = {
-     m : 'initChat',
-     d : channels
-     };
-
-     spark.write({"m": "chat", "d":data});
-     */
 
 
     /*
