@@ -1,8 +1,11 @@
-module.exports = function(_rf){
+module.exports = function(_s, _rf){
 
-    var router = _rf.Router;
+    var router = _rf.Router
+        , _ = _s.oReq.lodash
+        , User = _rf.User
+        ;
 
-    function RoutRoom (Primus, spark){
+    function RoutRoom (){
         router.apply(this,arguments);
     }
 
@@ -11,6 +14,80 @@ module.exports = function(_rf){
 
 
     RoutRoom.prototype.getRooms = function(spark, msg){
+
+        var roomsForSpark = [], inSparks = [], sparkList = {};
+
+        _rf.RoomHandler.getRoomsForSpark(spark.id).then(function(rooms){
+            if(!_.isArray(rooms)) return false;
+            var promiseRooms = rooms.map(function(room, index){
+                if(room.indexOf("u_") === 0 || room === 'terminal') return false;
+                roomsForSpark[index] = {
+                    id :room,
+                    title:room,
+                    content:{
+                        msg : [],
+                        members:[]
+                    },
+                    active : false
+                };
+
+                return _rf.RoomHandler.getSparksInRoom(room).then(function(sparks, index){
+                    roomsForSpark[index].content.members = sparks;
+                    }.bind(this,index)).catch(function(err){
+
+                });
+            });
+
+
+            _s.primus.all(promiseRooms).then(function(NotImportant) {
+                roomsForSpark.forEach(function(room){
+                    if(!_.isArray(room.content.members)) return false;
+                    for(var i=0; i < room.content.members.length; i++ ){
+                        sparkList[room.content.members[i]] = false;
+                    }
+                });
+
+
+                _s.primus.forEach(function (spark, next) {
+                    _(sparkList).forEach(function(singleSpark, sparkId) {
+                        if(spark.id == singleSpark){
+                            sparkList[sparkId] = spark.user.username;
+                            return false;
+                        }
+                    });
+                    next();
+                }, function (err) {
+                    _(sparkList).forEach(function(singleSpark, sparkId) {
+                        if(!singleSpark) inSparks.push(sparkId);
+                    });
+
+                    User.fetchUser({ 'spark': { $in: inSparks }}).then(function(users){
+                        if(!_.isArray(users)) return false;
+                        users.forEach(function(user){
+                            sparkList[user.spark] = user.username;
+                        });
+
+                        roomsForSpark.forEach(function(room){
+                            if(!_.isArray(room.content.members)) return false;
+                            for(var i=0; i < room.content.members.length; i++ ){
+                                room.content.members[i] = sparkList[room.content.members[i]];
+                            }
+                        });
+
+
+
+                        console.log(roomsForSpark);
+                    }).catch(err);
+
+
+                });
+            });
+
+        }).catch(function(err){
+
+        });
+
+
         var channels = [
             {
                 id : '',

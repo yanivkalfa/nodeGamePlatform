@@ -1,10 +1,10 @@
-module.exports = function(_rf){
+module.exports = function(_s, _rf){
 
     var router = _rf.Router
         , User = _rf.User
         ;
 
-    function RoutMsg (Primus, spark){
+    function RoutMsg (){
         router.apply(this,arguments);
     }
 
@@ -39,7 +39,7 @@ module.exports = function(_rf){
                             }
                         }
                     };
-                    this.primus.room(cName).write({"m": "chat", "d":data});
+                    _s.primus.room(cName).write({"m": "chat", "d":data});
                 };
 
                 prvFail = function(user){

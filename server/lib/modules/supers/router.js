@@ -1,16 +1,12 @@
-module.exports = function(_s){
+module.exports = function(){
 
-    function Router (Primus, spark){
-        this._s = _s;
-        this.Primus = Primus;
-        this.spark = spark;
-    }
+    function Router (){}
 
     Router.prototype =  {
 
         rout: function(spark, msg){
             var self = this;
-            self[msg.m](self.spark, msg.d);
+            self[msg.m](spark, msg.d);
         }
     };
 

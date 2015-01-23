@@ -1,4 +1,4 @@
-module.exports = function(_rf){
+module.exports = function(_s, _rf){
 
     var validation = _rf.Validation;
 

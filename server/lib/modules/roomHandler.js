@@ -1,3 +1,31 @@
+module.exports = function(_s){
+
+    return {
+        getRoomsForSpark : function(spark){
+            return new _s.oReq.Promise(function(resolve, reject) {
+                _s.primus.rooms(spark, function(err, rooms){
+                    if(err) return reject(err);
+                    return resolve(rooms);
+                });
+            });
+        },
+
+        getSparksInRoom : function(room){
+            return new _s.oReq.Promise(function(resolve, reject) {
+                _s.primus.room(room).clients(function(err, sparks){
+                    if(err) return reject(err);
+                    return resolve(sparks);
+                });
+            });
+        }
+
+
+    }
+
+};
+//RoomHandler
+
+/*
 module.exports = function(rooms, io,members,socket){
     var _this = this;
     this.rooms = rooms;
@@ -232,7 +260,7 @@ module.exports = function(rooms, io,members,socket){
     this.compareSockets = function(compareSocket){
         return _this._socket.decoded_token.nickName == compareSocket.decoded_token.nickName;
     };
-};
+};*/
 
 /*
 module.exports = {

@@ -1,7 +1,6 @@
-module.exports = function(_s){
+module.exports = function(){
 
     function Validation (details){
-        this._s = _s;
         this._isValid = false;
 
         this.validate(details);

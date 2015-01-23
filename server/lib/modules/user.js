@@ -26,6 +26,15 @@ module.exports = function(_s){
 
         set: function(user) { return _user = user ? _.pick(user, visibleField) : undefined; },
 
+        fetchUsers : function(credentials){
+            return new _s.oReq.Promise(function(resolve, reject) {
+                Users.find(credentials).exec(function (err, user) {
+                    if(err) return reject(err);
+                    return resolve(self.set(user));
+                });
+            });
+        },
+
         fetchUser : function(user){
 
             var id
