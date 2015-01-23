@@ -9,7 +9,6 @@ module.exports = function(_s){
 
     Validation.prototype = {
         validate : function(details){
-            console.log('aaa');
             this._isValid = true;
         },
         isValid : function(){

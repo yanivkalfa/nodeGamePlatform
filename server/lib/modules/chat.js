@@ -1,30 +1,27 @@
-module.exports = function(_s, Primus, spark){
+module.exports = function(_s, _rf){
+
+    var router = _rf.router
+        , _ = _s.oReq.lodash
+        ;
 
     function Chat (_s, Primus, spark){
-        var _ = _s.oReq.lodash;
-        this._s = _s;
-        this.Primus = Primus;
-        this.spark = spark;
+        router.call(this,_s, Primus, spark);
 
         this.msgRouter = _s.oModules.msgRouter(_s, _s.primus, spark);
         this.roomRouter = _s.oModules.roomRouter(_s, _s.primus, spark);
     }
 
-    Chat.prototype =  {
+    Chat.prototype = Object.create(router.prototype);
+    Chat.prototype.constructor = Chat;
 
-        rout: function(msg){
-            var self = this;
-            self[msg.m](self.spark, msg);
-        },
+    Chat.prototype.msg = function(msg){
+        this.msgRouter.rout(msg);
+    };
 
-        msg : function(msg){
-            this.msgRouter.rout(msg);
-        },
-        roomDo : function(msg){
-            this.roomRouter.rout(msg);
-        }
+    Chat.prototype.roomDo = function(msg){
+        this.roomRouter.rout(msg);
     };
 
 
-    return new Chat(_s, Primus, spark);
+    return Chat;
 };

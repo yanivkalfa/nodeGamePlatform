@@ -1,51 +1,47 @@
-module.exports = function(_s, Primus, spark){
+module.exports = function(_s, _rf){
+
+    var router = _rf.router
+        , _ = _s.oReq.lodash
+        ;
 
     function MsgRouter (_s, Primus, spark){
-        var _ = _s.oReq.lodash;
-        this._s = _s;
-        this.Primus = Primus;
-        this.spark = spark;
+        router.call(this,_s, Primus, spark);
     }
 
-    MsgRouter.prototype =  {
+    MsgRouter.prototype = Object.create(router.prototype);
+    MsgRouter.prototype.constructor = MsgRouter;
 
-        rout: function(msg){
-            var self = this;
-            self[msg.a](self.spark, msg);
-        },
+    MsgRouter.prototype.add = function(spark, args){
+        var dateNow = Date.now()
+            , randomId = Math.floor(Math.random()*300000)
+            ;
 
-        add : function(spark, args){
-            var dateNow = Date.now()
-                , randomId = Math.floor(Math.random()*300000)
-                ;
+        switch(args.toType){
+            case 'private':
+                var toEmit = {
+                    "m" : 'msg',
+                    "a" : 'add',
+                    "d" : {
+                        id : dateNow + randomId.toString(),
+                        "toType" : 'private',
+                        "to" : args[0],
+                        "from" : User.get().id,
+                        "date" : dateNow,
+                        "msg" : args.splice(1).join(" ")
+                    }
+                };
 
-            switch(args.toType){
-                case 'private':
-                    var toEmit = {
-                        "m" : 'msg',
-                        "a" : 'add',
-                        "d" : {
-                            id : dateNow + randomId.toString(),
-                            "toType" : 'private',
-                            "to" : args[0],
-                            "from" : User.get().id,
-                            "date" : dateNow,
-                            "msg" : args.splice(1).join(" ")
-                        }
-                    };
-
-                    break;
-                case 'room':
-                    break;
-
-            }
-        },
-
-        remove : function(spark, args){
+                break;
+            case 'room':
+                break;
 
         }
     };
 
+    MsgRouter.prototype.remove = function(spark, args){
 
-    return new MsgRouter(_s, Primus, spark);
+    };
+
+
+    return MsgRouter;
 };

@@ -1,32 +1,28 @@
-module.exports = function(_s, Primus, spark){
+module.exports = function(_s, _rf){
+
+    var router = _rf.router
+        , _ = _s.oReq.lodash
+        ;
 
     function RoomRouter (_s, Primus, spark){
-        var _ = _s.oReq.lodash;
-        this._s = _s;
-        this.Primus = Primus;
-        this.spark = spark;
+        router.call(this,_s, Primus, spark);
     }
 
-    RoomRouter.prototype =  {
+    RoomRouter.prototype = Object.create(router.prototype);
+    RoomRouter.prototype.constructor = RoomRouter;
 
-        rout: function(msg){
-            var self = this;
-            self[msg.m](self.spark, msg.d);
-        },
 
-        getRooms : function(spark, params){
+    RoomRouter.prototype.getRooms = function(){
 
-        },
-
-        join : function(spark, params){
-
-        },
-
-        leave : function(spark, params){
-
-        }
     };
 
+    RoomRouter.prototype.join = function(){
 
-    return new RoomRouter(_s, Primus, spark);
+    };
+
+    RoomRouter.prototype.leave = function(){
+
+    };
+
+    return RoomRouter;
 };
