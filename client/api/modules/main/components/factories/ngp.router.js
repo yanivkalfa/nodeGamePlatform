@@ -14,7 +14,7 @@ function Router() {
 
         rout: function(msg){
             var self = this;
-            self[msg.m](self.spark, msg.d);
+            self[msg.m](msg.d);
         }
 
     };
