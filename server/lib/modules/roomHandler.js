@@ -31,7 +31,7 @@ module.exports = function(_s, _rf){
                 });
             });
 
-            console.log(self.roomNames);
+            console.log(self.rooms);
             return this;
         },
 
