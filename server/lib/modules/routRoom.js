@@ -44,16 +44,16 @@ module.exports = function(_s, _rf){
                     });
                     next();
                 }, function (err) {
-
-                    console.log('sparkList', sparkList);
                     _(sparkList).forEach(function(singleSpark, sparkId) {
                         if(!singleSpark) inSparks.push(sparkId);
                     });
 
                     User.fetchUser({ 'spark': { $in: inSparks }}).then(function(users){
+
+                        console.log('users', users);
                         if(!_.isArray(users)) return false;
                         users.forEach(function(user){
-                            sparkList[user.spark] = user.username;
+                            sparkList[user.spark] = {username : users.username, id : users.id};
                         });
 
                         roomsForSpark.forEach(function(room){
