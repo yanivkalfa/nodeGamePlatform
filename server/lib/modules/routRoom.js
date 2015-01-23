@@ -45,7 +45,6 @@ module.exports = function(_s, _rf){
                     next();
                 }, function (err) {
                     _(sparkList).forEach(function(singleSpark, sparkId) {
-                        console.log(singleSpark, sparkId);
                         if(!singleSpark) inSparks.push(sparkId);
                     });
 

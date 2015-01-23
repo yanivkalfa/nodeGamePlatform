@@ -69,6 +69,7 @@ _s.primus.on('connection', function (spark) {
                     spark.user = user;
                     // Update user's spark id in database - in-case its needed
                     var upSkSuccess = function (success){
+                        console.log(spark.id);
                         // initiating socket router. and extending it.
                         var webSocket = _s.oModules.WebSocket();
                         var WebSocketExtender = function(){
