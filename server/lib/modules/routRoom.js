@@ -30,7 +30,7 @@ module.exports = function(_s, _rf){
 
 
             _s.oReq.Promise.all(promiseRooms).then(function(sparks) {
-                roomsForSpark = rooms.map(function(room, index){
+                roomsForSpark = rooms.filter(filter).map(function(room, index){
                     return {
                         id :room,
                         title:room,
