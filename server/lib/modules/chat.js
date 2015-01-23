@@ -1,7 +1,7 @@
 module.exports = function(_rf){
 
     var router = _rf.Router;
-    console.log('router', router);
+    console.log('router', _rf);
 
     function Chat (Primus, spark){
         router.call(this,Primus, spark);
