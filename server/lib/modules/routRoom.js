@@ -41,7 +41,7 @@ module.exports = function(_s, _rf){
                 });
             });
 
-            console.log('promiseRooms', promiseRooms);
+            console.log('roomsForSpark', roomsForSpark);
 
 
             _s.primus.all(promiseRooms).then(function(NotImportant) {
