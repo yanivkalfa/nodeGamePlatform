@@ -1,8 +1,6 @@
-module.exports = function(_s, _rf){
+module.exports = function(_rf){
 
-    var validation = _rf.Validation
-        , _ = _s.oReq.lodash
-        ;
+    var validation = _rf.Validation;
 
     function RegValidation (details){
         validation.call(this,details);

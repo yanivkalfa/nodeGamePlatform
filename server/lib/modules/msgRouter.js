@@ -1,11 +1,9 @@
-module.exports = function(_s, _rf){
+module.exports = function(_rf){
 
-    var router = _rf.router
-        , _ = _s.oReq.lodash
-        ;
+    var router = _rf.router;
 
-    function MsgRouter (_s, Primus, spark){
-        router.call(this,_s, Primus, spark);
+    function MsgRouter (Primus, spark){
+        router.call(this,Primus, spark);
     }
 
     MsgRouter.prototype = Object.create(router.prototype);

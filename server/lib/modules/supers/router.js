@@ -1,6 +1,6 @@
-module.exports = function(_s, rf){
+module.exports = function(_s){
 
-    function Router (_s, Primus, spark){
+    function Router (Primus, spark){
         this._s = _s;
         this.Primus = Primus;
         this.spark = spark;
