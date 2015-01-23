@@ -13,7 +13,6 @@ module.exports = function(_s){
             this._isValid = true;
         },
         isValid : function(){
-            console.log('aaaa');
             return this._isValid; }
 
     };
