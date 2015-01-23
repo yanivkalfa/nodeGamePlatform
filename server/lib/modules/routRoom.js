@@ -29,9 +29,20 @@ module.exports = function(_s, _rf){
             var promiseRooms = rooms.filter(filter).map(_rf.RoomHandler.getSparksInRoom);
 
 
-            _s.oReq.Promise.all(promiseRooms).then(function(NotImportant) {
-                console.log(NotImportant);
-                roomsForSpark = NotImportant;
+            _s.oReq.Promise.all(promiseRooms).then(function(sparks) {
+                roomsForSpark = rooms.map(function(room, index){
+                    return {
+                        id :room,
+                        title:room,
+                        content:{
+                            msg : [],
+                            members:sparks[index]
+                        },
+                        active : false
+                    };
+                });
+
+                console.log(roomsForSpark);
 
                 roomsForSpark.forEach(function(room){
                     if(!_.isArray(room.content.members)) return false;

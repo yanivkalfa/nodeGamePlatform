@@ -14,17 +14,6 @@ module.exports = function(_s){
             return new _s.oReq.Promise(function(resolve, reject) {
                 _s.primus.room(room).clients(function(err, sparks){
                     if(err) return reject(err);
-                    /*
-                    room = {
-                        id :room,
-                        title:room,
-                        content:{
-                            msg : [],
-                            members:sparks
-                        },
-                        active : false
-                    };
-                    */
                     return resolve(sparks);
                 });
             });
