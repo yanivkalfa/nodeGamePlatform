@@ -15,7 +15,7 @@ module.exports = function(_s, _rf){
 
     RoutRoom.prototype.getRooms = function(spark, msg){
 
-        var roomsForSpark = [], inSparks = [], sparkList = {};
+        var roomsForSpark = [], inSparks = [], sparkList = {}, unique = {};
 
         _rf.RoomHandler.getRoomsForSpark(spark.id).then(function(rooms){
 
@@ -48,15 +48,24 @@ module.exports = function(_s, _rf){
                         if(!singleSpark) inSparks.push(sparkId);
                     });
 
-                    console.log('inSparks', inSparks);
-
                     User.fetchUsers({ 'spark': { $in: inSparks }}).then(function(users){
-
-                        console.log('users', users);
                         if(!_.isArray(users)) return false;
                         users.forEach(function(user){
                             sparkList[user.spark] = {username : users.username, id : users.id};
                         });
+
+
+                        _(sparkList).forEach(function(singleSpark, sparkId) {
+                            if(!singleSpark) delete sparkList[sparkId];
+                            if(! unique[singleSpark.id] ) unique[singleSpark.id] = {count:0, sparkId : sparkId};
+                            unique[singleSpark.id].count++;
+                        });
+
+                        _(unique).forEach(function(item, index) {
+                            if(item.count > 1) delete sparkList[item.sparkId];
+                        });
+
+                        unique =  null;
 
                         roomsForSpark.forEach(function(room){
                             if(!_.isArray(room.content.members)) return false;
@@ -65,6 +74,9 @@ module.exports = function(_s, _rf){
                             }
                         });
 
+
+
+                        console.log('roomsForSpark', roomsForSpark);
 
 
                         console.log('aaaa');
