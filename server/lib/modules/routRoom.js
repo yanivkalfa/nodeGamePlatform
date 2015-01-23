@@ -25,7 +25,7 @@ module.exports = function(_s, _rf){
 
 
             _s.oReq.Promise.all(promiseRooms).then(function(NotImportant) {
-                console.log('NotImportant', NotImportant);
+                roomsForSpark = NotImportant;
 
                 roomsForSpark.forEach(function(room){
                     if(!_.isArray(room.content.members)) return false;
