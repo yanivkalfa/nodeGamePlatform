@@ -14,6 +14,7 @@ module.exports = function(_s, _rf){
 
 
     RoutRoom.prototype.getRooms = function(spark, msg){
+        var starTime = Date.now();
 
         var roomsForSpark = []
             , inSparks = []
@@ -82,6 +83,10 @@ module.exports = function(_s, _rf){
                         };
 
                         spark.write({"m": "chat", "d":data});
+
+                        var endTime = Date.now();
+
+                        console.log(endTime-starTime /1000 );
                     };
 
                     if(inSparks.length) {
