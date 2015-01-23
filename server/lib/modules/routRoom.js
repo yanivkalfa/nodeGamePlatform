@@ -21,7 +21,6 @@ module.exports = function(_s, _rf){
 
         _rf.RoomHandler.getRoomsForSpark(spark.id).then(function(rooms){
 
-            console.log('rooms', rooms);
             if(!_.isArray(rooms)) return false;
             var promiseRooms = rooms.map(function(room, index){
                 if(room.indexOf("u_") === 0 || room === 'terminal') return false;
@@ -41,6 +40,8 @@ module.exports = function(_s, _rf){
 
                 });
             });
+
+            console.log('promiseRooms', promiseRooms);
 
 
             _s.primus.all(promiseRooms).then(function(NotImportant) {
