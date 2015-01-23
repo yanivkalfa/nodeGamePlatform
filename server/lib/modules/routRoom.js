@@ -36,9 +36,6 @@ module.exports = function(_s, _rf){
 
                 return _rf.RoomHandler.getSparksInRoom(room).then(function(index, sparks){
                         roomsForSpark[index].content.members = sparks;
-
-                        console.log(index, sparks);
-
                     }.bind(this,index)).catch(function(err){
 
                 });
@@ -48,6 +45,8 @@ module.exports = function(_s, _rf){
 
 
             _s.primus.all(promiseRooms).then(function(NotImportant) {
+                console.log(NotImportant);
+
                 roomsForSpark.forEach(function(room){
                     if(!_.isArray(room.content.members)) return false;
                     for(var i=0; i < room.content.members.length; i++ ){
