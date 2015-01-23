@@ -57,6 +57,8 @@ module.exports = function(_s, req, res) {
         console.log(validator);
         if(!validator.isValid()) wrongUserDetails();
 
+        throw new Error();
+
         success = function(user){
             _this._setResp(_.pick(user, visibleField), true);
             return res.json(_this.toReturn);
