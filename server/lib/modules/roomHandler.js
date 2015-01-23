@@ -31,6 +31,7 @@ module.exports = function(_s, _rf){
                 });
             });
 
+            console.log(self.roomNames);
             return this;
         },
 
