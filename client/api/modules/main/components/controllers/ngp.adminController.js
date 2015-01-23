@@ -34,22 +34,32 @@ function adminController(
     }
 
     AdminController.prototype.logout = function(){
-        this.api.setMethod('post').setParams({
-            "method" : 'logout',
-            "status" : 0,
-            "success" : false,
-            "data" : {}
-        });
+        var success,fail, options;
 
-        this.api.doRequest().then(function(resp){
+        success = function(resp){
             if(resp.payload.success){
                 $cookieStore.remove('user');
                 WebSocket.end();
                 $state.go('login');
             }else{
-                Notify.error('Login Failed: ' + resp.payload.data);
+                Notify.error('Logout Failed: ' + resp.payload.data);
             }
-        });
+        };
+
+        fail = function(err){  Notify.error('There was some communication error: ' + err); };
+
+        options = {
+            method: 'post',
+            url: ngp.const.app.ajaxUrl,
+            data: {
+                "method" : 'logout',
+                "status" : 0,
+                "success" : false,
+                "data" : {}
+            }
+        };
+
+        this.api.doRequest(options).then(success).catch(fail);
     };
 
     AdminController.prototype.channelSelected = function(){
