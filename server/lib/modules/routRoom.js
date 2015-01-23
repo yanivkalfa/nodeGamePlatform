@@ -50,7 +50,7 @@ module.exports = function(_s, _rf){
 
                     console.log('inSparks', inSparks);
 
-                    User.fetchUser({ 'spark': { $in: inSparks }}).then(function(users){
+                    User.fetchUsers({ 'spark': { $in: inSparks }}).then(function(users){
 
                         console.log('users', users);
                         if(!_.isArray(users)) return false;
