@@ -34,7 +34,7 @@ module.exports = function(_s, _rf){
                     }
                 });
 
-
+                console.log(roomsForSpark);
                 _s.primus.forEach(function (spark, next) {
                     _(sparkList).forEach(function(singleSpark, sparkId) {
                         if(spark.id == singleSpark){
@@ -61,15 +61,11 @@ module.exports = function(_s, _rf){
                             unique[singleSpark.id].count++;
                         });
 
-                        /*
                         _(unique).forEach(function(item, index) {
                             if(item.count > 1) delete sparkList[item.sparkId];
                         });
-                        */
 
-                        //unique =  null;
-
-                        console.log(roomsForSpark);
+                        unique =  null;
 
                         roomsForSpark.forEach(function(room){
                             if(!_.isArray(room.content.members)) return false;
