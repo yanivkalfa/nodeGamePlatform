@@ -77,6 +77,8 @@ _s.primus.on('connection', function (spark) {
 
                     // initiating socket router. and extending it.
                     var webSocket = _s.oModules.WebSocket();
+
+                    console.log(webSocket);
                     var WebSocketExtender = function(){
                         webSocket.call(this,_s, _s.primus, spark);
                     };
