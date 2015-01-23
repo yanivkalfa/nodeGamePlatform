@@ -30,7 +30,7 @@ module.exports = function(_s){
             return new _s.oReq.Promise(function(resolve, reject) {
                 Users.find(credentials).exec(function (err, user) {
                     if(err) return reject(err);
-                    return resolve(self.set(user));
+                    return resolve(user);
                 });
             });
         },
