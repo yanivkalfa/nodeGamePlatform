@@ -51,7 +51,7 @@ module.exports = function(_s, _rf){
                     User.fetchUsers({ 'spark': { $in: inSparks }}).then(function(users){
                         if(!_.isArray(users)) return false;
                         users.forEach(function(user){
-                            sparkList[user.spark] = {username : users.username, id : users.id};
+                            sparkList[user.spark] = {username : user.username, id : user.id};
                         });
 
 
