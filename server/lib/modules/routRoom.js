@@ -42,8 +42,6 @@ module.exports = function(_s, _rf){
                     };
                 });
 
-                console.log(roomsForSpark);
-
                 roomsForSpark.forEach(function(room){
                     if(!_.isArray(room.content.members)) return false;
                     for(var i=0; i < room.content.members.length; i++ ){
