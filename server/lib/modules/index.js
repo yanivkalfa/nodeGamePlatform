@@ -1,4 +1,5 @@
 module.exports = function(_s){
+    console.log('aaaa');
     var rf = {};
     //rf.User = require('./user.js')(_s);
     //rf.Authorization = require('./authorization.js')(_s);
