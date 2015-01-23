@@ -17,7 +17,11 @@ module.exports = function(_s, _rf){
 
         var roomsForSpark = [], inSparks = [], sparkList = {};
 
+        console.log('aaaa');
+
         _rf.RoomHandler.getRoomsForSpark(spark.id).then(function(rooms){
+
+            console.log('rooms', rooms);
             if(!_.isArray(rooms)) return false;
             var promiseRooms = rooms.map(function(room, index){
                 if(room.indexOf("u_") === 0 || room === 'terminal') return false;
@@ -76,7 +80,7 @@ module.exports = function(_s, _rf){
 
 
 
-                        console.log(roomsForSpark);
+                        console.log('aaaa');
                     }).catch(err);
 
 
