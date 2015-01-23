@@ -64,7 +64,7 @@ _s.primus.on('connection', function (spark) {
             _s.oModules.Authorization.login({"_id" : decoded.userId}).then(function(user){
                 if(user === null)
                 {
-                    spark.end({"method" : "disconnect", msg : "Could not authenticate user."} );
+                    spark.end({"method" : "disconnect", msg : "Could not authenticate user a."} );
                 }
                 else
                 {
@@ -171,12 +171,14 @@ _s.primus.on('connection', function (spark) {
                 }
 
             }).catch(function(err){
-                if(err) spark.end({"method" : "disconnect", msg : "Could not authenticate user."} );
+                if(err) spark.end({"method" : "disconnect", msg : "Could not authenticate user b."} );
             });
         }else{
-            spark.end({"method" : "disconnect", msg : "Could not authenticate user."} );
+            spark.end({"method" : "disconnect", msg : "Could not authenticate user c."} );
         }
     });
+
+    console.log(spark.id);
 
 
 
