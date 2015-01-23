@@ -11,7 +11,9 @@ module.exports = function(_s){
         validate : function(details){
             this._isValid = true;
         },
-        isValid : function(){ return this._isValid; }
+        isValid : function(){
+            console.log('aaaa');
+            return this._isValid; }
 
     };
 
