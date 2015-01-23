@@ -3,7 +3,6 @@
  */
 angular.module(ngp.const.app.name)
     .controller('loginController', [
-        'Authorization',
         '$rootScope',
         '$state',
         '$cookieStore',
@@ -13,7 +12,6 @@ angular.module(ngp.const.app.name)
     ]);
 
 function loginController(
-    Authorization,
     $rootScope,
     $state,
     $cookieStore,
@@ -28,19 +26,10 @@ function loginController(
             password : ''
         };
     }
+    LoginController.prototype.login = function(){
+        var success,fail, options;
 
-    LoginController.prototype.login = _.bind(Authorization.login, Authorization, this.registerForm);
-
-        /*function(){
-
-        this.api.setMethod('post').setParams({
-            "method" : 'login',
-            "status" : 0,
-            "success" : false,
-            "data" : this.registerForm
-        });
-
-        this.api.doRequest().then(function(resp){
+        success = function(resp){
             if(resp.payload.success){
                 $cookieStore.put('user', resp.payload.data);
 
@@ -56,8 +45,23 @@ function loginController(
                 Notify.error('Login Failed: ' + resp.payload.data);
                 $cookieStore.remove('user');
             }
-        });
-    };*/
+        };
+
+        fail = function(err){  Notify.error('There was some communication error: ' + err); };
+
+        options = {
+            method: 'post',
+            url: ngp.const.app.ajaxUrl,
+            data: {
+                "method" : 'login',
+                "status" : 0,
+                "success" : false,
+                "data" : this.registerForm
+            }
+        };
+
+        this.api.doRequest(options).then(success).catch(fail);
+    };
 
     return new LoginController();
 }

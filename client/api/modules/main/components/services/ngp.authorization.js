@@ -8,8 +8,6 @@ angular.module(ngp.const.app.name)
         '$rootScope',
         '$state',
         'Api',
-        //'WebSocket',
-        'Notify',
         Authorization
     ]);
 
@@ -18,9 +16,7 @@ function Authorization(
     $cookieStore,
     $rootScope,
     $state,
-    Api,
-    //WebSocket,
-    Notify
+    Api
     ) {
 
     function AuthorizationService(){
@@ -151,51 +147,6 @@ function Authorization(
             }
 
             return false;
-        },
-        logout : function(){
-            this.api.setMethod('post').setParams({
-                "method" : 'logout',
-                "status" : 0,
-                "success" : false,
-                "data" : {}
-            });
-
-            this.api.doRequest().then(function(resp){
-                if(resp.payload.success){
-                    $cookieStore.remove('user');
-                    WebSocket.end();
-                    $state.go('login');
-                }else{
-                    Notify.error('Login Failed: ' + resp.payload.data);
-                }
-            });
-        },
-        login : function(credentials){
-
-            this.api.setMethod('post').setParams({
-                "method" : 'login',
-                "status" : 0,
-                "success" : false,
-                "data" : credentials
-            });
-
-            this.api.doRequest().then(function(resp){
-                if(resp.payload.success){
-                    $cookieStore.put('user', resp.payload.data);
-
-                    if(angular.isDefined($rootScope.ngp.returnToState))
-                    {
-                        $state.go($rootScope.ngp.returnToState.name, $rootScope.ngp.returnToStateParams);
-                    }
-                    else
-                    {
-                        $state.go('admin');
-                    }
-                }else{
-                    Notify.error('Login Failed: ' + resp.payload.data);
-                    $cookieStore.remove('user');
-                }
-            });
         }
     };
 
