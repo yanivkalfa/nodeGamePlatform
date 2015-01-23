@@ -45,7 +45,7 @@ module.exports = function(_s, _rf){
 
 
             _s.primus.all(promiseRooms).then(function(NotImportant) {
-                console.log(NotImportant);
+                console.log('NotImportant', NotImportant);
 
                 roomsForSpark.forEach(function(room){
                     if(!_.isArray(room.content.members)) return false;
