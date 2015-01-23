@@ -14,13 +14,13 @@ module.exports = function(_s, _rf){
 
 
     RoutRoom.prototype.getRooms = function(spark, msg){
-        var starTime = Date.now();
 
+        // @todo improve error catching as there is none currently and maybe cut down on the loops.
         var roomsForSpark = []
             , inSparks = []
             , sparkList = {}
             , unique = {}
-            , finishSparks;
+            , finishGetRooms;
 
         _rf.RoomHandler.getRoomsForSpark(spark.id).then(function(rooms){
 
@@ -30,6 +30,7 @@ module.exports = function(_s, _rf){
 
 
             _s.oReq.Promise.all(promiseRooms).then(function(NotImportant) {
+                console.log(NotImportant);
                 roomsForSpark = NotImportant;
 
                 roomsForSpark.forEach(function(room){
@@ -53,7 +54,7 @@ module.exports = function(_s, _rf){
                         if(!singleSpark) inSparks.push(sparkId);
                     });
 
-                    finishSparks = function(){
+                    finishGetRooms = function(){
                         _(sparkList).forEach(function(singleSpark, sparkId) {
                             if(!singleSpark) delete sparkList[sparkId];
                             if(! unique[singleSpark.id] ) unique[singleSpark.id] = {count:0, sparkId : sparkId};
@@ -83,12 +84,6 @@ module.exports = function(_s, _rf){
                         };
 
                         spark.write({"m": "chat", "d":data});
-
-                        var endTime = Date.now();
-
-                        console.log(endTime);
-                        console.log(starTime);
-                        console.log(endTime-starTime);
                     };
 
                     if(inSparks.length) {
@@ -98,10 +93,12 @@ module.exports = function(_s, _rf){
                                 sparkList[user.spark] = {username : user.username, id : user.id};
                             });
 
-                            finishSparks();
-                        }).catch(err);
+                            finishGetRooms();
+                        }).catch(function(err){
+                            finishGetRooms();
+                        });
                     }else{
-                        finishSparks();
+                        finishGetRooms();
                     }
                 });
             });
@@ -110,35 +107,10 @@ module.exports = function(_s, _rf){
 
         });
 
+    };
 
-        var channels = [
-            {
-                id : '',
-                title:'Dynamic Title 1',
-                content:{
-                    msg : [
-                        {id:"01",from:"SomeOne", data: 1421700566413, formatDate :  '', content : "This is a message", toType: "private"},
-                        {id:"02",from:"SomeOne", data: 1421700569382, formatDate :  '', content : "message 2" , toType: "room"},
-                        {id:"03",from:"SomeOne", data: 1421700502938, formatDate :  '', content : "message 3" , toType: "room"}
-                    ],
-                    members:['SomeOne', 'someone2', 'someone3']
-                },
-                active : true
-            },
-            {
-                id : '',
-                title:'Dynamic Title 2',
-                content:{
-                    msg : [
-                        {id:"01",from:"SomeOne", data: 1421700566413, formatDate : '', content : "This is a message", toType: "room"},
-                        {id:"02",from:"SomeOne", data: 1421700569382, formatDate : '', content : "message 2" , toType: "room"},
-                        {id:"03",from:"SomeOne", data: 1421700502938, formatDate : '', content : "message 3" , toType: "room"}
-                    ],
-                    members:['SomeOne', 'someone2', 'someone3']
-                },
-                active : false
-            }
-        ];
+    RoutRoom.prototype.getRoom = function(spark, msg){
+
     };
 
     RoutRoom.prototype.join = function(spark, msg){
