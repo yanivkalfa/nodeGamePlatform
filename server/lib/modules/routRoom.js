@@ -37,8 +37,8 @@ module.exports = function(_s, _rf){
 
                 _s.primus.forEach(function (spark, next) {
                     _(sparkList).forEach(function(singleSpark, sparkId) {
-                        if(spark.id == sparkId){
-                            sparkList[sparkId] = spark.user.username;
+                        if(spark.id == singleSpark){
+                            sparkList[sparkId] = {username : spark.user.username, id : spark.user.id};
                             return false;
                         }
                     });
