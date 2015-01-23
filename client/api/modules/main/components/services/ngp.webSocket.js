@@ -24,13 +24,11 @@ function webSocket($rootScope, $q, Authorization) {
                 self = this;
 
             if(!Authorization.isAuthenticated) {
-                console.log('ccc');
                 deferred.reject( 'User is not authenticated' );
                 return deferred.promise;
             }
 
             var token = Authorization.getUser().token;
-            console.log(token);
             this.Primus = Primus.connect('ws://' + ngp.const.app.domain + '/?token=' + token);
             this.Primus.on('data', function(msg){
                 console.log(msg);

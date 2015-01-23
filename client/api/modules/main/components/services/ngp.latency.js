@@ -22,7 +22,6 @@ function Latency($rootScope, $q, WebSocket) {
         this.cycleTime = 60*60*1000;
         this.pingEvery = 30*1000;
         this.pingInterval = false;
-        this.init();
     }
 
     LatencyService.prototype =  {
