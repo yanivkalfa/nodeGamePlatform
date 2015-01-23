@@ -1,8 +1,8 @@
 var _s = {};
-console.log('aaaa');
 _s.oServerN = process.argv[3]; // severName - not required
 _s.port = process.argv[2] || 8001; // server port - required
 _s.oReq = require('./lib/requiredFiles.js')(_s); // require files.
+console.log('aaaa');
 _s.sServerDirname = __dirname; // Server dir
 _s.sClientDirname = _s.oReq.path.resolve(__dirname, '..') + '/client'; //Client dir
 _s.oConfig = require('./settings/config'); // require config files.
