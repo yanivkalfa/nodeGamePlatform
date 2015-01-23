@@ -1,15 +1,15 @@
 module.exports = function(_rf){
 
-    var router = _rf.router;
+    var router = _rf.Router;
 
-    function MsgRouter (Primus, spark){
+    function RouterMsg (Primus, spark){
         router.call(this,Primus, spark);
     }
 
-    MsgRouter.prototype = Object.create(router.prototype);
-    MsgRouter.prototype.constructor = MsgRouter;
+    RouterMsg.prototype = Object.create(router.prototype);
+    RouterMsg.prototype.constructor = RouterMsg;
 
-    MsgRouter.prototype.add = function(spark, args){
+    RouterMsg.prototype.add = function(spark, args){
         var dateNow = Date.now()
             , randomId = Math.floor(Math.random()*300000)
             ;
@@ -36,10 +36,10 @@ module.exports = function(_rf){
         }
     };
 
-    MsgRouter.prototype.remove = function(spark, args){
+    RouterMsg.prototype.remove = function(spark, args){
 
     };
 
 
-    return MsgRouter;
+    return RouterMsg;
 };

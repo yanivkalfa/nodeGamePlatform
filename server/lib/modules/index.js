@@ -7,10 +7,10 @@ module.exports = function(_s){
     rf.uf = require('./utilFunc.js')(_s);
     rf.ajaxHandler = require('./ajaxHandler.js');
     rf.WebSocket = require('./webscoket.js');
-    rf.router = require('./supers/router.js')(_s);
-    rf.msgRouter = require('./msgRouter.js')(rf);
-    rf.roomRouter = require('./roomRouter.js')(rf);
-    rf.chat = require('./chat.js');
+    rf.Router = require('./supers/router.js')(_s);
+    rf.RouterMsg = require('./routerMsg.js')(rf);
+    rf.RouterRoom = require('./routerRoom.js')(rf);
+    rf.Chat = require('./chat.js');
 
     return rf;
 };
