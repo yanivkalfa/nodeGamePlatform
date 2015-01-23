@@ -27,6 +27,8 @@ module.exports = function(_s, _rf){
             _s.oReq.Promise.all(promiseRooms).then(function(NotImportant) {
                 roomsForSpark = NotImportant;
 
+                console.log(roomsForSpark, NotImportant);
+
                 roomsForSpark.forEach(function(room){
                     if(!_.isArray(room.content.members)) return false;
                     for(var i=0; i < room.content.members.length; i++ ){
@@ -34,7 +36,7 @@ module.exports = function(_s, _rf){
                     }
                 });
 
-                console.log(roomsForSpark);
+
                 _s.primus.forEach(function (spark, next) {
                     _(sparkList).forEach(function(singleSpark, sparkId) {
                         if(spark.id == singleSpark){
@@ -75,7 +77,7 @@ module.exports = function(_s, _rf){
                         });
 
 
-
+                        /*
                         var data  = {
                             "m" : 'roomDo',
                             "d" : {
@@ -85,6 +87,7 @@ module.exports = function(_s, _rf){
                         };
 
                         spark.write({"m": "chat", "d":data});
+                        */
                     }).catch(err);
 
 
