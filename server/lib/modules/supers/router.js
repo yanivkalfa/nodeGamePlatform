@@ -8,7 +8,7 @@ module.exports = function(_s){
 
     Router.prototype =  {
 
-        rout: function(msg){
+        rout: function(spark, msg){
             var self = this;
             console.log(msg);
             self[msg.m](self.spark, msg.d);
