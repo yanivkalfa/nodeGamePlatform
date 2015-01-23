@@ -54,7 +54,10 @@ module.exports = function(_s, req, res) {
         };
 
         var validator = new _s.oModules.RegValidation(userDetails);
+        console.log(validator);
         if(!validator.isValid()) wrongUserDetails();
+
+        throw new Error();
 
         success = function(user){
             _this._setResp(_.pick(user, visibleField), true);
