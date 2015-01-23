@@ -69,46 +69,6 @@ _s.primus.on('connection', function (spark) {
                 else
                 {
 
-                    console.log('authenticated ?');
-                    // Joining terminal, lobby  and user channels
-                    var userChannel = 'u_' + decoded.userId;
-                    spark.join('terminal lobby ' + userChannel, function(){});
-
-                    // Attaching userId to spark - for logout and maybe future needs
-                    spark.userId = decoded.userId;
-
-                    // Update user's spark id in database - in-case its needed
-                    var upSkSuccess = function (success){};
-                    var upSkFail = function(err){
-                        if(err) _s.oModules.Authorization.updateSpark({"_id" : decoded.userId}, spark.id).then(upSkSuccess).catch(upSkFail);
-                    };
-                    _s.oModules.Authorization.updateSpark({"_id" : decoded.userId}, spark.id).then(upSkSuccess).catch(upSkFail);
-
-                    // initiating socket router. and extending it.
-                    var webSocket = _s.oModules.WebSocket();
-                    var WebSocketExtender = function(){
-                        webSocket.call(this,_s, _s.primus, spark);
-                    };
-
-                    var chat = new _s.oModules.chat( _s.primus, spark);
-
-                    var extendRouterWith = {
-                        ping : function(spark, data){
-                            spark.write({"m": "ping", "d":"p"});
-                        },
-                        initChat : function(spark, data){
-
-                        },
-
-                        chat : function(msg){
-                            chat.rout(msg);
-                        }
-                    };
-                    WebSocketExtender.prototype = webSocket.prototype;
-                    _s.oModules.uf.extend(WebSocketExtender, extendRouterWith);
-
-                    var webSocketExtender = new WebSocketExtender();
-                    webSocketExtender.initChat(spark);
 
                 }
 
