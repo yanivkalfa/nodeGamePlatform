@@ -97,43 +97,7 @@ _s.primus.on('connection', function (spark) {
                             spark.write({"m": "ping", "d":"p"});
                         },
                         initChat : function(spark, data){
-                            /*
-                            var channels = [
-                                {
-                                    id : '',
-                                    title:'Dynamic Title 1',
-                                    content:{
-                                        msg : [
-                                            {id:"01",from:"SomeOne", data: 1421700566413, formatDate :  '', content : "This is a message", toType: "private"},
-                                            {id:"02",from:"SomeOne", data: 1421700569382, formatDate :  '', content : "message 2" , toType: "room"},
-                                            {id:"03",from:"SomeOne", data: 1421700502938, formatDate :  '', content : "message 3" , toType: "room"}
-                                        ],
-                                        members:['SomeOne', 'someone2', 'someone3']
-                                    },
-                                    active : true
-                                },
-                                {
-                                    id : '',
-                                    title:'Dynamic Title 2',
-                                    content:{
-                                        msg : [
-                                            {id:"01",from:"SomeOne", data: 1421700566413, formatDate : '', content : "This is a message", toType: "room"},
-                                            {id:"02",from:"SomeOne", data: 1421700569382, formatDate : '', content : "message 2" , toType: "room"},
-                                            {id:"03",from:"SomeOne", data: 1421700502938, formatDate : '', content : "message 3" , toType: "room"}
-                                        ],
-                                        members:['SomeOne', 'someone2', 'someone3']
-                                    },
-                                    active : false
-                                }
-                            ];
 
-                            var data = {
-                                m : 'initChat',
-                                d : channels
-                            };
-
-                            spark.write({"m": "chat", "d":data});
-                            */
                         },
 
                         chat : function(msg){
@@ -146,31 +110,10 @@ _s.primus.on('connection', function (spark) {
                     var webSocketExtender = new WebSocketExtender();
                     webSocketExtender.initChat(spark);
 
-                    /*
-
-                    var router = new s.utilFunc.CallRouter(socket);
-                    var msgRouter = new s.utilFunc.MsgRouter(c.oVars.oRoomHandler);
-                    var roomRouter = new s.utilFunc.roomRouter(c.oVars.oRoomHandler);
-
-
-                    var RouterExtender = function(){};
-                    var extendRouterWith = {
-                        ping : function(msg){
-                            spark.write({"m": "ping", "d":"p"});
-                        },
-                        msg : function(msg){
-                            c.oVars.oMsgRouter.routMsg(msg);
-                        },
-                        roomDo : function(msg){
-                            c.oVars.oRoomRouter.routRoom(msg);
-                        }
-                    };
-                    RouterExtender.prototype = c.oVars.oRouter;
-                    s.utilFunc.extend(RouterExtender, extendRouterWith);
-                    new RouterExtender();*/
                 }
 
             }).catch(function(err){
+                console.log(err);
                 if(err) spark.end({"method" : "disconnect", msg : "Could not authenticate user b."} );
             });
         }else{
@@ -180,6 +123,68 @@ _s.primus.on('connection', function (spark) {
 
     console.log(spark.id);
 
+
+    /*
+     var channels = [
+     {
+     id : '',
+     title:'Dynamic Title 1',
+     content:{
+     msg : [
+     {id:"01",from:"SomeOne", data: 1421700566413, formatDate :  '', content : "This is a message", toType: "private"},
+     {id:"02",from:"SomeOne", data: 1421700569382, formatDate :  '', content : "message 2" , toType: "room"},
+     {id:"03",from:"SomeOne", data: 1421700502938, formatDate :  '', content : "message 3" , toType: "room"}
+     ],
+     members:['SomeOne', 'someone2', 'someone3']
+     },
+     active : true
+     },
+     {
+     id : '',
+     title:'Dynamic Title 2',
+     content:{
+     msg : [
+     {id:"01",from:"SomeOne", data: 1421700566413, formatDate : '', content : "This is a message", toType: "room"},
+     {id:"02",from:"SomeOne", data: 1421700569382, formatDate : '', content : "message 2" , toType: "room"},
+     {id:"03",from:"SomeOne", data: 1421700502938, formatDate : '', content : "message 3" , toType: "room"}
+     ],
+     members:['SomeOne', 'someone2', 'someone3']
+     },
+     active : false
+     }
+     ];
+
+     var data = {
+     m : 'initChat',
+     d : channels
+     };
+
+     spark.write({"m": "chat", "d":data});
+     */
+
+
+    /*
+
+     var router = new s.utilFunc.CallRouter(socket);
+     var msgRouter = new s.utilFunc.MsgRouter(c.oVars.oRoomHandler);
+     var roomRouter = new s.utilFunc.roomRouter(c.oVars.oRoomHandler);
+
+
+     var RouterExtender = function(){};
+     var extendRouterWith = {
+     ping : function(msg){
+     spark.write({"m": "ping", "d":"p"});
+     },
+     msg : function(msg){
+     c.oVars.oMsgRouter.routMsg(msg);
+     },
+     roomDo : function(msg){
+     c.oVars.oRoomRouter.routRoom(msg);
+     }
+     };
+     RouterExtender.prototype = c.oVars.oRouter;
+     s.utilFunc.extend(RouterExtender, extendRouterWith);
+     new RouterExtender();*/
 
 
     //spark.join("aRoomName", function () {
