@@ -27,8 +27,6 @@ module.exports = function(_s, _rf){
             _s.oReq.Promise.all(promiseRooms).then(function(NotImportant) {
                 roomsForSpark = NotImportant;
 
-                console.log(roomsForSpark, NotImportant);
-
                 roomsForSpark.forEach(function(room){
                     if(!_.isArray(room.content.members)) return false;
                     for(var i=0; i < room.content.members.length; i++ ){
@@ -75,6 +73,9 @@ module.exports = function(_s, _rf){
                                 room.content.members[i] = sparkList[room.content.members[i]];
                             }
                         });
+
+
+                        console.log(roomsForSpark[0].content.members);
 
 
                         /*
