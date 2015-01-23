@@ -86,6 +86,8 @@ module.exports = function(_s, _rf){
 
                         var endTime = Date.now();
 
+                        console.log(endTime);
+                        console.log(starTime);
                         console.log(endTime-starTime);
                     };
 
