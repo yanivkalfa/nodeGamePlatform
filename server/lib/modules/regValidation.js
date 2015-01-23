@@ -1,6 +1,6 @@
-module.exports = function(_s){
+module.exports = function(_s, _rf){
 
-    var validation = _s.oModules.Validation
+    var validation = _rf.Validation
         , _ = _s.oReq.lodash
         ;
 
