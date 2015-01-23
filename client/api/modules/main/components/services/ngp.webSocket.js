@@ -30,8 +30,10 @@ function webSocket($rootScope, $q, Authorization) {
             }
 
             var token = Authorization.getUser().token;
+            console.log(token);
             this.Primus = Primus.connect('ws://' + ngp.const.app.domain + '/?token=' + token);
             this.Primus.on('data', function(msg){
+                console.log(msg);
                 self[msg.m](msg.d);
             });
 
@@ -48,8 +50,6 @@ function webSocket($rootScope, $q, Authorization) {
 
             this.Primus.on('end', function end() {
                 self.connected = false;
-                $rootScope.ngp.initChat = false;
-                console.log('end');
             });
 
 
