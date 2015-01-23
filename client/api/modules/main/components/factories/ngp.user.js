@@ -2,23 +2,23 @@
  * Created by Yaniv-Kalfa on 1/2/15.
  */
 angular.module(ngp.const.app.name)
-    .service('Users', [
+    .service('User', [
         '$q',
         'Api',
-        usersFactory
+        User
     ]);
 
-function usersFactory(
+function User(
     $q,
     Api
     ) {
 
-    function UsersFactory(){
+    function UserFactory(){
         this.api = Api.createNewApi(ngp.const.app.ajaxUrl);
         this._user = undefined;
     }
 
-    UsersFactory.prototype =  {
+    UserFactory.prototype =  {
 
         init : function(user){
             var deferred = $q.defer(),
@@ -88,5 +88,5 @@ function usersFactory(
 
     };
 
-    return new UsersFactory();
+    return new UserFactory();
 }

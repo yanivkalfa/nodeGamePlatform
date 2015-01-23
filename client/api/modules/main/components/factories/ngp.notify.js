@@ -5,10 +5,10 @@
 angular.module(ngp.const.app.name)
     .factory('Notify', [
         '$rootScope',
-        notifyFactory
+        Notify
     ]);
 
-function notifyFactory($rootScope) {
+function Notify($rootScope) {
 
 
     function NotifyFactory(){

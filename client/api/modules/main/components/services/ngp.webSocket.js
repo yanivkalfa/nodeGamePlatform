@@ -12,12 +12,12 @@ angular.module(ngp.const.app.name)
 
 function webSocket($rootScope, $q, Authorization) {
 
-    function WebSocket(){
+    function WebSocketService(){
         this.Primus = false;
         this.connected = false;
     }
 
-    WebSocket.prototype =  {
+    WebSocketService.prototype =  {
 
         init : function(){
             var deferred = $q.defer(),
@@ -63,5 +63,5 @@ function webSocket($rootScope, $q, Authorization) {
 
     };
 
-    return new WebSocket();
+    return new WebSocketService();
 }

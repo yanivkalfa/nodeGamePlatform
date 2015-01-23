@@ -30,14 +30,6 @@ function Authorization(
             return this._user;
         },
 
-        getUserRoles: function() {
-            return this._user.roles;
-        },
-
-        setUser: function(user) {
-            this._user = user;
-        },
-
         init: function(force) {
             var deferred = $q.defer(), self = this;
             if (force === true) this._user = undefined;

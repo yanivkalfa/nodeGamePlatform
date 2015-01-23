@@ -5,22 +5,22 @@ angular.module(ngp.const.app.name)
     .factory('Api', [
         '$http',
         '$q',
-        apiFactory
+        Api
     ]);
 
-function apiFactory(
+function Api(
     $http,
     $q
     ) {
 
-    function ApiFunction(url, method, params, options){
+    function ApiFactory(url, method, params, options){
         this._url = url || false;
         this._method = method || false;
         this._params = params || false;
         this._options = options || false;
     }
 
-    ApiFunction.prototype = {
+    ApiFactory.prototype = {
         setOptions : function(options){ this._options = options; return this; },
         setURL : function(url){ this._url = url; return this; },
         setMethod : function(method){ this._method = method; return this; },
@@ -64,5 +64,5 @@ function apiFactory(
         }
     };
 
-    return { createNewApi : function(url, method, params, options){ return new ApiFunction(url, method, params, options); } }
+    return { createNewApi : function(url, method, params, options){ return new ApiFactory(url, method, params, options); } }
 }

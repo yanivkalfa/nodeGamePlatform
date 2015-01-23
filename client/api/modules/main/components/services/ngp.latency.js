@@ -6,10 +6,10 @@ angular.module(ngp.const.app.name)
         '$rootScope',
         '$q',
         'WebSocket',
-        latencyService
+        Latency
     ]);
 
-function latencyService($rootScope, $q, WebSocket) {
+function Latency($rootScope, $q, WebSocket) {
 
     function LatencyService(){
         this._pingSent = 0;

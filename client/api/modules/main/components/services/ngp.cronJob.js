@@ -3,12 +3,12 @@
  */
 angular.module(ngp.const.app.name)
     .service('CronJobs', [
-        cronJobs
+        CronJobs
     ]);
 
-function cronJobs() {
+function CronJobs() {
 
-    function CronJobs(){
+    function CronJobsService(){
         this._intervalInit = false;
 
         this.interval = 1000;
@@ -17,7 +17,7 @@ function cronJobs() {
         this.init();
     }
 
-    CronJobs.prototype =  {
+    CronJobsService.prototype =  {
 
         init : function(){
             var self = this;
@@ -76,5 +76,5 @@ function cronJobs() {
         }
     };
 
-    return new CronJobs();
+    return new CronJobsService();
 }
