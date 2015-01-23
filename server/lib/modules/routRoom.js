@@ -12,7 +12,48 @@ module.exports = function(_s, _rf){
     RoutRoom.prototype = Object.create(router.prototype);
     RoutRoom.prototype.constructor = RoutRoom;
 
+    RoutRoom.prototype.getRooms = function(spark, msg){
+        var RoomHandler = new _rf.RoomHandler()
+            , sendRooms;
 
+        sendRooms = function(){
+            RoomHandler
+                .cleanSparkList()
+                .assembleRooms();
+
+            var data  = {
+                "m" : 'roomDo',
+                "d" : {
+                    "m" : 'getRooms',
+                    "d" : RoomHandler.getRooms()
+                }
+            };
+
+            spark.write({"m": "chat", "d":data});
+        };
+        RoomHandler.getRoomsForSpark(spark.id).then(function(rooms){
+            RoomHandler.setRoomNames(rooms)
+                .getSparksForAllRooms(RoomHandler.roomNames.map(RoomHandler.getSparksInRoom)).then(function(roomsSparks){
+                    RoomHandler.setRoomsSparks(roomsSparks)
+                        .setSparkList()
+                        .checkUserNameInPrimus()
+                        .setInSpark();
+
+                    if(RoomHandler.inSparks.length) {
+                        RoomHandler.fetchUsersInSparks().then(function(users){
+                            RoomHandler.checkUserNameInDB(users);
+                            sendRooms();
+                        }).catch(sendRooms);
+                    }else{
+                        sendRooms()
+                    }
+
+
+            }).catch(console.log);
+        }).catch(console.log)
+    };
+
+    /*
     RoutRoom.prototype.getRooms = function(spark, msg){
 
         // @todo improve error catching as there is none currently and maybe cut down on the loops.
@@ -41,6 +82,7 @@ module.exports = function(_s, _rf){
                         active : false
                     };
                 });
+
 
                 roomsForSpark.forEach(function(room){
                     if(!_.isArray(room.content.members)) return false;
@@ -117,6 +159,7 @@ module.exports = function(_s, _rf){
         });
 
     };
+    */
 
     RoutRoom.prototype.getRoom = function(spark, msg){
 

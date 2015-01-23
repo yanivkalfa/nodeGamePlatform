@@ -1,6 +1,141 @@
-module.exports = function(_s){
+module.exports = function(_s, _rf){
 
-    return {
+    var  _ = _s.oReq.lodash
+        , User = _rf.User
+        ;
+
+    function RoomHandler(){
+        this.rooms = [];
+        this.roomNames = [];
+        this.roomsSparks = [];
+        this.sparkList = {};
+        this.unique = {};
+        this.inSparks = [];
+
+    }
+
+    RoomHandler.prototype = {
+
+
+        assembleRooms : function(){
+            var self = this;
+            self.roomNames.forEach(function(room, index){
+                self.rooms.push({
+                    id : room,
+                    title : room,
+                    content : {
+                        msg : [],
+                        members : self.getSparksForRoom(index)
+                    },
+                    active : false
+                });
+            });
+
+            return this;
+        },
+
+
+        setRoomNames : function(rooms){
+            if(!_.isArray(rooms)) return false;
+
+            this.roomNames = rooms.filter(function(room){
+                return !(room.indexOf("u_") === 0 || room === 'terminal');
+            });
+            return this;
+        },
+
+        setRoomsSparks : function(roomsSparks){
+            this.roomsSparks = roomsSparks;
+            return this;
+        },
+
+        setSparkList : function(){
+            var self = this;
+            this.roomsSparks.forEach(function(sparkInRoom){
+                if(!_.isArray(sparkInRoom)) return false;
+                for(var i=0; i < sparkInRoom.length; i++ ){
+                    self.sparkList[sparkInRoom[i]] = false;
+                }
+            });
+            return this;
+        },
+
+        setInSpark : function(){
+            var self = this;
+            _(self.sparkList).forEach(function(spark, sparkId) {
+                if(!spark) self.inSparks.push(sparkId);
+            });
+            return this;
+        },
+
+        checkUserNameInPrimus : function(){
+            var self = this;
+            _s.primus.forEach(function (primSpark, next) {
+                _(self.sparkList).forEach(function(spark, sparkId) {
+                    if(primSpark.id == sparkId){
+                        self.sparkList[sparkId] = {username : primSpark.user.username, id : primSpark.user.id};
+                        return false;
+                    }
+                });
+                next();
+            }, function (err) {});
+            return this;
+        },
+        checkUserNameInDB : function(users){
+            if(!_.isArray(users)) return false;
+            var self = this;
+            users.forEach(function(user){
+                self.sparkList[user.spark] = {username : user.username, id : user.id};
+            });
+
+            return this;
+        },
+
+        cleanSparkList : function(){
+            var self = this;
+            _(self.sparkList).forEach(function(spark, sparkId) {
+                if(!spark) delete self.sparkList[sparkId];
+                if(!self.unique[spark.id] ) self.unique[spark.id] = {count:0, sparkId : sparkId};
+                self.unique[spark.id].count++;
+            });
+
+            _(self.unique).forEach(function(uniqueSpark, index) {
+                if(uniqueSpark.count > 1) delete self.sparkList[uniqueSpark.sparkId];
+            });
+
+            return this;
+        },
+
+        fetchUsersInSparks : function(){
+            var self = this;
+            return new _s.oReq.Promise(function(resolve, reject) {
+                User.fetchUsers({ 'spark': { $in: self.inSparks }}).then(resolve).catch(reject);
+            });
+        },
+
+        getRooms : function(){
+            return this.rooms;
+        },
+
+        getSparksForRoom : function(index){
+            var sparksForRoom = [], self = this;
+            _(self.roomsSparks).forEach(function(sparkInRoom, roomIndex){
+                if(roomIndex !== index) return true;
+                for(var i=0; i < sparkInRoom.length; i++ ){
+                    sparksForRoom.push(self.sparkList[sparkInRoom[i]]);
+                }
+                return false;
+            });
+
+            return sparksForRoom;
+        },
+
+        getSparksForAllRooms : function(roomsSparkPromises){
+            return new _s.oReq.Promise(function(resolve, reject) {
+                _s.oReq.Promise.all(roomsSparkPromises).then(resolve).catch(reject)
+            });
+        },
+
         getRoomsForSpark : function(spark){
             return new _s.oReq.Promise(function(resolve, reject) {
                 _s.primus.rooms(spark, function(err, rooms){
@@ -17,12 +152,24 @@ module.exports = function(_s){
                     return resolve(sparks);
                 });
             });
+        },
+
+        destroy : function(room){
+            this.rooms = [];
+            this.roomNames = [];
+            this.roomsSparks = [];
+            this.sparkList = {};
+            this.unique = {};
+            this.inSparks = [];
+            return this;
         }
+    };
 
-
-    }
+    return RoomHandler;
 
 };
+
+
 //RoomHandler
 
 /*
