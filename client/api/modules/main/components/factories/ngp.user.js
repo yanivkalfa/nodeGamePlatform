@@ -44,8 +44,7 @@ function User(
 
             if(!id && !username) return false;
 
-            if(id){ credentials = {"id" : id }; }
-            if(username){ credentials = {"username" : username }; }
+            credentials = id ? {"id" : id } : {"username" : username };
 
 
             fail = function(err){

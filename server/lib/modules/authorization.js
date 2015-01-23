@@ -1,5 +1,7 @@
 module.exports = function(_s){
     var _user = undefined
+        , _rout = undefined
+        , _authenticated = false
         , _ = _s.oReq.lodash
         , visibleField = ['id','username', 'firName','lastName','email','roles', 'token']
         ;
@@ -68,10 +70,6 @@ module.exports = function(_s){
                     return resolve(user.spark);
                 });
             });
-        },
-
-        checkUserDetails : function(userDetails){
-            return true;
         },
 
         authenticate: function() {

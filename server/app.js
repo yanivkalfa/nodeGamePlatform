@@ -61,7 +61,7 @@ _s.primus.on('connection', function (spark) {
 
     _s.oReq.jwt.verify(spark.query.token, sessSecret, function(err, decoded) {
         if(!_.isUndefined(decoded) && !_.isUndefined(decoded.userId)){
-            _s.oModules.User.login({"_id" : decoded.userId}).then(function(user){
+            _s.oModules.Authorization.login({"_id" : decoded.userId}).then(function(user){
                 if(user === null)
                 {
                     spark.end({"method" : "disconnect", msg : "Could not authenticate user."} );
@@ -78,9 +78,9 @@ _s.primus.on('connection', function (spark) {
                     // Update user's spark id in database - in-case its needed
                     var upSkSuccess = function (success){};
                     var upSkFail = function(err){
-                        if(err) _s.oModules.User.updateSpark({"_id" : decoded.userId}, spark.id).then(upSkSuccess).catch(upSkFail);
+                        if(err) _s.oModules.Authorization.updateSpark({"_id" : decoded.userId}, spark.id).then(upSkSuccess).catch(upSkFail);
                     };
-                    _s.oModules.User.updateSpark({"_id" : decoded.userId}, spark.id).then(upSkSuccess).catch(upSkFail);
+                    _s.oModules.Authorization.updateSpark({"_id" : decoded.userId}, spark.id).then(upSkSuccess).catch(upSkFail);
 
                     // initiating socket router. and extending it.
                     var webSocket = _s.oModules.WebSocket();
