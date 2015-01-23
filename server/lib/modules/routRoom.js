@@ -17,31 +17,11 @@ module.exports = function(_s, _rf){
 
         var roomsForSpark = [], inSparks = [], sparkList = {};
 
-        console.log('aaaa');
-
         _rf.RoomHandler.getRoomsForSpark(spark.id).then(function(rooms){
 
             if(!_.isArray(rooms)) return false;
-            var promiseRooms = rooms.map(function(room, index){
-                if(room.indexOf("u_") === 0 || room === 'terminal') return false;
-                roomsForSpark[index] = {
-                    id :room,
-                    title:room,
-                    content:{
-                        msg : [],
-                        members:[]
-                    },
-                    active : false
-                };
-
-                return _rf.RoomHandler.getSparksInRoom(room).then(function(index, sparks){
-                        roomsForSpark[index].content.members = sparks;
-                    }.bind(this,index)).catch(function(err){
-
-                });
-            });
-
-
+            var filter = function(room){ return !(room.indexOf("u_") === 0 || room === 'terminal'); };
+            var promiseRooms = rooms.filter(filter).map(_rf.RoomHandler.getSparksInRoom);
 
 
             _s.primus.all(promiseRooms).then(function(NotImportant) {
