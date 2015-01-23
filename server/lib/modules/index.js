@@ -10,7 +10,7 @@ module.exports = function(_s){
     rf.Router = require('./supers/router.js')(_s);
     rf.RouterMsg = require('./routerMsg.js')(rf);
     rf.RouterRoom = require('./routerRoom.js')(rf);
-    rf.Chat = require('./chat.js');
+    rf.Chat = require('./chat.js')(rf);
 
     return rf;
 };
