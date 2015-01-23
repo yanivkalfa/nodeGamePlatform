@@ -35,13 +35,14 @@ module.exports = function(_s, _rf){
                 };
 
                 return _rf.RoomHandler.getSparksInRoom(room).then(function(sparks, index){
-                    roomsForSpark[index].content.members = sparks;
+                        console.log('sparks', sparks, 'index', index);
+                        roomsForSpark[index].content.members = sparks;
                     }.bind(this,index)).catch(function(err){
 
                 });
             });
 
-            console.log('roomsForSpark', roomsForSpark);
+
 
 
             _s.primus.all(promiseRooms).then(function(NotImportant) {
