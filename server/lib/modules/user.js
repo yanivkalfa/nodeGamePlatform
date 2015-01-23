@@ -28,9 +28,10 @@ module.exports = function(_s){
 
         fetchUsers : function(credentials){
             return new _s.oReq.Promise(function(resolve, reject) {
-                Users.find(credentials).exec(function (err, user) {
+                Users.find(credentials).exec(function (err, users) {
+                    console.log(err, user, credentials);
                     if(err) return reject(err);
-                    return resolve(user);
+                    return resolve(users);
                 });
             });
         },
