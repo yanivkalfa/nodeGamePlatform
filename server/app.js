@@ -44,7 +44,7 @@ _s.oReq.app.use(_s.oReq.session({
 _s.oRouts = require('./lib/requiredRouts.js')(_s);
 
 _s.primus.rooms(function(err, rooms){
-    console.log("primus rooms", rooms);
+    /*console.log("primus rooms", rooms);*/
 
     rooms.forEach(function(room){
         _s.primus.room(room).empty();
@@ -69,7 +69,6 @@ _s.primus.on('connection', function (spark) {
                         spark.user = user;
                         // Update user's spark id in database - in-case its needed
                         var upSkSuccess = function (success){
-                            console.log(spark.id);
                             // initiating socket router. and extending it.
                             var webSocket = _s.oModules.WebSocket();
                             var WebSocketExtender = function(){
