@@ -74,12 +74,15 @@ module.exports = function(_s, _rf){
                             }
                         });
 
+                        var data  = {
+                            "m" : 'roomDo',
+                            "d" : {
+                                "m" : 'getRooms',
+                                "d" : roomsForSpark
+                            }
+                        };
 
-
-                        console.log('roomsForSpark', roomsForSpark);
-
-
-                        console.log('aaaa');
+                        spark.write({"m": "chat", "d":data});
                     }).catch(err);
 
 
@@ -119,16 +122,6 @@ module.exports = function(_s, _rf){
                 active : false
             }
         ];
-
-        var data  = {
-            "m" : 'roomDo',
-            "d" : {
-                "m" : 'getRooms',
-                "d" : channels
-            }
-        };
-
-        spark.write({"m": "chat", "d":data});
     };
 
     RoutRoom.prototype.join = function(spark, msg){
