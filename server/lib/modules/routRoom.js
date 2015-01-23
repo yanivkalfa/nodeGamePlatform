@@ -16,21 +16,6 @@ module.exports = function(_s, _rf){
         var RoomHandler = new _rf.RoomHandler()
             , sendRooms;
 
-        sendRooms = function(){
-            RoomHandler
-                .cleanSparkList()
-                .assembleRooms();
-
-            var data  = {
-                "m" : 'roomDo',
-                "d" : {
-                    "m" : 'getRooms',
-                    "d" : RoomHandler.getRooms()
-                }
-            };
-
-            spark.write({"m": "chat", "d":data});
-        };
         RoomHandler.getRoomsForSpark(spark.id).then(function(rooms){
             RoomHandler.setRoomNames(rooms)
                 .getSparksForAllRooms(RoomHandler.roomNames.map(RoomHandler.getSparksInRoom)).then(function(roomsSparks){
@@ -41,11 +26,11 @@ module.exports = function(_s, _rf){
 
                     if(RoomHandler.inSparks.length) {
                         RoomHandler.fetchUsersInSparks().then(function(users){
-                            RoomHandler.checkUserNameInDB(users);
-                            sendRooms();
-                        }).catch(sendRooms);
+                            RoomHandler.checkUserNameInDB(users)
+                                .sendRooms(spark);
+                        }).catch(RoomHandler.sendRooms.bind(RoomHandler, spark));
                     }else{
-                        sendRooms()
+                        RoomHandler.sendRooms(spark);
                     }
 
 

@@ -16,6 +16,22 @@ module.exports = function(_s, _rf){
 
     RoomHandler.prototype = {
 
+        sendRooms : function(spark){
+            var self = this;
+            self
+                .cleanSparkList()
+                .assembleRooms();
+
+            var data  = {
+                "m" : 'roomDo',
+                "d" : {
+                    "m" : 'getRooms',
+                    "d" : self.getRooms()
+                }
+            };
+
+            spark.write({"m": "chat", "d":data});
+        },
 
         assembleRooms : function(){
             var self = this;
