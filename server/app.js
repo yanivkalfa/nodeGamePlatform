@@ -107,9 +107,11 @@ _s.primus.on('connection', function (spark) {
 
                 }
 
-            }).catch(function(err){
+            });/*
+                .catch(function(err){
                 if(err) spark.end({"method" : "disconnect", msg : "Could not authenticate user b."} );
             });
+            */
         }else{
             spark.end({"method" : "disconnect", msg : "Could not authenticate user c."} );
         }
