@@ -64,6 +64,7 @@ _s.primus.on('connection', function (spark) {
                 }
                 else
                 {
+                    console.log(decoded);
                     // Attaching user to spark - for logout and maybe future needs
                     spark.user = user;
 
@@ -111,6 +112,7 @@ _s.primus.on('connection', function (spark) {
                     };
 
                     var upSkFail = function(err){
+                        console.log('aaaaaaaaaa');
                         if(err) _s.oModules.User.updateSpark({"_id" : decoded.userId}, spark.id).then(upSkSuccess, upSkEmpty).catch(upSkFail);
                     };
 
