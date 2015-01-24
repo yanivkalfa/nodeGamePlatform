@@ -46,9 +46,6 @@ module.exports = function(_s, _rf){
                     active : false
                 });
             });
-
-            console.log('50 roomHandler.js');
-            console.log(self.rooms);
             return this;
         },
 

@@ -33,10 +33,11 @@ function webSocket($rootScope, $q, RoutChat/*,Authorization*/) {
                 self[msg.m](msg.d);
             });
 
+            /*
             var data  = {
                 "m" : 'roomDo',
                 "d" : {
-                    "m" : 'join',
+                    "m" : 'leave',
                     "d" : {
                         "name" : 'aRoomName',
                         "type" : 'chat',
@@ -45,6 +46,7 @@ function webSocket($rootScope, $q, RoutChat/*,Authorization*/) {
                 }
             };
             this.Primus.write({"m": "chat", "d":data});
+            */
 
             this.Primus.on('open', function open() {
                 self.connected = true;

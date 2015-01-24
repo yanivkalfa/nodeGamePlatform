@@ -16,8 +16,10 @@ module.exports = function(_s){
 
     _s.oReq.app.get('/contents/:content', function (req, res) {
         if(_s.oConfig.routs.loginRequired(req.params.content)){
-            _s.oModules.Authorization.init(req.session.user, _s.oConfig.routs.getRout(req.params.content));
-            if(_s.oModules.Authorization.isAuthenticated()){
+
+            var auth = new _s.oModules.Authorization(req.session.user, _s.oConfig.routs.getRout(req.params.content));
+
+            if(auth.isAuthenticated()){
                 res.render(_s.sServerDirname + '/tpl/contents/' + req.params.content + '.jade');
             }else{
                 res.render(_s.sServerDirname + '/tpl/contents/restricted' + '.jade');

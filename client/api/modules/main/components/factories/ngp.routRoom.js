@@ -21,7 +21,7 @@ function RoutRoom($rootScope, UtilFunc, Chat, Router) {
 
 
     RoutRoomFactory.prototype.join = function(msg){
-        console.log('join', msg);
+        Chat.addMember(msg.user, msg.room);
     };
 
     RoutRoomFactory.prototype.leave = function(msg){

@@ -92,7 +92,7 @@ module.exports = function(_s, _rf){
 
         User.fetchUser({"id":spark.user.id}).then(_rf.RoomHandler.joinRoom.bind(this,msg.name)).then(function(user){
             spark.join(msg.name, function(err, succ){
-                if(err) warning('We were unable to join you to that room');
+                if(err) return warning('We were unable to join you to that room');
                 self.getRoom(spark, msg.name);
 
                 data  = {
@@ -100,9 +100,9 @@ module.exports = function(_s, _rf){
                     "d" : {
                         "m" : 'join',
                         "d" : {
-                            "name" : msg.name,
+                            "room" : {id : msg.name},
                             "type" : msg.type,
-                            "username" : spark.user.username
+                            "user" : {username : user.username, id : user.id}
                         }
                     }
                 };
@@ -113,7 +113,51 @@ module.exports = function(_s, _rf){
     };
 
     RoutRoom.prototype.leave = function(spark, msg){
+        var randomId = Math.floor(Math.random()*300000)
+            , data
+            , self = this
+            , warning
+            ;
 
+        warning = function(err){
+            var dateNow = Date.now();
+            data  = {
+                "m" : 'msg',
+                "d" : {
+                    "m" : 'add',
+                    "d" : {
+                        "id" : dateNow + randomId.toString(),
+                        "toType" : "warning",
+                        "to" : spark.user.username,
+                        "from" : "System",
+                        "date" : dateNow,
+                        "msg" : err
+                    }
+                }
+            };
+            return spark.write({"m": "chat", "d":data});
+        };
+        if(msg.name.indexOf("u_") === 0 || msg.name === 'terminal') warning('Illegal room name "' + msg.name + '"');
+
+        User.fetchUser({"id":spark.user.id}).then(_rf.RoomHandler.leaveRoom.bind(this,msg.name)).then(function(user){
+            spark.leave(msg.name, function(err, succ){
+                if(err) return warning('We were unable to remove you from that room');
+
+                data  = {
+                    "m" : 'roomDo',
+                    "d" : {
+                        "m" : 'leave',
+                        "d" : {
+                            "room" : {id : msg.name},
+                            "type" : msg.type,
+                            "user" : {username : user.username, id : user.id}
+                        }
+                    }
+                };
+                _s.primus.room(msg.name).write({"m": "chat", "d":data});
+            });
+
+        }).catch(warning);
     };
 
     return RoutRoom;

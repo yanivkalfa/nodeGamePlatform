@@ -1,30 +1,30 @@
 module.exports = function(_s){
-    var _user = undefined
-        , _rout = undefined
-        , _authenticated = false
-        , _ = _s.oReq.lodash
-        ;
 
-    return {
+    var _ = _s.oReq.lodash;
+
+    function Authorization(user, rout){
+        this._user = user || undefined;
+        this._rout = rout || undefined;
+        this._authenticated = false;
+        this.authenticate();
+    }
+
+
+    Authorization.prototype =  {
+
         get: function() {
-            return _user;
+            return this._user;
         },
         getRoles: function() {
-            return _user.roles;
+            return this._user.roles;
         },
 
         set: function(user) {
-            _user = user;
-        },
-
-        init: function(user, rout) {
-            _user = user;
-            _rout = rout;
-            this.authenticate();
+            this._user = user;
         },
 
         isResolved: function() {
-            return !_.isUndefined(_user);
+            return !_.isUndefined(this._user);
         },
 
         login : function(credentials){
@@ -51,16 +51,16 @@ module.exports = function(_s){
         },
 
         authenticate: function() {
-            return _authenticated = (!_.isUndefined(_user) && this.isInAnyRole(_rout.roles || []))
+            return this._authenticated = (!_.isUndefined(this._user) && this.isInAnyRole(this._rout.roles || []))
         },
 
         isAuthenticated: function() {
-            return _authenticated;
+            return this._authenticated;
         },
 
         isInRole: function(role) {
-            if(_.isUndefined(_user.roles)) return -1;
-            return _user.roles.indexOf(role) != -1;
+            if(_.isUndefined(this._user.roles)) return -1;
+            return this._user.roles.indexOf(role) != -1;
         },
 
         isInAnyRole: function(roles) {
@@ -73,4 +73,7 @@ module.exports = function(_s){
             return false;
         }
     };
+
+
+    return Authorization;
 };
