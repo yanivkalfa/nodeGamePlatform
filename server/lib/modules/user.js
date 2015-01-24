@@ -56,7 +56,6 @@ module.exports = function(_s){
             return new _s.oReq.Promise(function(resolve, reject) {
 
                 fail = function(err){
-                    self.set(undefined);
                     if(err) return reject(err);
                 };
 
