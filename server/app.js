@@ -63,6 +63,8 @@ _s.primus.on('connection', function (spark) {
                 }
                 else
                 {
+
+                    console.log((new Error).lineNumber);
                     // Joining terminal, lobby  and user channels
                     var userChannel = 'u_' + decoded.userId;
                     spark.join('terminal lobby ' + userChannel, function(){
@@ -87,7 +89,7 @@ _s.primus.on('connection', function (spark) {
                                     chat.rout(spark, msg);
                                 }
                             };
-                            console.log(new Error().lineNumber);
+
                             WebSocketExtender.prototype = webSocket.prototype;
                             _s.oModules.uf.extend(WebSocketExtender, extendRouterWith);
 
