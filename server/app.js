@@ -4,7 +4,7 @@ console.log = (function(_super) {
         var line = new Error().stack.split('\n')[1].split(':')[1];
         var arg = __dirname +' - (line ' + line + ')';
         var newArguments = Array.prototype.push.call(arguments, arg);
-        return _super.apply(this, newArguments);
+        return _super.apply(this, arguments);
     };
 })(console.log);
 
