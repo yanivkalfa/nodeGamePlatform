@@ -33,6 +33,23 @@ module.exports = function(_s, _rf){
             spark.write({"m": "chat", "d":data});
         },
 
+        sendRoom : function(spark){
+            var self = this;
+            self
+                .cleanSparkList()
+                .assembleRooms();
+
+            var data  = {
+                "m" : 'roomDo',
+                "d" : {
+                    "m" : 'getRoom',
+                    "d" : self.getRooms()
+                }
+            };
+
+            spark.write({"m": "chat", "d":data});
+        },
+
         assembleRooms : function(){
             var self = this;
             self.roomNames.forEach(function(room, index){
