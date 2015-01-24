@@ -1,8 +1,8 @@
 var _s = {};
 console.log = (function(_super) {
     return function() {
-        var line = new Error().stack.split('\n')[1].split(':')[1];
-        var arg = __dirname +' - (line ' + line + ')';
+        var file = __filename.split('/');
+        var arg = file[file.length-1] +' - (line ' + new Error().stack.split('\n')[1].split(':')[1] + ')';
         Array.prototype.push.call(arguments, arg);
         return _super.apply(this, arguments);
     };
