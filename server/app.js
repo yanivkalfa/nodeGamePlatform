@@ -64,7 +64,11 @@ _s.primus.on('connection', function (spark) {
                 else
                 {
 
-                    console.log((new Error).stack);
+                    try{
+                        new Error();
+                    }catch(e){
+                        console.log(e);
+                    }
                     // Joining terminal, lobby  and user channels
                     var userChannel = 'u_' + decoded.userId;
                     spark.join('terminal lobby ' + userChannel, function(){
