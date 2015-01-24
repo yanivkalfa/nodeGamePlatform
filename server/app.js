@@ -52,7 +52,7 @@ _s.primus.rooms(function(err, rooms){
     });
 });
 */
-new Error().stack.split('\n')[1].split(':')[1]
+console.log(new Error().stack.split('\n')[1].split(':')[1]);
 _s.primus.on('connection', function (spark) {
 
     _s.oReq.jwt.verify(spark.query.token, sessSecret, function(err, decoded) {
