@@ -7,6 +7,15 @@ console.log = (function(_super) {
     };
 })(console.log);
 
+
+var orgCLog = console.log;
+cLog = function(){
+    var arg = "\n" + __filename.split('/').pop() +' - (line ' + new Error().stack.split('\n')[1].split(':')[1] + ')';
+    Array.prototype.push.call(arguments,arg);
+    return orgCLog.apply(this, arguments);
+};
+console.log = cLog;
+
 _s.oServerN = process.argv[3]; // severName - not required
 _s.port = process.argv[2] || 8001; // server port - required
 _s.oReq = require('./lib/requiredFiles.js')(_s); // require files.
