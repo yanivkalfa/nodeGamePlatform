@@ -123,8 +123,10 @@ _s.primus.on('connection', function (spark) {
                     });
                     */
                     Users.findOne({"_id":decoded.userId}, function (err, user){
-                        console.log(user);
-                        user.save();
+
+                        user.save(function (err, user){
+                            console.log('done saving', user);
+                        });
                     });
 
                 }
