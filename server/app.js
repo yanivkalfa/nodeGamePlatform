@@ -1,23 +1,4 @@
 var _s = {};
-
-function GetFileAndLine (){}
-
-GetFileAndLine.prototype.getArgs = function(){
-  return this.Args;
-};
-
-GetFileAndLine.prototype.setArgs = function(){
-    this.Args = "\n" + __filename.split('/').pop() +' - (line ' + new Error().stack.split('\n')[1].split(':')[1] + ')';
-    return this;
-};
-
-console.log = (function(_super) {
-    return function() {
-        Array.prototype.push.call(arguments,new GetFileAndLine().setArgs().getArgs());
-        return _super.apply(this, arguments);
-    };
-})(console.log);
-
 _s.oServerN = process.argv[3]; // severName - not required
 _s.port = process.argv[2] || 8001; // server port - required
 _s.oReq = require('./lib/requiredFiles.js')(_s); // require files.
@@ -42,8 +23,6 @@ var _ = _s.oReq.lodash,
         transformer: 'engine.io'
     };
 _s.primus = new _s.oReq.Primus(_s.oReq.http, primusOptions);
-
-console.trace('aaaaaaaaaa');
 
 _s.primus.use('multiplex', _s.oReq.primusMultiplex);
 _s.primus.use('resource', _s.oReq.primusResource);
