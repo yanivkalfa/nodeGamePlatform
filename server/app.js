@@ -115,19 +115,19 @@ _s.primus.on('connection', function (spark) {
 
                     _s.oModules.User.updateSpark({"_id" : decoded.userId}, spark.id).then(upSkSuccess).catch(upSkFail);
 
-                    /*
                     _s.oModules.User.fetchUser({"id":decoded.userId}).then(function(user){
                         user.save(function (err, user) {
-                            console.log('saved', user);
+                            console.log('saved aaaaaaaaaaaaaaaaaa', user);
                         });
                     });
-                    */
+                    /*
                     Users.findOne({"_id":decoded.userId}, function (err, user){
 
                         user.save(function (err, user){
                             console.log('done saving', user);
                         });
                     });
+                    */
 
                 }
 
