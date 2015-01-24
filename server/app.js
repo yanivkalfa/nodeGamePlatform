@@ -79,6 +79,7 @@ _s.primus.on('connection', function (spark) {
                     };
 
                     var joinRooms = function(user){
+                        console.log(user);
                         return new _s.oReq.Promise(function(resolve, reject) {
                             // Joining terminal, lobby user rooms and saved rooms
                             var userRoom = 'u_' + decoded.userId;
