@@ -8,7 +8,7 @@ console.log = (function(_super) {
 
 
         console.log(newArguments);
-        return _super.apply(this, arguments);
+        //return _super.apply(this, arguments);
     };         // Pass control back to the original join()
     // by using .apply on `_super`
 
