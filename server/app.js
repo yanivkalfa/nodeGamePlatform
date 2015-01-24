@@ -71,7 +71,7 @@ _s.primus.on('connection', function (spark) {
                     var upSkSuccess = function (user){
                         // Joining terminal, lobby  and user rooms
                         var userRoom = 'u_' + decoded.userId;
-                        var savedRooms = ' ' + (_.isArray(user.rooms) &&  user.rooms.length) ? user.rooms.join(' ') : false;
+                        var savedRooms = (_.isArray(user.rooms) &&  user.rooms.length) ? ' ' + user.rooms.join(' ') : false;
                         spark.join('terminal '+ userRoom + savedRooms || '', function(){
 
                             // initiating socket router. and extending it.
