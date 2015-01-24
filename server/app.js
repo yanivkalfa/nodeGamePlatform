@@ -2,13 +2,11 @@ var _s = {};
 console.log = (function(_super) {
     return function() {
         var file = __filename.split('/');
-        var arg = file[file.length-1] +' - (line ' + new Error().stack.split('\n')[1].split(':')[1] + ')';
+        var arg = "\n" + file[file.length-1] +' - (line ' + new Error().stack.split('\n')[1].split(':')[1] + ')';
         Array.prototype.push.call(arguments,arg);
         return _super.apply(this, arguments);
     };
 })(console.log);
-
-console.log(__filename);
 
 _s.oServerN = process.argv[3]; // severName - not required
 _s.port = process.argv[2] || 8001; // server port - required
