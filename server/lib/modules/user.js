@@ -51,7 +51,7 @@ module.exports = function(_s){
 
             if(!id && !username) return false;
 
-            credentials = id ? {"id" : id } : {"username" : username };
+            credentials = id ? {"_id" : id } : {"username" : username };
 
             return new _s.oReq.Promise(function(resolve, reject) {
 
