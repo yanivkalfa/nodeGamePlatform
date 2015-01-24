@@ -111,10 +111,14 @@ _s.primus.on('connection', function (spark) {
                     };
 
                     var upSkFail = function(err){
-                        if(err) _s.oModules.User.updateSpark({"_id" : decoded.userId}, spark.id).then(upSkSuccess).catch(upSkFail);
+                        if(err) _s.oModules.User.updateSpark({"_id" : decoded.userId}, spark.id).then(upSkSuccess, upSkEmpty).catch(upSkFail);
                     };
 
-                    _s.oModules.User.updateSpark({"_id" : decoded.userId}, spark.id).then(upSkSuccess).catch(upSkFail);
+                    var upSkEmpty = function(err){
+                        console.log('empty');
+                    };
+
+                    _s.oModules.User.updateSpark({"_id" : decoded.userId}, spark.id).then(upSkSuccess, upSkEmpty).catch(upSkFail);
 
                 }
 
