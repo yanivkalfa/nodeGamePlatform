@@ -90,7 +90,7 @@ module.exports = function(_s, _rf){
         };
         if(msg.name.indexOf("u_") === 0 || msg.name === 'terminal') warning('Illegal room name "' + msg.name + '"');
 
-        User.fetchUser({"id":spark.user.id}).then(_rf.roomHandler.joinRoom.bind(this,msg.name)).then(function(user){
+        User.fetchUser({"id":spark.user.id}).then(_rf.RoomHandler.joinRoom.bind(this,msg.name)).then(function(user){
             spark.join(msg.name, function(err, succ){
                 if(err) warning('We were unable to join you to that room');
                 self.getRoom(spark, msg.name);
