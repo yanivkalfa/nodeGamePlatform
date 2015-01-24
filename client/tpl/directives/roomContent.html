@@ -1,0 +1,14 @@
+<div class="leftSide">
+    <div class="msgWrap">
+        <ul>
+            <li ng-repeat="msg in content.msg"> <ngp-room-msg class="toType" ng-class="msg.toType" msg="msg"></ngp-room-msg></li>
+        </ul>
+    </div>
+</div>
+
+<div class="rightSide">
+    <ul>
+        <li ng-repeat="member in content.members"> <ngp-room-member member="member"></ngp-room-member></li>
+    </ul>
+</div>
+<div class="clearFix"></div>

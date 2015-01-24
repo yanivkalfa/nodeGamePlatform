@@ -63,15 +63,16 @@ _s.primus.on('connection', function (spark) {
                 }
                 else
                 {
+                    // Attaching user to spark - for logout and maybe future needs
+                    spark.user = user;
 
-                    // Joining terminal, lobby  and user channels
-                    var userChannel = 'u_' + decoded.userId;
-                    spark.join('terminal lobby ' + userChannel, function(){
+                    // Update user's spark id in database - in-case its needed
+                    var upSkSuccess = function (user){
+                        console.log(user.rooms);
+                        // Joining terminal, lobby  and user rooms
+                        var userRoom = 'u_' + decoded.userId;
+                        spark.join('terminal '+ userRoom + ' ' + user.rooms.join(' '), function(){
 
-                        // Attaching userId to spark - for logout and maybe future needs
-                        spark.user = user;
-                        // Update user's spark id in database - in-case its needed
-                        var upSkSuccess = function (success){
                             // initiating socket router. and extending it.
                             var webSocket = _s.oModules.WebSocket();
                             var WebSocketExtender = function(){
@@ -97,17 +98,19 @@ _s.primus.on('connection', function (spark) {
                                 "m" : 'roomDo',
                                 "d" : {
                                     "m" : 'getRooms',
-                                    "d" : {}
+                                    "d" : {
+                                        rooms : user.rooms
+                                    }
                                 }
                             };
                             webSocketExtender.chat(spark,data);
-                        };
-                        var upSkFail = function(err){
-                            if(err) _s.oModules.Authorization.updateSpark({"_id" : decoded.userId}, spark.id).then(upSkSuccess).catch(upSkFail);
-                        };
-                        _s.oModules.Authorization.updateSpark({"_id" : decoded.userId}, spark.id).then(upSkSuccess).catch(upSkFail);
+                        });
+                    };
 
-                    });
+                    var upSkFail = function(err){
+                        if(err) _s.oModules.User.updateSpark({"_id" : decoded.userId}, spark.id).then(upSkSuccess).catch(upSkFail);
+                    };
+                    _s.oModules.User.updateSpark({"_id" : decoded.userId}, spark.id).then(upSkSuccess).catch(upSkFail);
 
                 }
 

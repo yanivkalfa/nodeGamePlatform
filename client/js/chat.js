@@ -356,7 +356,7 @@
                 activeTabIndex = _this.s.oVars.oTabs.tabs( "option", "active");
                 roomName = $(_this.s.oBinds.tabs.find('ul.tabsContainer li.roomNav')[activeTabIndex]).data("rName");
                 if(room.init.room.name !== roomName){
-                    room.init.notifyChannel();
+                    room.init.notifyRoom();
                     room.init.updateNotification();
                     _this.s.oBinds.notification.currentTime = 0;
                     _this.s.oBinds.notification.play();
@@ -535,7 +535,7 @@
                     return true;
                 },
                 leave : function(args){
-                    console.log("leaving channel client");
+                    console.log("leaving room client");
                     var toEmit;
                     toEmit = {
                         "action" : "leave",

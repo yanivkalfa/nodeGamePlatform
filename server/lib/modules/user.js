@@ -69,6 +69,34 @@ module.exports = function(_s){
                     return success(user);
                 });
             });
+        },
+
+        updateSpark : function(credentials, sparkId){
+            return new _s.oReq.Promise(function(resolve, reject) {
+                Users.update(credentials, {spark : sparkId}).exec(function (err, user) {
+                    if(err) return reject(err);
+                    return resolve(user);
+                });
+            });
+        },
+
+        updateRooms : function(credentials, update){
+            return new _s.oReq.Promise(function(resolve, reject) {
+                Users.update(credentials, update).exec(function (err, user) {
+                    if(err) return reject(err);
+                    return resolve(user);
+                });
+            });
+        },
+
+        getSparkId : function(credentials){
+            return new _s.oReq.Promise(function(resolve, reject) {
+                Users.findOne(credentials).exec(function (err, user) {
+                    if(err) return reject(err);
+                    return resolve(user.spark);
+                });
+            });
         }
+
     };
 };

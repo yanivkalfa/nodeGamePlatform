@@ -16,43 +16,43 @@ function Chat($rootScope, UtilFunc) {
 
     ChatFactory.prototype =  {
 
-        joinChannel : function(channel){
-            var index = UtilFunc.indexOf($rootScope.ngp.channels, channel, 'id');
+        joinRoom : function(room){
+            var index = UtilFunc.indexOf($rootScope.ngp.rooms, room, 'id');
             if(index != -1) return false;
-            $rootScope.ngp.channels.push(channel);
+            $rootScope.ngp.rooms.push(room);
 
             return true;
         },
 
-        leaveChannel : function(channel){
-            var index = UtilFunc.indexOf($rootScope.ngp.channels, channel, 'id');
+        leaveRoom : function(room){
+            var index = UtilFunc.indexOf($rootScope.ngp.rooms, room, 'id');
             if(index == -1) return false;
-            $rootScope.ngp.channels.splice(index,1);
+            $rootScope.ngp.rooms.splice(index,1);
 
             return true;
         },
 
-        addMsg : function(msg, channel){
+        addMsg : function(msg, room){
             var self = this;
-            var index = UtilFunc.indexOf($rootScope.ngp.channels, channel, 'id');
+            var index = UtilFunc.indexOf($rootScope.ngp.rooms, room, 'id');
             if(index == -1) return false;
-            $rootScope.ngp.channels[index].msg.push(msg);
-            self.updateChannelsNotification(index);
+            $rootScope.ngp.rooms[index].msg.push(msg);
+            self.updateRoomsNotification(index);
             return true;
         },
 
-        removeMsg : function(msg, channel){
-            var cIndex = UtilFunc.indexOf($rootScope.ngp.channels, channel, 'id');
+        removeMsg : function(msg, room){
+            var cIndex = UtilFunc.indexOf($rootScope.ngp.rooms, room, 'id');
             if(cIndex == -1) return false;
-            var mIndex = UtilFunc.indexOf($rootScope.ngp.channels[cIndex].msg, msg, 'date');
+            var mIndex = UtilFunc.indexOf($rootScope.ngp.rooms[cIndex].msg, msg, 'date');
             if(mIndex == -1) return false;
-            $rootScope.ngp.channels[cIndex].msg.splice(mIndex,1);
+            $rootScope.ngp.rooms[cIndex].msg.splice(mIndex,1);
             return true;
         },
 
-        updateChannelsNotification : function(index){
+        updateRoomsNotification : function(index){
             var self = this;
-            if(!$rootScope.ngp.channels[index].active) {
+            if(!$rootScope.ngp.rooms[index].active) {
                 self.addNotification(index);
                 var notification = document.getElementById('notification');
                 notification.currentTime = 0;
@@ -60,29 +60,29 @@ function Chat($rootScope, UtilFunc) {
             }
         },
 
-        addMember : function(member,channel){
-            var index = UtilFunc.indexOf($rootScope.ngp.channels, channel, 'id');
+        addMember : function(member,room){
+            var index = UtilFunc.indexOf($rootScope.ngp.rooms, room, 'id');
             if(index == -1) return false;
-            $rootScope.ngp.channels[index].members.push(member);
+            $rootScope.ngp.rooms[index].members.push(member);
             return true;
         },
 
-        removeMember : function(member,channel){
-            var cIndex = UtilFunc.indexOf($rootScope.ngp.channels, channel, 'id');
+        removeMember : function(member,room){
+            var cIndex = UtilFunc.indexOf($rootScope.ngp.rooms, room, 'id');
             if(cIndex == -1) return false;
-            var mIndex = UtilFunc.indexOf($rootScope.ngp.channels[cIndex].members, member);
+            var mIndex = UtilFunc.indexOf($rootScope.ngp.rooms[cIndex].members, member);
             if(mIndex == -1) return false;
-            $rootScope.ngp.channels[cIndex].members.splice(mIndex,1);
+            $rootScope.ngp.rooms[cIndex].members.splice(mIndex,1);
             return true;
         },
 
         resetNotification : function(index){
-            $rootScope.ngp.channels[index].notification = '';
+            $rootScope.ngp.rooms[index].notification = '';
         },
 
         addNotification : function(index){
-            if(!$rootScope.ngp.channels[index].notification) $rootScope.ngp.channels[index].notification = 0;
-            $rootScope.ngp.channels[index].notification++;
+            if(!$rootScope.ngp.rooms[index].notification) $rootScope.ngp.rooms[index].notification = 0;
+            $rootScope.ngp.rooms[index].notification++;
         }
 
     };

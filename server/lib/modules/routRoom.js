@@ -13,9 +13,11 @@ module.exports = function(_s, _rf){
     RoutRoom.prototype.constructor = RoutRoom;
 
     RoutRoom.prototype.getRooms = function(spark, msg){
-        var RoomHandler = new _rf.RoomHandler();
+        var RoomHandler = new _rf.RoomHandler(),
+            getRooms
+            ;
 
-        RoomHandler.getRoomsForSpark(spark.id).then(function(rooms){
+        getRooms = function(rooms){
             RoomHandler.setRoomNames(rooms)
                 .getSparksForAllRooms(RoomHandler.roomNames.map(RoomHandler.getSparksInRoom)).then(function(roomsSparks){
                     RoomHandler.setRoomsSparks(roomsSparks)
@@ -31,8 +33,15 @@ module.exports = function(_s, _rf){
                     }else{
                         RoomHandler.sendRooms(spark);
                     }
-            }).catch(console.log);
-        }).catch(console.log);
+                }).catch(console.log);
+        };
+
+        if(msg && msg.rooms.length > 0) {
+            getRooms(msg.rooms);
+        }else{
+            RoomHandler.getRoomsForSpark(spark.id).then(getRooms).catch(console.log);
+        }
+
     };
 
     RoutRoom.prototype.getRoom = function(spark, rname){
@@ -62,6 +71,9 @@ module.exports = function(_s, _rf){
             , self = this
             ;
 
+        User.fetchUser({id:spark.user.id}).then(function(user){
+            console.log(user);
+        });
         if(msg.name.indexOf("u_") === 0 || msg.name === 'terminal') {
             data  = {
                 "m" : 'msg',
@@ -73,7 +85,7 @@ module.exports = function(_s, _rf){
                         "to" : spark.user.username,
                         "from" : "System",
                         "date" : dateNow,
-                        "msg" : 'Illegal channel name "' + msg.name + '"'
+                        "msg" : 'Illegal room name "' + msg.name + '"'
                     }
                 }
             };

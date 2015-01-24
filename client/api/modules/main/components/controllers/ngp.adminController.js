@@ -62,7 +62,7 @@ function adminController(
         this.api.doRequest(options).then(success).catch(fail);
     };
 
-    AdminController.prototype.channelSelected = function(){
+    AdminController.prototype.roomSelected = function(){
         /*
         if(key === 13 && val){
             $(this).val("");

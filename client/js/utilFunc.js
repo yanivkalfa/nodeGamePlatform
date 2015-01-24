@@ -201,7 +201,7 @@
             };
         };
 
-        //w [name] [message] /whisper [name] [message] /join channelName /leave channelName
+        //w [name] [message] /whisper [name] [message] /join roomName /leave roomName
 
         this.LatencyCalculator = function(){
             var __this = this;
@@ -390,7 +390,7 @@
                 this.roomPanel.append(parent);
             };
 
-            this.notifyChannel = function(){
+            this.notifyRoom = function(){
                 this.notification++;
             };
 

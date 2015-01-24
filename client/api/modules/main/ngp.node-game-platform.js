@@ -21,7 +21,7 @@ function runFactory(
                 latency : 0
             }
         },
-        channels : []
+        rooms : []
     };
 
     CronJobs.add({fn: 'authenticate', f : '',  args : '', execEvery : 300000, lastExec : Date.now() + 120000, ref : Authorization});

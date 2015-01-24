@@ -50,24 +50,6 @@ module.exports = function(_s){
             });
         },
 
-        updateSpark : function(credentials, sparkId){
-            return new _s.oReq.Promise(function(resolve, reject) {
-                Users.update(credentials, {spark : sparkId}).exec(function (err, user) {
-                    if(err) return reject(err);
-                    return resolve(user);
-                });
-            });
-        },
-
-        getSparkId : function(credentials){
-            return new _s.oReq.Promise(function(resolve, reject) {
-                Users.findOne(credentials).exec(function (err, user) {
-                    if(err) return reject(err);
-                    return resolve(user.spark);
-                });
-            });
-        },
-
         authenticate: function() {
             return _authenticated = (!_.isUndefined(_user) && this.isInAnyRole(_rout.roles || []))
         },

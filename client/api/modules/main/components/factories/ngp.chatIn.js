@@ -24,10 +24,10 @@ function ChatIn($q, $rootScope, WebSocket,Authorization, UtilFunc) {
         },
 
         initChat : function(data){
-            $rootScope.ngp.channels = data;
+            $rootScope.ngp.rooms = data;
 
-            _($rootScope.ngp.channels).forEach(function(channel, chanIndex){
-                _(channel.content.msg).forEach(function(msg, msgIndex){
+            _($rootScope.ngp.rooms).forEach(function(room, chanIndex){
+                _(room.content.msg).forEach(function(msg, msgIndex){
                     msg.formatDate = UtilFunc.formatMsgDate(msg.data);
                 });
             });
@@ -35,10 +35,10 @@ function ChatIn($q, $rootScope, WebSocket,Authorization, UtilFunc) {
 
         getChanDetails : function(data){
             /*
-            $rootScope.ngp.channels = data;
+            $rootScope.ngp.rooms = data;
 
-            _($rootScope.ngp.channels).forEach(function(channel, chanIndex){
-                _(channel.content.msg).forEach(function(msg, msgIndex){
+            _($rootScope.ngp.rooms).forEach(function(room, chanIndex){
+                _(room.content.msg).forEach(function(msg, msgIndex){
                     msg.formatDate = UtilFunc.formatMsgDate(msg.data);
                 });
             });

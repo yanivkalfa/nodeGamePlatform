@@ -2,13 +2,13 @@
  * Created by Yaniv-Kalfa on 1/19/15.
  */
 angular.module(ngp.const.app.name)
-    .directive('ngpChannelMsg',[ngpChannelMsg]);
+    .directive('ngpRoomMsg',[ngpRoomMsg]);
 
-function ngpChannelMsg() {
+function ngpRoomMsg() {
     return {
         scope: {
             msg: '='
         },
-        templateUrl: ngp.const.app.url + '/tpl/directives/channelMsg.html'
+        templateUrl: ngp.const.app.url + '/tpl/directives/roomMsg.html'
     };
 }

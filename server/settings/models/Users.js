@@ -37,6 +37,11 @@ module.exports = {
             type :'string'
         },
 
+        rooms : {
+            type : 'array',
+            default : ['lobby']
+        },
+
         roles : {
             type : 'array',
             default : ['registered']

@@ -31,7 +31,7 @@ function RoutRoom($rootScope, UtilFunc, Chat, Router) {
     RoutRoomFactory.prototype.setRooms = function(msg){
         if(!_.isArray(msg)) return false;
         _(msg).forEach(function(room){
-            Chat.joinChannel(room);
+            Chat.joinRoom(room);
         })
     };
 

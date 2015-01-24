@@ -60,7 +60,7 @@ function ChatOut($q, $rootScope, WebSocket, Authorization,User, UtilFunc) {
             return true;
         },
 
-        getChannelDetails : function(data){
+        getRoomDetails : function(data){
 
 
         }
