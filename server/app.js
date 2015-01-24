@@ -1,5 +1,5 @@
 var _s = {};
-console.prototype.log = (function(_super) {
+console.log = (function(_super) {
     return function() {
         var line = new Error().stack.split('\n')[1].split(':')[1];
         var arg = __dirname +' - (line ' + line + ')';
@@ -8,7 +8,7 @@ console.prototype.log = (function(_super) {
     };         // Pass control back to the original join()
     // by using .apply on `_super`
 
-})(console.prototype.log);
+})(console.log);
 
 _s.oServerN = process.argv[3]; // severName - not required
 _s.port = process.argv[2] || 8001; // server port - required
