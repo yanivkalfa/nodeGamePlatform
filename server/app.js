@@ -9,12 +9,10 @@ console.log = (function(_super) {
 })(console.log);
 */
 
-
-var orgCLog = console.log;
 cLog = function(){
     var arg = "\n" + __filename.split('/').pop() +' - (line ' + new Error().stack.split('\n')[1].split(':')[1] + ')';
     Array.prototype.push.call(arguments,arg);
-    return orgCLog.apply(this, arguments);
+    return console.log.apply(this, arguments);
 };
 console.log = cLog;
 
