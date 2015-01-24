@@ -19,7 +19,7 @@ module.exports = function(_s, _rf){
 
         console.log(msg);
         getRooms = function(rooms){
-            console.log(rooms);
+            console.log('getRooms', rooms);
             RoomHandler.setRoomNames(rooms)
                 .getSparksForAllRooms(RoomHandler.roomNames.map(RoomHandler.getSparksInRoom)).then(function(roomsSparks){
                     RoomHandler.setRoomsSparks(roomsSparks)

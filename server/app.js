@@ -54,7 +54,6 @@ _s.primus.rooms(function(err, rooms){
 */
 _s.primus.on('connection', function (spark) {
 
-    console.log('got here');
     _s.oReq.jwt.verify(spark.query.token, sessSecret, function(err, decoded) {
         if(!_.isUndefined(decoded) && !_.isUndefined(decoded.userId)){
             _s.oModules.Authorization.login({"_id" : decoded.userId}).then(function(user){
@@ -70,9 +69,6 @@ _s.primus.on('connection', function (spark) {
 
                     // Update user's spark id in database - in-case its needed
                     var upSkSuccess = function (user){
-
-                        console.log('User', user);
-                        console.log(user.rooms);
                         // Joining terminal, lobby  and user rooms
                         var userRoom = 'u_' + decoded.userId + ' ';
                         var savedRooms = _.isArray(user.rooms) ? user.rooms.join(' ') : '';
