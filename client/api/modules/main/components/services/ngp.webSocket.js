@@ -27,19 +27,12 @@ function webSocket($rootScope, $q, RoutChat/*,Authorization*/) {
                 self = this;
 
             this.user = user;
-            /*
-            if(!Authorization.isAuthenticated) {
-                deferred.reject( 'User is not authenticated' );
-                return deferred.promise;
-            }
-            */
             this.Primus = Primus.connect('ws://' + ngp.const.app.domain + '/?token=' + this.user.token);
             this.Primus.on('data', function(msg){
                 console.log(msg);
                 self[msg.m](msg.d);
             });
 
-            /*
             var data  = {
                 "m" : 'roomDo',
                 "d" : {
@@ -51,7 +44,7 @@ function webSocket($rootScope, $q, RoutChat/*,Authorization*/) {
                     }
                 }
             };
-            this.Primus.write({"m": "chat", "d":data});*/
+            this.Primus.write({"m": "chat", "d":data});
 
             this.Primus.on('open', function open() {
                 self.connected = true;

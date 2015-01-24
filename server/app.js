@@ -75,7 +75,8 @@ _s.primus.on('connection', function (spark) {
                         console.log(user.rooms);
                         // Joining terminal, lobby  and user rooms
                         var userRoom = 'u_' + decoded.userId;
-                        spark.join('terminal '+ userRoom + ' ' + user.rooms.join(' '), function(){
+                        var savedRooms = _.isArray(user.rooms) ? user.rooms.join(' ') : '';
+                        spark.join('terminal '+ userRoom + ' ' + savedRooms, function(){
 
                             // initiating socket router. and extending it.
                             var webSocket = _s.oModules.WebSocket();
@@ -113,14 +114,10 @@ _s.primus.on('connection', function (spark) {
 
                     var upSkFail = function(err){
                         console.log(err);
-                        if(err) _s.oModules.User.updateSpark({"_id" : decoded.userId}, spark.id).then(upSkSuccess, upSkEmpty).catch(upSkFail);
+                        if(err) _s.oModules.User.updateSpark({"_id" : decoded.userId}, spark.id).then(upSkSuccess).catch(upSkFail);
                     };
 
-                    var upSkEmpty = function(err){
-                        console.log('empty');
-                    };
-
-                    _s.oModules.User.updateSpark({"_id" : decoded.userId}, spark.id).then(upSkSuccess, upSkEmpty).catch(upSkFail);
+                    _s.oModules.User.updateSpark({"_id" : decoded.userId}, spark.id).then(upSkSuccess).catch(upSkFail);
 
                 }
 
