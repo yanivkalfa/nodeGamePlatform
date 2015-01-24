@@ -20,8 +20,7 @@ function RoutRoom($rootScope, UtilFunc, Router) {
 
 
     RoutRoomFactory.prototype.join = function(msg){
-
-
+        console.log('join', msg);
     };
 
     RoutRoomFactory.prototype.leave = function(msg){
@@ -36,6 +35,10 @@ function RoutRoom($rootScope, UtilFunc, Router) {
                 msg.formatDate = UtilFunc.formatMsgDate(msg.data);
             });
         });
+    };
+
+    RoutRoomFactory.prototype.getRoom = function(msg){
+        console.log('getRoom', msg);
     };
 
     return RoutRoomFactory;
