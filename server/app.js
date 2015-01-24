@@ -74,9 +74,9 @@ _s.primus.on('connection', function (spark) {
                         console.log('User', user);
                         console.log(user.rooms);
                         // Joining terminal, lobby  and user rooms
-                        var userRoom = 'u_' + decoded.userId;
+                        var userRoom = 'u_' + decoded.userId + ' ';
                         var savedRooms = _.isArray(user.rooms) ? user.rooms.join(' ') : '';
-                        spark.join('terminal '+ userRoom + ' ' + savedRooms, function(){
+                        spark.join('terminal '+ userRoom + savedRooms, function(){
 
                             // initiating socket router. and extending it.
                             var webSocket = _s.oModules.WebSocket();
