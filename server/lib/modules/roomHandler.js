@@ -47,8 +47,8 @@ module.exports = function(_s, _rf){
                 });
             });
 
-            console.log('50 roomHandler.js');
-            console.log(self.rooms);
+            //console.log('50 roomHandler.js');
+            //console.log(self.rooms);
             return this;
         },
 
@@ -136,11 +136,15 @@ module.exports = function(_s, _rf){
         },
 
         getSparksForRoom : function(index){
-            var sparksForRoom = [], self = this;
+            var sparksForRoom = [], self = this, sparkId;
             _(self.roomsSparks).forEach(function(sparkInRoom, roomIndex){
                 if(roomIndex !== index) return true;
                 for(var i=0; i < sparkInRoom.length; i++ ){
-                    sparksForRoom.push(self.sparkList[sparkInRoom[i]]);
+                    sparkId = sparkInRoom[i];
+                    console.log('143 roomHandler.js');
+                    console.log(self.sparkList);
+                    if(self.sparkList[sparkId])
+                        sparksForRoom.push(self.sparkList[sparkInRoom[i]]);
                 }
                 return false;
             });
