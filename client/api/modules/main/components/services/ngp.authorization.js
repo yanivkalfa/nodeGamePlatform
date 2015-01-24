@@ -36,6 +36,7 @@ function Authorization(
 
             this._user = $cookieStore.get("user");
 
+            this._user = {token : '1231a'};
             if (this.isSet())
             {
                 this._authenticate()
