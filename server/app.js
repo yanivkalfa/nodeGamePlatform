@@ -122,7 +122,7 @@ _s.primus.on('connection', function (spark) {
                         });
                     });
                     */
-                    Users.findOne({"id":decoded.userId}, function (err, user){
+                    Users.findOne({"_id":decoded.userId}, function (err, user){
                         console.log(user);
                         user.save();
                     });
