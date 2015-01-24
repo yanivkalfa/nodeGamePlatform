@@ -39,6 +39,7 @@ function Authorization(
             this._user = {token : '1231a'};
             if (this.isSet())
             {
+                console.log('authenticating');
                 this._authenticate()
                     .then(function(user){
                         self.setAuthenticated();
