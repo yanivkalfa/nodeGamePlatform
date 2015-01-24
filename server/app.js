@@ -64,7 +64,7 @@ _s.primus.on('connection', function (spark) {
                 }
                 else
                 {
-                    console.log(decoded);
+                    console.log('decoded', decoded);
                     // Attaching user to spark - for logout and maybe future needs
                     spark.user = user;
 
