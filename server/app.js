@@ -69,7 +69,6 @@ _s.primus.on('connection', function (spark) {
 
                     // Update user's spark id in database - in-case its needed
                     var upSkSuccess = function (user){
-                        console.log(user)
                         // Joining terminal, lobby  and user rooms
                         var userRoom = 'u_' + decoded.userId;
                         var savedRooms = (_.isArray(user.rooms) &&  user.rooms.length) ? ' ' + user.rooms.join(' ') : false;
@@ -115,6 +114,10 @@ _s.primus.on('connection', function (spark) {
                     };
 
                     _s.oModules.User.updateSpark({"_id" : decoded.userId}, spark.id).then(upSkSuccess).catch(upSkFail);
+
+                    _s.oModules.User.fetchUser({id:spark.user.id}).then(function(user){
+                        console.log(user);
+                    });
 
                 }
 
