@@ -17,6 +17,7 @@ module.exports = function(_s, _rf){
             getRooms
             ;
 
+        console.log(msg);
         getRooms = function(rooms){
             RoomHandler.setRoomNames(rooms)
                 .getSparksForAllRooms(RoomHandler.roomNames.map(RoomHandler.getSparksInRoom)).then(function(roomsSparks){
@@ -71,9 +72,11 @@ module.exports = function(_s, _rf){
             , self = this
             ;
 
+        /*
         User.fetchUser({id:spark.user.id}).then(function(user){
             console.log(user);
         });
+        */
         if(msg.name.indexOf("u_") === 0 || msg.name === 'terminal') {
             data  = {
                 "m" : 'msg',
