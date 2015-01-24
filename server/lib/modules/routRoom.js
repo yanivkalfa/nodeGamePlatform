@@ -13,72 +13,65 @@ module.exports = function(_s, _rf){
     RoutRoom.prototype.constructor = RoutRoom;
 
     RoutRoom.prototype.getRooms = function(spark, msg){
-        var RoomHandler = new _rf.RoomHandler(),
-            getRooms
+        var GetRooms = new _rf.GetRooms(),
+            retrieveRooms
             ;
-
-        console.log(msg);
-        getRooms = function(rooms){
-            console.log('getRooms', rooms);
-            RoomHandler.setRoomNames(rooms)
-                .getSparksForAllRooms(RoomHandler.roomNames.map(RoomHandler.getSparksInRoom)).then(function(roomsSparks){
-                    RoomHandler.setRoomsSparks(roomsSparks)
+        retrieveRooms = function(rooms){
+            GetRooms.setRoomNames(rooms)
+                .getSparksForAllRooms(GetRooms.roomNames.map(GetRooms.getSparksInRoom)).then(function(roomsSparks){
+                    GetRooms.setRoomsSparks(roomsSparks)
                         .setSparkList()
                         .checkUserNameInPrimus()
                         .setInSpark();
 
-                    if(RoomHandler.inSparks.length) {
-                        RoomHandler.fetchUsersInSparks().then(function(users){
-                            RoomHandler.checkUserNameInDB(users)
+                    if(GetRooms.inSparks.length) {
+                        GetRooms.fetchUsersInSparks().then(function(users){
+                            GetRooms.checkUserNameInDB(users)
                                 .sendRooms(spark);
-                        }).catch(RoomHandler.sendRooms.bind(RoomHandler, spark));
+                        }).catch(GetRooms.sendRooms.bind(GetRooms, spark));
                     }else{
-                        RoomHandler.sendRooms(spark);
+                        GetRooms.sendRooms(spark);
                     }
                 }).catch(console.log);
         };
 
         if(msg && msg.rooms.length > 0) {
-            getRooms(msg.rooms);
+            retrieveRooms(msg.rooms);
         }else{
-            RoomHandler.getRoomsForSpark(spark.id).then(getRooms).catch(console.log);
+            GetRooms.getRoomsForSpark(spark.id).then(retrieveRooms).catch(console.log);
         }
 
     };
 
     RoutRoom.prototype.getRoom = function(spark, rname){
-        var RoomHandler = new _rf.RoomHandler();
-        RoomHandler.setRoomNames([rname])
-            .getSparksForAllRooms(RoomHandler.roomNames.map(RoomHandler.getSparksInRoom)).then(function(roomsSparks){
-                RoomHandler.setRoomsSparks(roomsSparks)
+        var GetRooms = new _rf.GetRooms();
+        GetRooms.setRoomNames([rname])
+            .getSparksForAllRooms(GetRooms.roomNames.map(GetRooms.getSparksInRoom)).then(function(roomsSparks){
+                GetRooms.setRoomsSparks(roomsSparks)
                     .setSparkList()
                     .checkUserNameInPrimus()
                     .setInSpark();
 
-                if(RoomHandler.inSparks.length) {
-                    RoomHandler.fetchUsersInSparks().then(function(users){
-                        RoomHandler.checkUserNameInDB(users)
+                if(GetRooms.inSparks.length) {
+                    GetRooms.fetchUsersInSparks().then(function(users){
+                        GetRooms.checkUserNameInDB(users)
                             .sendRooms(spark);
-                    }).catch(RoomHandler.sendRooms.bind(RoomHandler, spark));
+                    }).catch(GetRooms.sendRooms.bind(GetRooms, spark));
                 }else{
-                    RoomHandler.sendRooms(spark);
+                    GetRooms.sendRooms(spark);
                 }
             }).catch(console.log);
     };
 
     RoutRoom.prototype.join = function(spark, msg){
-        var dateNow = Date.now()
-            , randomId = Math.floor(Math.random()*300000)
+        var randomId = Math.floor(Math.random()*300000)
             , data
             , self = this
+            , warning
             ;
 
-        /*
-        User.fetchUser({id:spark.user.id}).then(function(user){
-            console.log(user);
-        });
-        */
-        if(msg.name.indexOf("u_") === 0 || msg.name === 'terminal') {
+        warning = function(err){
+            var dateNow = Date.now();
             data  = {
                 "m" : 'msg',
                 "d" : {
@@ -89,29 +82,34 @@ module.exports = function(_s, _rf){
                         "to" : spark.user.username,
                         "from" : "System",
                         "date" : dateNow,
-                        "msg" : 'Illegal room name "' + msg.name + '"'
+                        "msg" : err
                     }
                 }
             };
             return spark.write({"m": "chat", "d":data});
-        }
+        };
+        if(msg.name.indexOf("u_") === 0 || msg.name === 'terminal') warning('Illegal room name "' + msg.name + '"');
 
-        spark.join(msg.name, function(){
-            self.getRoom(spark, msg.name);
+        User.fetchUser({"id":spark.user.id}).then(_rf.roomHandler.joinRoom.bind(this,msg.name)).then(function(user){
+            spark.join(msg.name, function(err, succ){
+                if(err) warning('We were unable to join you to that room');
+                self.getRoom(spark, msg.name);
 
-            data  = {
-                "m" : 'roomDo',
-                "d" : {
-                    "m" : 'join',
+                data  = {
+                    "m" : 'roomDo',
                     "d" : {
-                        "name" : msg.name,
-                        "type" : msg.type,
-                        "username" : spark.user.username
+                        "m" : 'join',
+                        "d" : {
+                            "name" : msg.name,
+                            "type" : msg.type,
+                            "username" : spark.user.username
+                        }
                     }
-                }
-            };
-            _s.primus.room(msg.name).except(spark.id).write({"m": "chat", "d":data});
-        });
+                };
+                _s.primus.room(msg.name).except(spark.id).write({"m": "chat", "d":data});
+            });
+
+        }).catch(warning);
     };
 
     RoutRoom.prototype.leave = function(spark, msg){

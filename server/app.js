@@ -69,7 +69,6 @@ _s.primus.on('connection', function (spark) {
 
                     var updateSpark = function(user){
                         return new _s.oReq.Promise(function(resolve, reject) {
-                            user.rooms = ['lobby', 'aRoomName'];
                             user.spark = spark.id;
                             user.save(function (err, user) {
                                 if(err) reject(err);
