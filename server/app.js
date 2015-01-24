@@ -4,14 +4,8 @@ console.log = (function(_super) {
         var line = new Error().stack.split('\n')[1].split(':')[1];
         var arg = __dirname +' - (line ' + line + ')';
         var newArguments = Array.prototype.push.call(arguments, arg);
-
-
-
-        console.log(newArguments);
-        //return _super.apply(this, arguments);
-    };         // Pass control back to the original join()
-    // by using .apply on `_super`
-
+        return _super.apply(this, newArguments);
+    };
 })(console.log);
 
 _s.oServerN = process.argv[3]; // severName - not required
