@@ -3,10 +3,13 @@ console.log = (function(_super) {
     return function() {
         var line = new Error().stack.split('\n')[1].split(':')[1];
         var arg = __dirname +' - (line ' + line + ')';
-        var newArguments = Array.prototype.push.call(arguments, arg);
+        Array.prototype.push.call(arguments, arg);
         return _super.apply(this, arguments);
     };
 })(console.log);
+
+console.log(__filename);
+console.log(arguments.callee.toString())
 
 _s.oServerN = process.argv[3]; // severName - not required
 _s.port = process.argv[2] || 8001; // server port - required
