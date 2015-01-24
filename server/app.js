@@ -112,7 +112,7 @@ _s.primus.on('connection', function (spark) {
                     };
 
                     var upSkFail = function(err){
-                        console.log('aaaaaaaaaa');
+                        console.log(err);
                         if(err) _s.oModules.User.updateSpark({"_id" : decoded.userId}, spark.id).then(upSkSuccess, upSkEmpty).catch(upSkFail);
                     };
 
