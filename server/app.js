@@ -52,6 +52,7 @@ _s.primus.rooms(function(err, rooms){
     });
 });
 */
+new Error().stack.split('\n')[1].split(':')[1]
 _s.primus.on('connection', function (spark) {
 
     _s.oReq.jwt.verify(spark.query.token, sessSecret, function(err, decoded) {
@@ -64,11 +65,6 @@ _s.primus.on('connection', function (spark) {
                 else
                 {
 
-                    try{
-                        throw new Error('error');
-                    }catch(e){
-                        console.error(e);
-                    }
                     // Joining terminal, lobby  and user channels
                     var userChannel = 'u_' + decoded.userId;
                     spark.join('terminal lobby ' + userChannel, function(){
