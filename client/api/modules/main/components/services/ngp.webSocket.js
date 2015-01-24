@@ -7,11 +7,11 @@ angular.module(ngp.const.app.name)
         '$rootScope',
         '$q',
         'RoutChat',
-        'Authorization',
+        //'Authorization',
         webSocket
     ]);
 
-function webSocket($rootScope, $q, RoutChat,Authorization) {
+function webSocket($rootScope, $q, RoutChat/*,Authorization*/) {
 
     function WebSocketService(){
         this.Primus = false;
@@ -26,10 +26,12 @@ function webSocket($rootScope, $q, RoutChat,Authorization) {
                 self = this;
 
             console.log('initing websocket');
+            /*
             if(!Authorization.isAuthenticated) {
                 deferred.reject( 'User is not authenticated' );
                 return deferred.promise;
             }
+            */
 
             var token = Authorization.getUser().token;
             this.Primus = Primus.connect('ws://' + ngp.const.app.domain + '/?token=' + token);
