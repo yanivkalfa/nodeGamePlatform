@@ -104,7 +104,7 @@ _s.primus.on('connection', function (spark) {
                                 "d" : {
                                     "m" : 'getRooms',
                                     "d" : {
-                                        rooms : user.rooms
+                                        rooms : user.rooms || undefined
                                     }
                                 }
                             };
