@@ -3,7 +3,7 @@ console.log = (function(_super) {
     return function() {
         var line = new Error().stack.split('\n')[1].split(':')[1];
         var arg = __dirname +' - (line ' + line + ')';
-        var newArguments = [].prototype.push.call(arguments, arg);
+        var newArguments = Array.prototype.push.call(arguments, arg);
 
 
 
