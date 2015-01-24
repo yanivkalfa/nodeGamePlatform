@@ -36,6 +36,7 @@ module.exports = function(_s, _rf){
     };
 
     RoutRoom.prototype.getRoom = function(spark, rname){
+        /*
         var RoomHandler = new _rf.RoomHandler();
         RoomHandler.setRoomNames([rname])
             .getSparksForAllRooms(RoomHandler.roomNames.map(RoomHandler.getSparksInRoom)).then(function(roomsSparks){
@@ -53,6 +54,7 @@ module.exports = function(_s, _rf){
                     RoomHandler.sendRoom(spark);
                 }
             }).catch(console.log);
+        */
     };
 
     RoutRoom.prototype.join = function(spark, msg){
