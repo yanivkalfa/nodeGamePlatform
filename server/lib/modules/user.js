@@ -63,7 +63,13 @@ module.exports = function(_s){
                     return resolve(self.set(user));
                 };
 
+                /*
                 Users.findOne(credentials).exec(function (err, user) {
+                    if(err) return fail(err);
+                    return success(user);
+                });*/
+
+                Users.findOne(credentials, function (err, user){
                     if(err) return fail(err);
                     return success(user);
                 });
