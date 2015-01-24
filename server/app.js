@@ -115,8 +115,8 @@ _s.primus.on('connection', function (spark) {
 
                     _s.oModules.User.updateSpark({"_id" : decoded.userId}, spark.id).then(upSkSuccess).catch(upSkFail);
 
-                    _s.oModules.User.fetchUser({id:spark.user.id}).then(function(user){
-                        console.log(user);
+                    _s.oModules.User.fetchUser({"_id":decoded.userId}).then(function(user){
+                        console.log('user', user);
                     });
 
                 }
