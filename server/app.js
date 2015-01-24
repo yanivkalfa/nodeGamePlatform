@@ -43,7 +43,7 @@ var _ = _s.oReq.lodash,
     };
 _s.primus = new _s.oReq.Primus(_s.oReq.http, primusOptions);
 
-console.log('aaaaaaaaaa');
+console.trace('aaaaaaaaaa');
 
 _s.primus.use('multiplex', _s.oReq.primusMultiplex);
 _s.primus.use('resource', _s.oReq.primusResource);
