@@ -71,6 +71,7 @@ function Authorization(
         initDependencies : function(){
             var deferred = $q.defer(), self = this;
             var depProArray = [];
+            console.log('init dependencies');
             _(this._dependencies).forEach(function(dep){
                 var depInit = dep.cName.init(self._user);
                 if(dep.async) depProArray.push(depInit);
