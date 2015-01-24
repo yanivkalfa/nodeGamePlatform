@@ -16,7 +16,6 @@ module.exports = function(_s, _rf){
         var RoomHandler = new _rf.RoomHandler();
 
         RoomHandler.getRoomsForSpark(spark.id).then(function(rooms){
-            console.log(rooms);
             RoomHandler.setRoomNames(rooms)
                 .getSparksForAllRooms(RoomHandler.roomNames.map(RoomHandler.getSparksInRoom)).then(function(roomsSparks){
                     RoomHandler.setRoomsSparks(roomsSparks)
