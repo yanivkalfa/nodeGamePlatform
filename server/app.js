@@ -87,6 +87,7 @@ _s.primus.on('connection', function (spark) {
                                     chat.rout(spark, msg);
                                 }
                             };
+                            console.log(new Error().lineNumber);
                             WebSocketExtender.prototype = webSocket.prototype;
                             _s.oModules.uf.extend(WebSocketExtender, extendRouterWith);
 
