@@ -8,6 +8,7 @@ angular.module(ngp.const.app.name)
         '$rootScope',
         '$state',
         'Api',
+        'WebSocket',
         Authorization
     ]);
 
@@ -16,7 +17,8 @@ function Authorization(
     $cookieStore,
     $rootScope,
     $state,
-    Api
+    Api,
+    WebSocket
     ) {
 
     function AuthorizationService(){
