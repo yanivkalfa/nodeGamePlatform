@@ -1,20 +1,22 @@
 var _s = {};
-/*
+
+function GetFileAndLine (){}
+
+GetFileAndLine.prototype.getArgs = function(){
+  return this.Args;
+};
+
+GetFileAndLine.prototype.setArgs = function(){
+    this.Args = "\n" + __filename.split('/').pop() +' - (line ' + new Error().stack.split('\n')[1].split(':')[1] + ')';
+    return this;
+};
+
 console.log = (function(_super) {
     return function() {
-        var arg = "\n" + __filename.split('/').pop() +' - (line ' + new Error().stack.split('\n')[1].split(':')[1] + ')';
-        Array.prototype.push.call(arguments,arg);
+        Array.prototype.push.call(arguments,new GetFileAndLine().setArgs().getArgs());
         return _super.apply(this, arguments);
     };
 })(console.log);
-*/
-
-cLog = function(){
-    var arg = "\n" + __filename.split('/').pop() +' - (line ' + new Error().stack.split('\n')[1].split(':')[1] + ')';
-    Array.prototype.push.call(arguments,arg);
-    return console.log.apply(this, arguments);
-};
-console.log = cLog;
 
 _s.oServerN = process.argv[3]; // severName - not required
 _s.port = process.argv[2] || 8001; // server port - required
