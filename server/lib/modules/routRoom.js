@@ -56,6 +56,7 @@ module.exports = function(_s, _rf){
     };
 
     RoutRoom.prototype.join = function(spark, msg){
+        /*
         var dateNow = Date.now()
             , randomId = Math.floor(Math.random()*300000)
             , data
@@ -95,7 +96,7 @@ module.exports = function(_s, _rf){
             self.getRoom(spark, msg.name);
             _s.primus.room(msg.name).write({"m": "chat", "d":data});
         });
-
+        */
     };
 
     RoutRoom.prototype.leave = function(spark, msg){
