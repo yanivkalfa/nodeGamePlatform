@@ -67,68 +67,71 @@ _s.primus.on('connection', function (spark) {
                     // Attaching user to spark - for logout and maybe future needs
                     spark.user = user;
 
+                    var updateSpark = function(user){
+                        return new _s.oReq.Promise(function(resolve, reject) {
+                            user.rooms = ['lobby', 'aRoomName'];
+                            user.spark = spark.id;
+                            user.save(function (err, user) {
+                                if(err) reject(err);
+                                return resolve(user);
+                            });
+                        });
+                    };
+
+                    var joinRooms = function(user){
+                        return new _s.oReq.Promise(function(resolve, reject) {
+                            // Joining terminal, lobby user rooms and saved rooms
+                            var userRoom = 'u_' + decoded.userId;
+                            var savedRooms = (_.isArray(user.rooms) &&  user.rooms.length) ? ' ' + user.rooms.join(' ') : false;
+                            spark.join('terminal '+ userRoom + savedRooms || '', function(err, success){
+                                if(err) reject(err);
+                                return resolve(user);
+                            });
+                        });
+                    };
+
                     // Update user's spark id in database - in-case its needed
                     var upSkSuccess = function (user){
-                        // Joining terminal, lobby  and user rooms
-                        var userRoom = 'u_' + decoded.userId;
-                        var savedRooms = (_.isArray(user.rooms) &&  user.rooms.length) ? ' ' + user.rooms.join(' ') : false;
-                        spark.join('terminal '+ userRoom + savedRooms || '', function(){
 
-                            // initiating socket router. and extending it.
-                            var webSocket = _s.oModules.WebSocket();
-                            var WebSocketExtender = function(){
-                                webSocket.call(this,_s, _s.primus, spark);
-                            };
+                        // initiating socket router. and extending it.
+                        var webSocket = _s.oModules.WebSocket();
+                        var WebSocketExtender = function(){
+                            webSocket.call(this,_s, _s.primus, spark);
+                        };
 
-                            var chat = new _s.oModules.Chat(_s.primus);
-                            var extendRouterWith = {
-                                ping : function(spark, data){
-                                    spark.write({"m": "ping", "d":"p"});
-                                },
+                        var chat = new _s.oModules.Chat(_s.primus);
+                        var extendRouterWith = {
+                            ping : function(spark, data){
+                                spark.write({"m": "ping", "d":"p"});
+                            },
 
-                                chat : function(spark, msg){
-                                    chat.rout(spark, msg);
-                                }
-                            };
+                            chat : function(spark, msg){
+                                chat.rout(spark, msg);
+                            }
+                        };
 
-                            WebSocketExtender.prototype = webSocket.prototype;
-                            _s.oModules.uf.extend(WebSocketExtender, extendRouterWith);
+                        WebSocketExtender.prototype = webSocket.prototype;
+                        _s.oModules.uf.extend(WebSocketExtender, extendRouterWith);
 
-                            var webSocketExtender = new WebSocketExtender();
-                            var data  = {
-                                "m" : 'roomDo',
+                        var webSocketExtender = new WebSocketExtender();
+                        var data  = {
+                            "m" : 'roomDo',
+                            "d" : {
+                                "m" : 'getRooms',
                                 "d" : {
-                                    "m" : 'getRooms',
-                                    "d" : {
-                                        rooms : _.isArray(user.rooms) ? user.rooms : []
-                                    }
+                                    rooms : _.isArray(user.rooms) ? user.rooms : []
                                 }
-                            };
-                            webSocketExtender.chat(spark,data);
-                        });
+                            }
+                        };
+                        webSocketExtender.chat(spark,data);
                     };
 
                     var upSkFail = function(err){
                         console.log(err);
-                        if(err) _s.oModules.User.updateSpark({"_id" : decoded.userId}, spark.id).then(upSkSuccess).catch(upSkFail);
+                        if(err) _s.oModules.User.fetchUser({"id":decoded.userId}).then(updateSpark).then(joinRooms).then(upSkSuccess).catch(upSkFail);
                     };
 
-                    _s.oModules.User.updateSpark({"_id" : decoded.userId}, spark.id).then(upSkSuccess).catch(upSkFail);
-
-                    _s.oModules.User.fetchUser({"id":decoded.userId}).then(function(user){
-                        user.save(function (err, user) {
-                            console.log('saved aaaaaaaaaaaaaaaaaa', user);
-                        });
-                    });
-                    /*
-                    Users.findOne({"_id":decoded.userId}, function (err, user){
-
-                        user.save(function (err, user){
-                            console.log('done saving', user);
-                        });
-                    });
-                    */
-
+                    _s.oModules.User.fetchUser({"id":decoded.userId}).then(updateSpark).then(joinRooms).then(upSkSuccess).catch(upSkFail);
                 }
 
             });/*
