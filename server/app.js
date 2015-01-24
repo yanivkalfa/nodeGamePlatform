@@ -3,7 +3,9 @@ console.log = (function(_super) {
     return function() {
         var line = new Error().stack.split('\n')[1].split(':')[1];
         var arg = __dirname +' - (line ' + line + ')';
-        arguments.push(arg);
+        var newArguments = [].push.apply(arguments, [arg]);
+
+        console.log(newArguments);
         return _super.apply(this, arguments);
     };         // Pass control back to the original join()
     // by using .apply on `_super`
