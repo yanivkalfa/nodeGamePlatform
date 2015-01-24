@@ -37,17 +37,6 @@ function webSocket($rootScope, $q, RoutChat,Authorization) {
                 self[msg.m](msg.d);
             });
 
-            var toEmit = {
-                "m" : 'msg',
-                "a" : action,
-                "d" : {
-                    "toType" : toType,
-                    "to" : args[0],
-                    "from" : Authorization.getUser().id,
-                    "date" : '',
-                    "msg" : args.splice(1).join(" ")
-                }
-            };
             /*
             var data  = {
                 "m" : 'roomDo',
