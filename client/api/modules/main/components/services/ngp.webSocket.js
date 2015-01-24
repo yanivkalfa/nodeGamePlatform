@@ -26,7 +26,7 @@ function webSocket($rootScope, $q, RoutChat/*,Authorization*/) {
             var deferred = $q.defer(),
                 self = this;
 
-            console.log('initing websocket');
+            console.log('initing websocket', user);
 
             this.user = user;
             /*
