@@ -71,7 +71,7 @@ _s.primus.on('connection', function (spark) {
                     // Update user's spark id in database - in-case its needed
                     var upSkSuccess = function (user){
 
-                        console.log('Not suppose to get here');
+                        console.log('Not suppose to get here', spark);
                         console.log(user.rooms);
                         // Joining terminal, lobby  and user rooms
                         var userRoom = 'u_' + decoded.userId;
