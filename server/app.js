@@ -65,7 +65,7 @@ _s.primus.on('connection', function (spark) {
                 {
 
                     try{
-                        new Error();
+                        throw new Error('error');
                     }catch(e){
                         console.log(e);
                     }
