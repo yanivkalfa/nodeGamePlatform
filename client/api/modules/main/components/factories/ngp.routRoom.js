@@ -5,11 +5,12 @@ angular.module(ngp.const.app.name)
     .service('RoutRoom', [
         '$rootScope',
         'UtilFunc',
+        'Chat',
         'Router',
         RoutRoom
     ]);
 
-function RoutRoom($rootScope, UtilFunc, Router) {
+function RoutRoom($rootScope, UtilFunc, Chat, Router) {
 
     function RoutRoomFactory(){
         Router.apply(this, arguments);
@@ -27,18 +28,11 @@ function RoutRoom($rootScope, UtilFunc, Router) {
 
     };
 
-    RoutRoomFactory.prototype.getRooms = function(msg){
-        $rootScope.ngp.channels = msg;
-
-        _($rootScope.ngp.channels).forEach(function(channel, chanIndex){
-            _(channel.content.msg).forEach(function(msg, msgIndex){
-                msg.formatDate = UtilFunc.formatMsgDate(msg.data);
-            });
-        });
-    };
-
-    RoutRoomFactory.prototype.getRoom = function(msg){
-        console.log('getRoom', msg);
+    RoutRoomFactory.prototype.setRooms = function(msg){
+        if(!_.isArray(msg)) return false;
+        _(msg).forEach(function(room){
+            Chat.joinChannel(room);
+        })
     };
 
     return RoutRoomFactory;

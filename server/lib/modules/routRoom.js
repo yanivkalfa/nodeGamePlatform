@@ -47,10 +47,10 @@ module.exports = function(_s, _rf){
                 if(RoomHandler.inSparks.length) {
                     RoomHandler.fetchUsersInSparks().then(function(users){
                         RoomHandler.checkUserNameInDB(users)
-                            .sendRoom(spark);
-                    }).catch(RoomHandler.sendRoom.bind(RoomHandler, spark));
+                            .sendRooms(spark);
+                    }).catch(RoomHandler.sendRooms.bind(RoomHandler, spark));
                 }else{
-                    RoomHandler.sendRoom(spark);
+                    RoomHandler.sendRooms(spark);
                 }
             }).catch(console.log);
     };
@@ -82,6 +82,8 @@ module.exports = function(_s, _rf){
         }
 
         spark.join(msg.name, function(){
+            self.getRoom(spark, msg.name);
+
             data  = {
                 "m" : 'roomDo',
                 "d" : {
@@ -93,8 +95,7 @@ module.exports = function(_s, _rf){
                     }
                 }
             };
-            self.getRoom(spark, msg.name);
-            _s.primus.room(msg.name).write({"m": "chat", "d":data});
+            _s.primus.room(msg.name).except(spark.id).write({"m": "chat", "d":data});
         });
     };
 
