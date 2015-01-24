@@ -25,7 +25,6 @@ function webSocket($rootScope, $q, RoutChat,Authorization) {
             var deferred = $q.defer(),
                 self = this;
 
-            console.log('initing websocket');
             if(!Authorization.isAuthenticated) {
                 deferred.reject( 'User is not authenticated' );
                 return deferred.promise;

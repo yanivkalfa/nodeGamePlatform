@@ -52,7 +52,7 @@ function siteRouts($stateProvider, $urlRouterProvider, $locationProvider) {
                         .then(_.bind(Authorization.authorized, Authorization))
                         .catch(_.bind(Authorization.notAuthorized, Authorization));
                 }
-            ],
+            ]/*,
 
             WebSocket: ['$state','WebSocket',
                 function($state, WebSocket) {
@@ -63,8 +63,9 @@ function siteRouts($stateProvider, $urlRouterProvider, $locationProvider) {
                     });
                 }
             ],
+            */
             /*ChatIn: ['ChatIn', function(ChatIn) { return ChatIn.init(); } ],*/
-            Latency: ['Latency', function(Latency) { return Latency.init(); } ]
+            /*Latency: ['Latency', function(Latency) { return Latency.init(); } ]*/
         },
         data: {
             roles: ['registered']

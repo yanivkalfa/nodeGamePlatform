@@ -8,6 +8,8 @@ angular.module(ngp.const.app.name)
         '$rootScope',
         '$state',
         'Api',
+        'WebSocket',
+        'Latency',
         Authorization
     ]);
 
@@ -16,11 +18,14 @@ function Authorization(
     $cookieStore,
     $rootScope,
     $state,
-    Api
+    Api,
+    WebSocket,
+    Latency
     ) {
 
     function AuthorizationService(){
         this._user = undefined;
+        this._dependencies = [{cName : WebSocket, 'async' :true }, {cName : Latency, 'async' :false }];
         this._authenticated = false;
         this.api = Api.createNewApi();
     }
@@ -39,11 +44,15 @@ function Authorization(
             this._user = {token : '1231a'};
             if (this.isSet())
             {
-                console.log('authenticating');
                 this._authenticate()
                     .then(function(user){
                         self.setAuthenticated();
-                        deferred.resolve(self._user);
+                        self.initDependencies().then(function(deps){
+                            deferred.resolve(self._user);
+                        }).catch(function(err){
+                            self.setNotAuthenticated();
+                            deferred.reject(err);
+                        });
                     },function(err){
                         self.setNotAuthenticated();
                         deferred.reject(err);
@@ -57,6 +66,23 @@ function Authorization(
 
             return deferred.promise;
 
+        },
+
+        initDependencies : function(){
+            var deferred = $q.defer(), self = this;
+            var depProArray = [];
+            _(this._dependencies).forEach(function(dep){
+                var depInit = dep.cName.init();
+                if(dep.async) depProArray.push(depInit);
+            });
+
+            if(depProArray.length > 0){
+                $q.all(depProArray).then(deferred.resolve).catch(deferred.reject);
+            }else{
+                deferred.resolve(true);
+            }
+
+            return deferred.promise;
         },
 
         _authenticate: function() {
