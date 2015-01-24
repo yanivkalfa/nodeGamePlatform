@@ -17,24 +17,25 @@ function webSocket($rootScope, $q, RoutChat/*,Authorization*/) {
         this.Primus = false;
         this.connected = false;
         this.RoutChat = new RoutChat();
+        this.user = false;
     }
 
     WebSocketService.prototype =  {
 
-        init : function(){
+        init : function(user){
             var deferred = $q.defer(),
                 self = this;
 
             console.log('initing websocket');
+
+            this.user = user;
             /*
             if(!Authorization.isAuthenticated) {
                 deferred.reject( 'User is not authenticated' );
                 return deferred.promise;
             }
             */
-
-            var token = Authorization.getUser().token;
-            this.Primus = Primus.connect('ws://' + ngp.const.app.domain + '/?token=' + token);
+            this.Primus = Primus.connect('ws://' + ngp.const.app.domain + '/?token=' + this.user.token);
             this.Primus.on('data', function(msg){
                 console.log(msg);
                 self[msg.m](msg.d);
@@ -47,7 +48,7 @@ function webSocket($rootScope, $q, RoutChat/*,Authorization*/) {
                     "d" : {
                         "name" : 'aRoomName',
                         "type" : 'chat',
-                        "username" : Authorization.getUser().username
+                        "username" : this.user.username
                     }
                 }
             };

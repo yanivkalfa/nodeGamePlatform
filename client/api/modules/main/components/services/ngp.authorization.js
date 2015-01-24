@@ -9,6 +9,7 @@ angular.module(ngp.const.app.name)
         '$state',
         'Api',
         'WebSocket',
+        'Latency',
         Authorization
     ]);
 
@@ -18,12 +19,13 @@ function Authorization(
     $rootScope,
     $state,
     Api,
-    WebSocket
+    WebSocket,
+    Latency
     ) {
 
     function AuthorizationService(){
         this._user = undefined;
-        //this._dependencies = [{cName : WebSocket, 'async' :true }, {cName : Latency, 'async' :false }];
+        this._dependencies = [{cName : WebSocket, 'async' :true }, {cName : Latency, 'async' :false }];
         this._authenticated = false;
         this.api = Api.createNewApi();
     }
@@ -45,14 +47,12 @@ function Authorization(
                 this._authenticate()
                     .then(function(user){
                         self.setAuthenticated();
-                        deferred.resolve(self._user);
-                        /*
                         self.initDependencies().then(function(deps){
                             deferred.resolve(self._user);
                         }).catch(function(err){
                             self.setNotAuthenticated();
                             deferred.reject(err);
-                        });*/
+                        });
                     },function(err){
                         self.setNotAuthenticated();
                         deferred.reject(err);
@@ -72,7 +72,7 @@ function Authorization(
             var deferred = $q.defer(), self = this;
             var depProArray = [];
             _(this._dependencies).forEach(function(dep){
-                var depInit = dep.cName.init();
+                var depInit = dep.cName.init(self._user);
                 if(dep.async) depProArray.push(depInit);
             });
 
