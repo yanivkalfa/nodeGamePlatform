@@ -9,7 +9,6 @@ console.log = (function(_super) {
 })(console.log);
 
 console.log(__filename);
-console.log(arguments.callee.toString())
 
 _s.oServerN = process.argv[3]; // severName - not required
 _s.port = process.argv[2] || 8001; // server port - required
