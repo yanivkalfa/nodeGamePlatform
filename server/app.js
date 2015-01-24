@@ -43,13 +43,15 @@ _s.oReq.app.use(_s.oReq.session({
 
 _s.oRouts = require('./lib/requiredRouts.js')(_s);
 
+
+/*
 _s.primus.rooms(function(err, rooms){
-    /*console.log("primus rooms", rooms);*/
 
     rooms.forEach(function(room){
         _s.primus.room(room).empty();
     });
 });
+*/
 _s.primus.on('connection', function (spark) {
 
     _s.oReq.jwt.verify(spark.query.token, sessSecret, function(err, decoded) {

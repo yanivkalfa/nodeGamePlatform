@@ -56,7 +56,6 @@ module.exports = function(_s, _rf){
     };
 
     RoutRoom.prototype.join = function(spark, msg){
-        console.log(msg);
         var dateNow = Date.now()
             , randomId = Math.floor(Math.random()*300000)
             , data
