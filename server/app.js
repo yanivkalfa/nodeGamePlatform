@@ -2,8 +2,8 @@ var _s = {};
 console.log = (function(_super) {
     return function() {
         var file = __filename.split('/');
-        var arg = file[file.length-1] +' - (line ' + new Error().stack.split('\n')[1].split(':')[1] + ')';
-        Array.prototype.push.call(arguments, arg);
+        var arg = file[file.length-1] +' - (line ' + new Error().stack.split('\n')[1].split(':')[1] + ')' + "\n";
+        Array.prototype.push.call(arg, arguments);
         return _super.apply(this, arguments);
     };
 })(console.log);
