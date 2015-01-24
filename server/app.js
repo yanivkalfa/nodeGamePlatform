@@ -64,14 +64,14 @@ _s.primus.on('connection', function (spark) {
                 }
                 else
                 {
-                    console.log('decoded', decoded);
+
                     // Attaching user to spark - for logout and maybe future needs
                     spark.user = user;
 
                     // Update user's spark id in database - in-case its needed
                     var upSkSuccess = function (user){
 
-                        console.log('Not suppose to get here', spark);
+                        console.log('User', user);
                         console.log(user.rooms);
                         // Joining terminal, lobby  and user rooms
                         var userRoom = 'u_' + decoded.userId;
