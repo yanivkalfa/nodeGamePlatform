@@ -40,9 +40,6 @@ module.exports = function(_s){
             var id
                 , username
                 , credentials = {}
-                , success
-                , fail
-                , self = this
                 ;
 
             user = user || {};
@@ -54,22 +51,7 @@ module.exports = function(_s){
             credentials = id ? {"_id" : id } : {"username" : username };
 
             return new _s.oReq.Promise(function(resolve, reject) {
-
-                fail = function(err){
-                    if(err) return reject(err);
-                };
-
-                success = function(user){
-                    return resolve(self.set(user));
-                };
-
-                /*
                 Users.findOne(credentials).exec(function (err, user) {
-                    if(err) return fail(err);
-                    return success(user);
-                });*/
-
-                Users.findOne(credentials, function (err, user){
                     if(err) return reject(err);
                     return resolve(user);
                 });
