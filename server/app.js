@@ -1,4 +1,5 @@
 var _s = {};
+/*
 console.log = (function(_super) {
     return function() {
         var arg = "\n" + __filename.split('/').pop() +' - (line ' + new Error().stack.split('\n')[1].split(':')[1] + ')';
@@ -6,6 +7,7 @@ console.log = (function(_super) {
         return _super.apply(this, arguments);
     };
 })(console.log);
+*/
 
 
 var orgCLog = console.log;
