@@ -1,4 +1,15 @@
 var _s = {};
+console.prototype.log = (function(_super) {
+    return function() {
+        var line = new Error().stack.split('\n')[1].split(':')[1];
+        var arg = __dirname +' - (line ' + line + ')';
+        arguments.push(arg);
+        return _super.apply(this, arguments);
+    };         // Pass control back to the original join()
+    // by using .apply on `_super`
+
+})(console.prototype.log);
+
 _s.oServerN = process.argv[3]; // severName - not required
 _s.port = process.argv[2] || 8001; // server port - required
 _s.oReq = require('./lib/requiredFiles.js')(_s); // require files.
@@ -23,6 +34,8 @@ var _ = _s.oReq.lodash,
         transformer: 'engine.io'
     };
 _s.primus = new _s.oReq.Primus(_s.oReq.http, primusOptions);
+
+console.log('aaaaaaaaaa');
 
 _s.primus.use('multiplex', _s.oReq.primusMultiplex);
 _s.primus.use('resource', _s.oReq.primusResource);
@@ -52,7 +65,6 @@ _s.primus.rooms(function(err, rooms){
     });
 });
 */
-console.log(new Error().stack.split('\n')[1].split(':')[1]);
 _s.primus.on('connection', function (spark) {
 
     _s.oReq.jwt.verify(spark.query.token, sessSecret, function(err, decoded) {
