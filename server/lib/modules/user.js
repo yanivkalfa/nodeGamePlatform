@@ -70,8 +70,8 @@ module.exports = function(_s){
                 });*/
 
                 Users.findOne(credentials, function (err, user){
-                    if(err) return fail(err);
-                    return success(user);
+                    if(err) return reject(err);
+                    return resolve(user);
                 });
             });
         },
