@@ -32,9 +32,10 @@ function runFactory(
     $rootScope.$on('$stateChangeStart', function(event, toState, toStateParams) {
 
         console.log('going to : ', toState);
+        $templateCache.remove(ngp.const.app.url + '/contents/admin');
 
         if(toState.login == 'admin'){
-            $templateCache.remove(ngp.const.app.url + '/contents/admin');
+
         }
 
         $rootScope.ngp.toState = toState;
