@@ -31,13 +31,11 @@ function runFactory(
 
     $rootScope.$on('$stateChangeStart', function(event, toState, toStateParams, fromState) {
 
-        console.log(arguments);
-
         ///event, toState, toParams, fromState, fromParams
 
         console.log('going to inside run: ', toState, fromState);
 
-        if(toState.name == 'admin'){
+        if(fromState.name == 'login' && toState.name == 'admin'){
             $templateCache.remove(ngp.const.app.url + '/contents/admin');
         }
 
