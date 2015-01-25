@@ -172,6 +172,7 @@ function Authorization(
         },
 
         isSet: function() {
+            console.log('this._user', this._user);
             return this._user && angular.isDefined(this._user.token)
         },
         isAuthenticated: function() {
