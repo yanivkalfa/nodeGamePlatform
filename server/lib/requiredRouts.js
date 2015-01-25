@@ -15,9 +15,10 @@ module.exports = function(_s){
     _s.oReq.app.post('/ajaxHandler', _.partial(_s.oModules.ajaxHandler, _s));
 
     _s.oReq.app.get('/contents/:content', function (req, res) {
+        console.log("req.params", req.params);
+        console.log("req.session.user", req.session.user);
+
         if(_s.oConfig.routs.loginRequired(req.params.content)){
-            console.log("req.params", req.params);
-            console.log("req.session.user", req.session.user);
             _s.oModules.Authorization.init(req.session.user, _s.oConfig.routs.getRout(req.params.content));
             if(_s.oModules.Authorization.isAuthenticated()){
                 res.render(_s.sServerDirname + '/tpl/contents/' + req.params.content + '.jade');
