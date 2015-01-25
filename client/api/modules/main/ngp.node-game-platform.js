@@ -35,7 +35,7 @@ function runFactory(
 
         console.log('going to inside run: ', toState, fromState);
 
-        if(fromState.name == 'login' && toState.name == 'admin'){
+        if(fromState.name == 'login' && (toState.name == 'admin' || toState.parent == 'admin')){
             $templateCache.remove(ngp.const.app.url + '/contents/admin');
         }
 
