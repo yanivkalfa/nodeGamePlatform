@@ -34,6 +34,7 @@ function Authorization(
         },
 
         init: function(force) {
+            console.log('init');
             var deferred = $q.defer(), self = this;
             if (force === true) _user = undefined;
 
