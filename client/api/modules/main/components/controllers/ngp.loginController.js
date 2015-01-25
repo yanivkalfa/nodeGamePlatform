@@ -39,17 +39,26 @@ function loginController(
                 if(angular.isDefined($rootScope.ngp.returnToState))
                 {
                     Authorization.init()
-                        .then(_.bind(Authorization.authorized, Authorization))
+                        .then(function(user){
+                            //_.bind(Authorization.authorized, Authorization)
+
+                            Authorization.authorized(user);
+                            $state.go($rootScope.ngp.returnToState.name, $rootScope.ngp.returnToStateParams);
+                        })
                         .catch(_.bind(Authorization.notAuthorized, Authorization));
                     //document.location.href = $state.href($rootScope.ngp.returnToState.name, $rootScope.ngp.returnToStateParams, {absolute: true});
-                    $state.go($rootScope.ngp.returnToState.name, $rootScope.ngp.returnToStateParams);
+
                 }
                 else
                 {
                     Authorization.init()
-                        .then(_.bind(Authorization.authorized, Authorization))
+                        .then(function(user){
+                            //_.bind(Authorization.authorized, Authorization)
+
+                            Authorization.authorized(user);
+                            $state.go('admin');
+                        })
                         .catch(_.bind(Authorization.notAuthorized, Authorization));
-                    $state.go('admin');
                 }
             }else{
                 Notify.error('Login Failed: ' + resp.payload.data);
