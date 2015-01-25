@@ -28,7 +28,6 @@ function loginController(
     }
     LoginController.prototype.login = function(){
         var success,fail, options;
-        console.log('logging');
 
         success = function(resp){
             if(resp.payload.success){
@@ -36,12 +35,10 @@ function loginController(
 
                 if(angular.isDefined($rootScope.ngp.returnToState))
                 {
-                    console.log('going to ' , $rootScope.ngp.returnToState);
                     $state.go($rootScope.ngp.returnToState.name, $rootScope.ngp.returnToStateParams);
                 }
                 else
                 {
-                    console.log('going to admin');
                     $state.go('admin');
                 }
             }else{

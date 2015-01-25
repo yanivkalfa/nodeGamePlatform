@@ -39,8 +39,6 @@ function Authorization(
             var deferred = $q.defer(), self = this;
             if (force === true) this._user = undefined;
 
-            console.log('inside init');
-
             this._user = $cookieStore.get("user");
             if (this.isSet())
             {
