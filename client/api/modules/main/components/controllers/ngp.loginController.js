@@ -36,6 +36,7 @@ function loginController(
 
                 if(angular.isDefined($rootScope.ngp.returnToState))
                 {
+                    console.log('going to ' , $rootScope.ngp.returnToState);
                     $state.go($rootScope.ngp.returnToState.name, $rootScope.ngp.returnToStateParams);
                 }
                 else
