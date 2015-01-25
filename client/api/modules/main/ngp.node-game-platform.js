@@ -29,13 +29,12 @@ function runFactory(
     CronJobs.add({fn: 'authenticate', f : '',  args : '', execEvery : 300000, lastExec : Date.now() + 120000, ref : Authorization});
 
 
-    $rootScope.$on('$stateChangeStart', function(event, toState, toStateParams) {
+    $rootScope.$on('$stateChangeStart', function(event, fromState ,toState, toStateParams) {
 
-        console.log('going to inside run: ', toState);
-        //$templateCache.remove(ngp.const.app.url + '/contents/admin');
+        console.log('going to inside run: ', toState, fromState);
 
         if(toState.name == 'admin'){
-            console.log('is admin');
+            $templateCache.remove(ngp.const.app.url + '/contents/admin');
         }
 
         $rootScope.ngp.toState = toState;
