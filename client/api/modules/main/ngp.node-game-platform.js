@@ -4,6 +4,7 @@
 angular.module(ngp.const.app.name, ['ui.router', 'ngCookies', 'ui.bootstrap'])
     .run([
         '$rootScope',
+        '$templateCache',
         'Authorization',
         'CronJobs',
         runFactory
@@ -11,6 +12,7 @@ angular.module(ngp.const.app.name, ['ui.router', 'ngCookies', 'ui.bootstrap'])
 
 function runFactory(
     $rootScope,
+    $templateCache,
     Authorization,
     CronJobs
     ) {
@@ -30,6 +32,10 @@ function runFactory(
     $rootScope.$on('$stateChangeStart', function(event, toState, toStateParams) {
 
         console.log('going to : ', toState);
+
+        if(toState.login == 'admin'){
+            $templateCache.remove(ngp.const.app.url + '/contents/admin');
+        }
 
         $rootScope.ngp.toState = toState;
         $rootScope.ngp.toStateParams = toStateParams;

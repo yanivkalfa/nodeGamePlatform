@@ -29,7 +29,6 @@ function loginController(
     LoginController.prototype.login = function(){
         var success,fail, options;
 
-        console.log('logging');
         success = function(resp){
             if(resp.payload.success){
                 $cookieStore.put('user', resp.payload.data);
