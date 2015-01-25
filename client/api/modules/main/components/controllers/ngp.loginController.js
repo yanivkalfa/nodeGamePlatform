@@ -37,7 +37,7 @@ function loginController(
                 if(angular.isDefined($rootScope.ngp.returnToState))
                 {
                     var url = $state.href($rootScope.ngp.returnToState.name, $rootScope.ngp.returnToStateParams, {absolute: true});
-                    console.log(url);
+                    document.location.href = url;
                     //$state.go($rootScope.ngp.returnToState.name, $rootScope.ngp.returnToStateParams);
                 }
                 else
