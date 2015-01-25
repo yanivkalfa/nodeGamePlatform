@@ -48,6 +48,7 @@ function siteRouts($stateProvider, $urlRouterProvider, $locationProvider) {
 
             authorize: ['Authorization',
                 function(Authorization) {
+                    console.log('Authorizing.init');
                     return Authorization.init()
                         .then(_.bind(Authorization.authorized, Authorization))
                         .catch(_.bind(Authorization.notAuthorized, Authorization));
