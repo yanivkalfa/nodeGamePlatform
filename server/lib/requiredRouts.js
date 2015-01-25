@@ -31,6 +31,7 @@ module.exports = function(_s){
     });
 
     _s.oReq.app.post('/contents/:content', function (req, res) {
+        console.log('post !!');
         console.log("req.params", req.params);
         console.log("req.session.user", req.session.user);
     });
