@@ -34,7 +34,7 @@ function runFactory(
         $rootScope.ngp.toState = toState;
         $rootScope.ngp.toStateParams = toStateParams;
 
-        if (toState.name == 'admin' || toState.parent == 'admin' && !Authorization.isSet()) {
+        if ((toState.name == 'admin' || toState.parent == 'admin') && !Authorization.isSet()) {
             console.log('!isSet');
             event.preventDefault();
             Authorization.notAuthorized();
