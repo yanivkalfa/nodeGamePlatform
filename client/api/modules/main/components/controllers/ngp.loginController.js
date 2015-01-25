@@ -40,7 +40,6 @@ function loginController(
                 {
                     Authorization.init()
                         .then(function(user){
-                            console.log(user)
                             //_.bind(Authorization.authorized, Authorization)
 
                             if(Authorization.authorized(user))
@@ -55,7 +54,6 @@ function loginController(
                     Authorization.init()
                         .then(function(user){
                             //_.bind(Authorization.authorized, Authorization)
-                            console.log(user)
                             if(Authorization.authorized(user))
                                 $state.go('admin');
                         })

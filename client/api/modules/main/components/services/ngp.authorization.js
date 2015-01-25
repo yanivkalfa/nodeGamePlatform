@@ -2,7 +2,7 @@
  * Created by Yaniv-Kalfa on 1/2/15.
  */
 angular.module(ngp.const.app.name)
-    .service('Authorization', [
+    .factory('Authorization', [
         '$q',
         '$cookieStore',
         '$rootScope',
@@ -23,23 +23,21 @@ function Authorization(
     Latency
     ) {
 
-    function AuthorizationService(){
-        this._user = undefined;
-        this._dependencies = [{cName : WebSocket, 'async' :true }, {cName : Latency, 'async' :false }];
-        this._authenticated = false;
-        this.api = Api.createNewApi();
-    }
+    var _user = undefined
+        , _dependencies = [{cName : WebSocket, 'async' :true }, {cName : Latency, 'async' :false }]
+        , _authenticated = false
+        , _api = Api.createNewApi();
 
-    AuthorizationService.prototype =  {
+    return  {
         getUser: function() {
-            return this._user;
+            return _user;
         },
 
         init: function(force) {
             var deferred = $q.defer(), self = this;
-            if (force === true) this._user = undefined;
+            if (force === true) _user = undefined;
 
-            this._user = $cookieStore.get("user");
+            _user = $cookieStore.get("user");
             if (this.isSet())
             {
                 this._authenticate()
@@ -75,7 +73,7 @@ function Authorization(
         initDependencies : function(){
             var deferred = $q.defer(), self = this;
             var depProArray = [];
-            _(this._dependencies).forEach(function(dep){
+            _(_dependencies).forEach(function(dep){
                 var depInit = dep.cName.init(self._user);
                 if(dep.async) depProArray.push(depInit);
             });
@@ -91,7 +89,7 @@ function Authorization(
 
         killDependencies : function(){
             var self = this;
-            _(this._dependencies).forEach(function(dep){
+            _(_dependencies).forEach(function(dep){
                 dep.cName.destroy(self._user);
             });
         },
@@ -116,7 +114,7 @@ function Authorization(
                 }
             };
 
-            this.api.doRequest(options).then(function(resp){
+            _api.doRequest(options).then(function(resp){
                 if(resp.payload.success){
                     deferred.resolve(resp.payload.data);
                 }else{
@@ -162,29 +160,29 @@ function Authorization(
         },
 
         setAuthenticated : function(){
-            this._authenticated = true;
+            _authenticated = true;
         },
 
         setNotAuthenticated : function(){
-            this._user = undefined;
-            this._authenticated = false;
+            _user = undefined;
+            _authenticated = false;
             $cookieStore.remove('user');
         },
 
         isSet: function() {
-            console.log('this._user', this._user);
-            return this._user && angular.isDefined(this._user.token)
+            console.log('_user', _user);
+            return _user && angular.isDefined(_user.token)
         },
         isAuthenticated: function() {
-            return this._authenticated;
+            return _authenticated;
         },
         isInRole: function(role) {
-            if (!this._authenticated || !this._user.roles) return false;
+            if (!_authenticated || !_user.roles) return false;
 
-            return this._user.roles.indexOf(role) != -1;
+            return _user.roles.indexOf(role) != -1;
         },
         isInAnyRole: function(roles) {
-            if (!this._authenticated || !this._user.roles) return false;
+            if (!_authenticated || !_user.roles) return false;
 
             for (var i = 0; i < roles.length; i++) {
                 if (this.isInRole(roles[i])) return true;
@@ -193,6 +191,4 @@ function Authorization(
             return false;
         }
     };
-
-    return new AuthorizationService();
 }
