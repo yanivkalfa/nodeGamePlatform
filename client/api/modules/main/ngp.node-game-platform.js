@@ -31,6 +31,8 @@ function runFactory(
 
     $rootScope.$on('$stateChangeStart', function(event, toState, toStateParams, fromState) {
 
+        console.log(arguments);
+
         ///event, toState, toParams, fromState, fromParams
 
         console.log('going to inside run: ', toState, fromState);
