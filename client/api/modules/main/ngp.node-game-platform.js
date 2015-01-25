@@ -38,10 +38,10 @@ function runFactory(
             Authorization.init()
                 .then(_.bind(Authorization.authorized, Authorization))
                 .catch(_.bind(Authorization.notAuthorized, Authorization));
-        }else if(toState.name == 'admin' || toState.parent == 'admin'){
+        }/*else if(toState.name == 'admin' || toState.parent == 'admin'){
             console.log('!isSet');
             event.preventDefault();
             Authorization.notAuthorized();
-        }
+        }*/
     });
 }
