@@ -46,7 +46,7 @@ module.exports = function(_s){
                     next();
                 }
             }, function (err) {
-                req.session.user = {};
+                req.session.user = undefined;
             });
         },
 
@@ -59,12 +59,13 @@ module.exports = function(_s){
         },
 
         isInRole: function(role) {
-            if(_.isUndefined(_user.roles)) return -1;
+            if(_.isUndefined(_user.roles)) return false;
             return _user.roles.indexOf(role) != -1;
         },
 
         isInAnyRole: function(roles) {
             if(roles.length <= 0) return true;
+            if(_.isUndefined(_user.roles)) return false;
 
             for (var i = 0; i < roles.length; i++) {
                 if (this.isInRole(roles[i])) return true;
