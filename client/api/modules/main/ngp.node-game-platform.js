@@ -29,7 +29,9 @@ function runFactory(
     CronJobs.add({fn: 'authenticate', f : '',  args : '', execEvery : 300000, lastExec : Date.now() + 120000, ref : Authorization});
 
 
-    $rootScope.$on('$stateChangeStart', function(event, fromState ,toState, toStateParams) {
+    $rootScope.$on('$stateChangeStart', function(event, toState, toStateParams, fromState) {
+
+        ///event, toState, toParams, fromState, fromParams
 
         console.log('going to inside run: ', toState, fromState);
 
