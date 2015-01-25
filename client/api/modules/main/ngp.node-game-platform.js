@@ -39,7 +39,7 @@ function runFactory(
                 .then(_.bind(Authorization.authorized, Authorization))
                 .catch(function(){
 
-                    //event.preventDefault();
+                    //
 
                     console.log('aaaa');
                     Authorization.notAuthorized();
@@ -48,6 +48,7 @@ function runFactory(
 
         }else{
             console.log('!isSet');
+            event.preventDefault();
         }
     });
 }
