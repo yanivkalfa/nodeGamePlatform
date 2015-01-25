@@ -4,12 +4,11 @@
 angular.module(ngp.const.app.name)
     .service('Latency', [
         '$rootScope',
-        '$q',
         'WebSocket',
         Latency
     ]);
 
-function Latency($rootScope, $q, WebSocket) {
+function Latency($rootScope, WebSocket) {
 
     function LatencyService(){
         this._pingSent = 0;
@@ -37,30 +36,26 @@ function Latency($rootScope, $q, WebSocket) {
         },
 
         destroy : function(){
-            this.reset(true);
+            this.reset();
         },
 
         pingServer : function(){
             this._pingSent = Date.now();
             WebSocket.Primus.write({"m": "ping", "d":"p"});
 
-            if(this.cycleTime <= this._timeElapsed){
-                this.init();
-            }
+            if(this.cycleTime <= this._timeElapsed) this.init();
+
             this._timeElapsed += this.pingEvery;
         },
 
-        reset : function(kill){
+        reset : function(){
             this._pingSent = 0;
             this._pingreturn = 0;
             this._accomulativeLatency = 0;
-            this._rounds = 1;
             this._timeElapsed = 0;
-            if(kill){
-                this._latency = 0;
-                this._rounds = 0;
-                clearInterval(this.pingInterval);
-            }
+            this._latency = 0;
+            this._rounds = 0;
+            clearInterval(this.pingInterval);
         },
         calculateLatency : function(){
             this._rounds++;
