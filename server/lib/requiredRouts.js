@@ -30,12 +30,6 @@ module.exports = function(_s){
         }
     });
 
-    _s.oReq.app.post('/contents/:content', function (req, res) {
-        console.log('post !!');
-        console.log("req.params", req.params);
-        console.log("req.session.user", req.session.user);
-    });
-
     _s.oReq.app.get('/*', function (req, res) {
         res.locals.user = {};
         if(req.session.user){
