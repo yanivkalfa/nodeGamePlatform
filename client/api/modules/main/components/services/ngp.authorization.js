@@ -44,7 +44,7 @@ function Authorization(
                     .then(function(user){
                         self.setAuthenticated();
                         self.initDependencies().then(function(deps){
-                            deferred.resolve(self._user);
+                            deferred.resolve(_user);
                         }).catch(function(err){
                             self.setNotAuthenticated();
                             deferred.reject(err);
@@ -74,7 +74,7 @@ function Authorization(
             var deferred = $q.defer(), self = this;
             var depProArray = [];
             _(_dependencies).forEach(function(dep){
-                var depInit = dep.cName.init(self._user);
+                var depInit = dep.cName.init(_user);
                 if(dep.async) depProArray.push(depInit);
             });
 
@@ -90,7 +90,7 @@ function Authorization(
         killDependencies : function(){
             var self = this;
             _(_dependencies).forEach(function(dep){
-                dep.cName.destroy(self._user);
+                dep.cName.destroy(_user);
             });
         },
 
@@ -110,7 +110,7 @@ function Authorization(
                     "method" : 'authenticateUser',
                     "status" : 0,
                     "success" : false,
-                    "data" : self._user
+                    "data" : _user
                 }
             };
 
