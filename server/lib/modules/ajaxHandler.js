@@ -36,8 +36,7 @@ module.exports = function(_s, req, res) {
     };
 
     this.logout = function(){
-        var auth = new _s.oModules.Authorization();
-        auth.logout(req, res);
+        _s.oModules.Authorization.logout(req, res);
         _this._setResp(true, true);
         return res.json(_this.toReturn);
     };
@@ -73,9 +72,8 @@ module.exports = function(_s, req, res) {
     };
 
     this.login = function(userDetails){
-        var auth = new _s.oModules.Authorization();
 
-        auth.login(userDetails).then(function(user){
+        _s.oModules.Authorization.login(userDetails).then(function(user){
             if(user)
             {
                 var payLoard = { userId : user.id }
