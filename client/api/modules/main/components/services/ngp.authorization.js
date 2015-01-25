@@ -40,7 +40,6 @@ function Authorization(
             if (force === true) this._user = undefined;
 
             this._user = $cookieStore.get("user");
-            console.log('init start');
             if (this.isSet())
             {
                 this._authenticate()
@@ -142,7 +141,6 @@ function Authorization(
         },
 
         authorized : function(user){
-            console.log('authorized start:', user);
             var isAuthenticated = this.isAuthenticated();
 
             if ($rootScope.ngp.toState.data.roles && $rootScope.ngp.toState.data.roles.length > 0 && !this.isInAnyRole($rootScope.ngp.toState.data.roles)) {

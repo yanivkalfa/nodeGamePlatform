@@ -26,7 +26,6 @@ function loginController(
             password : ''
         };
 
-        console.log($rootScope.ngp.returnToState);
     }
     LoginController.prototype.login = function(){
         var success,fail, options;
