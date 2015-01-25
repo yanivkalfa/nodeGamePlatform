@@ -25,6 +25,8 @@ function loginController(
             email : '',
             password : ''
         };
+
+        console.log($rootScope.ngp.returnToState);
     }
     LoginController.prototype.login = function(){
         var success,fail, options;
@@ -33,17 +35,12 @@ function loginController(
             if(resp.payload.success){
                 $cookieStore.put('user', resp.payload.data);
 
-                console.log('going to : ', $rootScope.ngp.returnToState);
                 if(angular.isDefined($rootScope.ngp.returnToState))
                 {
-                    var url = $state.href($rootScope.ngp.returnToState.name, $rootScope.ngp.returnToStateParams, {absolute: true});
-                    $state.go($rootScope.ngp.returnToState.name, $rootScope.ngp.returnToStateParams);
-                    document.location.href = '';
-                    //$state.go($rootScope.ngp.returnToState.name, $rootScope.ngp.returnToStateParams);
+                    document.location.href = $state.href($rootScope.ngp.returnToState.name, $rootScope.ngp.returnToStateParams, {absolute: true});
                 }
                 else
                 {
-                    console.log('going to : admin');
                     $state.go('admin');
                 }
             }else{
