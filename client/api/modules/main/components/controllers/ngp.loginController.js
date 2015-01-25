@@ -39,6 +39,7 @@ function loginController(
                 }
                 else
                 {
+                    console.log('going to admin');
                     $state.go('admin');
                 }
             }else{
