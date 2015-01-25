@@ -31,6 +31,8 @@ function adminController(
         var self = this;
         this.api = Api.createNewApi(ngp.const.app.ajaxUrl);
         this.Authorization = Authorization.getUser();
+
+        console.log('Got into admin controller');
     }
 
     AdminController.prototype.logout = function(){
