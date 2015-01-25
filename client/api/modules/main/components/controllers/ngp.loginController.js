@@ -40,10 +40,11 @@ function loginController(
                 {
                     Authorization.init()
                         .then(function(user){
+                            console.log(user)
                             //_.bind(Authorization.authorized, Authorization)
 
-                            Authorization.authorized(user);
-                            $state.go($rootScope.ngp.returnToState.name, $rootScope.ngp.returnToStateParams);
+                            if(Authorization.authorized(user))
+                                $state.go($rootScope.ngp.returnToState.name, $rootScope.ngp.returnToStateParams);
                         })
                         .catch(_.bind(Authorization.notAuthorized, Authorization));
                     //document.location.href = $state.href($rootScope.ngp.returnToState.name, $rootScope.ngp.returnToStateParams, {absolute: true});
@@ -54,9 +55,9 @@ function loginController(
                     Authorization.init()
                         .then(function(user){
                             //_.bind(Authorization.authorized, Authorization)
-
-                            Authorization.authorized(user);
-                            $state.go('admin');
+                            console.log(user)
+                            if(Authorization.authorized(user))
+                                $state.go('admin');
                         })
                         .catch(_.bind(Authorization.notAuthorized, Authorization));
                 }

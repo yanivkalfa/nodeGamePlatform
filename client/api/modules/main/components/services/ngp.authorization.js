@@ -144,18 +144,21 @@ function Authorization(
             var isAuthenticated = this.isAuthenticated();
 
             if ($rootScope.ngp.toState.data.roles && $rootScope.ngp.toState.data.roles.length > 0 && !this.isInAnyRole($rootScope.ngp.toState.data.roles)) {
-                if (isAuthenticated) return $state.go('accessdenied');
+                if (isAuthenticated) {
+                    $state.go('accessdenied');
+                    return false;
+                }
                 else { return this.notAuthorized();}
             }
 
-            return user;
+            return true;
         },
 
         notAuthorized : function(err){
             $rootScope.ngp.returnToState = $rootScope.ngp.toState;
             $rootScope.ngp.returnToStateParams = $rootScope.ngp.toStateParams;
-
-            return $state.go('login');
+            $state.go('login');
+            return false;
         },
 
         setAuthenticated : function(){
