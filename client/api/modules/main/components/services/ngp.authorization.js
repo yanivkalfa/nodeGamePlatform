@@ -40,14 +40,13 @@ function Authorization(
             if (force === true) this._user = undefined;
 
             this._user = $cookieStore.get("user");
-
+            console.log('aaaaaaaaaaaaaaaaa');
             if (this.isSet())
             {
                 this._authenticate()
                     .then(function(user){
                         self.setAuthenticated();
                         self.initDependencies().then(function(deps){
-                            console.log(deps);
                             deferred.resolve(self._user);
                         }).catch(function(err){
                             self.setNotAuthenticated();
