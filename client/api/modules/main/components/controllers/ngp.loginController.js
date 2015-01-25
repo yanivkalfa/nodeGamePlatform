@@ -29,16 +29,19 @@ function loginController(
     LoginController.prototype.login = function(){
         var success,fail, options;
 
+        console.log('logging');
         success = function(resp){
             if(resp.payload.success){
                 $cookieStore.put('user', resp.payload.data);
 
+                console.log('going to : ', $rootScope.ngp.returnToState);
                 if(angular.isDefined($rootScope.ngp.returnToState))
                 {
                     $state.go($rootScope.ngp.returnToState.name, $rootScope.ngp.returnToStateParams);
                 }
                 else
                 {
+                    console.log('going to : admin');
                     $state.go('admin');
                 }
             }else{

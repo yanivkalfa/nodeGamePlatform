@@ -29,7 +29,7 @@ function runFactory(
 
     $rootScope.$on('$stateChangeStart', function(event, toState, toStateParams) {
 
-        console.log("cookies:",document.cookie);
+        console.log('going to : ', toState);
 
         $rootScope.ngp.toState = toState;
         $rootScope.ngp.toStateParams = toStateParams;
