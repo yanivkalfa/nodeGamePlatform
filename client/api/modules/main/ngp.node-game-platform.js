@@ -37,7 +37,15 @@ function runFactory(
         if (Authorization.isSet()) {
             Authorization.init()
                 .then(_.bind(Authorization.authorized, Authorization))
-                .catch(_.bind(Authorization.notAuthorized, Authorization));
+                .catch(function(){
+
+                    //event.preventDefault();
+
+                    console.log('aaaa');
+                    Authorization.notAuthorized();
+                });
+
+
         }
     });
 }
