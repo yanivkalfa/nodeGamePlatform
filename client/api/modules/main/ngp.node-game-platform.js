@@ -26,6 +26,7 @@ function runFactory(
 
     CronJobs.add({fn: 'authenticate', f : '',  args : '', execEvery : 300000, lastExec : Date.now() + 120000, ref : Authorization});
 
+    console.log(document.cookie);
 
 
     $rootScope.$on('$stateChangeStart', function(event, toState, toStateParams) {
