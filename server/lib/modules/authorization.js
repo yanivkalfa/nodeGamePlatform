@@ -24,7 +24,7 @@ module.exports = function(_s){
         },
 
         isResolved: function() {
-            return !_.isUndefined(_user);
+            return !_.isEmpty(_user);
         },
 
         login : function(credentials){
@@ -51,7 +51,7 @@ module.exports = function(_s){
         },
 
         authenticate: function() {
-            return _authenticated = (!_.isUndefined(_user) && this.isInAnyRole(_rout.roles || []))
+            return _authenticated = (!_.isEmpty(_user) && this.isInAnyRole(_rout.roles || []))
         },
 
         isAuthenticated: function() {
@@ -59,13 +59,13 @@ module.exports = function(_s){
         },
 
         isInRole: function(role) {
-            if(_.isUndefined(_user.roles)) return false;
+            if(_.isEmpty(_user) || _.isEmpty(_user.roles)) return false;
             return _user.roles.indexOf(role) != -1;
         },
 
         isInAnyRole: function(roles) {
             if(roles.length <= 0) return true;
-            if(_.isUndefined(_user.roles)) return false;
+            if(_.isEmpty(_user) || _.isEmpty(_user.roles)) return false;
 
             for (var i = 0; i < roles.length; i++) {
                 if (this.isInRole(roles[i])) return true;
