@@ -66,6 +66,10 @@ function webSocket($rootScope, $q, RoutChat) {
             return deferred.promise;
         },
 
+        destroy : function(){
+            this.Primus.end();
+        },
+
         chat : function(msg){
             this.RoutChat.rout(msg);
         },

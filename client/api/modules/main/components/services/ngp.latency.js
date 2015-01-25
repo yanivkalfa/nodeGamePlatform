@@ -36,6 +36,10 @@ function Latency($rootScope, $q, WebSocket) {
             return self;
         },
 
+        destroy : function(){
+            this.reset(true);
+        },
+
         pingServer : function(){
             this._pingSent = Date.now();
             WebSocket.Primus.write({"m": "ping", "d":"p"});

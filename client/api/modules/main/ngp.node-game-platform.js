@@ -34,7 +34,6 @@ function runFactory(
         $rootScope.ngp.toStateParams = toStateParams;
 
         if (Authorization.isSet()) {
-            console.log('aa');
             Authorization.init()
                 .then(_.bind(Authorization.authorized, Authorization))
                 .catch(_.bind(Authorization.notAuthorized, Authorization));

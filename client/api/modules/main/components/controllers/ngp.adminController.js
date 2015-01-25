@@ -38,9 +38,7 @@ function adminController(
 
         success = function(resp){
             if(resp.payload.success){
-                $cookieStore.remove('user');
-                WebSocket.end();
-                $state.go('login');
+                Authorization.logout();
             }else{
                 Notify.error('Logout Failed: ' + resp.payload.data);
             }
