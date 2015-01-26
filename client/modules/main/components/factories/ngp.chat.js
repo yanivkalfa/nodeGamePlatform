@@ -28,6 +28,7 @@ function Chat($rootScope, UtilFunc) {
                 scrollFlag : true,
                 msgWrap : undefined,
                 scrollBottom : function(){
+                    console.log('aaaa', this.msgWrap);
                     this.msgWrap.scrollTop = this.msgWrap.scrollHeight;
                 },
                 updateScroll : function(){
