@@ -32,7 +32,7 @@ function Chat($rootScope, UtilFunc) {
             return UtilFunc.indexOf($rootScope.ngp.rooms, room, 'id');
         },
 
-        getActiveRoom : function(room){
+        getActiveRoom : function(){
             if(!_.isArray($rootScope.ngp.rooms)) return false;
 
             for(var i = 0; i < $rootScope.ngp.rooms.length; i++){
