@@ -66,6 +66,7 @@ _s.primus.on('connection', function (spark) {
                     // Attaching user to spark - for logout and maybe future needs
                     spark.user = user;
 
+                    // Update user's spark id in database - in-case its needed
                     var updateSpark = function(user){
                         return new _s.oReq.Promise(function(resolve, reject) {
                             user.spark = spark.id;
@@ -76,41 +77,12 @@ _s.primus.on('connection', function (spark) {
                         });
                     };
 
-                    // Update user's spark id in database - in-case its needed
+
                     var upSkSuccess = function (user){
-
-                        //var RoutChat = new _s.oModules.RoutChat(_s.primus);
                         var RoutSocket = new _s.oModules.RoutSocket(_s.primus);
-
                         spark.on('data', function (msg) {
                             RoutSocket.rout(spark, msg);
                         });
-
-                        /*
-
-                        // initiating socket router. and extending it.
-                        var webSocket = _s.oModules.WebSocket();
-                        var WebSocketExtender = function(){
-                            webSocket.call(this,_s, _s.primus, spark);
-                        };
-
-
-                        var extendRouterWith = {
-                            ping : function(spark, data){
-                                spark.write({"m": "ping", "d":"p"});
-                            },
-
-                            chat : function(spark, msg){
-                                RoutChat.rout(spark, msg);
-                            }
-                        };
-
-                        WebSocketExtender.prototype = webSocket.prototype;
-                        _s.oModules.uf.extend(WebSocketExtender, extendRouterWith);
-
-                        var webSocketExtender = new WebSocketExtender();
-
-                        */
 
                         // Joining terminal, lobby user rooms and saved rooms
                         var userRoom = 'u_' + decoded.userId;
@@ -164,8 +136,22 @@ _s.primus.on('disconnection', function (spark) {
 
 _s.primus.on('leaveallrooms', function (rooms, spark) {
 
+    if(!spark) return false;
+    var RoutRoom = new _s.oModules.RoutRoom(_s.primus);
+    _s.oModules.User.fetchUser({"id":spark.user.id}).then(function(user){
+        _.isArray(user.rooms) && _(user.rooms).forEach(function(room){
+            var room  = {
+                "id" : room,
+                "type" : 'chat',
+                "users" : {}
+            };
+            RoutRoom._leave(spark, room)
+        });
 
-    //_s.oModules.User.fetchUser({"id":decoded.userId}).then(updateSpark).then(upSkSuccess).catch(upSkFail);
+
+
+    });
+    //
     console.log('leaving all rooms ' , spark.id);
     // works when the client closes the connection
 });
