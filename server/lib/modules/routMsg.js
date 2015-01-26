@@ -39,7 +39,6 @@ module.exports = function(_s, _rf){
             , randomId = Math.floor(Math.random()*300000)
             , cName
             , prvSuccess
-            , prvFail
             , data
             , self = this
             ;
@@ -69,22 +68,35 @@ module.exports = function(_s, _rf){
     };
 
     RoutMsg.prototype.publicMsg = function(spark, msg){
-        var data  = {
+        var dateNow = Date.now()
+            , randomId = Math.floor(Math.random()*300000)
+            , data
+            ;
+
+        data = {
             "m" : 'msg',
             "d" : {
-                "m" : method,
+                "m" : "publicMsg",
                 "d" : {
-                    "id" : id,
+                    id : dateNow + randomId.toString(),
+                    "action" : msg.action,
                     "toType" : 'public',
-                    "action" : action,
-                    "to" : args[0],
-                    "from" : Authorization.getUser().id,
-                    "content" : args.splice(1).join(" ")
+                    "to" : {'id' : msg.to},
+                    "from" : {id : spark.user.id, username : spark.user.username},
+                    "date" : dateNow,
+                    "content" : msg.content
                 }
             }
         };
 
-        //{id:'', date : '', formatDate : '', action:'', from : '', to : '', content: ''}
+        if(msg.action == 'remove'){
+            data.d.d.id = msg.id;
+            delete data.d.d.date;
+            delete data.d.d.content;
+        }
+
+        _s.primus.room(msg.to).write({"m": "chat", "d":data});
+
     };
 
 
