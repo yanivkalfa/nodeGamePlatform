@@ -63,8 +63,6 @@ _s.primus.on('connection', function (spark) {
                 }
                 else
                 {
-
-                    console.log('happening', spark.id);
                     // Attaching user to spark - for logout and maybe future needs
                     spark.user = user;
 
@@ -150,14 +148,14 @@ _s.primus.on('end', function () {
 });
 
 _s.primus.on('disconnection', function (spark) {
-    //console.log(spark);
+    console.log('disconnection ' , spark.id);
 });
 
 _s.primus.on('leaveallrooms', function (rooms, spark) {
 
 
     //_s.oModules.User.fetchUser({"id":decoded.userId}).then(updateSpark).then(upSkSuccess).catch(upSkFail);
-    console.log('leaving all rooms aaa ' , spark.id);
+    console.log('leaving all rooms ' , spark.id);
     // works when the client closes the connection
 });
 
