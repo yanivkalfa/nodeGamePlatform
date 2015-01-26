@@ -44,6 +44,7 @@ module.exports = function(_s, _rf){
 
     };
 
+    /*
     RoutRoom.prototype.getRoom = function(spark, rname){
         var GetRooms = new _rf.GetRooms();
         GetRooms.setRoomNames([rname])
@@ -62,7 +63,7 @@ module.exports = function(_s, _rf){
                     GetRooms.sendRooms(spark);
                 }
             }).catch(console.log);
-    };
+    };*/
 
     RoutRoom.prototype.join = function(spark, room){
         var randomId = Math.floor(Math.random()*300000)
@@ -106,7 +107,7 @@ module.exports = function(_s, _rf){
             _s.primus.room(room.id).write({"m": "chat", "d":data});
             spark.join(room.id, function(err, succ){
                 if(err) return warning('We were unable to join you to that room');
-                self.getRoom(spark, room.id);
+                self.getRooms(spark, {rooms : [room.id]});
             });
 
         }).catch(warning);

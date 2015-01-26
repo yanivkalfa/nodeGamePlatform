@@ -26,11 +26,31 @@ module.exports = function(_s, _rf){
                 "m" : 'room',
                 "d" : {
                     "m" : 'setRooms',
-                    "d" : self.getRooms()
+                    "d" : self.rooms
                 }
             };
 
             spark.write({"m": "chat", "d":data});
+            this.notifyUserInRooms(spark);
+
+        },
+
+        notifyUserInRooms : function(spark){
+            _(this.rooms).forEach(function(room){
+                var data  = {
+                    "m" : 'room',
+                    "d" : {
+                        "m" : 'join',
+                        "d" : {
+                            "id" : room.id,
+                            "type" : room.type,
+                            "user" : {username : spark.user.username, id : spark.user.id}
+                        }
+                    }
+                };
+                _s.primus.room(room.id).except(spark.id).write({"m": "chat", "d":data});
+            });
+
         },
 
         assembleRooms : function(){
