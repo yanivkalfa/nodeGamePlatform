@@ -14,6 +14,8 @@ function ngpRoomMsgWrap($rootScope,Chat) {
             var rIndex = Chat.getActiveRoom()
                 , room = $rootScope.ngp.rooms[rIndex];
 
+            console.log(raw.offsetHeight);
+
             element.bind('scroll', function () {
                 room.scrollFlag = raw.scrollTop + element.height() == raw.scrollTop;
 
