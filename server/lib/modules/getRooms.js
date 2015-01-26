@@ -4,7 +4,7 @@ module.exports = function(_s, _rf){
         , User = _rf.User
         ;
 
-    function RoomHandler(){
+    function GetRooms(){
         this.rooms = [];
         this.roomNames = [];
         this.roomsSparks = [];
@@ -14,7 +14,7 @@ module.exports = function(_s, _rf){
 
     }
 
-    RoomHandler.prototype = {
+    GetRooms.prototype = {
 
         sendRooms : function(spark){
             var self = this;
@@ -202,7 +202,7 @@ module.exports = function(_s, _rf){
         }
     };
 
-    return RoomHandler;
+    return GetRooms;
 
 };
 

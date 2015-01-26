@@ -64,19 +64,19 @@ function Chat($rootScope, UtilFunc) {
             console.log(member,room);
             var cIndex = UtilFunc.indexOf($rootScope.ngp.rooms, room, 'id');
             if(cIndex == -1) return false;
-            var mIndex = UtilFunc.indexOf($rootScope.ngp.rooms[cIndex].members, member, 'id');
+            var mIndex = UtilFunc.indexOf($rootScope.ngp.rooms[cIndex].users, member, 'id');
             if(mIndex != -1) return false;
             console.log($rootScope.ngp.rooms);
-            $rootScope.ngp.rooms[cIndex].content.members.push(member);
+            $rootScope.ngp.rooms[cIndex].content.users.push(member);
             return true;
         },
 
         removeMember : function(member,room){
             var cIndex = UtilFunc.indexOf($rootScope.ngp.rooms, room, 'id');
             if(cIndex == -1) return false;
-            var mIndex = UtilFunc.indexOf($rootScope.ngp.rooms[cIndex].members, member, 'id');
+            var mIndex = UtilFunc.indexOf($rootScope.ngp.rooms[cIndex].users, member, 'id');
             if(mIndex == -1) return false;
-            $rootScope.ngp.rooms[cIndex].content.members.splice(mIndex,1);
+            $rootScope.ngp.rooms[cIndex].content.users.splice(mIndex,1);
             return true;
         },
 

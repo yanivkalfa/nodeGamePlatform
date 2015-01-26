@@ -44,32 +44,37 @@ module.exports = function(_s, _rf){
 
     };
 
-    /*
-    RoutRoom.prototype.getRoom = function(spark, rname){
-        var GetRooms = new _rf.GetRooms();
-        GetRooms.setRoomNames([rname])
-            .getSparksForAllRooms(GetRooms.roomNames.map(GetRooms.getSparksInRoom)).then(function(roomsSparks){
-                GetRooms.setRoomsSparks(roomsSparks)
-                    .setSparkList()
-                    .checkUserNameInPrimus()
-                    .setInSpark();
 
-                if(GetRooms.inSparks.length) {
-                    GetRooms.fetchUsersInSparks().then(function(users){
-                        GetRooms.checkUserNameInDB(users)
-                            .sendRooms(spark);
-                    }).catch(GetRooms.sendRooms.bind(GetRooms, spark));
-                }else{
-                    GetRooms.sendRooms(spark);
-                }
-            }).catch(console.log);
-    };*/
 
-    RoutRoom.prototype.join = function(spark, room){
+    RoutRoom.prototype.getRoom = function(spark, room){
+        var GetRoom = new _rf.GetRoom();
+        return new _s.oReq.Promise(function(resolve, reject) {
+            GetRoom.getSparksInRoom(room)
+                .then(function(roomSparks){
+                    GetRoom.setRoomSparks(roomSparks)
+                        .setSparkList()
+                        .checkUserNameInPrimus()
+                        .setInSpark()
+                        .fetchUsersInSparks().then(function(users){
+                            GetRoom.checkUserNameInDB(users)
+                                .cleanSparkList()
+                                .assembleRoom();
+                            resolve(GetRoom);
+                        }).catch(reject);
+                }).catch(reject)
+        });
+    };
+
+    RoutRoom.prototype._join = function(spark, room){
+        this.join(spark, room, true);
+    };
+
+    RoutRoom.prototype.join = function(spark, room, noStore){
         var randomId = Math.floor(Math.random()*300000)
             , data
             , self = this
             , warning
+            , joinRoom
             ;
 
         warning = function(err){
@@ -92,25 +97,35 @@ module.exports = function(_s, _rf){
         };
         if(room.id.indexOf("u_") === 0 || room.id === 'terminal') warning('Illegal room name "' + room.id + '"');
 
-        User.fetchUser({"id":spark.user.id}).then(_rf.RoomHandler.joinRoom.bind(this,room.id)).then(function(user){
-            data  = {
-                "m" : 'room',
-                "d" : {
-                    "m" : 'join',
-                    "d" : {
-                        "id" : room.id,
-                        "type" : room.type,
-                        "user" : {username : user.username, id : user.id}
-                    }
-                }
-            };
-            _s.primus.room(room.id).write({"m": "chat", "d":data});
+        joinRoom = function(user){
             spark.join(room.id, function(err, succ){
                 if(err) return warning('We were unable to join you to that room');
-                self.getRooms(spark, {rooms : [room.id]});
+                data  = {
+                    "m" : 'room',
+                    "d" : {
+                        "m" : 'join',
+                        "d" : {
+                            "id" : room.id,
+                            "type" : room.type,
+                            "users" : {username : user.username, id : user.id}
+                        }
+                    }
+                };
+                _s.primus.room(room.id).write({"m": "chat", "d":data});
+                self.getRoom(spark, room.id).then(function(GetRoom){
+                    data.d.d.users = GetRoom.getRoomUsers();
+                    spark.write({"m": "chat", "d":data});
+                });
             });
 
-        }).catch(warning);
+        };
+
+        if(noStore){
+            User.fetchUser({"id":spark.user.id}).then(joinRoom).catch(warning);
+        }else{
+            User.fetchUser({"id":spark.user.id}).then(_rf.RoomHandler.joinRoom.bind(this,room.id)).then(joinRoom).catch(warning);
+        }
+
     };
 
     RoutRoom.prototype.leave = function(spark, room){
@@ -152,7 +167,7 @@ module.exports = function(_s, _rf){
                         "d" : {
                             "id" : room.id,
                             "type" : room.type,
-                            "user" : {username : user.username, id : user.id}
+                            "users" : {username : user.username, id : user.id}
                         }
                     }
                 };
@@ -165,3 +180,24 @@ module.exports = function(_s, _rf){
 
     return RoutRoom;
 };
+
+/*
+ RoutRoom.prototype.getRoom = function(spark, rname){
+ var GetRooms = new _rf.GetRooms();
+ GetRooms.setRoomNames([rname])
+ .getSparksForAllRooms(GetRooms.roomNames.map(GetRooms.getSparksInRoom)).then(function(roomsSparks){
+ GetRooms.setRoomsSparks(roomsSparks)
+ .setSparkList()
+ .checkUserNameInPrimus()
+ .setInSpark();
+
+ if(GetRooms.inSparks.length) {
+ GetRooms.fetchUsersInSparks().then(function(users){
+ GetRooms.checkUserNameInDB(users)
+ .sendRooms(spark);
+ }).catch(GetRooms.sendRooms.bind(GetRooms, spark));
+ }else{
+ GetRooms.sendRooms(spark);
+ }
+ }).catch(console.log);
+ };*/

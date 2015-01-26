@@ -8,6 +8,7 @@ module.exports = function(_s){
     rf.ajaxHandler = require('./ajaxHandler.js');
     rf.RoomHandler = require('./roomHandler.js')(_s,rf);
     rf.GetRooms = require('./getRooms.js')(_s,rf);
+    rf.GetRoom = require('./getRoom.js')(_s,rf);
     rf.WebSocket = require('./webscoket.js');
     rf.Router = require('./supers/router.js')();
     rf.RoutMsg = require('./routMsg.js')(_s,rf);

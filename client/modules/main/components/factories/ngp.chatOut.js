@@ -70,7 +70,7 @@ function ChatOut(WebSocket, Authorization) {
                     "d" : {
                         "id" : args[0],
                         "type" : 'chat',
-                        "username" : {username : user.username, id : user.id}
+                        "users" : {username : user.username, id : user.id}
                     }
                 }
             };
