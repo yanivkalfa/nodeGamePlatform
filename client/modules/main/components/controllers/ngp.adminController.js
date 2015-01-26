@@ -61,9 +61,25 @@ function adminController(
         this.api.doRequest(options).then(success).catch(fail);
     };
 
-    AdminController.prototype.sendMessage = function(){
-        console.log(arguments);
+    AdminController.prototype.msgInput = function(e){
+        var key = e.keyCode || e.which;
+        if(key === 13 && this.commandLine) this.sendMessage();
     };
+
+    AdminController.prototype.msgButton = function(){
+        if(this.commandLine) this.sendMessage();
+    };
+
+    AdminController.prototype.sendMessage = function(){
+        console.log(this.getActiveRoom());
+    };
+
+    AdminController.prototype.getActiveRoom = function(){
+        _($rootScope.ngp.rooms).forEach(function(room, index){
+            if(room.active) return index;
+        })
+    };
+
 
     AdminController.prototype.roomSelected = function(){
         /*
