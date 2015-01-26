@@ -13,15 +13,8 @@ function ngpRoomMsgWrap($rootScope,Chat) {
                 , room = $rootScope.ngp.rooms[rIndex]
                 ;
 
-            room.scrollBottom = function(){
-                raw.scrollTop = raw.scrollHeight;
-            };
+            room.msgWrap = raw;
 
-            room.updateScroll = function(){
-                if(room.scrollFlag){
-                    room.scrollBottom();
-                }
-            };
 
             setInterval(function(){
                 console.log('aaaaaa');
