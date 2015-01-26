@@ -21,6 +21,7 @@ module.exports = function(_s, _rf){
                     "d" : {
                         "id" : dateNow + randomId.toString(),
                         "action" : "add",
+                        "toType" : 'warning',
                         "to" : {id : spark.user.id, username : spark.user.username},
                         "from" : "System",
                         "date" : dateNow,
@@ -52,6 +53,7 @@ module.exports = function(_s, _rf){
                     "d" : {
                         id : dateNow + randomId.toString(),
                         "action" : 'add',
+                        "toType" : 'private',
                         "to" : {id:user.id, username: user.username},
                         "from" : {id : spark.user.id, username : spark.user.username},
                         "date" : dateNow,
@@ -73,6 +75,7 @@ module.exports = function(_s, _rf){
                 "m" : method,
                 "d" : {
                     "id" : id,
+                    "toType" : 'public',
                     "action" : action,
                     "to" : args[0],
                     "from" : Authorization.getUser().id,

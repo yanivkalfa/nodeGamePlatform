@@ -89,7 +89,7 @@
 }
 
 .toType.private{ color : purple; }
-.toType.room{ color: black; }
+.toType.public{ color: black; }
 .toType.warning{ color: red; }
 
 .tabContainer{
