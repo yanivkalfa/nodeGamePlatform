@@ -28,7 +28,7 @@ function ChatOut(WebSocket, Authorization) {
         },
 
         remove : function(args){
-            this.msg(args, 'remove', 'remove', args[0]);
+            this.msg(args, 'publicMsg', 'remove', args[0]);
             return true;
         },
 
