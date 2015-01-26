@@ -57,13 +57,14 @@ function RoutMsg($rootScope, Router, Authorization, Chat, UtilFunc) {
     };
 
     RoutMsgFactory.prototype.publicMsg = function(msg){
-
+        var user = Authorization.getUser();
         var rIndex = Chat.indexOf(msg.to);
         switch(msg.action){
             case 'add':
                 msg.formatDate = UtilFunc.formatMsgDate(msg.date);
                 Chat.addMsg(msg, $rootScope.ngp.rooms[rIndex]);
-                Chat.updateRoomsNotification(rIndex);
+                if(user.id != msg.from.id)
+                    Chat.updateRoomsNotification(rIndex);
                 break;
 
             case 'remove':
