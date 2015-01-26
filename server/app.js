@@ -107,11 +107,7 @@ _s.primus.on('connection', function (spark) {
 
                         // Joining terminal, lobby user rooms and saved rooms
                         var userRoom = 'u_' + decoded.userId;
-                        spark.join('terminal '+ userRoom, function(err, success){
-                            if(err) reject(err);
-                            return resolve(user);
-                        });
-
+                        spark.join('terminal '+ userRoom, function(err, succ){});
 
                         _.isArray(user.rooms) && _(user.rooms).forEach(function(room){
                             var data  = {
