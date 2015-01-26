@@ -126,7 +126,7 @@ _s.primus.on('connection', function (spark) {
 
 
                             //_s.oModules.User.fetchUser({"id":decoded.userId}).then(updateSpark).then(upSkSuccess).catch(upSkFail);
-                            console.log('leaving all rooms');
+                            console.log('leaving all rooms aaa ' , spark.id);
                             // works when the client closes the connection
                         });
                     };
