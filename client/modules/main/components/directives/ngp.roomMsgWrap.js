@@ -24,7 +24,7 @@ function ngpRoomMsgWrap($rootScope,Chat) {
             };
 
             setInterval(function(){
-                room.updateScroll();
+                room.scrollBottom();
             }, 2000);
 
             element.bind('scroll', function () {
