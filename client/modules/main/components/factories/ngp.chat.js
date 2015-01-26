@@ -127,7 +127,7 @@ function Chat($rootScope, UtilFunc) {
                     //this.msgWrap.scrollbot = this.msgWrap.scrollHeight;
                 },
                 updateScroll : function(){
-                    this.scrollBottom();
+                    //this.scrollBottom();
                     if(this.scrollFlag){
                         this.scrollBottom();
                     }

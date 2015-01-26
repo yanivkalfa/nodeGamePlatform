@@ -69,9 +69,6 @@ function RoutMsg($rootScope, Router, Authorization, Chat, UtilFunc) {
                 msg.formatDate = UtilFunc.formatMsgDate(msg.date);
                 Chat.addMsg(msg, room);
                 room.msgFlag = false;
-                setTimeout(function(){
-                    room.updateScroll();
-                },100);
                 break;
 
             case 'remove':
@@ -79,6 +76,7 @@ function RoutMsg($rootScope, Router, Authorization, Chat, UtilFunc) {
                 break;
         }
         $rootScope.$apply();
+        room.updateScroll();
     };
 
     return RoutMsgFactory;
