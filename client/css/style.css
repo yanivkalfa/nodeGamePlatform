@@ -130,6 +130,7 @@
     border-bottom:1px solid black;
     background-color: #FFFEAD;
     overflow: auto;
+    display:block;
 }
 .msgWrap ul{
     width:100%;
