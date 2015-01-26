@@ -64,7 +64,7 @@ module.exports = function(_s, _rf){
             }).catch(console.log);
     };
 
-    RoutRoom.prototype.join = function(spark, msg){
+    RoutRoom.prototype.join = function(spark, room){
         var randomId = Math.floor(Math.random()*300000)
             , data
             , self = this
@@ -89,31 +89,30 @@ module.exports = function(_s, _rf){
             };
             return spark.write({"m": "chat", "d":data});
         };
-        if(msg.name.indexOf("u_") === 0 || msg.name === 'terminal') warning('Illegal room name "' + msg.name + '"');
+        if(room.id.indexOf("u_") === 0 || room.id === 'terminal') warning('Illegal room name "' + room.id + '"');
 
-        User.fetchUser({"id":spark.user.id}).then(_rf.RoomHandler.joinRoom.bind(this,msg.name)).then(function(user){
-            spark.join(msg.name, function(err, succ){
-                if(err) return warning('We were unable to join you to that room');
-                self.getRoom(spark, msg.name);
-
-                data  = {
-                    "m" : 'room',
+        User.fetchUser({"id":spark.user.id}).then(_rf.RoomHandler.joinRoom.bind(this,room.id)).then(function(user){
+            data  = {
+                "m" : 'room',
+                "d" : {
+                    "m" : 'join',
                     "d" : {
-                        "m" : 'join',
-                        "d" : {
-                            "room" : {id : msg.name},
-                            "type" : msg.type,
-                            "user" : {username : user.username, id : user.id}
-                        }
+                        "id" : room.id,
+                        "type" : room.type,
+                        "user" : {username : user.username, id : user.id}
                     }
-                };
-                _s.primus.room(msg.name).except(spark.id).write({"m": "chat", "d":data});
+                }
+            };
+            _s.primus.room(room.id).write({"m": "chat", "d":data});
+            spark.join(room.id, function(err, succ){
+                if(err) return warning('We were unable to join you to that room');
+                self.getRoom(spark, room.id);
             });
 
         }).catch(warning);
     };
 
-    RoutRoom.prototype.leave = function(spark, msg){
+    RoutRoom.prototype.leave = function(spark, room){
         var randomId = Math.floor(Math.random()*300000)
             , data
             , self = this
@@ -138,24 +137,26 @@ module.exports = function(_s, _rf){
             };
             return spark.write({"m": "chat", "d":data});
         };
-        if(msg.name.indexOf("u_") === 0 || msg.name === 'terminal') warning('Illegal room name "' + msg.name + '"');
+        if(room.id.indexOf("u_") === 0 || room.id === 'terminal') warning('Illegal room name "' + room.id + '"');
 
-        User.fetchUser({"id":spark.user.id}).then(_rf.RoomHandler.leaveRoom.bind(this,msg.name)).then(function(user){
-            spark.leave(msg.name, function(err, succ){
+        User.fetchUser({"id":spark.user.id}).then(_rf.RoomHandler.leaveRoom.bind(this,room.id)).then(function(user){
+            spark.leave(room.id, function(err, succ){
                 if(err) return warning('We were unable to remove you from that room');
+
 
                 data  = {
                     "m" : 'room',
                     "d" : {
                         "m" : 'leave',
                         "d" : {
-                            "room" : {id : msg.name},
-                            "type" : msg.type,
+                            "id" : room.id,
+                            "type" : room.type,
                             "user" : {username : user.username, id : user.id}
                         }
                     }
                 };
-                _s.primus.room(msg.name).write({"m": "chat", "d":data});
+                _s.primus.room(room.id).write({"m": "chat", "d":data});
+                spark.write({"m": "chat", "d":data});
             });
 
         }).catch(warning);

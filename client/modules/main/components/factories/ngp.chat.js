@@ -72,7 +72,7 @@ function Chat($rootScope, UtilFunc) {
         removeMember : function(member,room){
             var cIndex = UtilFunc.indexOf($rootScope.ngp.rooms, room, 'id');
             if(cIndex == -1) return false;
-            var mIndex = UtilFunc.indexOf($rootScope.ngp.rooms[cIndex].members, member);
+            var mIndex = UtilFunc.indexOf($rootScope.ngp.rooms[cIndex].members, member, 'id');
             if(mIndex == -1) return false;
             $rootScope.ngp.rooms[cIndex].members.splice(mIndex,1);
             return true;

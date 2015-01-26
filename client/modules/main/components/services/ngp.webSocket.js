@@ -32,21 +32,6 @@ function webSocket($rootScope, $q, RoutChat) {
                 self[msg.m](msg.d);
             });
 
-            /*
-            var data  = {
-                "m" : 'room',
-                "d" : {
-                    "m" : 'join',
-                    "d" : {
-                        "name" : 'lobby',
-                        "type" : 'chat',
-                        "username" : {username : this.user.username, id : this.user.id}
-                    }
-                }
-            };
-            this.Primus.write({"m": "chat", "d":data});
-            */
-
             this.Primus.on('open', function open() {
                 self.connected = true;
                 deferred.resolve( self );
