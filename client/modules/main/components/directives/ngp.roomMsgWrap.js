@@ -12,6 +12,16 @@ function ngpRoomMsgWrap($rootScope) {
     return {
         link: function (scope, element, attrs) {
             console.log(scope, element, attrs);
+            var raw = element[0];
+            console.log(raw, raw.scrollTop);
+
+            element.bind('scroll', function () {
+                console.log(raw.scrollTop);
+
+                /*if (raw.scrollTop + raw.offsetHeight > raw.scrollHeight) {
+                    //scope.$apply(attrs.scrolly);
+                }*/
+            });
         },
         scope: {
             content: '='
