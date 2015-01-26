@@ -34,10 +34,10 @@ function Chat($rootScope, UtilFunc) {
 
         joinRoom : function(room){
             var index = UtilFunc.indexOf($rootScope.ngp.rooms, room, 'id');
-
-            console.log(index);
             if(index != -1) return false;
             $rootScope.ngp.rooms.push(room);
+
+            console.log(index);
 
             //$rootScope.$apply();
 
@@ -84,9 +84,8 @@ function Chat($rootScope, UtilFunc) {
             console.log(member,room);
             var cIndex = UtilFunc.indexOf($rootScope.ngp.rooms, room, 'id');
             if(cIndex == -1) return false;
-            var mIndex = UtilFunc.indexOf($rootScope.ngp.rooms[cIndex].users, member, 'id');
+            var mIndex = UtilFunc.indexOf($rootScope.ngp.rooms[cIndex].content.users, member, 'id');
             if(mIndex != -1) return false;
-            console.log($rootScope.ngp.rooms);
             $rootScope.ngp.rooms[cIndex].content.users.push(member);
             return true;
         },
@@ -94,7 +93,7 @@ function Chat($rootScope, UtilFunc) {
         removeMember : function(member,room){
             var cIndex = UtilFunc.indexOf($rootScope.ngp.rooms, room, 'id');
             if(cIndex == -1) return false;
-            var mIndex = UtilFunc.indexOf($rootScope.ngp.rooms[cIndex].users, member, 'id');
+            var mIndex = UtilFunc.indexOf($rootScope.ngp.rooms[cIndex].content.users, member, 'id');
             if(mIndex == -1) return false;
             $rootScope.ngp.rooms[cIndex].content.users.splice(mIndex,1);
             return true;
