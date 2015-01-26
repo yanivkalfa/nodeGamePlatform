@@ -95,6 +95,7 @@ module.exports = function(_s, _rf){
             delete data.d.d.content;
         }
 
+        console.log(msg);
         _s.primus.room(msg.to).write({"m": "chat", "d":data});
 
     };

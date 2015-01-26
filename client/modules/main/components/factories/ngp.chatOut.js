@@ -28,7 +28,7 @@ function ChatOut(WebSocket, Authorization) {
         },
 
         remove : function(args){
-            this.msg(args, 'publicMsg', 'remove', args[0]);
+            this.msg(args, 'publicMsg', 'remove');
             return true;
         },
 
@@ -41,16 +41,14 @@ function ChatOut(WebSocket, Authorization) {
             return true;
         },
 
-        msg : function(args, method, action, id){
-
-            console.log(arguments)
+        msg : function(args, method, action){
 
             var data  = {
                 "m" : 'msg',
                 "d" : {
                     "m" : method,
                     "d" : {
-                        "id" : id,
+                        "id" : args[1],
                         "action" : action,
                         "to" : args[0],
                         "from" : Authorization.getUser().id,
