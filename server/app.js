@@ -136,16 +136,18 @@ _s.primus.on('disconnection', function (spark) {
 
 _s.primus.on('leaveallrooms', function (rooms, spark) {
 
+    console.log('leaving all rooms ' , spark.user);
     if(!spark) return false;
     var RoutRoom = new _s.oModules.RoutRoom(_s.primus);
     _s.oModules.User.fetchUser({"id":spark.user.id}).then(function(user){
         _.isArray(user.rooms) && _(user.rooms).forEach(function(room){
-            var room  = {
+            var aRoom  = {
                 "id" : room,
                 "type" : 'chat',
                 "users" : {}
             };
-            RoutRoom._leave(spark, room)
+            console.log('leaveing room: ', aRoom.id);
+            RoutRoom._leave(spark, aRoom)
         });
 
 
