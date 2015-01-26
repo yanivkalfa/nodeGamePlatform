@@ -41,8 +41,6 @@ function Authorization(
 
             this._user = $cookieStore.get("user");
 
-            console.log('init()');
-
             if (this.isSet())
             {
                 this._authenticate()

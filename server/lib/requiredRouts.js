@@ -15,6 +15,9 @@ module.exports = function(_s){
     _s.oReq.app.post('/ajaxHandler', _.partial(_s.oModules.ajaxHandler, _s));
 
     _s.oReq.app.get('/contents/:content', function (req, res) {
+        return res.render(_s.sServerDirname + '/tpl/contents/' + req.params.content + '.jade');
+
+
         console.log('req.session.user', req.session.user);
         if(_s.oConfig.routs.loginRequired(req.params.content)){
             _s.oModules.Authorization.init(req.session.user, _s.oConfig.routs.getRout(req.params.content));
