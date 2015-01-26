@@ -115,7 +115,6 @@ function Chat($rootScope, UtilFunc) {
                 };
                 this.active = false;
                 this.scrollFlag = true;
-                this.msgFlag = false;
                 this.msgWrap = undefined;
 
             }
@@ -124,10 +123,8 @@ function Chat($rootScope, UtilFunc) {
                 scrollBottom : function(){
                     console.log(this.msgWrap.scrollTop, this.msgWrap.scrollHeight, this.msgWrap.offsetHeight);
                     this.msgWrap.scrollTop = this.msgWrap.scrollHeight;
-                    //this.msgWrap.scrollbot = this.msgWrap.scrollHeight;
                 },
                 updateScroll : function(){
-                    //this.scrollBottom();
                     if(this.scrollFlag){
                         this.scrollBottom();
                     }

@@ -65,10 +65,8 @@ function RoutMsg($rootScope, Router, Authorization, Chat, UtilFunc) {
             ;
         switch(msg.action){
             case 'add':
-                room.msgFlag = true;
                 msg.formatDate = UtilFunc.formatMsgDate(msg.date);
                 Chat.addMsg(msg, room);
-                room.msgFlag = false;
                 break;
 
             case 'remove':
