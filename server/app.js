@@ -114,6 +114,7 @@ _s.primus.on('connection', function (spark) {
 
                         var webSocketExtender = new WebSocketExtender();
                         console.log('user.rooms', user.rooms);
+                        console.log('user', user);
                         var data  = {
                             "m" : 'roomDo',
                             "d" : {
