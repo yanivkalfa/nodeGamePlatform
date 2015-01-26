@@ -24,8 +24,10 @@ function ngpRoomMsgWrap($rootScope,Chat) {
             };
 
             setInterval(function(){
+                console.log('aaaaaa');
+                raw.scrollTop = 0;
                 room.scrollBottom();
-            }, 2000);
+            }, 1000);
 
             element.bind('scroll', function () {
                 room.scrollFlag = raw.scrollTop + raw.offsetHeight >= raw.scrollHeight;
