@@ -17,9 +17,7 @@ function Chat($rootScope, UtilFunc) {
     ChatFactory.prototype =  {
 
         createRoom : function(room){
-            var newRoom = new UtilFunc.Room(room);
-            console.log(newRoom);
-            return newRoom;
+            return new this.Room(room);
         },
 
         indexOf : function(room){
@@ -104,6 +102,34 @@ function Chat($rootScope, UtilFunc) {
         addNotification : function(index){
             if(!$rootScope.ngp.rooms[index].notification) $rootScope.ngp.rooms[index].notification = 0;
             $rootScope.ngp.rooms[index].notification++;
+        },
+
+        Room : function(room){
+
+            function Room (room){
+                this.id = room.id;
+                this.title = room.id;
+                this.content = {
+                    msg : [],
+                    users : _.isArray(room.users) ? room.users : [room.users]
+                };
+                this.active = false;
+                this.scrollFlag = true;
+                this.msgWrap = undefined;
+
+            }
+
+            Room.prototype =  {
+                scrollBottom : function(){
+                    this.msgWrap.scrollTop = this.msgWrap.scrollHeight;
+                },
+                updateScroll : function(){
+                    if(this.scrollFlag){
+                        this.scrollBottom();
+                    }
+                }
+            };
+            return new Room(room);
         }
 
     };

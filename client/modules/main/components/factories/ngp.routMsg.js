@@ -24,8 +24,10 @@ function RoutMsg($rootScope, Router, Authorization, Chat, UtilFunc) {
         switch(msg.action){
             case 'add':
                 var activeIndex = Chat.getActiveRoom();
+                var room = rootScope.ngp.rooms[activeIndex];
                 msg.formatDate = UtilFunc.formatMsgDate(msg.date);
-                Chat.addMsg(msg, $rootScope.ngp.rooms[activeIndex]);
+                Chat.addMsg(msg, room);
+                room.updateScroll();
                 break;
 
             case 'remove':
@@ -45,8 +47,10 @@ function RoutMsg($rootScope, Router, Authorization, Chat, UtilFunc) {
                 }
 
                 var activeIndex = Chat.getActiveRoom();
+                var room = $rootScope.ngp.rooms[activeIndex];
                 msg.formatDate = UtilFunc.formatMsgDate(msg.date);
-                Chat.addMsg(msg, $rootScope.ngp.rooms[activeIndex]);
+                Chat.addMsg(msg, room);
+                room.updateScroll();
                 break;
 
             case 'remove':
@@ -56,16 +60,18 @@ function RoutMsg($rootScope, Router, Authorization, Chat, UtilFunc) {
     };
 
     RoutMsgFactory.prototype.publicMsg = function(msg){
-        var user = Authorization.getUser();
-        var rIndex = Chat.indexOf(msg.to);
+        var rIndex = Chat.indexOf(msg.to)
+            , room = $rootScope.ngp.rooms[rIndex]
+            ;
         switch(msg.action){
             case 'add':
                 msg.formatDate = UtilFunc.formatMsgDate(msg.date);
-                Chat.addMsg(msg, $rootScope.ngp.rooms[rIndex]);
+                Chat.addMsg(msg, room);
+                room.updateScroll();
                 break;
 
             case 'remove':
-                Chat.removeMsg(msg, $rootScope.ngp.rooms[rIndex]);
+                Chat.removeMsg(msg, room);
                 break;
         }
         $rootScope.$apply();
