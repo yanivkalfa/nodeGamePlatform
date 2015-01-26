@@ -108,7 +108,7 @@ module.exports = function(_s, _rf){
         },
 
         getRoomUsers : function(){
-            return self.room.content.users;
+            return this.room.content.users;
         },
 
         destroy : function(){
