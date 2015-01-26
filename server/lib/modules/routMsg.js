@@ -13,6 +13,7 @@ module.exports = function(_s, _rf){
     RoutMsg.prototype.constructor = RoutMsg;
 
     RoutMsg.prototype.warningMsg = function(spark, injectedMsg, naturalMsg){
+        console.log(typeof naturalMsg);
         var warningMsg = _.isEmpty(naturalMsg) ? injectedMsg : naturalMsg;
         console.log(warningMsg);
         console.log(injectedMsg);
