@@ -22,7 +22,7 @@ function RoutRoom(Authorization, Chat, Router) {
     RoutRoomFactory.prototype.join = function(room){
 
         var user = Authorization.getUser();
-
+        console.log('isArray', _.isArray(room.users));
         if(!_.isArray(room.users) && user.id == room.users.id) {
             console.log('joiningRoom');
             Chat.joinRoom(room);
