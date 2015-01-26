@@ -35,8 +35,6 @@ module.exports = function(_s, _rf){
 
         spark.write({"m": "chat", "d":data});
     };
-
-    //{id:'', date : '', formatDate : '', action:'', from : '', to : '', content: ''}
     RoutMsg.prototype.privateMsg = function(spark, msg){
         var dateNow = Date.now()
             , randomId = Math.floor(Math.random()*300000)
@@ -47,6 +45,8 @@ module.exports = function(_s, _rf){
             ;
 
         prvSuccess = function(user){
+            if(user.id == msg.to.id) return self.warningMsg(spark, 'You cannot Message yourself');
+
             cName = 'u_' + user.id;
             data = {
                 "m" : 'msg',

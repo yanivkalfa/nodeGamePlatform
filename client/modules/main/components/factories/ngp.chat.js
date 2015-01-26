@@ -116,12 +116,10 @@ function Chat($rootScope, UtilFunc) {
                 this.active = false;
                 this.scrollFlag = true;
                 this.msgWrap = undefined;
-
             }
 
             Room.prototype =  {
                 scrollBottom : function(){
-                    console.log(this.msgWrap.scrollTop, this.msgWrap.scrollHeight, this.msgWrap.offsetHeight);
                     this.msgWrap.scrollTop = this.msgWrap.scrollHeight;
                 },
                 updateScroll : function(){

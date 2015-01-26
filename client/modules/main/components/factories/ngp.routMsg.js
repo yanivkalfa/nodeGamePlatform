@@ -27,13 +27,13 @@ function RoutMsg($rootScope, Router, Authorization, Chat, UtilFunc) {
                 var room = $rootScope.ngp.rooms[activeIndex];
                 msg.formatDate = UtilFunc.formatMsgDate(msg.date);
                 Chat.addMsg(msg, room);
-                room.updateScroll();
                 break;
 
             case 'remove':
                 break;
         }
         $rootScope.$apply();
+        room.updateScroll();
     };
 
     RoutMsgFactory.prototype.privateMsg  = function(msg){
@@ -50,13 +50,13 @@ function RoutMsg($rootScope, Router, Authorization, Chat, UtilFunc) {
                 var room = $rootScope.ngp.rooms[activeIndex];
                 msg.formatDate = UtilFunc.formatMsgDate(msg.date);
                 Chat.addMsg(msg, room);
-                room.updateScroll();
                 break;
 
             case 'remove':
                 break;
         }
         $rootScope.$apply();
+        room.updateScroll();
     };
 
     RoutMsgFactory.prototype.publicMsg = function(msg){
