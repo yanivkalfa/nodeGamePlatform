@@ -129,7 +129,7 @@ _s.primus.on('connection', function (spark) {
                                 }
                             };
 
-                            webSocketExtender.chat(spark,data);
+                            RoutSocket.chat(spark,data);
                         });
 
                     };
