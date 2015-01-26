@@ -18,8 +18,12 @@ function Chat($rootScope, UtilFunc) {
 
         joinRoom : function(room){
             var index = UtilFunc.indexOf($rootScope.ngp.rooms, room, 'id');
+
+            console.log(index);
             if(index != -1) return false;
             $rootScope.ngp.rooms.push(room);
+
+            $rootScope.$apply();
 
             return true;
         },
