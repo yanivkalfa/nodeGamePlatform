@@ -35,6 +35,9 @@ function RoutMsg($rootScope, Router, Authorization, Chat, UtilFunc) {
     };
 
     RoutMsgFactory.prototype.privateMsg  = function(msg){
+        console.log(msg);
+
+        /*
         var user = Authorization.getUser();
         switch(msg.action){
             case 'add':
@@ -52,6 +55,7 @@ function RoutMsg($rootScope, Router, Authorization, Chat, UtilFunc) {
                 break;
         }
         $rootScope.$apply();
+        */
     };
 
     RoutMsgFactory.prototype.publicMsg = function(msg){
