@@ -79,20 +79,29 @@ _s.primus.on('connection', function (spark) {
                     // Update user's spark id in database - in-case its needed
                     var upSkSuccess = function (user){
 
+                        //var RoutChat = new _s.oModules.RoutChat(_s.primus);
+                        var RoutSocket = new _s.oModules.RoutSocket(_s.primus);
+
+                        spark.on('data', function (msg) {
+                            RoutSocket.rout(spark, msg);
+                        });
+
+                        /*
+
                         // initiating socket router. and extending it.
                         var webSocket = _s.oModules.WebSocket();
                         var WebSocketExtender = function(){
                             webSocket.call(this,_s, _s.primus, spark);
                         };
 
-                        var chat = new _s.oModules.Chat(_s.primus);
+
                         var extendRouterWith = {
                             ping : function(spark, data){
                                 spark.write({"m": "ping", "d":"p"});
                             },
 
                             chat : function(spark, msg){
-                                chat.rout(spark, msg);
+                                RoutChat.rout(spark, msg);
                             }
                         };
 
@@ -100,6 +109,8 @@ _s.primus.on('connection', function (spark) {
                         _s.oModules.uf.extend(WebSocketExtender, extendRouterWith);
 
                         var webSocketExtender = new WebSocketExtender();
+
+                        */
 
                         // Joining terminal, lobby user rooms and saved rooms
                         var userRoom = 'u_' + decoded.userId;
