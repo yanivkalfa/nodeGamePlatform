@@ -12,6 +12,7 @@ angular.module(ngp.const.app.name)
         'Authorization',
         'Notify',
         'Terminal',
+        'Chat',
         adminController
     ]);
 
@@ -24,7 +25,8 @@ function adminController(
     Api,
     Authorization,
     Notify,
-    Terminal
+    Terminal,
+    Chat
     ) {
 
     function AdminController(){
@@ -71,7 +73,7 @@ function adminController(
     };
 
     AdminController.prototype.sendMessage = function(){
-        var rIndex = this.getActiveRoom()
+        var rIndex = Chat.getActiveRoom()
             , rName = $rootScope.ngp.rooms[rIndex].id
             , msg
             ;
@@ -85,30 +87,9 @@ function adminController(
         this.commandLine = '';
     };
 
-    AdminController.prototype.getActiveRoom = function(){
-        if(!_.isArray($rootScope.ngp.rooms)) return false;
 
-        for(var i = 0; i < $rootScope.ngp.rooms.length; i++){
-            if($rootScope.ngp.rooms[i].active) return i;
-        }
-
-        return -1;
-    };
-
-
-    AdminController.prototype.roomSelected = function(){
-        /*
-        if(key === 13 && val){
-            $(this).val("");
-            rname = $(this).parents(".roomContainer").data("rName");
-            if(msg =_this.s.oVars.oTerminal.isMessageACommend(val)){
-                _this.s.oVars.oTerminal.analyseMessage(msg);
-            }else{
-                msg = "addMessage " + rname + " " + val;
-                _this.s.oVars.oTerminal.analyseMessage(msg);
-            }
-        }
-        */
+    AdminController.prototype.roomSelected = function(rIndex){
+        Chat.resetNotification(rIndex);
     };
 
 

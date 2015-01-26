@@ -24,7 +24,7 @@ div(ui-view='admin')
     div.tabContainer
         div(class="tabs" id="tabs")
             tabset
-                tab(ng-repeat="room in $root.ngp.rooms" select="admin.roomSelected()" heading="{{room.title + ' ' + room.notification}}" active="room.active" disabled="room.disabled")
+                tab(ng-repeat="(rIndex, room) in $root.ngp.rooms" select="admin.roomSelected(rIndex)" heading="{{room.title + ' ' + room.notification}}" active="room.active" disabled="room.disabled")
                     ngp-room-content(content="room.content")
     div.inputContainer
         input(id="msg" placeholder="enter a message" class="msg" ng-keypress="admin.msgInput($event)" ng-model="admin.commandLine")
