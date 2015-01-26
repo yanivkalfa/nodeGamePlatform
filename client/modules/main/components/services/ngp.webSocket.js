@@ -6,11 +6,12 @@ angular.module(ngp.const.app.name)
     .service('WebSocket', [
         '$rootScope',
         '$q',
+        'Authorization',
         //'RoutChat',
         webSocket
     ]);
 
-function webSocket($rootScope, $q/*, RoutChat*/) {
+function webSocket($rootScope, $q, Authorization/*, RoutChat*/) {
 
     function WebSocketService(){
         this.Primus = false;

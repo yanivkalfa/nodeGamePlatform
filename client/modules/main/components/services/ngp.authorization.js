@@ -8,8 +8,8 @@ angular.module(ngp.const.app.name)
         '$rootScope',
         '$state',
         'Api',
-        'WebSocket',
-        'Latency',
+        //'WebSocket',
+        //'Latency',
         Authorization
     ]);
 
@@ -18,14 +18,14 @@ function Authorization(
     $cookieStore,
     $rootScope,
     $state,
-    Api,
-    WebSocket,
-    Latency
+    Api
+    //WebSocket,
+    //Latency
     ) {
 
     function AuthorizationService(){
         this._user = undefined;
-        this._dependencies = [{cName : WebSocket, 'async' :true }, {cName : Latency, 'async' :false }];
+        //this._dependencies = [{cName : WebSocket, 'async' :true }, {cName : Latency, 'async' :false }];
         this._authenticated = false;
         this.api = Api.createNewApi();
     }
@@ -46,12 +46,15 @@ function Authorization(
                 this._authenticate()
                     .then(function(user){
                         self.setAuthenticated();
-                        self.initDependencies().then(function(deps){
+                        deferred.resolve(self._user);
+
+                        /*self.initDependencies().then(function(deps){
                             deferred.resolve(self._user);
                         }).catch(function(err){
                             self.setNotAuthenticated();
                             deferred.reject(err);
                         });
+                        */
                     },function(err){
                         self.setNotAuthenticated();
                         deferred.reject(err);
@@ -69,7 +72,7 @@ function Authorization(
 
         logout : function(){
             this.setNotAuthenticated();
-            this.killDependencies();
+            //this.killDependencies();
             $state.go('login');
         },
 
