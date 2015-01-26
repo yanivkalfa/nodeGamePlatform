@@ -16,6 +16,22 @@ function Chat($rootScope, UtilFunc) {
 
     ChatFactory.prototype =  {
 
+        createRoom : function(room){
+            return _.cloneDeep({
+                id : room.id,
+                title : room.id,
+                content : {
+                    msg : [],
+                    users : _.isArray(room.users) ? room.users : [room.users]
+                },
+                active : false
+            });
+        },
+
+        roomExist : function(room){
+            return UtilFunc.indexOf($rootScope.ngp.rooms, room, 'id');
+        },
+
         joinRoom : function(room){
             var index = UtilFunc.indexOf($rootScope.ngp.rooms, room, 'id');
 
@@ -23,7 +39,7 @@ function Chat($rootScope, UtilFunc) {
             if(index != -1) return false;
             $rootScope.ngp.rooms.push(room);
 
-            $rootScope.$apply();
+            //$rootScope.$apply();
 
             return true;
         },

@@ -25,15 +25,20 @@ function RoutRoom(Authorization, Chat, Router) {
         console.log('isArray', _.isArray(room.users));
         if(!_.isArray(room.users) && user.id == room.users.id) {
             console.log('joiningRoom');
-            Chat.joinRoom(room);
+            Chat.joinRoom(Chat.createRoom(room));
         }
         else
         {
             if(!_.isArray(room.users)) Chat.addMember(room.users, room);
             else{
-                _(room.users).forEach(function(user){
-                    Chat.addMember(user, room);
-                })
+                if(Chat.roomExist(room) == -1) {
+                    Chat.joinRoom(Chat.createRoom(room));
+                }else{
+                    _(room.users).forEach(function(user){
+                        Chat.addMember(user, room);
+                    })
+                }
+
             }
         }
 
