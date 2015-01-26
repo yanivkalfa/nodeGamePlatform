@@ -4,13 +4,13 @@
 angular.module(ngp.const.app.name)
     .service('RoutRoom', [
         '$rootScope',
-        'Authorization',
+        //'Authorization',
         'Chat',
         'Router',
         RoutRoom
     ]);
 
-function RoutRoom($rootScope, Authorization, Chat, Router) {
+function RoutRoom($rootScope, Chat, Router) {
 
     function RoutRoomFactory(){
         Router.apply(this, arguments);
