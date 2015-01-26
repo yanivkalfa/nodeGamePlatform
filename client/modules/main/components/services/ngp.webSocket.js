@@ -31,7 +31,6 @@ function webSocket($rootScope, $q, Authorization, RoutChat) {
             this.user = Authorization.getUser();
             this.Primus = Primus.connect('ws://' + ngp.const.app.domain + '/?token=' + this.user.token);
             this.Primus.on('data', function(msg){
-                console.log(msg);
                 self[msg.m](msg.d);
             });
 
