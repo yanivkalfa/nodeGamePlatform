@@ -152,7 +152,7 @@ _s.primus.on('leaveallrooms', function (rooms, spark) {
 
     });
     //
-    console.log('leaving all rooms ' , spark.id);
+    console.log('leaving all rooms ' , spark.user);
     // works when the client closes the connection
 });
 
