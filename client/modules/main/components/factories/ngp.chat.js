@@ -123,6 +123,7 @@ function Chat($rootScope, UtilFunc) {
                 scrollBottom : function(){
                     console.log(this.msgWrap.scrollTop, this.msgWrap.scrollHeight, this.msgWrap.offsetHeight);
                     this.msgWrap.scrollTop = this.msgWrap.scrollHeight;
+                    //this.msgWrap.scrollbot = this.msgWrap.scrollHeight;
                 },
                 updateScroll : function(){
                     console.log('aaaaaaaaaa', this.scrollFlag);
