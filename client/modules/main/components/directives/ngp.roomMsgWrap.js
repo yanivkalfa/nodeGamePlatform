@@ -16,8 +16,8 @@ function ngpRoomMsgWrap($rootScope,Chat) {
 
             element.bind('scroll', function () {
 
-                console.log("raw.scrollTop", raw.scrollTop, ' raw.offsetHeight: ', raw.offsetHeight);
-                room.scrollFlag = raw.scrollTop + raw.offsetHeight >= raw.scrollTop;
+                console.log("raw.scrollTop", raw.scrollTop, ' raw.offsetHeight: ', raw.offsetHeight, " raw.scrollHeight ", raw.scrollHeight);
+                room.scrollFlag = raw.scrollTop + raw.offsetHeight >= raw.scrollHeight;
 
                 console.log(room.scrollFlag);
             });
