@@ -14,7 +14,7 @@ module.exports = function(_s, _rf){
 
     RoutMsg.prototype.warningMsg = function(spark, injectedMsg, naturalMsg){
         console.log(typeof naturalMsg);
-        var warningMsg = _.isEmpty(naturalMsg) ? injectedMsg : naturalMsg;
+        var warningMsg = _.isEmpty(naturalMsg.toString()) ? injectedMsg : naturalMsg;
         console.log(warningMsg);
         console.log(injectedMsg);
         console.log(naturalMsg);
