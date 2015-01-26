@@ -28,5 +28,5 @@ div(ui-view='admin')
                 tab(ng-repeat="room in $root.ngp.rooms" select="admin.roomSelected()" heading="{{room.title + ' ' + room.notification}}" active="room.active" disabled="room.disabled")
                     ngp-room-content(content="room.content")
     div.inputContainer
-        input(id="msg" placeholder="enter a message" class="msg" ng-keypress="admin.sendMessage()" ng-model="admin.commandLine")
+        input(id="msg" placeholder="enter a message" class="msg" ng-keypress="admin.sendMessage($event)" ng-model="admin.commandLine")
         button(class="submitMsg") Submit
