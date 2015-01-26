@@ -47,6 +47,8 @@ function UtilFunc($rootScope) {
 
             Room.prototype =  {
                 scrollBottom : function(){
+                    console.log('a', this.msgWrap);
+
                     console.log('scrollHeight', this.msgWrap.scrollHeight);
 
                     console.log('scrollTop', this.msgWrap.scrollTop);

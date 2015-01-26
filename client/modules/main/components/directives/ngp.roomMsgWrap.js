@@ -13,7 +13,7 @@ function ngpRoomMsgWrap($rootScope,Chat) {
                 , room = $rootScope.ngp.rooms[rIndex]
                 ;
 
-            room.msgWrap = raw;
+            room.msgWrap = element[0];
 
 
             setInterval(function(){
