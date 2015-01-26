@@ -12,6 +12,8 @@ module.exports = function(_s, _rf){
     RoutMsg.prototype.constructor = RoutMsg;
 
     RoutMsg.prototype.warningMsg = function(spark, warningMsg){
+
+        console.log(spark, warningMsg);
         var randomId = Math.floor(Math.random()*300000)
             , dateNow = Date.now()
             , data  = {
@@ -64,7 +66,7 @@ module.exports = function(_s, _rf){
             _s.primus.room(cName).write({"m": "chat", "d":data});
         };
 
-        User.fetchUser(msg.to).then(prvSuccess).catch(self.warningMsg.bind(spark));
+        User.fetchUser(msg.to).then(prvSuccess).catch(self.warningMsg.bind(self, spark));
     };
 
     RoutMsg.prototype.publicMsg = function(spark, msg){
