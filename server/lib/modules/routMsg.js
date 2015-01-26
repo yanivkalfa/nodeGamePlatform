@@ -12,8 +12,6 @@ module.exports = function(_s, _rf){
     RoutMsg.prototype.constructor = RoutMsg;
 
     RoutMsg.prototype.warningMsg = function(spark, warningMsg){
-
-        console.log(spark, warningMsg);
         var randomId = Math.floor(Math.random()*300000)
             , dateNow = Date.now()
             , data  = {
@@ -25,7 +23,7 @@ module.exports = function(_s, _rf){
                         "action" : "add",
                         "toType" : 'warning',
                         "to" : {id : spark.user.id, username : spark.user.username},
-                        "from" : "System",
+                        "from" : {id : spark.user.id, username : 'System'},
                         "date" : dateNow,
                         "msg" : warningMsg
                     }
