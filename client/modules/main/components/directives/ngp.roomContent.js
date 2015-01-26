@@ -9,7 +9,7 @@ function ngpRoomContent() {
     return {
         scope: {
             content: '=',
-            room: '='
+            roomIndex: '='
         },
         templateUrl: ngp.const.app.url + '/tpl/directives/roomContent.html'
     };
