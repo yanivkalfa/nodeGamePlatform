@@ -121,6 +121,7 @@ function Chat($rootScope, UtilFunc) {
 
             Room.prototype =  {
                 scrollBottom : function(){
+                    console.log(this.msgWrap.scrollTop, this.msgWrap.scrollHeight);
                     this.msgWrap.scrollTop = this.msgWrap.scrollHeight;
                 },
                 updateScroll : function(){
