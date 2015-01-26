@@ -61,10 +61,12 @@ function Chat($rootScope, UtilFunc) {
         },
 
         addMember : function(member,room){
+            console.log(member,room);
             var cIndex = UtilFunc.indexOf($rootScope.ngp.rooms, room, 'id');
             if(cIndex == -1) return false;
             var mIndex = UtilFunc.indexOf($rootScope.ngp.rooms[cIndex].members, member, 'id');
             if(mIndex != -1) return false;
+            console.log($rootScope.ngp.rooms);
             $rootScope.ngp.rooms[cIndex].members.push(member);
             return true;
         },

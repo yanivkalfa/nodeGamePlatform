@@ -21,14 +21,14 @@ function RoutRoom(Authorization, Chat, Router) {
 
     RoutRoomFactory.prototype.join = function(room){
         console.log('adding member to a channel');
-        Chat.addMember(room.user, room.id);
+        Chat.addMember(room.user, room);
     };
 
     RoutRoomFactory.prototype.leave = function(room){
         var user = Authorization.getUser();
         console.log('leave', room);
-        if(user.id == room.user.id) Chat.leaveRoom(room.id);
-        else Chat.removeMember(room.user, room.id);
+        if(user.id == room.user.id) Chat.leaveRoom(room);
+        else Chat.removeMember(room.user, room);
     };
 
     RoutRoomFactory.prototype.setRooms = function(msg){
