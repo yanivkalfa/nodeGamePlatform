@@ -77,18 +77,6 @@ _s.primus.on('connection', function (spark) {
                         });
                     };
 
-                    var joinRooms = function(user){
-                        return new _s.oReq.Promise(function(resolve, reject) {
-                            // Joining terminal, lobby user rooms and saved rooms
-                            var userRoom = 'u_' + decoded.userId;
-                            var savedRooms = (_.isArray(user.rooms) &&  user.rooms.length) ? ' ' + user.rooms.join(' ') : false;
-                            spark.join('terminal '+ userRoom + savedRooms || '', function(err, success){
-                                if(err) reject(err);
-                                return resolve(user);
-                            });
-                        });
-                    };
-
                     // Update user's spark id in database - in-case its needed
                     var upSkSuccess = function (user){
 
@@ -113,24 +101,41 @@ _s.primus.on('connection', function (spark) {
                         _s.oModules.uf.extend(WebSocketExtender, extendRouterWith);
 
                         var webSocketExtender = new WebSocketExtender();
-                        var data  = {
-                            "m" : 'room',
-                            "d" : {
-                                "m" : 'getRooms',
+
+
+
+
+                        // Joining terminal, lobby user rooms and saved rooms
+                        var userRoom = 'u_' + decoded.userId;
+                        spark.join('terminal '+ userRoom, function(err, success){
+                            if(err) reject(err);
+                            return resolve(user);
+                        });
+
+
+                        _.isArray(user.rooms) && _(user.rooms).forEach(function(room){
+                            var data  = {
+                                "m" : 'room',
                                 "d" : {
-                                    rooms : _.isArray(user.rooms) ? user.rooms : []
+                                    "m" : '_join',
+                                    "d" : {
+                                        "id" : room,
+                                        "type" : 'chat',
+                                        "users" : {username : user.username, id : user.id}
+                                    }
                                 }
-                            }
-                        };
-                        webSocketExtender.chat(spark,data);
+                            };
+
+                            webSocketExtender.chat(spark,data);
+                        });
                     };
 
                     var upSkFail = function(err){
                         console.log(err);
-                        if(err) _s.oModules.User.fetchUser({"id":decoded.userId}).then(updateSpark).then(joinRooms).then(upSkSuccess).catch(upSkFail);
+                        if(err) _s.oModules.User.fetchUser({"id":decoded.userId}).then(updateSpark).then(upSkSuccess).catch(upSkFail);
                     };
 
-                    _s.oModules.User.fetchUser({"id":decoded.userId}).then(updateSpark).then(joinRooms).then(upSkSuccess).catch(upSkFail);
+                    _s.oModules.User.fetchUser({"id":decoded.userId}).then(updateSpark).then(upSkSuccess).catch(upSkFail);
                 }
 
             });/*

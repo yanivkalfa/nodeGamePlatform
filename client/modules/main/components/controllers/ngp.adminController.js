@@ -82,6 +82,7 @@ function adminController(
             msg = "add " + rName + " " + this.commandLine;
             Terminal.analyseMessage(msg);
         }
+        this.commandLine = '';
     };
 
     AdminController.prototype.getActiveRoom = function(){
