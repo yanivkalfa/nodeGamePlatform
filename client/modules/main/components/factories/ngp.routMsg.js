@@ -31,6 +31,7 @@ function RoutMsg($rootScope, Router, Authorization, Chat, UtilFunc) {
             case 'remove':
                 break;
         }
+        $rootScope.$apply();
     };
 
     RoutMsgFactory.prototype.privateMsg  = function(msg){
@@ -38,7 +39,7 @@ function RoutMsg($rootScope, Router, Authorization, Chat, UtilFunc) {
         switch(msg.action){
             case 'add':
                 if(user.id == msg.from.id) {
-                    msg.from = 'to :' + msg.to.username;
+                    msg.from.username = 'to :' + msg.to.username;
                 }
 
                 var activeIndex = Chat.getActiveRoom();
@@ -49,6 +50,7 @@ function RoutMsg($rootScope, Router, Authorization, Chat, UtilFunc) {
             case 'remove':
                 break;
         }
+        $rootScope.$apply();
     };
 
     RoutMsgFactory.prototype.publicMsg = function(msg){
@@ -64,6 +66,7 @@ function RoutMsg($rootScope, Router, Authorization, Chat, UtilFunc) {
                 Chat.removeMsg(msg, $rootScope.ngp.rooms[rIndex]);
                 break;
         }
+        $rootScope.$apply();
     };
 
     return RoutMsgFactory;
