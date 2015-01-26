@@ -68,7 +68,7 @@ function ChatOut(WebSocket, Authorization) {
                 "d" : {
                     "m" : action,
                     "d" : {
-                        "name" : args[0],
+                        "id" : args[0],
                         "type" : 'chat',
                         "username" : {username : user.username, id : user.id}
                     }
