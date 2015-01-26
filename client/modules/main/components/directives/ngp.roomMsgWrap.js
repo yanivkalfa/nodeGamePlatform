@@ -8,18 +8,27 @@ function ngpRoomMsgWrap($rootScope,Chat) {
 
     return {
         link: function (scope, element, attrs) {
-            console.log(scope, element, attrs);
-            var raw = element[0];
+            var raw = element[0]
+                , rIndex = Chat.getActiveRoom()
+                , room = $rootScope.ngp.rooms[rIndex]
+                ;
 
-            var rIndex = Chat.getActiveRoom()
-                , room = $rootScope.ngp.rooms[rIndex];
+            room.scrollBottom = function(){
+                raw.scrollTop = 0;
+            };
+
+            room.updateScroll = function(){
+                if(room.scrollFlag){
+                    room.scrollBottom();
+                }
+            };
+
+            setInterval(function(){
+                room.updateScroll();
+            }, 2000);
 
             element.bind('scroll', function () {
-
-                console.log("raw.scrollTop", raw.scrollTop, ' raw.offsetHeight: ', raw.offsetHeight, " raw.scrollHeight ", raw.scrollHeight);
                 room.scrollFlag = raw.scrollTop + raw.offsetHeight >= raw.scrollHeight;
-
-                console.log(room.scrollFlag);
             });
         },
         scope: {

@@ -24,7 +24,10 @@ function Chat($rootScope, UtilFunc) {
                     msg : [],
                     users : _.isArray(room.users) ? room.users : [room.users]
                 },
-                active : false
+                active : false,
+                scrollFlag : true,
+                scrollBottom : function(){},
+                updateScroll : function(){}
             });
         },
 
