@@ -16,7 +16,7 @@ module.exports = function(_s, _rf){
         var GetRooms = new _rf.GetRooms(),
             retrieveRooms
             ;
-        onsole.log('getRooms: ', spark.user);
+        console.log('getRooms: ', spark.user);
         retrieveRooms = function(rooms){
             console.log('retrieveRooms: ', rooms);
             GetRooms.setRoomNames(rooms)
