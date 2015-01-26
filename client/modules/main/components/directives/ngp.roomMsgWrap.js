@@ -2,9 +2,9 @@
  * Created by Yaniv-Kalfa on 1/19/15.
  */
 angular.module(ngp.const.app.name)
-    .directive('ngpRoomMsgWrap',['$rootScope', ngpRoomContent]);
+    .directive('ngpRoomMsgWrap',['$rootScope', ngpRoomMsgWrap]);
 
-function ngpRoomContent($rootScope) {
+function ngpRoomMsgWrap($rootScope) {
 
     console.log($rootScope);
 
@@ -14,7 +14,7 @@ function ngpRoomContent($rootScope) {
             console.log(scope, element, attrs);
         },
         scope: {
-            content: '='
+            messages: '='
         },
         templateUrl: ngp.const.app.url + '/tpl/directives/roomMsgWrap.html'
     };
