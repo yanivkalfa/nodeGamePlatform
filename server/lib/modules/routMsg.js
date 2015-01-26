@@ -53,7 +53,7 @@ module.exports = function(_s, _rf){
                         id : dateNow + randomId.toString(),
                         "action" : 'add',
                         "to" : {id:user.id, username: user.username},
-                        "from" : {id:spark.id, username: spark.username},
+                        "from" : {id : spark.user.id, username : spark.user.username},
                         "date" : dateNow,
                         "content" : msg.content
                     }

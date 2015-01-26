@@ -35,14 +35,11 @@ function RoutMsg($rootScope, Router, Authorization, Chat, UtilFunc) {
     };
 
     RoutMsgFactory.prototype.privateMsg  = function(msg){
-        console.log(msg);
-
-        /*
         var user = Authorization.getUser();
         switch(msg.action){
             case 'add':
                 if(user.id == msg.from.id) {
-                    //msg.from.username = 'to :' + msg.to.username;
+                    msg.from.username = 'to :' + msg.to.username;
                 }
 
                 var activeIndex = Chat.getActiveRoom();
@@ -55,7 +52,6 @@ function RoutMsg($rootScope, Router, Authorization, Chat, UtilFunc) {
                 break;
         }
         $rootScope.$apply();
-        */
     };
 
     RoutMsgFactory.prototype.publicMsg = function(msg){
