@@ -13,11 +13,8 @@ module.exports = function(_s, _rf){
     RoutMsg.prototype.constructor = RoutMsg;
 
     RoutMsg.prototype.warningMsg = function(spark, injectedMsg, naturalMsg){
-        console.log(typeof naturalMsg);
-        var warningMsg = _.isEmpty(naturalMsg.toString()) ? injectedMsg : naturalMsg;
-        console.log(warningMsg);
-        console.log(injectedMsg);
-        console.log(naturalMsg);
+        var warningMsg = _.isEmpty(naturalMsg) || typeof naturalMsg === 'object' ? injectedMsg : naturalMsg;
+
         var randomId = Math.floor(Math.random()*300000)
             , dateNow = Date.now()
             , data  = {
