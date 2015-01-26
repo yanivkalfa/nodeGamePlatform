@@ -14,7 +14,7 @@ function ngpRoomMsgWrap($rootScope,Chat) {
                 ;
 
             room.scrollBottom = function(){
-                raw.scrollTop = 0;
+                raw.scrollTop = raw.scrollHeight;
             };
 
             room.updateScroll = function(){
@@ -25,7 +25,6 @@ function ngpRoomMsgWrap($rootScope,Chat) {
 
             setInterval(function(){
                 console.log('aaaaaa');
-                raw.scrollTop = 0;
                 room.scrollBottom();
             }, 1000);
 
