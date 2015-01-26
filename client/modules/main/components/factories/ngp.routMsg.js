@@ -40,6 +40,8 @@ function RoutMsg($rootScope, Router, Authorization, Chat, UtilFunc) {
             case 'add':
                 if(user.id == msg.from.id) {
                     msg.from.username = 'to :' + msg.to.username;
+                }else{
+                    msg.from.username = 'from :' + msg.from.username;
                 }
 
                 var activeIndex = Chat.getActiveRoom();
