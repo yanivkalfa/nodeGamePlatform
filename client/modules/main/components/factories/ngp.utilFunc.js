@@ -32,7 +32,7 @@ function UtilFunc($rootScope) {
 
         Room : function(room){
 
-            function room (room){
+            function Room (room){
                 this.id = room.id;
                 this.title = room.id;
                 this.content = {
@@ -45,7 +45,7 @@ function UtilFunc($rootScope) {
 
             }
 
-            room.prototype =  {
+            Room.prototype =  {
                 scrollBottom : function(){
                     console.log('scrollHeight', this.msgWrap.scrollHeight);
 
@@ -58,7 +58,7 @@ function UtilFunc($rootScope) {
                     }
                 }
             };
-            return room;
+            return Room;
         }
     };
 

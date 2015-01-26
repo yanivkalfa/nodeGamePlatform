@@ -17,7 +17,9 @@ function Chat($rootScope, UtilFunc) {
     ChatFactory.prototype =  {
 
         createRoom : function(room){
-            return new UtilFunc.Room(room);
+            var newRoom = new UtilFunc.Room(room);
+            console.log(newRoom);
+            return newRoom;
         },
 
         indexOf : function(room){
