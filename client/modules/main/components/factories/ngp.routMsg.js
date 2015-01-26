@@ -57,6 +57,7 @@ function RoutMsg($rootScope, Router, Authorization, Chat, UtilFunc) {
     };
 
     RoutMsgFactory.prototype.publicMsg = function(msg){
+        console.log('msg aaaa: ', msg);
         var user = Authorization.getUser();
         var rIndex = Chat.indexOf(msg.to);
         switch(msg.action){
