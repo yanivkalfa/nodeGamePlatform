@@ -75,8 +75,8 @@ function Chat($rootScope, UtilFunc) {
             return true;
         },
 
-        updateRoomsNotification : function(index){
-            console.log('aaaa');
+        updateRoomsNotification : function(index, msg){
+            console.log('aaaa', msg);
             var self = this;
             if(!$rootScope.ngp.rooms[index].active) {
                 self.addNotification(index);
