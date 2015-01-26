@@ -115,6 +115,7 @@ function Chat($rootScope, UtilFunc) {
                 };
                 this.active = false;
                 this.scrollFlag = true;
+                this.msgFlag = false;
                 this.msgWrap = undefined;
 
             }
