@@ -25,7 +25,7 @@ module.exports = function(_s, _rf){
                         "to" : {id : spark.user.id, username : spark.user.username},
                         "from" : {id : spark.user.id, username : 'System'},
                         "date" : dateNow,
-                        "msg" : warningMsg
+                        "content" : warningMsg
                     }
                 }
             };
