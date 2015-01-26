@@ -3,8 +3,10 @@ module.exports = function(_s, _rf){
     var router = _rf.Router
         , _ = _s.oReq.lodash
         , User = _rf.User
+        , RoutMsg = new _rf.RoutMsg()
         ;
 
+    
     function RoutRoom (){
         router.apply(this,arguments);
     }
@@ -41,27 +43,8 @@ module.exports = function(_s, _rf){
     };
 
     RoutRoom.prototype._checkChannel = function(spark, room, warningMsg){
-        var randomId = Math.floor(Math.random()*300000)
-            , data
-            ;
-
         if(room.id.indexOf("u_") === 0 || room.id === 'terminal') {
-            var dateNow = Date.now();
-            data  = {
-                "m" : 'msg',
-                "d" : {
-                    "m" : 'add',
-                    "d" : {
-                        "id" : dateNow + randomId.toString(),
-                        "toType" : "warning",
-                        "to" : spark.user.username,
-                        "from" : "System",
-                        "date" : dateNow,
-                        "msg" : warningMsg
-                    }
-                }
-            };
-            spark.write({"m": "chat", "d":data});
+            RoutMsg.warningMsg(spark, warningMsg);
             return false;
         }
         return true;
@@ -69,10 +52,8 @@ module.exports = function(_s, _rf){
 
 
     RoutRoom.prototype.join = function(spark, room, noStore){
-        var randomId = Math.floor(Math.random()*300000)
-            , data
+        var data
             , self = this
-            , warning
             , joinRoom
             ;
 
@@ -80,7 +61,7 @@ module.exports = function(_s, _rf){
 
         joinRoom = function(user){
             spark.join(room.id, function(err, succ){
-                if(err) return warning('We were unable to join you to that room');
+                if(err) return RoutMsg.warningMsg(spark, 'We were unable to join you to that room');
                 data  = {
                     "m" : 'room',
                     "d" : {
@@ -102,18 +83,16 @@ module.exports = function(_s, _rf){
         };
 
         if(noStore){
-            User.fetchUser({"id":spark.user.id}).then(joinRoom).catch(warning);
+            User.fetchUser({"id":spark.user.id}).then(joinRoom).catch(RoutMsg.warningMsg.bind(spark));
         }else{
-            User.fetchUser({"id":spark.user.id}).then(_rf.RoomHandler.joinRoom.bind(this,room.id)).then(joinRoom).catch(warning);
+            User.fetchUser({"id":spark.user.id}).then(_rf.RoomHandler.joinRoom.bind(this,room.id)).then(joinRoom).catch(RoutMsg.warningMsg.bind(spark));
         }
 
     };
 
     RoutRoom.prototype.leave = function(spark, room, noStore){
-        var randomId = Math.floor(Math.random()*300000)
-            , data
+        var data
             , self = this
-            , warning
             , leaveRoom
             ;
 
@@ -133,14 +112,14 @@ module.exports = function(_s, _rf){
             };
             _s.primus.room(room.id).write({"m": "chat", "d":data});
             spark.leave(room.id, function(err, succ){
-                if(err) return warning('We were unable to remove you from that room');
+                if(err) return RoutMsg.warningMsg(spark, 'We were unable to remove you from that room');
             });
         };
 
         if(noStore){
-            User.fetchUser({"id":spark.user.id}).then(leaveRoom).catch(warning);
+            User.fetchUser({"id":spark.user.id}).then(leaveRoom).catch(RoutMsg.warningMsg.bind(spark));
         }else{
-            User.fetchUser({"id":spark.user.id}).then(_rf.RoomHandler.leaveRoom.bind(this,room.id)).then(leaveRoom).catch(warning);
+            User.fetchUser({"id":spark.user.id}).then(_rf.RoomHandler.leaveRoom.bind(this,room.id)).then(leaveRoom).catch(RoutMsg.warningMsg.bind(spark));
         }
     };
 

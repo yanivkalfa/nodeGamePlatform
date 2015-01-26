@@ -14,21 +14,21 @@ function ChatOut(WebSocket, Authorization) {
 
     ChatOutFactory.prototype =  {
         w : function(args){
-            this.msg(args, "add", "private");
+            this.msg(args, 'privateMsg', 'add');
         },
 
         whisper : function(args){
-            this.msg(args, "add", "private");
+            this.msg(args, 'privateMsg', 'add');
             return true;
         },
 
         add : function(args){
-            this.msg(args, "add", "room");
+            this.msg(args, 'publicMsg', 'add');
             return true;
         },
 
         remove : function(args){
-            this.msg(args, "remove", "room");
+            this.msg(args, 'remove', 'remove');
             return true;
         },
 
@@ -41,20 +41,23 @@ function ChatOut(WebSocket, Authorization) {
             return true;
         },
 
-        msg : function(args, method, toType){
+        msg : function(args, method, action, id){
 
             var data  = {
                 "m" : 'msg',
                 "d" : {
                     "m" : method,
                     "d" : {
-                        "toType" : toType,
+                        "id" : id,
+                        "action" : action,
                         "to" : args[0],
                         "from" : Authorization.getUser().id,
-                        "msg" : args.splice(1).join(" ")
+                        "content" : args.splice(1).join(" ")
                     }
                 }
             };
+
+            //{id:'', date : '', formatDate : '', action:'', from : '', to : '', content: ''}
 
             WebSocket.Primus.write({"m": "chat", "d":data});
 

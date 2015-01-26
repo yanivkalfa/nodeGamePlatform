@@ -114,11 +114,9 @@ _s.primus.on('connection', function (spark) {
                     _s.oModules.User.fetchUser({"id":decoded.userId}).then(updateSpark).then(upSkSuccess).catch(upSkFail);
                 }
 
-            });/*
-                .catch(function(err){
+            }).catch(function(err){
                 if(err) spark.end({"method" : "disconnect", msg : "Could not authenticate user b."} );
             });
-            */
         }else{
             spark.end({"method" : "disconnect", msg : "Could not authenticate user c."} );
         }
@@ -135,8 +133,6 @@ _s.primus.on('disconnection', function (spark) {
 });
 
 _s.primus.on('leaveallrooms', function (rooms, spark) {
-
-    console.log('leaving all rooms ' , spark.user);
     if(!spark) return false;
     var RoutRoom = new _s.oModules.RoutRoom(_s.primus);
     _s.oModules.User.fetchUser({"id":spark.user.id}).then(function(user){
@@ -146,16 +142,11 @@ _s.primus.on('leaveallrooms', function (rooms, spark) {
                 "type" : 'chat',
                 "users" : {}
             };
-            console.log('leaveing room: ', aRoom.id);
             RoutRoom._leave(spark, aRoom)
         });
+    }).catch(console.log);
 
-
-
-    });
-    //
-    console.log('leaving all rooms ' , spark.user);
-    // works when the client closes the connection
+    return true;
 });
 
 
