@@ -10,10 +10,9 @@ function ngpRoomMsgWrap($rootScope) {
 
 
     return {
-        /*
         link: function (scope, element, attrs) {
             console.log(scope, element, attrs);
-        },*/
+        },
         scope: {
             content: '='
         },
