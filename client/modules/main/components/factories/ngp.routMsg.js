@@ -39,12 +39,12 @@ function RoutMsg($rootScope, Router, Authorization, Chat, UtilFunc) {
         switch(msg.action){
             case 'add':
                 if(user.id == msg.from.id) {
-                    msg.from.username = 'to :' + msg.to.username;
+                    //msg.from.username = 'to :' + msg.to.username;
                 }
 
                 var activeIndex = Chat.getActiveRoom();
                 msg.formatDate = UtilFunc.formatMsgDate(msg.date);
-                console.log(msg);
+                console.log('aaa', msg);
                 Chat.addMsg(msg, $rootScope.ngp.rooms[activeIndex]);
                 break;
 
