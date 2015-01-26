@@ -8,10 +8,8 @@ function ngpRoomMsgWrap($rootScope,Chat) {
 
     return {
         link: function (scope, element, attrs) {
-            console.log(attrs.roomIndex);
             var raw = element[0]
-                , rIndex = Chat.getActiveRoom()
-                , room = $rootScope.ngp.rooms[rIndex]
+                , room = $rootScope.ngp.rooms[attrs.roomIndex]
                 ;
 
             room.msgWrap = element[0];
