@@ -17,8 +17,6 @@ function ngpRoomMsgWrap($rootScope,Chat) {
 
 
             setInterval(function(){
-                console.log('aaaaaa');
-
                 room.scrollBottom();
             }, 1000);
 
