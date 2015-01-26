@@ -1,9 +1,5 @@
 <div class="leftSide">
-    <ngp-room-msg-wrap class="msgWrap">
-        <ul>
-            <li ng-repeat="msg in content.msg"> <ngp-room-msg class="toType" ng-class="msg.toType" msg="msg"></ngp-room-msg></li>
-        </ul>
-    </ngp-room-msg-wrap>
+    <ngp-room-msg-wrap class="msgWrap" content="content"></ngp-room-msg-wrap>
 </div>
 
 <div class="rightSide">

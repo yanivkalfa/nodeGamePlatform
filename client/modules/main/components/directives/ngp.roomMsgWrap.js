@@ -8,9 +8,14 @@ function ngpRoomContent($rootScope) {
 
     console.log($rootScope);
 
+
     return {
         link: function (scope, element, attrs) {
             console.log(scope, element, attrs);
-        }
+        },
+        scope: {
+            content: '='
+        },
+        templateUrl: ngp.const.app.url + '/tpl/directives/roomMsgWrap.html'
     };
 }
