@@ -20,11 +20,11 @@ function RoutRoom(Authorization, Chat, Router) {
 
 
     RoutRoomFactory.prototype.join = function(room){
-        console.log('adding member to a channel');
 
         var user = Authorization.getUser();
 
         if(!_.isArray(room.users) && user.id == room.users.id) {
+            console.log('joiningRoom');
             Chat.joinRoom(room);
         }
         else
