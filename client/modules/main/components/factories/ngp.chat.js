@@ -124,6 +124,7 @@ function Chat($rootScope, UtilFunc) {
                     this.msgWrap.scrollTop = this.msgWrap.scrollHeight;
                 },
                 updateScroll : function(){
+                    console.log('aaaaaaaaaa', this.scrollFlag);
                     if(this.scrollFlag){
                         this.scrollBottom();
                     }

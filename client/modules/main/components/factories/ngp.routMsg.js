@@ -24,7 +24,7 @@ function RoutMsg($rootScope, Router, Authorization, Chat, UtilFunc) {
         switch(msg.action){
             case 'add':
                 var activeIndex = Chat.getActiveRoom();
-                var room = rootScope.ngp.rooms[activeIndex];
+                var room = $rootScope.ngp.rooms[activeIndex];
                 msg.formatDate = UtilFunc.formatMsgDate(msg.date);
                 Chat.addMsg(msg, room);
                 room.updateScroll();
