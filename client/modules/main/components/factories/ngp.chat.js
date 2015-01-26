@@ -67,7 +67,7 @@ function Chat($rootScope, UtilFunc) {
             var mIndex = UtilFunc.indexOf($rootScope.ngp.rooms[cIndex].members, member, 'id');
             if(mIndex != -1) return false;
             console.log($rootScope.ngp.rooms);
-            $rootScope.ngp.rooms[cIndex].members.push(member);
+            $rootScope.ngp.rooms[cIndex].content.members.push(member);
             return true;
         },
 
@@ -76,7 +76,7 @@ function Chat($rootScope, UtilFunc) {
             if(cIndex == -1) return false;
             var mIndex = UtilFunc.indexOf($rootScope.ngp.rooms[cIndex].members, member, 'id');
             if(mIndex == -1) return false;
-            $rootScope.ngp.rooms[cIndex].members.splice(mIndex,1);
+            $rootScope.ngp.rooms[cIndex].content.members.splice(mIndex,1);
             return true;
         },
 
