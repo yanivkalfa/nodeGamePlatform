@@ -72,6 +72,8 @@ module.exports = function(_s, _rf){
             , warning
             ;
 
+        console.log(msg);
+
         warning = function(err){
             var dateNow = Date.now();
             data  = {

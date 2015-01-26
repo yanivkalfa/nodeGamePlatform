@@ -35,7 +35,7 @@ function webSocket($rootScope, $q, RoutChat) {
             var data  = {
                 "m" : 'roomDo',
                 "d" : {
-                    "m" : 'leave',
+                    "m" : 'join',
                     "d" : {
                         "name" : 'lobby',
                         "type" : 'chat',
