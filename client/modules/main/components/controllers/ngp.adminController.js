@@ -11,7 +11,7 @@ angular.module(ngp.const.app.name)
         'Api',
         'Authorization',
         'Notify',
-        'WebSocket',
+        'Terminal',
         adminController
     ]);
 
@@ -24,7 +24,7 @@ function adminController(
     Api,
     Authorization,
     Notify,
-    WebSocket
+    Terminal
     ) {
 
     function AdminController(){
@@ -71,7 +71,17 @@ function adminController(
     };
 
     AdminController.prototype.sendMessage = function(){
-        console.log(this.getActiveRoom());
+        var rIndex = this.getActiveRoom()
+            , rName = $rootScope.ngp.rooms[rIndex].title
+            , msg
+            ;
+
+        if(msg = Terminal.isMessageACommend(this.commandLine)){
+            Terminal.analyseMessage(msg);
+        }else{
+            msg = "add " + rName + " " + this.commandLine;
+            Terminal.analyseMessage(msg);
+        }
     };
 
     AdminController.prototype.getActiveRoom = function(){

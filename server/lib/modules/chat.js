@@ -16,7 +16,7 @@ module.exports = function(_rf){
         this.RoutMsg.rout(spark,msg);
     };
 
-    Chat.prototype.roomDo = function(spark, msg){
+    Chat.prototype.room = function(spark, msg){
         this.RoutRoom.rout(spark, msg);
     };
 

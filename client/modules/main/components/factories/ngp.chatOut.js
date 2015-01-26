@@ -3,16 +3,12 @@
  */
 angular.module(ngp.const.app.name)
     .service('ChatOut', [
-        '$q',
-        '$rootScope',
         'WebSocket',
         'Authorization',
-        'User',
-        'UtilFunc',
         ChatOut
     ]);
 
-function ChatOut($q, $rootScope, WebSocket, Authorization,User, UtilFunc) {
+function ChatOut(WebSocket, Authorization) {
 
     function ChatOutFactory(){ }
 
@@ -36,36 +32,53 @@ function ChatOut($q, $rootScope, WebSocket, Authorization,User, UtilFunc) {
             return true;
         },
 
-        join : function(){
-            WebSocket.Primus.write({"m": "chat", "d":"p"});
+        join : function(args){
+            this.room(args, "join");
+            return true;
         },
-
-
-        leave : function(data){ },
-
-        msg : function(args, action, toType){
-            var toEmit = {
-                "m" : 'msg',
-                "a" : action,
-                "d" : {
-                    "toType" : toType,
-                    "to" : args[0],
-                    "from" : Authorization.getUser().id,
-                    "date" : '',
-                    "msg" : args.splice(1).join(" ")
-                }
-            };
-
-            WebSocket.Primus.write({"m": "chat", "d":toEmit});
+        leave : function(args){
+            this.room(args, "leave");
             return true;
         },
 
-        getRoomDetails : function(data){
+        msg : function(args, method, toType){
 
+            var data  = {
+                "m" : 'msg',
+                "d" : {
+                    "m" : method,
+                    "d" : {
+                        "toType" : toType,
+                        "to" : args[0],
+                        "from" : Authorization.getUser().id,
+                        "msg" : args.splice(1).join(" ")
+                    }
+                }
+            };
 
+            WebSocket.Primus.write({"m": "chat", "d":data});
+
+            return true;
+        },
+
+        room : function(args, action){
+            var user = Authorization.getUser();
+            var data  = {
+                "m" : 'room',
+                "d" : {
+                    "m" : action,
+                    "d" : {
+                        "name" : args[0],
+                        "type" : 'chat',
+                        "username" : {username : user.username, id : user.id}
+                    }
+                }
+            };
+            WebSocket.Primus.write({"m": "chat", "d":data});
+            return true;
         }
 
     };
 
-    return new ChatOutFactory();
+    return ChatOutFactory;
 }

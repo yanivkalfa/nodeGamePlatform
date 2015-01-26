@@ -23,7 +23,7 @@ module.exports = function(_s, _rf){
                 .assembleRooms();
 
             var data  = {
-                "m" : 'roomDo',
+                "m" : 'room',
                 "d" : {
                     "m" : 'setRooms',
                     "d" : self.getRooms()
@@ -230,7 +230,7 @@ module.exports = function(rooms, io,members,socket){
         _this._join(room.name, room.nickName, room.type || "chat");
         aRoom = _this.getRoom(room.name);
 
-        _this.to(room.name).broadCast('response', {"method": "roomDo", "msg":{
+        _this.to(room.name).broadCast('response', {"method": "room", "msg":{
             "action" : "join",
             "msg" : {
                 "name" : room.name,
@@ -275,7 +275,7 @@ module.exports = function(rooms, io,members,socket){
         aRoom = _this.getRoom(room.name);
 
         if(aRoom){
-            _this.to(room.name).broadCast('response', {"method": "roomDo", "msg":{
+            _this.to(room.name).broadCast('response', {"method": "room", "msg":{
                 "action" : "leave",
                 "msg" : {
                     "name" : room.name,

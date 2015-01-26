@@ -114,7 +114,7 @@ _s.primus.on('connection', function (spark) {
 
                         var webSocketExtender = new WebSocketExtender();
                         var data  = {
-                            "m" : 'roomDo',
+                            "m" : 'room',
                             "d" : {
                                 "m" : 'getRooms',
                                 "d" : {
@@ -159,7 +159,7 @@ _s.primus.on('connection', function (spark) {
      msg : function(msg){
      c.oVars.oMsgRouter.routMsg(msg);
      },
-     roomDo : function(msg){
+     room : function(msg){
      c.oVars.oRoomRouter.routRoom(msg);
      }
      };
@@ -508,7 +508,7 @@ var s = {
                                 msg : function(msg){
                                     c.oVars.oMsgRouter.routMsg(msg);
                                 },
-                                roomDo : function(msg){
+                                room : function(msg){
                                     c.oVars.oRoomRouter.routRoom(msg);
                                 }
                             };

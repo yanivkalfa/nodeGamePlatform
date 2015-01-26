@@ -3,34 +3,37 @@
  */
 angular.module(ngp.const.app.name)
     .service('Terminal', [
-        'UtilFunc',
+        'ChatOut',
         Terminal
     ]);
 
-function Terminal(UtilFunc) {
+function Terminal(ChatOut) {
 
     function TerminalService(){
+        ChatOut.apply(this, arguments);
+
         this._commend = "";
         this._arguments = "";
     }
 
-    TerminalService.prototype =  {
+    TerminalService.prototype = Object.create(ChatOut.prototype);
+    TerminalService.prototype.constructor = TerminalService;
 
-        isMessageACommend : function(msg){
-            return (msg.slice(0, 1) == "/") ? msg.slice(1) : false ;
-        },
 
-        analyseMessage : function(msg){
-            var temp = msg.split(" "), self = this;
-            self._commend = temp[0];
-            self._arguments = temp.splice(1);
+    TerminalService.prototype.isMessageACommend = function(msg){
+        return (msg.slice(0, 1) == "/") ? msg.slice(1) : false ;
+    };
 
-            if(typeof self[self._commend] === 'function'){
-                return self[self._commend](self._arguments);
-            }
+    TerminalService.prototype.analyseMessage = function(msg){
+        var temp = msg.split(" "), self = this;
+        self._commend = temp[0];
+        self._arguments = temp.splice(1);
 
-            return {"success":false,"msg":"4004", errorIn: self._commend}
+        if(typeof self[self._commend] === 'function'){
+            return self[self._commend](self._arguments);
         }
+
+        return {"success":false,"msg":"4004", errorIn: self._commend}
     };
 
     return new TerminalService();

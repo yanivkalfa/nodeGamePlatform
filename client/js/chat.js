@@ -458,7 +458,7 @@
                     _this._ChatView[action](args.msg);
                 },
 
-                roomDo : function(args){
+                room : function(args){
                     var action = "_" + args.action+"Room";
                     _this._ChatView[action](args.msg);
                 },
@@ -466,7 +466,7 @@
                 updateRoomMembers : function(args){
                     for(var i = 0; i < args.msg.nickName.length; i++)
                     {
-                        this.roomDo({
+                        this.room({
                             "action" : args.action,
                             "msg" : {
                                 "name" : args.msg.name,
@@ -531,7 +531,7 @@
                         }
                     };
                     _this._ChatView._joinRoom(toEmit.msg);
-                    _this.s.oVars.oSocket.emit('request', {"method": "roomDo", "msg" : toEmit});
+                    _this.s.oVars.oSocket.emit('request', {"method": "room", "msg" : toEmit});
                     return true;
                 },
                 leave : function(args){
@@ -546,7 +546,7 @@
                         }
                     };
                     _this._ChatView._leaveRoom(toEmit.msg);
-                    _this.s.oVars.oSocket.emit('request', {"method": "roomDo", "msg" : toEmit});
+                    _this.s.oVars.oSocket.emit('request', {"method": "room", "msg" : toEmit});
                     return true;
                 },
                 help : function(args){

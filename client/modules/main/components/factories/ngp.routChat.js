@@ -25,7 +25,7 @@ function RoutChat(Router, RoutMsg, RoutRoom) {
         this.RoutMsg.rout(msg);
     };
 
-    RoutChatFactory.prototype.roomDo = function(msg){
+    RoutChatFactory.prototype.room = function(msg){
         this.RoutRoom.rout(msg);
     };
 

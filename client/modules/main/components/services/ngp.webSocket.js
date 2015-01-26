@@ -33,13 +33,13 @@ function webSocket($rootScope, $q, RoutChat) {
             });
 
             var data  = {
-                "m" : 'roomDo',
+                "m" : 'room',
                 "d" : {
                     "m" : 'join',
                     "d" : {
                         "name" : 'lobby',
                         "type" : 'chat',
-                        "username" : this.user.username
+                        "username" : {username : this.user.username, id : this.user.id}
                     }
                 }
             };

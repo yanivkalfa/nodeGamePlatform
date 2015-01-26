@@ -97,7 +97,7 @@ module.exports = function(_s, _rf){
                 self.getRoom(spark, msg.name);
 
                 data  = {
-                    "m" : 'roomDo',
+                    "m" : 'room',
                     "d" : {
                         "m" : 'join',
                         "d" : {
@@ -145,7 +145,7 @@ module.exports = function(_s, _rf){
                 if(err) return warning('We were unable to remove you from that room');
 
                 data  = {
-                    "m" : 'roomDo',
+                    "m" : 'room',
                     "d" : {
                         "m" : 'leave',
                         "d" : {
