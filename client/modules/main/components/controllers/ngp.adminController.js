@@ -76,7 +76,8 @@ function adminController(
 
     AdminController.prototype.getActiveRoom = function(){
         _($rootScope.ngp.rooms).forEach(function(room, index){
-            if(room.active) return index;
+            console.log(room);
+            //if(room.active) return index;
         })
     };
 
