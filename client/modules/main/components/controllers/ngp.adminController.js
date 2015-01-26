@@ -31,6 +31,7 @@ function adminController(
         var self = this;
         this.api = Api.createNewApi(ngp.const.app.ajaxUrl);
         this.Authorization = Authorization.getUser();
+        this.commandLine = '';
     }
 
     AdminController.prototype.logout = function(){
@@ -58,6 +59,10 @@ function adminController(
         };
 
         this.api.doRequest(options).then(success).catch(fail);
+    };
+
+    AdminController.prototype.sendMessage = function(){
+        console.log(arguments);
     };
 
     AdminController.prototype.roomSelected = function(){

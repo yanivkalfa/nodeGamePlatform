@@ -51,7 +51,6 @@ function webSocket($rootScope, $q, RoutChat) {
             });
 
             this.Primus.on('error', function error(err) {
-                console.log('ERRORRRRR aaaaaaaaaaa');
                 self.connected = false;
                 deferred.reject( err );
             });

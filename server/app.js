@@ -113,8 +113,6 @@ _s.primus.on('connection', function (spark) {
                         _s.oModules.uf.extend(WebSocketExtender, extendRouterWith);
 
                         var webSocketExtender = new WebSocketExtender();
-                        console.log('user.rooms', user.rooms);
-                        console.log('user', user);
                         var data  = {
                             "m" : 'roomDo',
                             "d" : {

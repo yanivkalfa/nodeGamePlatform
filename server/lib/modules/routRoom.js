@@ -16,9 +16,8 @@ module.exports = function(_s, _rf){
         var GetRooms = new _rf.GetRooms(),
             retrieveRooms
             ;
-        console.log('getRooms: ', spark.user);
+
         retrieveRooms = function(rooms){
-            console.log('retrieveRooms: ', rooms);
             GetRooms.setRoomNames(rooms)
                 .getSparksForAllRooms(GetRooms.roomNames.map(GetRooms.getSparksInRoom)).then(function(roomsSparks){
                     GetRooms.setRoomsSparks(roomsSparks)
@@ -71,8 +70,6 @@ module.exports = function(_s, _rf){
             , self = this
             , warning
             ;
-
-        console.log(msg);
 
         warning = function(err){
             var dateNow = Date.now();
