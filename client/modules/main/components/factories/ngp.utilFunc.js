@@ -58,7 +58,7 @@ function UtilFunc($rootScope) {
                     }
                 }
             };
-            return Room;
+            return new Room(room);
         }
     };
 
