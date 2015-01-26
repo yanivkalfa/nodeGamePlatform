@@ -102,9 +102,6 @@ _s.primus.on('connection', function (spark) {
 
                         var webSocketExtender = new WebSocketExtender();
 
-
-
-
                         // Joining terminal, lobby user rooms and saved rooms
                         var userRoom = 'u_' + decoded.userId;
                         spark.join('terminal '+ userRoom, function(err, succ){});

@@ -69,15 +69,16 @@ module.exports = function(_s, _rf){
         this.join(spark, room, true);
     };
 
-    RoutRoom.prototype.join = function(spark, room, noStore){
+    RoutRoom.prototype._leave = function(spark, room){
+        this.leave(spark, room, true);
+    };
+
+    RoutRoom.prototype._checkChannel = function(spark, room, warningMsg){
         var randomId = Math.floor(Math.random()*300000)
             , data
-            , self = this
-            , warning
-            , joinRoom
             ;
 
-        warning = function(err){
+        if(room.id.indexOf("u_") === 0 || room.id === 'terminal') {
             var dateNow = Date.now();
             data  = {
                 "m" : 'msg',
@@ -89,13 +90,26 @@ module.exports = function(_s, _rf){
                         "to" : spark.user.username,
                         "from" : "System",
                         "date" : dateNow,
-                        "msg" : err
+                        "msg" : warningMsg
                     }
                 }
             };
-            return spark.write({"m": "chat", "d":data});
-        };
-        if(room.id.indexOf("u_") === 0 || room.id === 'terminal') warning('Illegal room name "' + room.id + '"');
+            spark.write({"m": "chat", "d":data});
+            return false;
+        }
+        return true;
+    };
+
+
+    RoutRoom.prototype.join = function(spark, room, noStore){
+        var randomId = Math.floor(Math.random()*300000)
+            , data
+            , self = this
+            , warning
+            , joinRoom
+            ;
+
+        if(!self._checkChannel(spark, room, 'Illegal room name "' + room.id + '"')) return false;
 
         joinRoom = function(user){
             spark.join(room.id, function(err, succ){
@@ -128,54 +142,39 @@ module.exports = function(_s, _rf){
 
     };
 
-    RoutRoom.prototype.leave = function(spark, room){
+    RoutRoom.prototype.leave = function(spark, room, noStore){
         var randomId = Math.floor(Math.random()*300000)
             , data
             , self = this
             , warning
+            , leaveRoom
             ;
 
-        warning = function(err){
-            var dateNow = Date.now();
+        if(!self._checkChannel(spark, room, 'Illegal room name "' + room.id + '"')) return false;
+
+        leaveRoom = function(user){
             data  = {
-                "m" : 'msg',
+                "m" : 'room',
                 "d" : {
-                    "m" : 'add',
+                    "m" : 'leave',
                     "d" : {
-                        "id" : dateNow + randomId.toString(),
-                        "toType" : "warning",
-                        "to" : spark.user.username,
-                        "from" : "System",
-                        "date" : dateNow,
-                        "msg" : err
+                        "id" : room.id,
+                        "type" : room.type,
+                        "users" : {username : user.username, id : user.id}
                     }
                 }
             };
-            return spark.write({"m": "chat", "d":data});
-        };
-        if(room.id.indexOf("u_") === 0 || room.id === 'terminal') warning('Illegal room name "' + room.id + '"');
-
-        User.fetchUser({"id":spark.user.id}).then(_rf.RoomHandler.leaveRoom.bind(this,room.id)).then(function(user){
+            _s.primus.room(room.id).write({"m": "chat", "d":data});
             spark.leave(room.id, function(err, succ){
                 if(err) return warning('We were unable to remove you from that room');
-
-
-                data  = {
-                    "m" : 'room',
-                    "d" : {
-                        "m" : 'leave',
-                        "d" : {
-                            "id" : room.id,
-                            "type" : room.type,
-                            "users" : {username : user.username, id : user.id}
-                        }
-                    }
-                };
-                _s.primus.room(room.id).write({"m": "chat", "d":data});
-                spark.write({"m": "chat", "d":data});
             });
+        };
 
-        }).catch(warning);
+        if(noStore){
+            User.fetchUser({"id":spark.user.id}).then(leaveRoom).catch(warning);
+        }else{
+            User.fetchUser({"id":spark.user.id}).then(_rf.RoomHandler.leaveRoom.bind(this,room.id)).then(leaveRoom).catch(warning);
+        }
     };
 
     return RoutRoom;

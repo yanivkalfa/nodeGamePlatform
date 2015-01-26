@@ -23,15 +23,12 @@ function RoutRoom($rootScope,Authorization, Chat, Router) {
     RoutRoomFactory.prototype.join = function(room){
 
         var user = Authorization.getUser();
-        console.log('isArray', _.isArray(room.users));
         if(!_.isArray(room.users) && user.id == room.users.id) {
-            console.log('joiningRoom');
             Chat.joinRoom(Chat.createRoom(room));
         }
         else
         {
             if(!_.isArray(room.users)) {
-                console.log('for Other sparks');
                 Chat.addMember(room.users, room);
             }
             else{
@@ -51,7 +48,6 @@ function RoutRoom($rootScope,Authorization, Chat, Router) {
 
     RoutRoomFactory.prototype.leave = function(room){
         var user = Authorization.getUser();
-        console.log('leave', room);
         if(user.id == room.users.id) Chat.leaveRoom(room);
         else Chat.removeMember(room.users, room);
     };
