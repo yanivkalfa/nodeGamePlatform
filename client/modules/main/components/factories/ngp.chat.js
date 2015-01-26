@@ -17,28 +17,7 @@ function Chat($rootScope, UtilFunc) {
     ChatFactory.prototype =  {
 
         createRoom : function(room){
-            return _.cloneDeep({
-                id : room.id,
-                title : room.id,
-                content : {
-                    msg : [],
-                    users : _.isArray(room.users) ? room.users : [room.users]
-                },
-                active : false,
-                scrollFlag : true,
-                msgWrap : undefined,
-                scrollBottom : function(){
-                    console.log('scrollHeight', this.msgWrap.scrollHeight);
-
-                    console.log('scrollTop', this.msgWrap.scrollTop);
-                    this.msgWrap.scrollTop = this.msgWrap.scrollHeight;
-                },
-                updateScroll : function(){
-                    if(this.scrollFlag){
-                        this.scrollBottom();
-                    }
-                }
-            });
+            return new UtilFunc.Room(room);
         },
 
         indexOf : function(room){

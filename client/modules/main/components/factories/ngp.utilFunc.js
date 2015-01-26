@@ -28,6 +28,37 @@ function UtilFunc($rootScope) {
                 if(this[i] == index) return i;
             }
             return -1;
+        },
+
+        Room : function(room){
+
+            function room (room){
+                this.id = room.id;
+                this.title = room.id;
+                this.content = {
+                    msg : [],
+                    users : _.isArray(room.users) ? room.users : [room.users]
+                };
+                this.active = false;
+                this.scrollFlag = true;
+                this.msgWrap = undefined;
+
+            }
+
+            room.prototype =  {
+                scrollBottom : function(){
+                    console.log('scrollHeight', this.msgWrap.scrollHeight);
+
+                    console.log('scrollTop', this.msgWrap.scrollTop);
+                    this.msgWrap.scrollTop = this.msgWrap.scrollHeight;
+                },
+                updateScroll : function(){
+                    if(this.scrollFlag){
+                        this.scrollBottom();
+                    }
+                }
+            };
+            return room;
         }
     };
 
