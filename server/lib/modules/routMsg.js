@@ -45,7 +45,7 @@ module.exports = function(_s, _rf){
             ;
 
         prvSuccess = function(user){
-            if(user.id == msg.to.id) return self.warningMsg(spark, 'You cannot Message yourself');
+            if(user.username == msg.to) return self.warningMsg(spark, 'You cannot Message yourself');
 
             cName = 'u_' + user.id;
             data = {
