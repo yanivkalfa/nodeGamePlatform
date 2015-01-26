@@ -28,8 +28,18 @@ function Chat($rootScope, UtilFunc) {
             });
         },
 
-        roomExist : function(room){
+        indexOf : function(room){
             return UtilFunc.indexOf($rootScope.ngp.rooms, room, 'id');
+        },
+
+        getActiveRoom : function(room){
+            if(!_.isArray($rootScope.ngp.rooms)) return false;
+
+            for(var i = 0; i < $rootScope.ngp.rooms.length; i++){
+                if($rootScope.ngp.rooms[i].active) return i;
+            }
+
+            return -1;
         },
 
         joinRoom : function(room){
@@ -51,7 +61,7 @@ function Chat($rootScope, UtilFunc) {
             var self = this;
             var index = UtilFunc.indexOf($rootScope.ngp.rooms, room, 'id');
             if(index == -1) return false;
-            $rootScope.ngp.rooms[index].msg.push(msg);
+            $rootScope.ngp.rooms[index].content.msg.push(msg);
             self.updateRoomsNotification(index);
             return true;
         },
@@ -59,9 +69,9 @@ function Chat($rootScope, UtilFunc) {
         removeMsg : function(msg, room){
             var cIndex = UtilFunc.indexOf($rootScope.ngp.rooms, room, 'id');
             if(cIndex == -1) return false;
-            var mIndex = UtilFunc.indexOf($rootScope.ngp.rooms[cIndex].msg, msg, 'date');
+            var mIndex = UtilFunc.indexOf($rootScope.ngp.rooms[cIndex].content.msg, msg, 'id');
             if(mIndex == -1) return false;
-            $rootScope.ngp.rooms[cIndex].msg.splice(mIndex,1);
+            $rootScope.ngp.rooms[cIndex].content.msg.splice(mIndex,1);
             return true;
         },
 

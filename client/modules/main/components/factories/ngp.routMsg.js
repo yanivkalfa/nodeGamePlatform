@@ -3,11 +3,15 @@
  */
 angular.module(ngp.const.app.name)
     .service('RoutMsg', [
+        '$rootScope',
         'Router',
+        'Authorization',
+        'Chat',
+        'UtilFunc',
         RoutMsg
     ]);
 
-function RoutMsg(Router) {
+function RoutMsg($rootScope, Router, Authorization, Chat, UtilFunc) {
 
     function RoutMsgFactory(){
         Router.apply(this, arguments);
@@ -16,12 +20,50 @@ function RoutMsg(Router) {
     RoutMsgFactory.prototype = Object.create(Router.prototype);
     RoutMsgFactory.prototype.constructor = RoutMsgFactory;
 
-    RoutMsgFactory.prototype.add = function(msg){
+    RoutMsgFactory.prototype.warningMsg  = function(msg){
+        switch(msg.action){
+            case 'add':
+                var activeIndex = Chat.getActiveRoom();
+                msg.formatDate = UtilFunc.formatMsgDate(msg.date);
+                Chat.addMsg(msg, $rootScope.ngp.rooms[activeIndex]);
+                break;
 
+            case 'remove':
+                break;
+        }
     };
 
-    RoutMsgFactory.prototype.remove = function(msg){
+    RoutMsgFactory.prototype.privateMsg  = function(msg){
+        var user = Authorization.getUser();
+        switch(msg.action){
+            case 'add':
+                if(user.id == msg.from.id) {
+                    msg.from = 'to :' + msg.to.username;
+                }
 
+                var activeIndex = Chat.getActiveRoom();
+                msg.formatDate = UtilFunc.formatMsgDate(msg.date);
+                Chat.addMsg(msg, $rootScope.ngp.rooms[activeIndex]);
+                break;
+
+            case 'remove':
+                break;
+        }
+    };
+
+    RoutMsgFactory.prototype.publicMsg = function(msg){
+
+        var rIndex = Chat.indexOf(msg.to);
+        switch(msg.action){
+            case 'add':
+                msg.formatDate = UtilFunc.formatMsgDate(msg.date);
+                Chat.addMsg(msg, $rootScope.ngp.rooms[rIndex]);
+                break;
+
+            case 'remove':
+                Chat.removeMsg(msg, $rootScope.ngp.rooms[rIndex]);
+                break;
+        }
     };
 
     return RoutMsgFactory;

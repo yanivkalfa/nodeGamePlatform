@@ -72,7 +72,7 @@ function adminController(
 
     AdminController.prototype.sendMessage = function(){
         var rIndex = this.getActiveRoom()
-            , rName = $rootScope.ngp.rooms[rIndex].title
+            , rName = $rootScope.ngp.rooms[rIndex].id
             , msg
             ;
 

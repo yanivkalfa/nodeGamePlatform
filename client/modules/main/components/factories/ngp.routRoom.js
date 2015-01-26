@@ -32,7 +32,7 @@ function RoutRoom($rootScope,Authorization, Chat, Router) {
                 Chat.addMember(room.users, room);
             }
             else{
-                if(Chat.roomExist(room) == -1) {
+                if(Chat.indexOf(room) == -1) {
                     Chat.joinRoom(Chat.createRoom(room));
                 }else{
                     _(room.users).forEach(function(user){

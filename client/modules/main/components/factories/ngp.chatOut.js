@@ -56,9 +56,6 @@ function ChatOut(WebSocket, Authorization) {
                     }
                 }
             };
-
-            //{id:'', date : '', formatDate : '', action:'', from : '', to : '', content: ''}
-
             WebSocket.Primus.write({"m": "chat", "d":data});
 
             return true;

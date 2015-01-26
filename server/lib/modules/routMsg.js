@@ -59,6 +59,7 @@ module.exports = function(_s, _rf){
                     }
                 }
             };
+            spark.write({"m": "chat", "d":data});
             _s.primus.room(cName).write({"m": "chat", "d":data});
         };
 
