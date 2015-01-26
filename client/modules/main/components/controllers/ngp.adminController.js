@@ -75,12 +75,13 @@ function adminController(
     };
 
     AdminController.prototype.getActiveRoom = function(){
-        console.log('aaaaaaa');
+        if(!_.isArray($rootScope.ngp.rooms)) return false;
 
-        _($rootScope.ngp.rooms).forEach(function(room, index){
-            console.log(room);
-            //if(room.active) return index;
-        })
+        for(var i = 0; i < $rootScope.ngp.rooms.length; i++){
+            if($rootScope.ngp.rooms[i].active) return i;
+        }
+
+        return -1;
     };
 
 
