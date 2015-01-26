@@ -1,6 +1,7 @@
 module.exports = function(_s, _rf){
 
     var router = _rf.Router
+        , _ = _s.oReq.lodash
         , User = _rf.User
         ;
 
@@ -11,7 +12,9 @@ module.exports = function(_s, _rf){
     RoutMsg.prototype = Object.create(router.prototype);
     RoutMsg.prototype.constructor = RoutMsg;
 
-    RoutMsg.prototype.warningMsg = function(spark, warningMsg){
+    RoutMsg.prototype.warningMsg = function(spark, injectedMsg, naturalMsg){
+        var warningMsg = _.isEmpty(naturalMsg) ? injectedMsg : naturalMsg;
+        console.log(warningMsg);
         var randomId = Math.floor(Math.random()*300000)
             , dateNow = Date.now()
             , data  = {
@@ -64,7 +67,7 @@ module.exports = function(_s, _rf){
             _s.primus.room(cName).write({"m": "chat", "d":data});
         };
 
-        User.fetchUser(msg.to).then(prvSuccess).catch(self.warningMsg.bind(self, spark));
+        User.fetchUser(msg.to).then(prvSuccess).catch(self.warningMsg.bind(self, spark, 'User with this name does not exist'));
     };
 
     RoutMsg.prototype.publicMsg = function(spark, msg){
