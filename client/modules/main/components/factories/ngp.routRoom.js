@@ -3,13 +3,14 @@
  */
 angular.module(ngp.const.app.name)
     .service('RoutRoom', [
+        '$rootScope',
         'Authorization',
         'Chat',
         'Router',
         RoutRoom
     ]);
 
-function RoutRoom(Authorization, Chat, Router) {
+function RoutRoom($rootScope,Authorization, Chat, Router) {
 
     function RoutRoomFactory(){
         Router.apply(this, arguments);
@@ -29,7 +30,10 @@ function RoutRoom(Authorization, Chat, Router) {
         }
         else
         {
-            if(!_.isArray(room.users)) Chat.addMember(room.users, room);
+            if(!_.isArray(room.users)) {
+                console.log('for Other sparks');
+                Chat.addMember(room.users, room);
+            }
             else{
                 if(Chat.roomExist(room) == -1) {
                     Chat.joinRoom(Chat.createRoom(room));
@@ -42,6 +46,7 @@ function RoutRoom(Authorization, Chat, Router) {
             }
         }
 
+        $rootScope.$apply();
     };
 
     RoutRoomFactory.prototype.leave = function(room){

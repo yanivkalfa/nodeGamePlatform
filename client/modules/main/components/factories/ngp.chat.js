@@ -36,11 +36,6 @@ function Chat($rootScope, UtilFunc) {
             var index = UtilFunc.indexOf($rootScope.ngp.rooms, room, 'id');
             if(index != -1) return false;
             $rootScope.ngp.rooms.push(room);
-
-            console.log(index);
-
-            //$rootScope.$apply();
-
             return true;
         },
 
@@ -81,7 +76,6 @@ function Chat($rootScope, UtilFunc) {
         },
 
         addMember : function(member,room){
-            console.log(member,room);
             var cIndex = UtilFunc.indexOf($rootScope.ngp.rooms, room, 'id');
             if(cIndex == -1) return false;
             var mIndex = UtilFunc.indexOf($rootScope.ngp.rooms[cIndex].content.users, member, 'id');
