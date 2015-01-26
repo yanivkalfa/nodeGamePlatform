@@ -50,13 +50,7 @@ function RoutRoom($rootScope,Authorization, Chat, Router) {
         var user = Authorization.getUser();
         if(user.id == room.users.id) Chat.leaveRoom(room);
         else Chat.removeMember(room.users, room);
-    };
-
-    RoutRoomFactory.prototype.setRooms = function(msg){
-        if(!_.isArray(msg)) return false;
-        _(msg).forEach(function(room){
-            Chat.joinRoom(room);
-        })
+        $rootScope.$apply();
     };
 
     return RoutRoomFactory;

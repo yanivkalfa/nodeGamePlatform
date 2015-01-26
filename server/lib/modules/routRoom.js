@@ -12,39 +12,6 @@ module.exports = function(_s, _rf){
     RoutRoom.prototype = Object.create(router.prototype);
     RoutRoom.prototype.constructor = RoutRoom;
 
-    RoutRoom.prototype.getRooms = function(spark, msg){
-        var GetRooms = new _rf.GetRooms(),
-            retrieveRooms
-            ;
-
-        retrieveRooms = function(rooms){
-            GetRooms.setRoomNames(rooms)
-                .getSparksForAllRooms(GetRooms.roomNames.map(GetRooms.getSparksInRoom)).then(function(roomsSparks){
-                    GetRooms.setRoomsSparks(roomsSparks)
-                        .setSparkList()
-                        .checkUserNameInPrimus()
-                        .setInSpark();
-
-                    if(GetRooms.inSparks.length) {
-                        GetRooms.fetchUsersInSparks().then(function(users){
-                            GetRooms.checkUserNameInDB(users)
-                                .sendRooms(spark);
-                        }).catch(GetRooms.sendRooms.bind(GetRooms, spark));
-                    }else{
-                        GetRooms.sendRooms(spark);
-                    }
-                }).catch(console.log);
-        };
-
-        if(msg && msg.rooms.length > 0) {
-            retrieveRooms(msg.rooms);
-        }else{
-            GetRooms.getRoomsForSpark(spark.id).then(retrieveRooms).catch(console.log);
-        }
-
-    };
-
-
 
     RoutRoom.prototype.getRoom = function(spark, room){
         var GetRoom = new _rf.GetRoom();
@@ -179,24 +146,3 @@ module.exports = function(_s, _rf){
 
     return RoutRoom;
 };
-
-/*
- RoutRoom.prototype.getRoom = function(spark, rname){
- var GetRooms = new _rf.GetRooms();
- GetRooms.setRoomNames([rname])
- .getSparksForAllRooms(GetRooms.roomNames.map(GetRooms.getSparksInRoom)).then(function(roomsSparks){
- GetRooms.setRoomsSparks(roomsSparks)
- .setSparkList()
- .checkUserNameInPrimus()
- .setInSpark();
-
- if(GetRooms.inSparks.length) {
- GetRooms.fetchUsersInSparks().then(function(users){
- GetRooms.checkUserNameInDB(users)
- .sendRooms(spark);
- }).catch(GetRooms.sendRooms.bind(GetRooms, spark));
- }else{
- GetRooms.sendRooms(spark);
- }
- }).catch(console.log);
- };*/

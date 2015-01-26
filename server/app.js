@@ -121,6 +121,14 @@ _s.primus.on('connection', function (spark) {
 
                             webSocketExtender.chat(spark,data);
                         });
+
+                        _s.primus.on('leaveallrooms', function (rooms, spark) {
+
+
+                            //_s.oModules.User.fetchUser({"id":decoded.userId}).then(updateSpark).then(upSkSuccess).catch(upSkFail);
+                            console.log('leaving all rooms');
+                            // works when the client closes the connection
+                        });
                     };
 
                     var upSkFail = function(err){
@@ -140,99 +148,6 @@ _s.primus.on('connection', function (spark) {
             spark.end({"method" : "disconnect", msg : "Could not authenticate user c."} );
         }
     });
-
-
-    /*
-
-     var router = new s.utilFunc.CallRouter(socket);
-     var msgRouter = new s.utilFunc.MsgRouter(c.oVars.oRoomHandler);
-     var roomRouter = new s.utilFunc.roomRouter(c.oVars.oRoomHandler);
-
-
-     var RouterExtender = function(){};
-     var extendRouterWith = {
-     ping : function(msg){
-     spark.write({"m": "ping", "d":"p"});
-     },
-     msg : function(msg){
-     c.oVars.oMsgRouter.routMsg(msg);
-     },
-     room : function(msg){
-     c.oVars.oRoomRouter.routRoom(msg);
-     }
-     };
-     RouterExtender.prototype = c.oVars.oRouter;
-     s.utilFunc.extend(RouterExtender, extendRouterWith);
-     new RouterExtender();*/
-
-
-    //spark.join("aRoomName", function () {
-
-        // send message to this client
-        //spark.write('you joined room ' + "aRoomName");
-
-        // send message to all clients except this one
-        //spark.room("aRoomName").except(spark.id).write(spark.id + ' joined room ' + "aRoomName");
-
-
-        /*
-        primus.rooms(function(err, rooms){
-            console.log("primus rooms", rooms);
-
-            rooms.forEach(function(room){
-                primus.room(room).clients(function(err, cs){
-                    console.log(err, cs);
-                });
-            });
-        });
-
-        */
-
-
-
-        /*
-
-        primus.rooms(spark.id,function(err, rooms){
-            console.log("primus room", rooms);
-        });
-
-        spark.rooms(function(err, rooms){
-            console.log("spark room", rooms);
-        });
-        */
-    //});
-
-
-    //console.log(primus);
-
-    /*
-    spark.join("aRoomName", function () {
-
-        // send message to this client
-        //spark.write('you joined room ' + "aRoomName");
-
-        // send message to all clients except this one
-        spark.room("aRoomName").except(spark.id).write(spark.id + ' joined room ' + "aRoomName");
-
-        primus.rooms(function(err, rooms){
-            console.log("primus room", rooms);
-        });
-
-        primus.rooms(spark.id,function(err, rooms){
-            console.log("primus room", rooms);
-        });
-
-        spark.rooms(function(err, rooms){
-            console.log("spark room", rooms);
-        });
-    });
-    */
-
-    /*
-    spark.on('data', function (msg) {
-        try{ab[msg.m](spark, msg.d);}catch(e){}
-    });
-    */
 });
 
 
@@ -244,10 +159,7 @@ _s.primus.on('disconnection', function (spark) {
     //console.log(spark);
 });
 
-_s.primus.on('leaveallrooms', function (rooms, spark) {
-    console.log('leaving all rooms');
-    // works when the client closes the connection
-});
+
 
 
 /*
