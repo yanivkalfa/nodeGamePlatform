@@ -9,7 +9,6 @@ module.exports = function(_s){
     rf.RoomHandler = require('./roomHandler.js')(_s,rf);
     rf.GetRooms = require('./getRooms.js')(_s,rf);
     rf.GetRoom = require('./getRoom.js')(_s,rf);
-    rf.WebSocket = require('./supers/webscoket.js');
     rf.Router = require('./supers/router.js')();
     rf.RoutMsg = require('./routMsg.js')(_s,rf);
     rf.RoutRoom = require('./routRoom.js')(_s,rf);
