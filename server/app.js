@@ -6,9 +6,6 @@ _s.oConfig = require('./settings/config'); // require config files.
 global.oCore = require('./core')(_s); // require core files.
 _s.oModules = require('./lib/modules')(_s); // require utility functions
 
-
-return false;
-
 var startServer = function(server){
     console.log(server);
     _s.details = server;
@@ -25,7 +22,9 @@ if(process.argv[2] && process.argv[2] == 'servers'){
     var filterArg = function(item, i){
         return i !== 0 && i !== 1 && i !== 2
     };
-    return servers.analys(process.argv.filter(filterArg));
+    var returned = servers.analys(process.argv.filter(filterArg));
+    console.log(returned);
+    process.exit();
 }else{
     servers.fetchByName(process.argv[2] || 'testSlave01').then(startServer).catch(console.log);
 }
