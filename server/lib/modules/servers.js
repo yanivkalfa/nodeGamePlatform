@@ -11,7 +11,6 @@ module.exports = function(_s){
         },
 
         fetchByName : function(name){
-            console.log(Servers);
             return new _s.oReq.Promise(function(resolve, reject) {
                 Servers.findOne({name : name}).exec(function (err, server) {
 
