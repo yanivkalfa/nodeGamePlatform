@@ -1,7 +1,7 @@
 
 module.exports = {
 
-    name : "Users",
+    name : "Servers",
 
     schema : {
 
@@ -11,16 +11,17 @@ module.exports = {
         },
 
         port : {
-            type :'string',
+            type :'int',
             required : true
         },
 
         address : {
-            type :'string'
+            type :'string',
+            required : true
         },
 
         maxConnections : {
-            type : 'string'
+            type : 'int'
         }
     }
 };
