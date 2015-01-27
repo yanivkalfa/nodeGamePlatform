@@ -7,6 +7,7 @@ global.oCore = require('./core')(_s); // require core files.
 _s.oModules = require('./lib/modules')(_s); // require utility functions
 
 var startServer = function(server){
+    console.log(server);
     _s.details = server;
     _s.oRouts = require('./lib/requiredRouts.js')(_s);
     _s.oWebSockets = require('./lib/requiredWebSockets.js')(_s);
