@@ -8,7 +8,7 @@ module.exports = function(_s){
             console.log(arg);
             var self = this;
             if(!arg[0]) return false;
-            if(typeof arg[0] !== 'function') return false;
+            if(typeof self[arg[0]] !== 'function') return false;
             return self[arg[0]](arg.splice(0,1))
         },
 
