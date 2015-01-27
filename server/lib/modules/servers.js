@@ -5,6 +5,7 @@ module.exports = function(_s){
     ServersClass.prototype =  {
 
         analys : function(arg){
+            console.log(arg);
             var self = this;
             if(!arg[0]) return false;
             if(typeof arg[0] !== 'function') return false;
