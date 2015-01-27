@@ -23,7 +23,7 @@ if(process.argv[2] && process.argv[2] == 'servers'){
     var filterArg = function(item, i){
         return i !== 0 && i !== 1 && i !== 2
     };
-    servers.analys(process.argv.filter(filterArg));
+    return servers.analys(process.argv.filter(filterArg));
 }else{
     servers.fetchByName(process.argv[2] || 'testSlave01').then(startServer).catch(console.log);
 }
