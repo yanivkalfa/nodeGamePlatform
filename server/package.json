@@ -18,6 +18,7 @@
         "primus-rooms" : "~3.1.0",
         "primus-resource" : "~2.0.6",
         "primus-multiplex" : "~3.0.3",
+        "metroplex" : "~0.0.6",
         "engine.io": "~1.4.3",
         "bluebird" : "~2.5.3"
     },
