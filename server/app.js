@@ -8,27 +8,14 @@ _s.oConfig = require('./settings/config'); // require config files.
 global.oCore = require('./core')(_s); // require core files.
 _s.oModules = require('./lib/modules')(_s); // require utility functions
 
-var _ = _s.oReq.lodash,
-    sessCon = _s.oConfig.session.connection,
-    sessSecret = _s.oConfig.session.secret,
-    sessMaxAge = _s.oConfig.session.maxAge;
 
-_s.oReq.app.use(_s.oReq.session({
-    store: new _s.oReq.RedisStore({
-        port : _s.oConfig.connections[sessCon].port,
-        host : _s.oConfig.connections[sessCon].host
-    }),
-    secret: sessSecret,
-    saveUninitialized: true,
-    resave: true,
-    cookie: { maxAge: sessMaxAge }
-}));
 _s.oRouts = require('./lib/requiredRouts.js')(_s);
-_s.oRouts = require('./lib/requiredWebSockets.js')(_s);
+_s.oWebSockets = require('./lib/requiredWebSockets.js')(_s);
 
 _s.oReq.http.listen(_s.port || 8000, function(){
     console.log('listening on *:' + _s.port);
 });
+
 
 /*
 setTimeout(function(){
