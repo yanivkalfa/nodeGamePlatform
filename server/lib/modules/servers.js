@@ -5,7 +5,6 @@ module.exports = function(_s){
     ServersClass.prototype =  {
 
         analys : function(arg){
-            console.log(arg);
             var self = this;
             if(!arg[0]) return false;
             if(typeof self[arg[0]] !== 'function') return false;
@@ -15,8 +14,6 @@ module.exports = function(_s){
         fetchByName : function(name){
             return new _s.oReq.Promise(function(resolve, reject) {
                 Servers.findOne({name : name}).exec(function (err, server) {
-
-                    console.log('after findOne', err, server);
                     if(err) return reject(err);
                     return resolve(server);
                 });
