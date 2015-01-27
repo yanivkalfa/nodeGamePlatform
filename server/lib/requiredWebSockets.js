@@ -103,17 +103,19 @@ module.exports = function(_s){
 
     _s.primus.on('leaveallrooms', function (rooms, spark) {
         if(!spark) return false;
-        var RoutRoom = new _s.oModules.RoutRoom(_s.primus);
-        _s.oModules.User.fetchUser({"id":spark.user.id}).then(function(user){
-            _.isArray(user.rooms) && _(user.rooms).forEach(function(room){
-                var aRoom  = {
-                    "id" : room,
-                    "type" : 'chat',
-                    "users" : {}
-                };
-                RoutRoom._leave(spark, aRoom)
-            });
-        }).catch(console.log);
+        try{
+            var RoutRoom = new _s.oModules.RoutRoom(_s.primus);
+            _s.oModules.User.fetchUser({"id":spark.user.id}).then(function(user){
+                _.isArray(user.rooms) && _(user.rooms).forEach(function(room){
+                    var aRoom  = {
+                        "id" : room,
+                        "type" : 'chat',
+                        "users" : {}
+                    };
+                    RoutRoom._leave(spark, aRoom)
+                });
+            }).catch(console.log);
+        }catch(e){console.log(e)}
 
         return true;
     });
