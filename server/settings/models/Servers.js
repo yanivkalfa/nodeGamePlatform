@@ -11,7 +11,7 @@ module.exports = {
         },
 
         port : {
-            type :'int',
+            type :'number',
             required : true
         },
 
@@ -21,7 +21,7 @@ module.exports = {
         },
 
         maxConnections : {
-            type : 'int'
+            type : 'number'
         }
     }
 };
