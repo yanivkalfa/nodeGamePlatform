@@ -8,7 +8,12 @@ module.exports = function(_s){
             var self = this;
             if(!arg[0]) return false;
             if(typeof self[arg[0]] !== 'function') return false;
-            return self[arg[0]](arg.splice(0,1))
+
+            var filterArg = function(item, i){
+                return i !== 0;
+            };
+
+            return self[arg[0]](arg.filter(filterArg))
         },
 
         fetchByName : function(name){
