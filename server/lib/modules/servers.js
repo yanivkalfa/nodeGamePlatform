@@ -25,6 +25,8 @@ module.exports = function(_s){
         addServer : function(args){
             console.log(args);
             if(!_.isArray(args)) return false;
+
+            return true;
         }
     };
 
