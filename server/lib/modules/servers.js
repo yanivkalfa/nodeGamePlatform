@@ -11,10 +11,13 @@ module.exports = function(_s){
         },
 
         fetchByName : function(name){
+            console.log('inside fetch');
             return new _s.oReq.Promise(function(resolve, reject) {
-                Servers.findOne({name : name}).exec(function (err, user) {
+                Servers.findOne({name : name}).exec(function (err, server) {
+
+                    console.log('after findOne', err, server);
                     if(err) return reject(err);
-                    return resolve(user);
+                    return resolve(server);
                 });
             });
         },

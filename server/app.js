@@ -24,5 +24,6 @@ if(process.argv[2] && process.argv[2] == 'servers'){
     };
     Servers.analys(process.argv.filter(filterArg));
 }else{
+    console.log('aaaa');
     Servers.fetchByName(process.argv[2] || 'testSlave01').then(startServer).catch(console.log);
 }
