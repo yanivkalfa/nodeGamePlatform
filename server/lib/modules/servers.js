@@ -1,8 +1,8 @@
 module.exports = function(_s){
     var _ = _s.oReq.lodash;
-    function Servers(){}
+    function ServersClass(){}
 
-    Servers.prototype =  {
+    ServersClass.prototype =  {
 
         analys : function(arg){
             var self = this;
@@ -29,5 +29,5 @@ module.exports = function(_s){
     };
 
 
-    return Servers;
+    return ServersClass;
 };
