@@ -1,8 +1,14 @@
 module.exports = function(_s){
+    var _ = _s.oReq.lodash;
+    function Servers(){}
 
-    function Server (){}
+    Servers.prototype =  {
 
-    Server.prototype =  {
+        analys : function(arg){
+            var self = this;
+            if(!arg[0]) return false;
+            return self[arg[0]](arg.splice(0,1))
+        },
 
         fetchByName : function(name){
             return new _s.oReq.Promise(function(resolve, reject) {
@@ -11,9 +17,14 @@ module.exports = function(_s){
                     return resolve(user);
                 });
             });
+        },
+
+        addServer : function(args){
+            console.log(args);
+            if(!_.isArray(args)) return false;
         }
     };
 
 
-    return Server;
+    return Servers;
 };
