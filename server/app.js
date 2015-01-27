@@ -5,8 +5,9 @@ _s.sClientDirname = _s.oReq.path.resolve(__dirname, '..') + '/client'; //Client 
 _s.oConfig = require('./settings/config'); // require config files.
 global.oCore = require('./core')(_s); // require core files.
 _s.oModules = require('./lib/modules')(_s); // require utility functions
-console.log('aaaa');
 
+
+console.log(Servers);
 var startServer = function(server){
     console.log(server);
     _s.details = server;
@@ -18,13 +19,12 @@ var startServer = function(server){
     });
 };
 
-var Servers = new _s.oModules.Servers();
+var servers = new _s.oModules.Servers();
 if(process.argv[2] && process.argv[2] == 'servers'){
     var filterArg = function(item, i){
         return i !== 0 && i !== 1 && i !== 2
     };
-    Servers.analys(process.argv.filter(filterArg));
+    servers.analys(process.argv.filter(filterArg));
 }else{
-    console.log('aaaa');
-    Servers.fetchByName(process.argv[2] || 'testSlave01').then(startServer).catch(console.log);
+    servers.fetchByName(process.argv[2] || 'testSlave01').then(startServer).catch(console.log);
 }
