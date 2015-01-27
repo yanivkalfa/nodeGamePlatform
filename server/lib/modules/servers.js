@@ -7,6 +7,7 @@ module.exports = function(_s){
         analys : function(arg){
             var self = this;
             if(!arg[0]) return false;
+            if(typeof arg[0] !== 'function') return false;
             return self[arg[0]](arg.splice(0,1))
         },
 
