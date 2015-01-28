@@ -40,12 +40,15 @@ module.exports = function(_s){
         },
 
         add : function(args){
+            var server = {}
+                , success
+                , fail
+                , self = this
+                ;
+
             return new _s.oReq.Promise(function(resolve, reject) {
                 if(!_.isArray(args) || !args[0] || _.isEmpty(args[0])) return reject(0);
-                var server = {}
-                    , success
-                    , fail
-                    ;
+
                 try{
                     server = JSON.parse(args[0]);
                 }catch(e){
@@ -54,7 +57,7 @@ module.exports = function(_s){
                 }
 
                 if(!server) return reject(0);
-                server = this.filter(server);
+                server = self.filter(server);
                 success = function(server){
                     console.log('success arguments',arguments);
                     console.log('success server',server);
