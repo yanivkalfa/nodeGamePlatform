@@ -32,6 +32,15 @@ module.exports = function(_s){
             });
         },
 
+        _create : function(server){
+            return new _s.oReq.Promise(function(resolve, reject) {
+                Servers.create(server).exec(function (err, server) {
+                    if(err) return reject(err);
+                    return resolve(server);
+                });
+            });
+        },
+
         add : function(args){
 
             if(!_.isArray(args) || !args[0] || _.isEmpty(args[0])) return false;
@@ -49,16 +58,18 @@ module.exports = function(_s){
             if(!server) return false;
             server = this.filter(server);
             success = function(server){
+                console.log('success arguments',arguments);
                 console.log('success server',server);
                 return true;
             };
             fail = function(err){
+                console.log('fail arguments',arguments);
                 console.log('fail err',err);
                 return true;
             };
 
             console.log('before create', server);
-            Servers.create(server).then(success,fail);
+            this._create(server).then(success,fail);
         },
 
         remove : function(args){
