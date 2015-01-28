@@ -40,6 +40,7 @@ module.exports = function(_s, _rf){
 
     HttpTransit.prototype.doRequest = function(options, params){
         console.log('doReq', params);
+        console.log('JSON.stringify(params)', JSON.stringify(params));
         return new _s.oReq.Promise(function(resolve, reject) {
             var req;
             req = http.request(options, function(res) {

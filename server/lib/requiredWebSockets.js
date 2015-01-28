@@ -26,11 +26,11 @@ module.exports = function(_s){
     _s.primus.use('cluster', _s.oReq.primusCluster);
 
     var port = 8001;
-    var credential = {email : 'ya@ya.com', password : 'a'};
+    var credential = {"email" : 'ya@ya.com', "password" : 'a'};
 
     if(_s.details.port == 8001){
         port = 8002;
-        credential = {email : 'yanivkalfa@yahoo.com', password : 'a'};
+        credential = {"email" : 'yanivkalfa@yahoo.com', "password" : 'a'};
     }
 
     var options = {
