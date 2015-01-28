@@ -93,6 +93,7 @@ module.exports = function(_s){
                     {
                         // Attaching user to spark - for logout and maybe future needs
                         spark.user = user;
+                        var RoutSocket = new _s.oModules.RoutSocket(_s.primus);
 
                         // Update user's spark id in database - in-case its needed
                         var updateSpark = function(user){
@@ -107,6 +108,8 @@ module.exports = function(_s){
 
 
                         var upSkSuccess = function (user){
+
+                            console.log(user);
 
                             // Joining terminal, lobby user rooms and saved rooms
                             var userRoom = 'u_' + decoded.userId;
@@ -139,8 +142,6 @@ module.exports = function(_s){
                             updateSpark(user).then(upSkSuccess).catch(upSkFail);
                         }
 
-
-                        var RoutSocket = new _s.oModules.RoutSocket(_s.primus);
                         spark.on('data', function (msg) {
                             RoutSocket.rout(spark, msg);
                         });
