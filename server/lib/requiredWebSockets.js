@@ -21,7 +21,7 @@ module.exports = function(_s){
     _s.primus.use('resource', _s.oReq.primusResource);
     _s.primus.use('rooms', _s.oReq.primusRooms);
     _s.primus.use('emitter', _s.oReq.primusEmitter);
-    _s.primus.use('cluster', _s.oReq.primusMetroplex);
+    _s.primus.use('metroplex', _s.oReq.primusMetroplex);
     _s.primus.use('cluster', _s.oReq.primusCluster);
 
 
