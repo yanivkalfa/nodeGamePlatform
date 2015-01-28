@@ -135,7 +135,7 @@ module.exports = function(_s){
                             RoutSocket.rout(spark, msg);
                         });
 
-                        primus.metroplex.servers(function (err, servers) {
+                        _s.primus.metroplex.servers(function (err, servers) {
                             console.log('registered servers:', servers);
                         });
                     }
