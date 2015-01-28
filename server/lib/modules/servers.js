@@ -12,14 +12,15 @@ module.exports = function(_s){
         },
 
         analys : function(arg){
+            console.log(arg);
             return new _s.oReq.Promise(function(resolve, reject) {
                 var self = this
                     , success
                     , fail
                     , filter
                     ;
-                if(!arg[0]) return reject(0);
-                if(typeof self[arg[0]] !== 'function') return reject(0);
+                if(!arg[0]) return reject('!arg[0]');
+                if(typeof self[arg[0]] !== 'function') return reject('!function');
 
                 filter = function(item, i){ return i !== 0; };
                 success = function(code){  return resolve(code); };
