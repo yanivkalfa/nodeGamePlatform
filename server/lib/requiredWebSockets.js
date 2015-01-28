@@ -44,6 +44,7 @@ module.exports = function(_s){
     options = HttpTransit.prepareRequest(options, false, credential);
 
     setTimeout(function(){
+        console.log(options);
         HttpTransit.doRequest(options, credential).then(function(resp){
             console.log(resp);
 
