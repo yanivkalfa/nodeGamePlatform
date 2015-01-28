@@ -1,6 +1,5 @@
 
 module.exports = function(_s){
-
     var _ = _s.oReq.lodash;
 
     _s.oReq.app.use(_s.oReq.bodyParser.json());
