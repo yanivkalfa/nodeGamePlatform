@@ -17,7 +17,6 @@ module.exports = function(_s, req, res) {
     });
 
     this.init = function(){
-        console.log(_this.body);
         return (!_.isUndefined(_this.body.data))
             ? _this[_this.body.method](_this.body.data)
             : _this[_this.body.method]() ;
