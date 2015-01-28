@@ -28,7 +28,7 @@ module.exports = function(_s){
 
     var options = {
             "hostname" : 'localhost',
-            "port" : _s.details.port == 8001 ? 8002 : 8001
+            "port" : _s.details.cPort
         }
         , HttpTransit = new _s.oModules.HttpTransit(),
         data = {
@@ -127,7 +127,7 @@ module.exports = function(_s){
                             if(err) updateSpark(user).then(upSkSuccess).catch(upSkFail)
                         };
 
-                        if(user.type !== 'server'){
+                        if(user.type == 'user'){
                             updateSpark(user).then(upSkSuccess).catch(upSkFail);
                         }
 
