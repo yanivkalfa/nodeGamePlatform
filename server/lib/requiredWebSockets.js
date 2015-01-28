@@ -35,9 +35,7 @@ module.exports = function(_s){
 
     var options = {
             "hostname" : 'localhost',
-            "port" : port,
-            "path" : '',
-            "method": 'post'
+            "port" : port
         }
         , HttpTransit = new _s.oModules.HttpTransit();
 
