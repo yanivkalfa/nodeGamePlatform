@@ -65,7 +65,7 @@ module.exports = function(_s){
         });
 
 
-    }, 10000);
+    }, 15000);
 
 
     _s.primus.on('connection', function (spark) {
