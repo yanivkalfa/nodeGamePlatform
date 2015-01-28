@@ -3,6 +3,7 @@
         "id" : "54.164.203.197:8001",
         "name": "testSlave01",
         "port": 8001,
+        "cPort": 8002,
         "address": "54.164.203.197",
         "user":{
             "email" : "testSlave01@gmail.com",
@@ -13,6 +14,7 @@
         "id" : "54.164.203.197:8002",
         "name": "testSlave02",
         "port": 8002,
+        "cPort": 8001,
         "address": "54.164.203.197",
         "user":{
             "email" : "testSlave02@gmail.com",

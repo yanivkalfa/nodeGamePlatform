@@ -54,7 +54,7 @@ module.exports = function(_s){
             console.log('response', response);
             if(response.success){
                 var Socket = _s.primus.Socket;
-                var client = new Socket('http://localhost:' + (_s.details.port == 8001 ? 8002 : 8001) + '/?token=' + response.data.token);
+                var client = new Socket('http://localhost:' + _s.details.cPort + '/?token=' + response.data.token);
                 client.on('open', function open() {
                     console.log('open');
                 });
@@ -80,6 +80,7 @@ module.exports = function(_s){
                     }
                     else
                     {
+                        console.log('i am connected');
                         // Attaching user to spark - for logout and maybe future needs
                         spark.user = user;
                         var RoutSocket = new _s.oModules.RoutSocket(_s.primus);
