@@ -30,8 +30,8 @@ if(sName.toLowerCase() == 'servers'){
     var filter = function(item, i){ return i !== 0 && i !== 1 && i !== 2; };
     servers.analys(process.argv.filter(filter)).then(function(aaa){
         console.log(aaa);
-        process.exit
-    });
+        process.exit(aaa);
+    }).catch(console.log);
 }else{
 
     console.log('got here');
