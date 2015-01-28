@@ -45,7 +45,7 @@ module.exports = function(_s){
                 server = false;
             }
             if(!server) return false;
-
+            server = this.filter(server);
             success = function(server){ return true; };
             Servers.create(server).then(success,console.log);
         },
