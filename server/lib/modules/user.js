@@ -21,6 +21,7 @@ module.exports = function(_s){
         },
 
         filter : function(user){
+            console.log('filter', user)
             var self = this;
             return _.pick(user, self.visibleField());
         },
