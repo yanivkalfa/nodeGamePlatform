@@ -1,6 +1,6 @@
 
 module.exports = function(_s){
-    console.log(_s.details);
+    console.log(_s.details.address + ':' + _s.details.port);
     var _ = _s.oReq.lodash,
         sessCon = _s.oConfig.session.connection,
         sessSecret = _s.oConfig.session.secret,
