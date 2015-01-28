@@ -42,7 +42,7 @@ module.exports = function(_s){
             "method" : 'login',
             "status" : 0,
             "success" : false,
-            "data" : "aaa"
+            "data" : credential
         }
         ;
 
