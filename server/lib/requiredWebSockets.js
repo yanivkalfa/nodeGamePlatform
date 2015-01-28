@@ -13,7 +13,7 @@ module.exports = function(_s){
             },
             transformer: 'engine.io',
             address : _s.details.address + ':' + _s.details.port,
-            redis: _s.oReq.redis.createClient(_s.oConfig.connections.redis.port,_s.oConfig.connections.redis.host)
+            //redis: _s.oReq.redis.createClient(_s.oConfig.connections.redis.port,_s.oConfig.connections.redis.host)
         };
     _s.primus = new _s.oReq.Primus(_s.oReq.http, primusOptions);
 
@@ -22,7 +22,7 @@ module.exports = function(_s){
     _s.primus.use('resource', _s.oReq.primusResource);
     _s.primus.use('rooms', _s.oReq.primusRooms);
     _s.primus.use('emitter', _s.oReq.primusEmitter);
-    _s.primus.use('metroplex', _s.oReq.primusMetroplex);
+    //_s.primus.use('metroplex', _s.oReq.primusMetroplex);
     _s.primus.use('cluster', _s.oReq.primusCluster);
 
 
@@ -59,9 +59,11 @@ module.exports = function(_s){
                                 RoutSocket.rout(spark, msg);
                             });
 
+                            /*
                             _s.primus.metroplex.servers(function (err, servers) {
                                 console.log('registered servers:', servers);
                             });
+                            */
 
                             // Joining terminal, lobby user rooms and saved rooms
                             var userRoom = 'u_' + decoded.userId;
