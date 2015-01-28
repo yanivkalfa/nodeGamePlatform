@@ -16,14 +16,15 @@ module.exports = function(_s){
                 var self = this
                     , success
                     , fail
-                    ,filter
+                    , filter
                     ;
-                if(!arg[0]) return false;
-                if(typeof self[arg[0]] !== 'function') return false;
+                if(!arg[0]) return reject(0);
+                if(typeof self[arg[0]] !== 'function') return reject(0);
 
                 filter = function(item, i){ return i !== 0; };
                 success = function(code){  return resolve(code); };
                 fail = function(code){ return reject(code); };
+                console.log('got here');
                 self[arg[0]](arg.filter(filter)).then(success,fail).catch(fail)
             });
         },
@@ -31,16 +32,6 @@ module.exports = function(_s){
         fetchByName : function(name){
             return new _s.oReq.Promise(function(resolve, reject) {
                 Servers.find().exec(function (err, server) {
-                    if(err) return reject(err);
-                    return resolve(server);
-                });
-            });
-        },
-
-        _create : function(server){
-            return new _s.oReq.Promise(function(resolve, reject) {
-                Servers.create(server).exec(function (err, server) {
-                    console.log('_create', arguments);
                     if(err) return reject(err);
                     return resolve(server);
                 });
