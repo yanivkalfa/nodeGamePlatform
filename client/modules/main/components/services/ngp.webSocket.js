@@ -36,6 +36,7 @@ function webSocket($rootScope, $q, Authorization, RoutChat) {
 
             this.Primus.on('open', function open() {
                 self.connected = true;
+                console.log(self.Primus);
                 deferred.resolve( self );
             });
 
