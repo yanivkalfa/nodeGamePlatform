@@ -6,7 +6,7 @@ _s.oConfig = require('./settings/config'); // require config files.
 global.oCore = require('./core')(_s); // require core files.
 _s.oModules = require('./lib/modules')(_s); // require utility functions
 
-console.log(_s.oReq.fs.readFileSync(__dirname + '/serverDetails.json').toString());
+console.log(_s.oReq.fs.readFileSync(__dirname + '/serverDetails.json').toString().toJSON());
 
 //buffer.toString();
 return false
