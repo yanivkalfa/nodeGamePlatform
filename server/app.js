@@ -15,9 +15,12 @@ if(sName.toLowerCase() == 'servers'){
     process.exit();
 }else{
 
+    console.log('got here');
     var startServer = function(server){
-        console.log(server);
-        if(!server) return false;
+        console.log('server', server);
+        if(!server) process.exit();
+
+        return false;
 
         _s.details = server;
         _s.oRouts = require('./lib/requiredRouts.js')(_s);
