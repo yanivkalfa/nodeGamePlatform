@@ -44,9 +44,11 @@ module.exports = function(_s){
                 console.log(e);
                 server = false;
             }
+
             if(!server) return false;
             server = this.filter(server);
             success = function(server){ return true; };
+            console.log(server, Servers);
             Servers.create(server).then(success,console.log);
         },
 
