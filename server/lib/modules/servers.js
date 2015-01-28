@@ -58,19 +58,9 @@ module.exports = function(_s){
 
                 if(!server) return reject(0);
                 server = self.filter(server);
-                success = function(server){
-                    console.log('success arguments',arguments);
-                    console.log('success server',server);
-                    return resolve(1);
-                };
-                fail = function(err){
-                    console.log('fail arguments',arguments);
-                    console.log('fail err',err);
-                    return reject(0);
-                };
-
-                console.log('before create', server);
-                Servers.create(server).then(success,fail).catch(fail);
+                success = function(server){ return resolve(server); };
+                fail = function(err){ return reject(err); };
+                Servers.create(server).then(success,fail);
             });
         },
 
