@@ -15,7 +15,8 @@ module.exports = function(_s, _rf){
     {
         var defaults =
         {
-            "hostname" : 'localhost:8002',
+            "hostname" : 'localhost',
+            "port" : 8001,
             "path" : '',
             "method": 'post',
             "headers" : {}
