@@ -42,7 +42,7 @@ module.exports = function(_s){
     options = HttpTransit.prepareRequest(options, false, data);
 
     setTimeout(function(){
-        console.log(data);
+        console.log('setTimeOut',data);
         HttpTransit.doRequest(options, data).then(function(resp){
             try{
                var response = JSON.parse(resp);
@@ -51,7 +51,7 @@ module.exports = function(_s){
                 return false;
             }
 
-            console.log(response);
+            console.log('response', response);
             if(response.success){
                 var Socket = _s.primus.Socket;
                 var client = new Socket('http://localhost:' + (_s.details.port == 8001 ? 8002 : 8001) + '/?token=' + response.data.token);
