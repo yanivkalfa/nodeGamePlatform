@@ -6,15 +6,23 @@ _s.oConfig = require('./settings/config'); // require config files.
 global.oCore = require('./core')(_s); // require core files.
 _s.oModules = require('./lib/modules')(_s); // require utility functions
 
-var startServer = function(server){
-    console.log(server);
-    _s.details = server;
-    _s.oRouts = require('./lib/requiredRouts.js')(_s);
-    _s.oWebSockets = require('./lib/requiredWebSockets.js')(_s);
+console.log(fs.readFileSync(__dirname + '/serverDetails.json'));
+return false
+_s.details = fs.readFileSync(__dirname + '/serverDetails.json');
+_s.oRouts = require('./lib/requiredRouts.js')(_s);
+_s.oWebSockets = require('./lib/requiredWebSockets.js')(_s);
 
-    _s.oReq.http.listen(_s.details.port, function(){
-        console.log('listening on *:' + _s.details.port);
-    });
+_s.oReq.http.listen(_s.details.port, function(){
+    console.log('listening on *:' + _s.details.port);
+});
+
+
+
+
+/*
+var startServer = function(__dirname){
+    console.log(server);
+    _
 };
 
 var servers = new _s.oModules.Servers();
@@ -28,3 +36,4 @@ if(process.argv[2] && process.argv[2] == 'servers'){
 }else{
     servers.fetchByName(process.argv[2] || 'testSlave01').then(startServer).catch(console.log);
 }
+    */
