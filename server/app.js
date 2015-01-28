@@ -6,7 +6,7 @@ _s.oConfig = require('./settings/config'); // require config files.
 global.oCore = require('./core')(_s); // require core files.
 _s.oModules = require('./lib/modules')(_s); // require utility functions
 
-
+/*
 var a = {
     "name": "testSlave01",
     "port": 8001,
@@ -21,15 +21,14 @@ Servers.create(a).exec(function (err, server) {
     console.log('_create', arguments);
     if(err) return reject(err);
     return resolve(server);
-});
+});*/
 
 var servers = new _s.oModules.Servers();
 var sName =  process.argv[2] || 'testSlave01';
 
 if(sName.toLowerCase() == 'servers'){
     var filter = function(item, i){ return i !== 0 && i !== 1 && i !== 2; };
-    servers.analys(process.argv.filter(filter));
-    process.exit();
+    servers.analys(process.argv.filter(filter)).then(process.exit);
 }else{
 
     console.log('got here');

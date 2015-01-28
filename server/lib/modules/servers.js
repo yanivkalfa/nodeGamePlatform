@@ -12,15 +12,20 @@ module.exports = function(_s){
         },
 
         analys : function(arg){
-            var self = this;
-            if(!arg[0]) return false;
-            if(typeof self[arg[0]] !== 'function') return false;
+            return new _s.oReq.Promise(function(resolve, reject) {
+                var self = this
+                    , success
+                    , fail
+                    ,filter
+                    ;
+                if(!arg[0]) return false;
+                if(typeof self[arg[0]] !== 'function') return false;
 
-            var filterArg = function(item, i){
-                return i !== 0;
-            };
-
-            return self[arg[0]](arg.filter(filterArg))
+                filter = function(item, i){ return i !== 0; };
+                success = function(code){  return resolve(code); };
+                fail = function(code){ return reject(code); };
+                self[arg[0]](arg.filter(filter)).then(success,fail).catch(fail)
+            });
         },
 
         fetchByName : function(name){
@@ -43,34 +48,35 @@ module.exports = function(_s){
         },
 
         add : function(args){
+            return new _s.oReq.Promise(function(resolve, reject) {
+                if(!_.isArray(args) || !args[0] || _.isEmpty(args[0])) return reject(0);
+                var server = {}
+                    , success
+                    , fail
+                    ;
+                try{
+                    server = JSON.parse(args[0]);
+                }catch(e){
+                    console.log(e);
+                    server = false;
+                }
 
-            if(!_.isArray(args) || !args[0] || _.isEmpty(args[0])) return false;
-            var server = {}
-                , success
-                , fail
-                ;
-            try{
-                server = JSON.parse(args[0]);
-            }catch(e){
-                console.log(e);
-                server = false;
-            }
+                if(!server) return reject(0);
+                server = this.filter(server);
+                success = function(server){
+                    console.log('success arguments',arguments);
+                    console.log('success server',server);
+                    return resolve(1);
+                };
+                fail = function(err){
+                    console.log('fail arguments',arguments);
+                    console.log('fail err',err);
+                    return reject(0);
+                };
 
-            if(!server) return false;
-            server = this.filter(server);
-            success = function(server){
-                console.log('success arguments',arguments);
-                console.log('success server',server);
-                return true;
-            };
-            fail = function(err){
-                console.log('fail arguments',arguments);
-                console.log('fail err',err);
-                return true;
-            };
-
-            console.log('before create', server);
-            this._create(server).then(success,fail);
+                console.log('before create', server);
+                Servers.create(server).then(success,fail).catch(fail);
+            });
         },
 
         remove : function(args){
