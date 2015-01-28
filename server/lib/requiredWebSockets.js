@@ -26,53 +26,7 @@ module.exports = function(_s){
     _s.primus.use('metroplex', _s.oReq.primusMetroplex);
     _s.primus.use('cluster', _s.oReq.primusCluster);
 
-    /*
-    var options = {
-            "hostname" : 'localhost',
-            "port" : _s.details.cPort
-        }
-        , HttpTransit = new _s.oModules.HttpTransit(),
-        data = {
-            "method" : 'login',
-            "status" : 0,
-            "success" : false,
-            "data" : {"email" : _s.details.user.email, "password" : _s.details.user.password}
-        }
-        ;
-
-    options = HttpTransit.prepareRequest(options, false, data);
-
-    setTimeout(function(){
-        console.log('setTimeOut',data);
-        HttpTransit.doRequest(options, data).then(function(resp){
-            try{
-               var response = JSON.parse(resp);
-            }catch(e){
-                console.log(e);
-                return false;
-            }
-
-            console.log('response', response);
-            if(response.success){
-                var Socket = _s.primus.Socket;
-                var client = new Socket('http://localhost:' + _s.details.cPort + '/?token=' + response.data.token);
-                client.on('open', function open() {
-                    console.log('open');
-                });
-
-                client.write({"m": "ping", "d":"p"});
-            }
-        });
-
-
-    }, 15000);
-    */
-
-
     _s.primus.on('connection', function (spark) {
-
-        console.log('got here');
-
         _s.oReq.jwt.verify(spark.query.token, sessSecret, function(err, decoded) {
             if(!_.isUndefined(decoded) && !_.isUndefined(decoded.userId)){
                 _s.oModules.Authorization.login({"_id" : decoded.userId}).then(function(user){
@@ -82,9 +36,9 @@ module.exports = function(_s){
                     }
                     else
                     {
-                        console.log(user);
+
                         // Attaching user to spark - for logout and maybe future needs
-                        spark.user = user;
+                        spark.user = _.cloneDeep(user);
                         var RoutSocket = new _s.oModules.RoutSocket(_s.primus);
 
                         // Update user's spark id in database - in-case its needed

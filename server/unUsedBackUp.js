@@ -3,6 +3,49 @@
 
 
 /*
+ var options = {
+ "hostname" : 'localhost',
+ "port" : _s.details.cPort
+ }
+ , HttpTransit = new _s.oModules.HttpTransit(),
+ data = {
+ "method" : 'login',
+ "status" : 0,
+ "success" : false,
+ "data" : {"email" : _s.details.user.email, "password" : _s.details.user.password}
+ }
+ ;
+
+ options = HttpTransit.prepareRequest(options, false, data);
+
+ setTimeout(function(){
+ console.log('setTimeOut',data);
+ HttpTransit.doRequest(options, data).then(function(resp){
+ try{
+ var response = JSON.parse(resp);
+ }catch(e){
+ console.log(e);
+ return false;
+ }
+
+ console.log('response', response);
+ if(response.success){
+ var Socket = _s.primus.Socket;
+ var client = new Socket('http://localhost:' + _s.details.cPort + '/?token=' + response.data.token);
+ client.on('open', function open() {
+ console.log('open');
+ });
+
+ client.write({"m": "ping", "d":"p"});
+ }
+ });
+
+
+ }, 15000);
+ */
+
+
+/*
  setTimeout(function(){
  User.find().exec(function (err, users) {
  users.forEach(function(user){
