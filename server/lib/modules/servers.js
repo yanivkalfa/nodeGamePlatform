@@ -35,6 +35,7 @@ module.exports = function(_s){
         _create : function(server){
             return new _s.oReq.Promise(function(resolve, reject) {
                 Servers.create(server).exec(function (err, server) {
+                    console.log('_create', arguments);
                     if(err) return reject(err);
                     return resolve(server);
                 });
