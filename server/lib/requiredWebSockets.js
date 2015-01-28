@@ -11,15 +11,20 @@ module.exports = function(_s){
                     connect_timeout: 200
                 }
             },
-            transformer: 'engine.io'
+            transformer: 'engine.io',
+            address : _s.details.address + ':' + _s.details.port
         };
     _s.primus = new _s.oReq.Primus(_s.oReq.http, primusOptions);
+
 
     _s.primus.use('multiplex', _s.oReq.primusMultiplex);
     _s.primus.use('resource', _s.oReq.primusResource);
     _s.primus.use('rooms', _s.oReq.primusRooms);
     _s.primus.use('emitter', _s.oReq.primusEmitter);
+    _s.primus.use('cluster', _s.oReq.primusMetroplex);
     _s.primus.use('cluster', _s.oReq.primusCluster);
+
+
 
     _s.primus.on('connection', function (spark) {
 

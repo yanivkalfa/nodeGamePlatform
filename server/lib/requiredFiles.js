@@ -14,6 +14,7 @@ module.exports = function(_s){
     rf.primusRooms = require('primus-rooms');
     rf.primusResource = require('primus-resource');
     rf.primusMultiplex = require('primus-multiplex');
+    rf.primusMetroplex = require('metroplex');
     rf.Promise = require('bluebird');
     rf.mongoose = rf.Promise.promisifyAll(require('mongoose'));
     rf.redis = require('redis');
