@@ -141,9 +141,11 @@ module.exports = function(_s){
                     }
 
                 }).catch(function(err){
+                    console.log(err);
                     if(err) spark.end({"method" : "disconnect", msg : "Could not authenticate user b."} );
                 });
             }else{
+                console.log(err);
                 spark.end({"method" : "disconnect", msg : "Could not authenticate user c."} );
             }
         });
