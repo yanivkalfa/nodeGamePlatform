@@ -49,18 +49,23 @@ module.exports = function(_s){
     options = HttpTransit.prepareRequest(options, false, data);
 
     setTimeout(function(){
-        console.log(options);
         HttpTransit.doRequest(options, data).then(function(resp){
-            console.log(resp);
+            if('object' !== typeof resp)  return false;
+
+
+            //resp
+            if(resp.success){
+                var Socket = _s.primus.Socket;
+                var client = new Socket('http://localhost:' + (_s.details.port == 8001 ? 8002 : 8001) + '/?token=' + resp.data.token);
+                client.on('open', function open() {
+                    console.log('open');
+                });
+
+                client.write({"m": "ping", "d":"p"});
+            }
 
             /*
-            var Socket = _s.primus.Socket;
-            var client = new Socket('http://localhost:' + (_s.details.port == 8001 ? 8002 : 8001));
-            client.on('open', function open() {
-                console.log('open');
-            });
 
-            client.write({"m": "ping", "d":"p"});
             */
         });
 

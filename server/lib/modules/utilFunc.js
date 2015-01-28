@@ -4,7 +4,6 @@ module.exports = function(_s){
         concat : function (res) {
             return new _s.oReq.Promise(function(resolve, reject) {
                 res.pipe(_s.oReq.concat(function(fullResp) {
-                    console.log(res.statusCode);
                     var statusCode = parseInt(res.statusCode);
                     if(statusCode < 200 || statusCode > 299){
                         return reject('{"error" : "There is some problem with the request status code: '+statusCode+'"}');
