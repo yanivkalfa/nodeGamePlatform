@@ -25,13 +25,34 @@ module.exports = function(_s){
     _s.primus.use('metroplex', _s.oReq.primusMetroplex);
     _s.primus.use('cluster', _s.oReq.primusCluster);
 
-    var Socket = _s.primus.Socket;
-    var client = new Socket('http://localhost:' + (_s.details.port == 8001 ? 8002 : 8001));
-    client.on('open', function open() {
-       console.log('open');
-    });
+    var options = {
+            "hostname" : 'localhost',
+            "port" : (_s.details.port == 8001 ? 8002 : 8001),
+            "path" : '',
+            "method": 'post'
+        }
+        , HttpTransit = new _s.oModules.HttpTransit();
 
-    client.write({"m": "ping", "d":"p"});
+    options = HttpTransit.prepareRequest(options, false, {email : 'ya@ya.com', password : 'a'});
+
+    setTimeout(function(){
+        HttpTransit.doRequest(options, {email : 'ya@ya.com', password : 'a'}).then(function(resp){
+            console.log(resp);
+
+            /*
+            var Socket = _s.primus.Socket;
+            var client = new Socket('http://localhost:' + (_s.details.port == 8001 ? 8002 : 8001));
+            client.on('open', function open() {
+                console.log('open');
+            });
+
+            client.write({"m": "ping", "d":"p"});
+            */
+        });
+
+
+    }, 10000);
+
 
     _s.primus.on('connection', function (spark) {
 
@@ -62,16 +83,6 @@ module.exports = function(_s){
 
 
                         var upSkSuccess = function (user){
-                            var RoutSocket = new _s.oModules.RoutSocket(_s.primus);
-                            spark.on('data', function (msg) {
-                                RoutSocket.rout(spark, msg);
-                            });
-
-
-                            _s.primus.metroplex.servers(function (err, servers) {
-                                console.log('registered servers:', servers);
-                            });
-
 
                             // Joining terminal, lobby user rooms and saved rooms
                             var userRoom = 'u_' + decoded.userId;
@@ -97,10 +108,18 @@ module.exports = function(_s){
 
                         var upSkFail = function(err){
                             console.log(err);
-                            if(err) _s.oModules.User.fetchUser({"id":decoded.userId}).then(updateSpark).then(upSkSuccess).catch(upSkFail);
+                            if(err) updateSpark(user).then(upSkSuccess).catch(upSkFail)
                         };
 
-                        _s.oModules.User.fetchUser({"id":decoded.userId}).then(updateSpark).then(upSkSuccess).catch(upSkFail);
+                        if(user.type !== 'server'){
+                            updateSpark(user).then(upSkSuccess).catch(upSkFail);
+                        }
+
+
+                        var RoutSocket = new _s.oModules.RoutSocket(_s.primus);
+                        spark.on('data', function (msg) {
+                            RoutSocket.rout(spark, msg);
+                        });
                     }
 
                 }).catch(function(err){

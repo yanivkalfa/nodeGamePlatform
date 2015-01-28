@@ -21,7 +21,8 @@
         "metroplex" : "~0.0.6",
         "engine.io": "~1.5.1",
         "engine.io-client" : "~1.5.1",
-        "bluebird" : "~2.5.3"
+        "bluebird" : "~2.5.3",
+        "concat-stream" : "~1.4.7"
     },
     "repository": {
         "type" : "git",

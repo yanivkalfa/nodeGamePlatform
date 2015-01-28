@@ -21,6 +21,7 @@ module.exports = function(_s){
     rf.session = require('express-session');
     rf.RedisStore = require('connect-redis')(rf.session);
     rf.jwt = require('jsonwebtoken');
+    rf.concat = require('concat-stream');
 
     return rf;
 };
