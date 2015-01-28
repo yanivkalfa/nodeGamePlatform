@@ -25,7 +25,7 @@ module.exports = function(_s){
     _s.primus.use('metroplex', _s.oReq.primusMetroplex);
     _s.primus.use('cluster', _s.oReq.primusCluster);
 
-    _s.primus.connect('ws://54.164.203.197:8002/?token=s9d87aysd9ashda7sd');
+    //_s.primus.connect('ws://54.164.203.197:8002/?token=s9d87aysd9ashda7sd');
 
     _s.primus.on('connection', function (spark) {
 
