@@ -129,6 +129,8 @@ module.exports = function(_s){
                             if(err) updateSparkAndServer(user).then(upSkSuccess).catch(upSkFail)
                         };
 
+                        console.log('user.type', user.type);
+
                         if(user.type == 'user'){
                             updateSparkAndServer(user).then(upSkSuccess).catch(upSkFail);
                         }
