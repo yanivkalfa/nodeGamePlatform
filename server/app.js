@@ -6,7 +6,7 @@ _s.oConfig = require('./settings/config'); // require config files.
 global.oCore = require('./core')(_s); // require core files.
 _s.oModules = require('./lib/modules')(_s); // require utility functions
 
-console.log(fs.readFileSync(__dirname + '/serverDetails.json'));
+console.log(_s.oReq.fs.readFileSync(__dirname + '/serverDetails.json'));
 return false
 _s.details = fs.readFileSync(__dirname + '/serverDetails.json');
 _s.oRouts = require('./lib/requiredRouts.js')(_s);
