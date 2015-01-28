@@ -25,24 +25,17 @@ module.exports = function(_s){
     _s.primus.use('metroplex', _s.oReq.primusMetroplex);
     _s.primus.use('cluster', _s.oReq.primusCluster);
 
-    var port = 8001;
-    var credential = {"email" : 'ya@ya.com', "password" : 'a'};
-
-    if(_s.details.port == 8001){
-        port = 8002;
-        credential = {"email" : 'yanivkalfa@yahoo.com', "password" : 'a'};
-    }
 
     var options = {
             "hostname" : 'localhost',
-            "port" : port
+            "port" : _s.details.port == 8001 ? 8002 : 8001
         }
         , HttpTransit = new _s.oModules.HttpTransit(),
         data = {
             "method" : 'login',
             "status" : 0,
             "success" : false,
-            "data" : credential
+            "data" : {"email" : _s.details.user.email, "password" : _s.details.user.password}
         }
         ;
 
@@ -68,10 +61,6 @@ module.exports = function(_s){
 
                 client.write({"m": "ping", "d":"p"});
             }
-
-            /*
-
-            */
         });
 
 
@@ -109,8 +98,6 @@ module.exports = function(_s){
 
                         var upSkSuccess = function (user){
 
-                            console.log(user);
-
                             // Joining terminal, lobby user rooms and saved rooms
                             var userRoom = 'u_' + decoded.userId;
                             spark.join('terminal '+ userRoom, function(err, succ){});
@@ -129,6 +116,7 @@ module.exports = function(_s){
                                 };
 
                                 RoutSocket.chat(spark,data);
+
                             });
 
                         };
@@ -144,6 +132,10 @@ module.exports = function(_s){
 
                         spark.on('data', function (msg) {
                             RoutSocket.rout(spark, msg);
+                        });
+
+                        primus.metroplex.servers(function (err, servers) {
+                            console.log('registered servers:', servers);
                         });
                     }
 
