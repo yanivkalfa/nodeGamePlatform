@@ -129,7 +129,8 @@ module.exports = function(_s){
                             if(err) updateSpark(user).then(upSkSuccess).catch(upSkFail)
                         };
 
-                        console.log('user', user);
+                        console.log('user', user.type);
+                        throw new Error('aaa');
 
                         if(user.type == 'user'){
                             updateSpark(user).then(upSkSuccess).catch(upSkFail);
