@@ -28,12 +28,11 @@ module.exports = function(_s){
         add : function(args){
 
             if(!_.isArray(args)) return false;
-            var user = args[0];
-            console.log('user', user);
-            return
+            var user = {};
             try{
                 user = JSON.parse(args[0]);
             }catch(e){
+                console.log(e);
                 user = false;
             }
             console.log('user' , user);
