@@ -26,8 +26,14 @@ module.exports = function(_s){
         },
 
         addServer : function(args){
-            console.log(args);
             if(!_.isArray(args)) return false;
+            var user = {};
+            try{
+                user = JSON.parse(args[0]);
+            }catch(e){
+                user = false;
+            }
+            console.log(user);
 
             return true;
         }
