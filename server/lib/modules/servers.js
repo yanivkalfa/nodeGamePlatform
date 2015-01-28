@@ -26,6 +26,7 @@ module.exports = function(_s){
         },
 
         addServer : function(args){
+            console.log(args);
             if(!_.isArray(args)) return false;
             var user = {};
             try{
@@ -33,7 +34,7 @@ module.exports = function(_s){
             }catch(e){
                 user = false;
             }
-            console.log(user);
+            console.log('user' , user);
 
             return true;
         }
