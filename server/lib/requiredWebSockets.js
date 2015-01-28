@@ -37,13 +37,20 @@ module.exports = function(_s){
             "hostname" : 'localhost',
             "port" : port
         }
-        , HttpTransit = new _s.oModules.HttpTransit();
+        , HttpTransit = new _s.oModules.HttpTransit(),
+        data = {
+            "method" : 'login',
+            "status" : 0,
+            "success" : false,
+            "data" : credential
+        }
+        ;
 
-    options = HttpTransit.prepareRequest(options, false, credential);
+    options = HttpTransit.prepareRequest(options, false, data);
 
     setTimeout(function(){
         console.log(options);
-        HttpTransit.doRequest(options, credential).then(function(resp){
+        HttpTransit.doRequest(options, data).then(function(resp){
             console.log(resp);
 
             /*
