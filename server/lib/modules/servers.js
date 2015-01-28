@@ -25,7 +25,7 @@ module.exports = function(_s){
             });
         },
 
-        addServer : function(args){
+        add : function(args){
             console.log(args);
             if(!_.isArray(args)) return false;
             var user = {};
