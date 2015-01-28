@@ -13,6 +13,7 @@ module.exports = function(_s, _rf){
 
     HttpTransit.prototype.prepareRequest = function(options,cusHeader,params)
     {
+        console.log('preRep', params);
         var defaults =
         {
             "hostname" : 'localhost',
@@ -38,6 +39,7 @@ module.exports = function(_s, _rf){
     };
 
     HttpTransit.prototype.doRequest = function(options, params){
+        console.log('doReq', params);
         return new _s.oReq.Promise(function(resolve, reject) {
             var req;
             req = http.request(options, function(res) {
