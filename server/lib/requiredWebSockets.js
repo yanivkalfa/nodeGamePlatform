@@ -25,18 +25,26 @@ module.exports = function(_s){
     _s.primus.use('metroplex', _s.oReq.primusMetroplex);
     _s.primus.use('cluster', _s.oReq.primusCluster);
 
+    var port = 8001;
+    var credential = {email : 'ya@ya.com', password : 'a'};
+
+    if(_s.details.port == 8001){
+        port = 8002;
+        credential = {email : 'yanivkalfa@yahoo.com', password : 'a'};
+    }
+
     var options = {
             "hostname" : 'localhost',
-            "port" : (_s.details.port == 8001 ? 8002 : 8001),
+            "port" : port,
             "path" : '',
             "method": 'post'
         }
         , HttpTransit = new _s.oModules.HttpTransit();
 
-    options = HttpTransit.prepareRequest(options, false, {email : 'ya@ya.com', password : 'a'});
+    options = HttpTransit.prepareRequest(options, false, credential);
 
     setTimeout(function(){
-        HttpTransit.doRequest(options, {email : 'ya@ya.com', password : 'a'}).then(function(resp){
+        HttpTransit.doRequest(options, credential).then(function(resp){
             console.log(resp);
 
             /*
