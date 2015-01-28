@@ -1,6 +1,8 @@
 
 module.exports = function(_s){
 
+    var _ = _s.oReq.lodash;
+
     _s.oReq.app.use(_s.oReq.bodyParser.json());
     _s.oReq.app.use(_s.oReq.bodyParser.urlencoded({ extended: true }));
     _s.oReq.app.use(_s.oReq.express.static(_s.sClientDirname));
