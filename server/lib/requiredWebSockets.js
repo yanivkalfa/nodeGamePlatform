@@ -25,7 +25,7 @@ module.exports = function(_s){
     _s.primus.use('metroplex', _s.oReq.primusMetroplex);
     _s.primus.use('cluster', _s.oReq.primusCluster);
 
-
+    /*
     var options = {
             "hostname" : 'localhost',
             "port" : _s.details.cPort
@@ -65,6 +65,7 @@ module.exports = function(_s){
 
 
     }, 15000);
+    */
 
 
     _s.primus.on('connection', function (spark) {
