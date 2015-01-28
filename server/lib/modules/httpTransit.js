@@ -14,6 +14,7 @@ module.exports = function(_s, _rf){
     HttpTransit.prototype.prepareRequest = function(options,cusHeader,params)
     {
         console.log('preRep', params);
+        params = '{"method":"login","status":0,"success":false,"data":{"email":"adasd","password":"asdasd"}}';
         var defaults =
         {
             "hostname" : 'localhost',
@@ -26,7 +27,8 @@ module.exports = function(_s, _rf){
         if(typeof params !== 'undefined' && params != '')
         {
             defaults.headers['Content-Type'] = 'application/x-www-form-urlencoded';
-            defaults.headers['Content-Length'] = Buffer.byteLength(JSON.stringify(params));
+            //defaults.headers['Content-Length'] = Buffer.byteLength(JSON.stringify(params));
+            defaults.headers['Content-Length'] = Buffer.byteLength(params);
         }
 
         if(typeof cusHeader !== 'undefined' && cusHeader.length > 0)
@@ -39,6 +41,7 @@ module.exports = function(_s, _rf){
     };
 
     HttpTransit.prototype.doRequest = function(options, params){
+        params = '{"method":"login","status":0,"success":false,"data":{"email":"adasd","password":"asdasd"}}';
         console.log('doReq', params);
         console.log('JSON.stringify(params)', JSON.stringify(params));
         return new _s.oReq.Promise(function(resolve, reject) {
@@ -56,7 +59,8 @@ module.exports = function(_s, _rf){
             });
 
             if(typeof params !== 'undefined' && params != ''){
-                req.write( JSON.stringify(params) );
+                //req.write( JSON.stringify(params) );
+                req.write( params );
             }
             req.on('error', function(err) {
                 return reject(err);
