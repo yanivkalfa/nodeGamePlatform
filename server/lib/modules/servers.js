@@ -57,6 +57,7 @@ module.exports = function(_s){
                 return true;
             };
 
+            console.log('before create', server);
             Servers.create(server).then(success,fail);
         },
 
