@@ -33,6 +33,12 @@ module.exports = {
             unique : true
         },
 
+        type : {
+            type :'string',
+            required : true,
+            default : 'user'
+        },
+
         spark : {
             type :'string'
         },
