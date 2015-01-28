@@ -16,6 +16,7 @@ if(sName.toLowerCase() == 'servers'){
 }else{
 
     var startServer = function(server){
+        console.log(server);
         if(!server) return false;
 
         _s.details = server;
