@@ -26,7 +26,7 @@ module.exports = function(_s, _rf){
 
         if(typeof params !== 'undefined' && params != '')
         {
-            defaults.headers['Content-Type'] = 'application/x-www-form-urlencoded';
+            //defaults.headers['Content-Type'] = 'application/x-www-form-urlencoded';
             defaults.headers['Content-Type'] = 'application/json';
 
             defaults.headers['Content-Length'] = Buffer.byteLength(JSON.stringify(params));
