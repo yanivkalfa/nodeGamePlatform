@@ -50,13 +50,18 @@ module.exports = function(_s){
 
     setTimeout(function(){
         HttpTransit.doRequest(options, data).then(function(resp){
-            if('object' !== typeof resp)  return false;
+            try{
+               var response = JSON.parse(resp);
+            }catch(e){
+                console.log(e);
+                return false;
+            }
 
 
             //resp
-            if(resp.success){
+            if(response.success){
                 var Socket = _s.primus.Socket;
-                var client = new Socket('http://localhost:' + (_s.details.port == 8001 ? 8002 : 8001) + '/?token=' + resp.data.token);
+                var client = new Socket('http://localhost:' + (_s.details.port == 8001 ? 8002 : 8001) + '/?token=' + response.data.token);
                 client.on('open', function open() {
                     console.log('open');
                 });
