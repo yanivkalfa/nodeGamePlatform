@@ -88,7 +88,7 @@ module.exports = function(_s){
                         var RoutSocket = new _s.oModules.RoutSocket(_s.primus);
 
                         // Update user's spark id in database - in-case its needed
-                        var updateSparkAndServer = function(user){
+                        var updateSpark = function(user){
                             return new _s.oReq.Promise(function(resolve, reject) {
                                 user.spark = spark.id;
                                 user.save(function (err, user) {
@@ -126,13 +126,13 @@ module.exports = function(_s){
 
                         var upSkFail = function(err){
                             console.log(err);
-                            if(err) updateSparkAndServer(user).then(upSkSuccess).catch(upSkFail)
+                            if(err) updateSpark(user).then(upSkSuccess).catch(upSkFail)
                         };
 
-                        console.log('user.type', user.type);
+                        console.log('user', user);
 
                         if(user.type == 'user'){
-                            updateSparkAndServer(user).then(upSkSuccess).catch(upSkFail);
+                            updateSpark(user).then(upSkSuccess).catch(upSkFail);
                         }
 
                         spark.on('data', function (msg) {
