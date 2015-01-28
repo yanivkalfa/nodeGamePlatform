@@ -38,7 +38,7 @@ module.exports = function(_s){
                     {
 
                         // Attaching user to spark - for logout and maybe future needs
-                        spark.user = _.cloneDeep(user);
+                        spark.user = _.cloneDeep(_s.oModules.User.filter(user));
                         console.log(spark.user);
                         var RoutSocket = new _s.oModules.RoutSocket(_s.primus);
 

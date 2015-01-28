@@ -20,6 +20,11 @@ module.exports = function(_s){
             return visibleField;
         },
 
+        filter : function(user){
+            var self = this;
+            return _.pick(user, self.visibleField());
+        },
+
         getRoles: function() {
             return _user.roles;
         },
