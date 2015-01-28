@@ -20,10 +20,10 @@ module.exports = function(_s){
             return visibleField;
         },
 
-        filter : function(user){
-            console.log('filter', user)
+        clone : function(user){
+            console.log('filter', user);
             var self = this;
-            return _.pick(user, self.visibleField());
+            return _.pick(_.cloneDeep(user), self.visibleField());
         },
 
         getRoles: function() {
