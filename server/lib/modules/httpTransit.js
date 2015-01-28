@@ -40,7 +40,7 @@ module.exports = function(_s, _rf){
         return new _s.oReq.Promise(function(resolve, reject) {
             var req;
             req = http.request(options, function(res) {
-                uf.concat(res).then(function(fullResponse){
+                _s.oModules.uf.concat(res).then(function(fullResponse){
                     return resolve(fullResponse);
                 }).catch(function(err){
                     return reject(err);
@@ -54,7 +54,7 @@ module.exports = function(_s, _rf){
             if(typeof params !== 'undefined' && params != ''){
                 req.write( JSON.stringify(params) );
             }
-            req.on('error', function(e) {
+            req.on('error', function(err) {
                 return reject(err);
             });
 
