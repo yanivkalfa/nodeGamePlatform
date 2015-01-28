@@ -18,10 +18,7 @@ if(sName.toLowerCase() == 'servers'){
     };
     servers.analys(process.argv.filter(filter)).then(success, fail).catch(fail);
 }else{
-
-    console.log('got here');
     var startServer = function(server){
-        console.log('server', server);
         if(!server) process.exit();
 
         _s.details = server;
