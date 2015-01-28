@@ -1,3 +1,6 @@
+//node app.js servers add '{"name":"testSlave02","port":8002,"address":"54.164.203.197","user":{"email":"testSlave02@gmail.com","password":"testSlave02"}}'
+
+
 
 /*
  setTimeout(function(){

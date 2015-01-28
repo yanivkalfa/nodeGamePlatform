@@ -24,8 +24,6 @@ if(sName.toLowerCase() == 'servers'){
         console.log('server', server);
         if(!server) process.exit();
 
-        return false;
-
         _s.details = server;
         _s.oRouts = require('./lib/requiredRouts.js')(_s);
         _s.oWebSockets = require('./lib/requiredWebSockets.js')(_s);
