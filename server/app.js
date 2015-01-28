@@ -1,7 +1,6 @@
 var _s = {};
 _s.oReq = require('./lib/requiredFiles.js')(_s); // require files.
 _s.details = JSON.parse(_s.oReq.fs.readFileSync(__dirname + '/serverDetails.json'))[process.argv[2] || 'testSlave01'];
-console.log(_s.details);
 _s.sServerDirname = __dirname; // Server dir
 _s.sClientDirname = _s.oReq.path.resolve(__dirname, '..') + '/client'; //Client dir
 _s.oConfig = require('./settings/config'); // require config files.

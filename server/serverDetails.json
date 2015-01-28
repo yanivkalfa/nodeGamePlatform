@@ -1,12 +1,12 @@
 {
     "testSlave01" : {
         "name": "testSlave01",
-        "port": 8000,
+        "port": 8001,
         "address": "54.164.203.197"
     },
     "testSlave02" : {
         "name": "testSlave02",
-        "port": 8001,
+        "port": 8002,
         "address": "54.164.203.197"
     }
 }
