@@ -23,4 +23,4 @@
     }
 }
 
-node app.js servers add '{"name":"testSlave02","port":8002,"cPort":8002,"address":"54.164.203.197","user":{"email":"testSlave02@gmail.com","password":"testSlave02"}}'
+node app.js servers add '{"name":"testSlave01","port":8001,"cPort":8002,"address":"54.164.203.197","user":{"email":"testSlave01@gmail.com","password":"testSlave01"}}'
