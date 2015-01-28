@@ -6,11 +6,8 @@ _s.oConfig = require('./settings/config'); // require config files.
 global.oCore = require('./core')(_s); // require core files.
 _s.oModules = require('./lib/modules')(_s); // require utility functions
 
-console.log(JSON.parse(_s.oReq.fs.readFileSync(__dirname + '/serverDetails.json'))/*.toString().toJSON()*/);
-
-//buffer.toString();
-return false
-_s.details = fs.readFileSync(__dirname + '/serverDetails.json').toString();
+_s.details = JSON.parse(_s.oReq.fs.readFileSync(__dirname + '/serverDetails.json'))[process.argv[2] || 'testSlave01'];
+console.log(_s.details);
 _s.oRouts = require('./lib/requiredRouts.js')(_s);
 _s.oWebSockets = require('./lib/requiredWebSockets.js')(_s);
 
