@@ -17,7 +17,7 @@ module.exports = function(_s, _rf){
         {
             "hostname" : 'localhost',
             "port" : 8001,
-            "path" : '',
+            "path" : '/ajaxHandler',
             "method": 'post',
             "headers" : {}
         };
