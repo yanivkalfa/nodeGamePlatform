@@ -83,7 +83,7 @@ module.exports = function(_s){
                             console.log(err);
                             if(err) updateSpark(user).then(upSkSuccess).catch(upSkFail)
                         };
-
+                        console.log(user);
 
                         if(user.type == 'user'){
                             updateSpark(user).then(upSkSuccess).catch(upSkFail);

@@ -21,11 +21,8 @@ module.exports = function(_s){
         },
 
         clone : function(user){
-            console.log('filter', user);
             var self = this;
-            var clone = _.cloneDeep(user._doc);
-            console.log(clone);
-            return _.pick(clone, self.visibleField());
+            return _.pick(_.cloneDeep(user._doc), self.visibleField());
         },
 
         getRoles: function() {
