@@ -13,19 +13,19 @@ module.exports = function(_s){
 
         analys : function(arg){
             console.log(arg);
+            var self = this
+                , success
+                , fail
+                , filter
+                ;
+
             return new _s.oReq.Promise(function(resolve, reject) {
-                var self = this
-                    , success
-                    , fail
-                    , filter
-                    ;
                 if(!arg[0]) return reject('!arg[0]');
                 if(typeof self[arg[0]] !== 'function') return reject('!function');
 
                 filter = function(item, i){ return i !== 0; };
-                success = function(code){  return resolve(code); };
-                fail = function(code){ return reject(code); };
-                console.log('got here');
+                success = function(success){  return resolve(success); };
+                fail = function(err){ return reject(err); };
                 self[arg[0]](arg.filter(filter)).then(success,fail).catch(fail)
             });
         },
