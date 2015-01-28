@@ -27,7 +27,11 @@ module.exports = function(_s){
 
     var Socket = _s.primus.Socket;
     var client = new Socket('http://localhost:' + (_s.details.port == 8001 ? 8002 : 8001));
-    console.log(client);
+    client.on('open', function open() {
+       console.log('open');
+    });
+
+    client.write({"m": "ping", "d":"p"});
 
     _s.primus.on('connection', function (spark) {
 
