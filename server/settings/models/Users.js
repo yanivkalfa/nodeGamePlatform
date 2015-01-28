@@ -47,6 +47,11 @@ module.exports = {
             default : ['registered']
         },
 
+        server : {
+            type :'string',
+            required : true
+        },
+
         facebookToken : {
             type : 'string'
         },
