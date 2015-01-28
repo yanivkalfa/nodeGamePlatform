@@ -11,8 +11,8 @@ module.exports = function(_s){
                     connect_timeout: 200
                 }
             },
-            transformer: 'engine.io',
-            address : _s.details.address + ':' + _s.details.port,
+            transformer: 'engine.io'
+            //address : _s.details.address + ':' + _s.details.port,
             //redis: _s.oReq.redis.createClient(_s.oConfig.connections.redis.port,_s.oConfig.connections.redis.host)
         };
     _s.primus = new _s.oReq.Primus(_s.oReq.http, primusOptions);
