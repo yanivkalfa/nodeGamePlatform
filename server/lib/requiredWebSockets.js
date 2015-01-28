@@ -59,6 +59,10 @@ module.exports = function(_s){
                                 RoutSocket.rout(spark, msg);
                             });
 
+                            _s.primus.metroplex.servers(function (err, servers) {
+                                console.log('registered servers:', servers);
+                            });
+
                             // Joining terminal, lobby user rooms and saved rooms
                             var userRoom = 'u_' + decoded.userId;
                             spark.join('terminal '+ userRoom, function(err, succ){});
