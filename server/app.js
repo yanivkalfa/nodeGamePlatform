@@ -28,9 +28,12 @@ var sName =  process.argv[2] || 'testSlave01';
 
 if(sName.toLowerCase() == 'servers'){
     var filter = function(item, i){ return i !== 0 && i !== 1 && i !== 2; };
-    servers.analys(process.argv.filter(filter)).then(function(resp){
-        process.exit(resp)
-    }).catch(console.log);
+    var success = function(){process.exit(1)};
+    var fail = function(err){
+        console.log(err);
+        process.exit(0)
+    };
+    servers.analys(process.argv.filter(filter)).then(success, fail).catch(fail);
 }else{
 
     console.log('got here');
