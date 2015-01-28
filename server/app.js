@@ -1,164 +1,16 @@
 var _s = {};
 _s.oReq = require('./lib/requiredFiles.js')(_s); // require files.
-//_s.details = JSON.parse(_s.oReq.fs.readFileSync(__dirname + '/serverDetails.json'))[process.argv[2] || 'testSlave01'];
-//console.log(_s.details);
+_s.details = JSON.parse(_s.oReq.fs.readFileSync(__dirname + '/serverDetails.json'))[process.argv[2] || 'testSlave01'];
+console.log(_s.details);
 _s.sServerDirname = __dirname; // Server dir
 _s.sClientDirname = _s.oReq.path.resolve(__dirname, '..') + '/client'; //Client dir
 _s.oConfig = require('./settings/config'); // require config files.
 global.oCore = require('./core')(_s); // require core files.
 _s.oModules = require('./lib/modules')(_s); // require utility functions
 
-//_s.oRouts = require('./lib/requiredRouts.js')(_s);
-//_s.oWebSockets = require('./lib/requiredWebSockets.js')(_s);
-
-var _ = _s.oReq.lodash,
-    sessCon = _s.oConfig.session.connection,
-    sessSecret = _s.oConfig.session.secret,
-    sessMaxAge = _s.oConfig.session.maxAge,
-    primusOptions = {
-        cluster: {
-            redis: {
-                port: _s.oConfig.connections[sessCon].port,
-                host: _s.oConfig.connections[sessCon].host,
-                connect_timeout: 200
-            }
-        },
-        transformer: 'engine.io'
-        //address : _s.details.address + ':' + _s.details.port,
-        //redis: _s.oReq.redis.createClient(_s.oConfig.connections.redis.port,_s.oConfig.connections.redis.host)
-    };
-_s.primus = new _s.oReq.Primus(_s.oReq.http, primusOptions);
-
-_s.oReq.app.use(_s.oReq.session({
-    store: new _s.oReq.RedisStore({
-        port : _s.oConfig.connections[sessCon].port,
-        host : _s.oConfig.connections[sessCon].host
-    }),
-    secret: sessSecret,
-    saveUninitialized: true,
-    resave: true,
-    cookie: { maxAge: sessMaxAge }
-}));
-
 _s.oRouts = require('./lib/requiredRouts.js')(_s);
+_s.oWebSockets = require('./lib/requiredWebSockets.js')(_s);
 
-
-
-_s.primus.use('multiplex', _s.oReq.primusMultiplex);
-_s.primus.use('resource', _s.oReq.primusResource);
-_s.primus.use('rooms', _s.oReq.primusRooms);
-_s.primus.use('emitter', _s.oReq.primusEmitter);
-//_s.primus.use('metroplex', _s.oReq.primusMetroplex);
-_s.primus.use('cluster', _s.oReq.primusCluster);
-
-
-
-_s.primus.on('connection', function (spark) {
-
-    _s.oReq.jwt.verify(spark.query.token, sessSecret, function(err, decoded) {
-        if(!_.isUndefined(decoded) && !_.isUndefined(decoded.userId)){
-            _s.oModules.Authorization.login({"_id" : decoded.userId}).then(function(user){
-                if(user === null)
-                {
-                    spark.end({"method" : "disconnect", msg : "Could not authenticate user a."} );
-                }
-                else
-                {
-                    // Attaching user to spark - for logout and maybe future needs
-                    spark.user = user;
-
-                    // Update user's spark id in database - in-case its needed
-                    var updateSpark = function(user){
-                        return new _s.oReq.Promise(function(resolve, reject) {
-                            user.spark = spark.id;
-                            user.save(function (err, user) {
-                                if(err) reject(err);
-                                return resolve(user);
-                            });
-                        });
-                    };
-
-
-                    var upSkSuccess = function (user){
-                        var RoutSocket = new _s.oModules.RoutSocket(_s.primus);
-                        spark.on('data', function (msg) {
-                            RoutSocket.rout(spark, msg);
-                        });
-
-                        /*
-                         _s.primus.metroplex.servers(function (err, servers) {
-                         console.log('registered servers:', servers);
-                         });
-                         */
-
-                        // Joining terminal, lobby user rooms and saved rooms
-                        var userRoom = 'u_' + decoded.userId;
-                        spark.join('terminal '+ userRoom, function(err, succ){});
-
-                        _.isArray(user.rooms) && _(user.rooms).forEach(function(room){
-                            var data  = {
-                                "m" : 'room',
-                                "d" : {
-                                    "m" : '_join',
-                                    "d" : {
-                                        "id" : room,
-                                        "type" : 'chat',
-                                        "users" : {username : user.username, id : user.id}
-                                    }
-                                }
-                            };
-
-                            RoutSocket.chat(spark,data);
-                        });
-
-                    };
-
-                    var upSkFail = function(err){
-                        console.log(err);
-                        if(err) _s.oModules.User.fetchUser({"id":decoded.userId}).then(updateSpark).then(upSkSuccess).catch(upSkFail);
-                    };
-
-                    _s.oModules.User.fetchUser({"id":decoded.userId}).then(updateSpark).then(upSkSuccess).catch(upSkFail);
-                }
-
-            }).catch(function(err){
-                if(err) spark.end({"method" : "disconnect", msg : "Could not authenticate user b."} );
-            });
-        }else{
-            spark.end({"method" : "disconnect", msg : "Could not authenticate user c."} );
-        }
-    });
-});
-
-
-_s.primus.on('end', function () {
-    console.log('end');
-});
-
-_s.primus.on('disconnection', function (spark) {
-    console.log('disconnection ' , spark.id);
-});
-
-_s.primus.on('leaveallrooms', function (rooms, spark) {
-    if(!spark) return false;
-    try{
-        var RoutRoom = new _s.oModules.RoutRoom(_s.primus);
-        _s.oModules.User.fetchUser({"id":spark.user.id}).then(function(user){
-            _.isArray(user.rooms) && _(user.rooms).forEach(function(room){
-                var aRoom  = {
-                    "id" : room,
-                    "type" : 'chat',
-                    "users" : {}
-                };
-                RoutRoom._leave(spark, aRoom)
-            });
-        }).catch(console.log);
-    }catch(e){console.log(e)}
-
-    return true;
-});
-
-
-_s.oReq.http.listen(8000, function(){
-    console.log('listening on *:' + 8000);
+_s.oReq.http.listen(_s.details.port, function(){
+    console.log('listening on *:' + _s.details.port);
 });
