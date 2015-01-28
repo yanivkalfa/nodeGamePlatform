@@ -24,3 +24,4 @@
 }
 
 '{"name":"testSlave01","port":8001,"address":"54.164.203.197","user":{"email":"testSlave01@gmail.com","password":"testSlave01"}'
+'{"name":"testSlave02","port":8002,"address":"54.164.203.197","user":{"email":"testSlave02@gmail.com","password":"testSlave02"}'

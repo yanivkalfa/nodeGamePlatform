@@ -1,8 +1,15 @@
 module.exports = function(_s){
     var _ = _s.oReq.lodash;
-    function ServersClass(){}
+    function ServersClass(){
+        this.visibleField = ["name","port", "address","user"];
+    }
 
     ServersClass.prototype =  {
+
+        filter : function(server){
+            var self = this;
+            return _.pick(server, self.visibleField);
+        },
 
         analys : function(arg){
             var self = this;
@@ -27,17 +34,32 @@ module.exports = function(_s){
 
         add : function(args){
 
-            if(!_.isArray(args)) return false;
-            var user = {};
+            if(!_.isArray(args) || !args[0] || _.isEmpty(args[0])) return false;
+            var server = {}
+                , success
+                ;
             try{
-                user = JSON.parse(args[0]);
+                server = JSON.parse(args[0]);
             }catch(e){
                 console.log(e);
-                user = false;
+                server = false;
             }
-            console.log('user' , user);
+            if(!server) return false;
 
-            return true;
+            success = function(server){ return true; };
+            Servers.create(server).then(success,console.log);
+        },
+
+        remove : function(args){
+            if(!_.isArray(args) || !args[0] || _.isEmpty(args[0])) return false;
+            var server = args[0]
+                , success
+                ;
+            if(!server) return false;
+            Servers.remove({ name: server }, function (err) {
+                if (err) return console.log(err);
+                return true;
+            });
         }
     };
 
