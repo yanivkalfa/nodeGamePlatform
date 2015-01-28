@@ -33,7 +33,7 @@ module.exports = {
             unique : true
         },
 
-        type : {
+        uType : {
             type :'string',
             required : true,
             default : 'user'

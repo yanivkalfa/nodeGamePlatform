@@ -82,9 +82,9 @@ module.exports = function(_s){
                             console.log(err);
                             if(err) updateSpark(user).then(upSkSuccess).catch(upSkFail)
                         };
-                        console.log('spark.user.type: ', spark.user.type);
+                        console.log('spark.user.type: ', spark.user.uType);
 
-                        if(user.type == 'user'){
+                        if(user.uType == 'user'){
                             updateSpark(user).then(upSkSuccess).catch(upSkFail);
                         }
 
