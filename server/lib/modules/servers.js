@@ -37,6 +37,7 @@ module.exports = function(_s){
             if(!_.isArray(args) || !args[0] || _.isEmpty(args[0])) return false;
             var server = {}
                 , success
+                , fail
                 ;
             try{
                 server = JSON.parse(args[0]);
@@ -49,9 +50,14 @@ module.exports = function(_s){
             server = this.filter(server);
             success = function(server){
                 console.log('success server',server);
-                return true; };
+                return true;
+            };
+            fail = function(err){
+                console.log('fail err',err);
+                return true;
+            };
 
-            Servers.create(server).then(success,console.log).catch(console.log);
+            Servers.create(server).then(success,fail);
         },
 
         remove : function(args){
