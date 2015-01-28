@@ -51,7 +51,7 @@ module.exports = function(_s){
                 console.log('success server',server);
                 return true; };
 
-            Servers.create(server).then(success,console.log);
+            Servers.create(server).then(success,console.log).catch(console.log);
         },
 
         remove : function(args){
