@@ -12,7 +12,6 @@ module.exports = function(_s){
         },
 
         analys : function(arg){
-            console.log(arg);
             var self = this
                 , success
                 , fail
