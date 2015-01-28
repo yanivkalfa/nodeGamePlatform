@@ -1,11 +1,16 @@
 var _s = {};
 _s.oReq = require('./lib/requiredFiles.js')(_s); // require files.
+_s.details = JSON.parse(_s.oReq.fs.readFileSync(__dirname + '/serverDetails.json').toString())[process.argv[2] || 'testSlave01'];
+console.log(_s.details);
 _s.sServerDirname = __dirname; // Server dir
 _s.sClientDirname = _s.oReq.path.resolve(__dirname, '..') + '/client'; //Client dir
 _s.oConfig = require('./settings/config'); // require config files.
 global.oCore = require('./core')(_s); // require core files.
 _s.oModules = require('./lib/modules')(_s); // require utility functions
 
+
+
+/*
 var servers = new _s.oModules.Servers();
 var sName =  process.argv[2] || 'testSlave01';
 
@@ -33,3 +38,4 @@ if(sName.toLowerCase() == 'servers'){
     servers.fetchByName(sName).then(startServer).catch(console.log)
 
 }
+    */
