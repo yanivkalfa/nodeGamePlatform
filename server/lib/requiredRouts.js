@@ -47,6 +47,13 @@ module.exports = function(_s){
     });
 
     _s.oReq.app.get('/*', function (req, res) {
+        var connections = 0;
+        _s.primus.forEach(function (spark, next) {
+            connections++;
+            next();
+        }, function (err) { });
+
+        res.status(502).end();
         res.locals.user = {};
         if(req.session.user){
             res.locals.user = req.session.user;
