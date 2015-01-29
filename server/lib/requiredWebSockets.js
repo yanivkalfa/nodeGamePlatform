@@ -38,7 +38,7 @@ module.exports = function(_s){
                     else
                     {
 
-                        console.log(_s.primus);
+                        console.log(_s.primus.length);
                         // Attaching user to spark - for logout and maybe future needs
                         spark.user = user;
                         var RoutSocket = new _s.oModules.RoutSocket(_s.primus);
