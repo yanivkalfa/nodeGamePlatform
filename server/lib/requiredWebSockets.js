@@ -13,7 +13,7 @@ module.exports = function(_s){
                 }
             },
             transformer: 'engine.io',
-            address : 'blabla',
+            address : '54.164.203.197:8002',
             redis: _s.oReq.redis.createClient(_s.oConfig.connections.redis.port,_s.oConfig.connections.redis.host)
         };
     _s.primus = new _s.oReq.Primus(_s.oReq.http, primusOptions);
