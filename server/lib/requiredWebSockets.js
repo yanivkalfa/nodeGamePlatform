@@ -1,7 +1,5 @@
 
 module.exports = function(_s){
-    var address = _s.details.address + ':' + _s.details.port;
-    console.log(address);
     var _ = _s.oReq.lodash,
         sessCon = _s.oConfig.session.connection,
         sessSecret = _s.oConfig.session.secret,
@@ -14,7 +12,7 @@ module.exports = function(_s){
                 }
             },
             transformer: 'engine.io',
-            address : address,
+            address : _s.details.address + ':' + _s.details.port,
             redis: _s.oReq.redis.createClient(_s.oConfig.connections.redis.port,_s.oConfig.connections.redis.host)
         };
     _s.primus = new _s.oReq.Primus(_s.oReq.http, primusOptions);
@@ -121,7 +119,6 @@ module.exports = function(_s){
     });
 
     _s.primus.on('leaveallrooms', function (rooms, spark) {
-        /*
         if(!spark) return false;
         try{
             var RoutRoom = new _s.oModules.RoutRoom(_s.primus);
@@ -138,6 +135,5 @@ module.exports = function(_s){
         }catch(e){console.log(e)}
 
         return true;
-        */
     });
 };
