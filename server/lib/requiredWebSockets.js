@@ -26,6 +26,9 @@ module.exports = function(_s){
     _s.primus.use('metroplex', _s.oReq.primusMetroplex);
     _s.primus.use('cluster', _s.oReq.primusCluster);
 
+    console.log('got here');
+    return false;
+
     _s.primus.on('connection', function (spark) {
         _s.oReq.jwt.verify(spark.query.token, sessSecret, function(err, decoded) {
             if(!_.isUndefined(decoded) && !_.isUndefined(decoded.userId)){
