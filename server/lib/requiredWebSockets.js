@@ -26,8 +26,6 @@ module.exports = function(_s){
     _s.primus.use('metroplex', _s.oReq.primusMetroplex);
     _s.primus.use('cluster', _s.oReq.primusCluster);
 
-    console.log('got here');
-    return false;
 
     _s.primus.on('connection', function (spark) {
         _s.oReq.jwt.verify(spark.query.token, sessSecret, function(err, decoded) {
@@ -40,6 +38,7 @@ module.exports = function(_s){
                     else
                     {
 
+                        /*
                         // Attaching user to spark - for logout and maybe future needs
                         spark.user = user;
                         var RoutSocket = new _s.oModules.RoutSocket(_s.primus);
@@ -98,6 +97,7 @@ module.exports = function(_s){
                         _s.primus.metroplex.servers(function (err, servers) {
                             console.log('registered servers:', servers);
                         });
+                        */
                     }
 
                 }).catch(function(err){
@@ -121,6 +121,7 @@ module.exports = function(_s){
     });
 
     _s.primus.on('leaveallrooms', function (rooms, spark) {
+        /*
         if(!spark) return false;
         try{
             var RoutRoom = new _s.oModules.RoutRoom(_s.primus);
@@ -137,5 +138,6 @@ module.exports = function(_s){
         }catch(e){console.log(e)}
 
         return true;
+        */
     });
 };
