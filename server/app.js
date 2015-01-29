@@ -8,7 +8,7 @@ global.oCore = require('./core')(_s); // require core files.
 _s.oModules = require('./lib/modules')(_s); // require utility functions
 
 _s.oRouts = require('./lib/requiredRouts.js')(_s);
-_s.oWebSockets = require('./lib/requiredWebSockets.js')(_s);
+//_s.oWebSockets = require('./lib/requiredWebSockets.js')(_s);
 
 _s.oReq.http.listen(_s.details.port, function(){
     console.log('listening on *:' + _s.details.port);
