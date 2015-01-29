@@ -45,7 +45,6 @@ module.exports = function(_s){
 
                         // Update user's spark id in database - in-case its needed
                         var updateSpark = function(user){
-                            console.log(user);
                             return new _s.oReq.Promise(function(resolve, reject) {
                                 user.spark = spark.id;
                                 user.save(function (err, user) {
@@ -57,7 +56,6 @@ module.exports = function(_s){
 
 
                         var upSkSuccess = function (user){
-                            console.log('got here');
 
                             // Joining terminal, lobby user rooms and saved rooms
                             var userRoom = 'u_' + decoded.userId;
@@ -95,11 +93,9 @@ module.exports = function(_s){
                             RoutSocket.rout(spark, msg);
                         });
 
-                        /*
                         _s.primus.metroplex.servers(function (err, servers) {
                             console.log('registered servers:', servers);
                         });
-                        */
 
                     }
 
