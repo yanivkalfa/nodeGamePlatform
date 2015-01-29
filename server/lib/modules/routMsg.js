@@ -101,6 +101,7 @@ module.exports = function(_s, _rf){
                     Socket = _s.primus.Socket;
                     client = new Socket(serverDetails.address + ':' + serverDetails.port + '/?token=' + user.token);
                     client.on('open', function open() {
+                        console.log('opened');
                         spark.write({"m": "chat", "d":data});
 
                         data.m = 'rmMsg';
