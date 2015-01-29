@@ -14,6 +14,7 @@ function Router() {
 
         rout: function(msg){
             var self = this;
+            console.log(msg);
             self[msg.m](msg.d);
         }
 
