@@ -65,7 +65,7 @@ module.exports = function(_s, _rf){
 
         prvSuccess = function(user){
             if(!user) return self.warningMsg(spark, 'User with this name does not exist');
-            if(user.username == msg.to) return self.warningMsg(spark, 'You cannot Message yourself');
+            if(spark.user.username == msg.to) return self.warningMsg(spark, 'You cannot Message yourself');
 
             data = {
                 "m" : 'msg',
