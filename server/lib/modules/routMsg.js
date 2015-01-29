@@ -99,7 +99,8 @@ module.exports = function(_s, _rf){
                     console.log('login user: ', user);
 
                     Socket = _s.primus.Socket;
-                    client = new Socket(serverDetails.address + ':' + serverDetails.port + '/?token=' + user.token);
+                    client = new Socket('http://'+serverDetails.address + ':' + serverDetails.port + '/?token=' + user.token);
+                    console.log('aaaaa');
                     client.on('open', function open() {
                         console.log('opened');
                         spark.write({"m": "chat", "d":data});
