@@ -14,29 +14,42 @@ module.exports = function(_s, _rf){
     RoutMsg.prototype = Object.create(router.prototype);
     RoutMsg.prototype.constructor = RoutMsg;
 
-    RoutMsg.prototype.warningMsg = function(spark, injectedMsg, naturalMsg){
-        var warningMsg = _.isEmpty(naturalMsg) || typeof naturalMsg === 'object' ? injectedMsg : naturalMsg;
-
+    RoutMsg.prototype.warningMsg = function(spark, msg, warningMsg){
+        warningMsg = (warningMsg) ? warningMsg : msg;
         var randomId = Math.floor(Math.random()*300000)
             , dateNow = Date.now()
-            , data  = {
-                "m" : 'msg',
+            , data
+            ;
+
+        data  = {
+            "m" : 'msg',
+            "d" : {
+                "m" : 'warningMsg',
                 "d" : {
-                    "m" : 'warningMsg',
-                    "d" : {
-                        "id" : dateNow + randomId.toString(),
-                        "action" : "add",
-                        "toType" : 'warning',
-                        "to" : {id : spark.user.id, username : spark.user.username},
-                        "from" : {id : spark.user.id, username : 'System'},
-                        "date" : dateNow,
-                        "content" : warningMsg
-                    }
+                    "id" : dateNow + randomId.toString(),
+                    "action" : "add",
+                    "toType" : 'warning',
+                    "to" : {id : spark.user.id, username : spark.user.username},
+                    "from" : {id : spark.user.id, username : 'System'},
+                    "date" : dateNow,
+                    "content" : warningMsg
                 }
-            };
+            }
+        };
+
+        if(msg.fromSpark){
+            data.m = 'rmMsg';
+            data.d.d.fromSpark = msg.fromSpark;
+            data.d.d.toSpark = msg.toSpark;
+            spark.write({"m": "chat", "d":data});
+            spark.end();
+            return true;
+        }
+
 
         spark.write({"m": "chat", "d":data});
     };
+
     RoutMsg.prototype.privateMsg = function(spark, msg){
         var dateNow = Date.now()
             , randomId = Math.floor(Math.random()*300000)
@@ -45,6 +58,9 @@ module.exports = function(_s, _rf){
             , data
             , self = this
             , serverDetails
+            , toSpark
+            , Socket
+            , client
             ;
 
         prvSuccess = function(user){
@@ -67,21 +83,31 @@ module.exports = function(_s, _rf){
                 }
             };
 
+            toSpark = _s.primus.spark(user.spark);
+            if(toSpark){
+                console.log('spark on server');
+                spark.write({"m": "chat", "d":data});
+                toSpark.write({"m": "chat", "d":data});
+                return true;
+            }
+
             _s.primus.metroplex.spark(user.spark, function (err, server) {
+                if(!server || server.port || server.address) return self.warningMsg(spark, 'We were unable to find this user');
+                console.log('metroplex server:', server);
                 serverDetails = Servers.parseAddress(server);
                 HttpTransit.login(serverDetails).then(function(user){
+                    console.log('login user: ', user);
 
-                    var Socket = _s.primus.Socket;
-                    var client = new Socket(serverDetails.address + ':' + serverDetails.port + '/?token=' + user.token);
+                    Socket = _s.primus.Socket;
+                    client = new Socket(serverDetails.address + ':' + serverDetails.port + '/?token=' + user.token);
                     client.on('open', function open() {
                         spark.write({"m": "chat", "d":data});
 
-                        data.d.d = 'rmPrivateMsg';
-                        data.d.d.spark = user.spark;
+                        data.m = 'rmMsg';
+                        data.d.d.fromSpark = spark.id;
+                        data.d.d.toSpark = user.spark;
                         client.write({"m": "chat", "d":data});
                     });
-
-                    //_s.primus.room(cName).write({"m": "chat", "d":data});
                 });
             });
         };

@@ -13,6 +13,7 @@ module.exports = function(_s){
     rf.GetRoom = require('./getRoom.js')(_s,rf);
     rf.Router = require('./supers/router.js')();
     rf.RoutMsg = require('./routMsg.js')(_s,rf);
+    rf.RoutRemoteMsg = require('./routRemoteMsg.js')(_s,rf);
     rf.RoutRoom = require('./routRoom.js')(_s,rf);
     rf.RoutChat = require('./routChat.js')(_s,rf);
     rf.RoutSocket = require('./routSocket.js')(_s, rf);

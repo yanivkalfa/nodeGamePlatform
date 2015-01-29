@@ -7,6 +7,7 @@ module.exports = function(_s, _rf){
 
         this.RoutMsg = new _rf.RoutMsg();
         this.RoutRoom = new _rf.RoutRoom();
+        this.RoutRemoteMsg = new _rf.RoutRemoteMsg();
     }
 
     RoutChat.prototype = Object.create(router.prototype);
@@ -14,6 +15,10 @@ module.exports = function(_s, _rf){
 
     RoutChat.prototype.msg = function(spark,msg){
         this.RoutMsg.rout(spark,msg);
+    };
+
+    RoutChat.prototype.rmMsg = function(spark, msg){
+        this.RoutRemoteMsg.rout(spark, msg);
     };
 
     RoutChat.prototype.room = function(spark, msg){
