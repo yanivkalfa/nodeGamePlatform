@@ -13,7 +13,7 @@ module.exports = function(_s, _rf){
     RoutSocket.prototype.constructor = RoutSocket;
 
     RoutSocket.prototype.ping = function(spark, data){
-        console.log(data);
+        //console.log(data);
         spark.write({"m": "ping", "d":"p"});
     };
 
