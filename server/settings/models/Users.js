@@ -6,64 +6,66 @@ module.exports = {
     schema : {
 
         username : {
-            type :'string',
+            type :String,
             required : true
         },
 
         password : {
-            type :'string',
+            type :String,
             required : true
         },
 
         passwordHash : {
-            type :'string'
+            type :String
         },
 
         firName : {
-            type : 'string'
+            type : String
         },
 
         lastName : {
-            type : 'string'
+            type : String
         },
 
         email : {
-            type :'string',
+            type :String,
             required : true,
-            unique : true
+            index : {
+                unique : true
+            }
         },
 
         uType : {
-            type :'string',
+            type :String,
             required : true,
             default : 'user'
         },
 
         spark : {
-            type :'string'
+            type :String
         },
 
         rooms : {
-            type : 'array',
+            type : Array,
             default : ['lobby']
         },
 
         roles : {
-            type : 'array',
+            type : Array,
             default : ['registered']
         },
 
         server : {
-            type :'string',
+            type :String,
             required : true
         },
 
         facebookToken : {
-            type : 'string'
+            type : String
         },
 
         token : {
-            type : 'string'
+            type : String
         }
     }
 };
