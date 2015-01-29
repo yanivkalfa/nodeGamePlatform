@@ -3,6 +3,8 @@ module.exports = function(_s, _rf){
     var router = _rf.Router
         , _ = _s.oReq.lodash
         , User = _rf.User
+        , HttpTransit = _rf.HttpTransit
+        , Servers = _rf.Servers
         ;
 
     function RoutMsg (){
@@ -42,12 +44,13 @@ module.exports = function(_s, _rf){
             , prvSuccess
             , data
             , self = this
+            , serverDetails
             ;
 
         prvSuccess = function(user){
+            if(!user) return self.warningMsg(spark, 'User with this name does not exist');
             if(user.username == msg.to) return self.warningMsg(spark, 'You cannot Message yourself');
 
-            cName = 'u_' + user.id;
             data = {
                 "m" : 'msg',
                 "d" : {
@@ -63,8 +66,24 @@ module.exports = function(_s, _rf){
                     }
                 }
             };
-            spark.write({"m": "chat", "d":data});
-            _s.primus.room(cName).write({"m": "chat", "d":data});
+
+            _s.primus.metroplex.spark(user.spark, function (err, server) {
+                serverDetails = Servers.parseAddress(server);
+                HttpTransit.login(serverDetails).then(function(user){
+
+                    var Socket = _s.primus.Socket;
+                    var client = new Socket(serverDetails.address + ':' + serverDetails.port + '/?token=' + user.token);
+                    client.on('open', function open() {
+                        spark.write({"m": "chat", "d":data});
+
+                        data.d.d = 'rmPrivateMsg';
+                        data.d.d.spark = user.spark;
+                        client.write({"m": "chat", "d":data});
+                    });
+
+                    //_s.primus.room(cName).write({"m": "chat", "d":data});
+                });
+            });
         };
 
         User.fetchUser(msg.to).then(prvSuccess).catch(self.warningMsg.bind(self, spark, 'User with this name does not exist'));
