@@ -9,8 +9,9 @@ module.exports = function(_s, req, res) {
             next();
         }, function (err) { });
 
-        if(connections >= 2)return res.status(502).end();
         console.log(connections);
+        if(connections >= 2)return res.status(502).end();
+
     };
 
     this.body = req.body;
