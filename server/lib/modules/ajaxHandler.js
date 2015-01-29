@@ -10,7 +10,7 @@ module.exports = function(_s, req, res) {
         }, function (err) { });
 
         if(connections > 2){
-            res.status(502).end();
+            return res.status(502).end();
         }
         console.log(connections);
     };
