@@ -116,7 +116,7 @@ module.exports = function(_s){
     });
 
     _s.primus.on('disconnection', function (spark) {
-        console.log('disconnection ' , spark.id);
+        console.log('disconnection ' , spark.user.username);
     });
 
     _s.primus.on('leaveallrooms', function (rooms, spark) {
