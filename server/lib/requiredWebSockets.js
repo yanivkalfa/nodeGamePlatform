@@ -93,7 +93,7 @@ module.exports = function(_s){
                         });
 
                         _s.primus.metroplex.servers(function (err, servers) {
-                            console.log('registered servers:', servers);
+                            //console.log('registered servers:', servers);
                         });
 
                     }
