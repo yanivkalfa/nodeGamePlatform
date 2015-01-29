@@ -29,9 +29,6 @@ module.exports = function(_s){
 
     _s.primus.on('connection', function (spark) {
 
-        _s.primus.metroplex.servers(function (err, servers) {
-            console.log('registered servers:', servers);
-        });
         _s.oReq.jwt.verify(spark.query.token, sessSecret, function(err, decoded) {
             if(!_.isUndefined(decoded) && !_.isUndefined(decoded.userId)){
                 _s.oModules.Authorization.login({"_id" : decoded.userId}).then(function(user){
@@ -42,7 +39,7 @@ module.exports = function(_s){
                     else
                     {
 
-                        /*
+
                         // Attaching user to spark - for logout and maybe future needs
                         spark.user = user;
                         var RoutSocket = new _s.oModules.RoutSocket(_s.primus);
@@ -88,10 +85,10 @@ module.exports = function(_s){
                             console.log(err);
                             if(err) updateSpark(user).then(upSkSuccess).catch(upSkFail)
                         };
-                        console.log('spark.user.type: ', spark.user.uType);
+                        console.log('user.uType: ', user.uType);
 
                         if(user.uType == 'user'){
-                            updateSpark(user).then(upSkSuccess).catch(upSkFail);
+                            //updateSpark(user).then(upSkSuccess).catch(upSkFail);
                         }
 
                         spark.on('data', function (msg) {
@@ -101,7 +98,7 @@ module.exports = function(_s){
                         _s.primus.metroplex.servers(function (err, servers) {
                             console.log('registered servers:', servers);
                         });
-                        */
+
                     }
 
                 }).catch(function(err){
