@@ -37,7 +37,7 @@ module.exports = function(_s){
                     }
                     else
                     {
-                        spark = primus.spark('asdasdasdasd');
+                        spark = _s.primus.spark('asdasdasdasd');
                         console.log(spark);
 
                         // Attaching user to spark - for logout and maybe future needs
