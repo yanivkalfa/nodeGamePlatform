@@ -1,6 +1,6 @@
 
 module.exports = function(_s){
-    console.log(_s.details.address + ':' + _s.details.port);
+    var address = _s.details.address + ':' + _s.details.port;
     var _ = _s.oReq.lodash,
         sessCon = _s.oConfig.session.connection,
         sessSecret = _s.oConfig.session.secret,
@@ -13,7 +13,7 @@ module.exports = function(_s){
                 }
             },
             transformer: 'engine.io',
-            address : _s.details.address + ':' + _s.details.port,
+            address : address,
             redis: _s.oReq.redis.createClient(_s.oConfig.connections.redis.port,_s.oConfig.connections.redis.host)
         };
     _s.primus = new _s.oReq.Primus(_s.oReq.http, primusOptions);
