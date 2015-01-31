@@ -6,7 +6,7 @@ module.exports = function(_s, _rf){
 
     function RoutSocket (){
         router.apply(this,arguments);
-        this.RoutChat = new _rf.RoutChat()
+        this.RoutChat = new _rf.RoutChat();
     }
 
     RoutSocket.prototype = Object.create(router.prototype);
@@ -20,6 +20,8 @@ module.exports = function(_s, _rf){
     RoutSocket.prototype.chat = function(spark, msg){
         this.RoutChat.rout(spark, msg);
     };
+
+    RoutSocket.prototype.sjax = _s.SocketAjax.exec;
 
 
     return RoutSocket;

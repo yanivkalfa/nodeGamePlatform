@@ -99,22 +99,19 @@ module.exports = function(_s, _rf){
                 Servers.login(serverDetails).then(function(user){
                     console.log('login user: ', user);
 
-
-                    /*
                     Socket = _s.primus.Socket;
                     client = new Socket('http://'+serverDetails.address + ':' + serverDetails.port + '/?token=' + user.token);
-                    console.log('aaaaa');
                     client.on('open', function open() {
-                        console.log('opened');
+                        console.log('Connected to server socket ');
                         spark.write({"m": "chat", "d":data});
-
+                        /*
                         data.m = 'rmMsg';
                         data.d.d.fromSpark = spark.id;
                         data.d.d.toSpark = user.spark;
                         console.log('data', data);
                         client.write({"m": "chat", "d":data});
+                        */
                     });
-                    */
                 });
             });
         };
