@@ -1,6 +1,7 @@
 module.exports = function(_s){
 
     function SocketAjax (){
+        this.fns = [];
     }
 
 
