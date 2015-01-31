@@ -99,6 +99,7 @@ module.exports = function(_s, _rf){
                 Servers.login(serverDetails).then(function(user){
                     console.log('login user: ', user);
 
+
                     /*
                     Socket = _s.primus.Socket;
                     client = new Socket('http://'+serverDetails.address + ':' + serverDetails.port + '/?token=' + user.token);
