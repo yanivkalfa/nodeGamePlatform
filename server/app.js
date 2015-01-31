@@ -7,8 +7,7 @@ _s.oConfig = require('./settings/config'); // require config files.
 global.oCore = require('./core')(_s); // require core files.
 _s.oModules = require('./lib/modules')(_s); // require utility functions
 
-_s.oSocketAjax = require('./lib/socketAjax.js')(_s);
-console.log(_s.oSocketAjax);
+console.log(_s.oModules.SocketAjax);
 _s.oRouts = require('./lib/requiredRouts.js')(_s);
 _s.oWebSockets = require('./lib/requiredWebSockets.js')(_s);
 

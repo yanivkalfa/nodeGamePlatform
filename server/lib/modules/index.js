@@ -1,5 +1,6 @@
 module.exports = function(_s){
     var rf = {};
+    rf.SocketAjax = require('./socketAjax.js')(_s);
     rf.HttpTransit = require('./httpTransit.js')(_s);
     rf.User = require('./user.js')(_s);
     rf.Servers = require('./servers.js')(_s, rf);
