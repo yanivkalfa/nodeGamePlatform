@@ -61,46 +61,5 @@ module.exports = function(_s, _rf){
 
     };
 
-    HttpTransit.prototype.login = function(server){
-        var options = {
-                "hostname" : server.address,
-                "port" : server.port
-            }
-            , params = {
-                "method" : 'login',
-                "status" : 0,
-                "success" : false,
-                "data" : {"email" : _s.details.user.email, "password" : _s.details.user.password}
-            }
-            , self = this
-            ;
-
-        options = this.prepareRequest(options, false, params);
-        return new _s.oReq.Promise(function(resolve, reject) {
-            self.doRequest(options, params).then(function(resp){
-                try{
-                    var response = JSON.parse(resp);
-                }catch(e){
-                    return reject(e);
-                }
-                if(response.success){
-                    return resolve(response.data);
-                }else{
-                    var err = new Error(response.data);
-                    return reject(err);
-                }
-            }).catch(function(err){
-                return reject(err);
-            });
-        });
-
-
-    };
-
-
-
-
-
-
     return new HttpTransit();
 };

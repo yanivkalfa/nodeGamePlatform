@@ -3,7 +3,6 @@ module.exports = function(_s, _rf){
     var router = _rf.Router
         , _ = _s.oReq.lodash
         , User = _rf.User
-        , HttpTransit = _rf.HttpTransit
         , Servers = _rf.Servers
         ;
 
@@ -93,14 +92,14 @@ module.exports = function(_s, _rf){
 
             console.log('user.spark', user.spark);
             _s.primus.metroplex.spark(user.spark, function (err, server) {
-                console.log('spark found in :', user.spark, server);
-                /*
-                if(!server || server.port || server.address) return self.warningMsg(spark, 'We were unable to find this user');
-                console.log('metroplex server:', server);
                 serverDetails = Servers.parseAddress(server);
-                HttpTransit.login(serverDetails).then(function(user){
+                if(!serverDetails || !serverDetails.port || !serverDetails.address) return self.warningMsg(spark, 'We were unable to find this user');
+                console.log('spark found in: ', serverDetails);
+
+                Servers.login(serverDetails).then(function(user){
                     console.log('login user: ', user);
 
+                    /*
                     Socket = _s.primus.Socket;
                     client = new Socket('http://'+serverDetails.address + ':' + serverDetails.port + '/?token=' + user.token);
                     console.log('aaaaa');
@@ -114,8 +113,8 @@ module.exports = function(_s, _rf){
                         console.log('data', data);
                         client.write({"m": "chat", "d":data});
                     });
+                    */
                 });
-                */
             });
         };
 
