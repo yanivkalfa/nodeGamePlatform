@@ -75,7 +75,6 @@ module.exports = function(_s){
                                 };
 
                                 RoutSocket.chat(spark,data);
-
                             });
 
                         };

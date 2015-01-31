@@ -91,7 +91,10 @@ module.exports = function(_s, _rf){
                 return true;
             }
 
+            console.log('user.spark', user.spark);
             _s.primus.metroplex.spark(user.spark, function (err, server) {
+                console.log('spark found in :', user.spark, server);
+                /*
                 if(!server || server.port || server.address) return self.warningMsg(spark, 'We were unable to find this user');
                 console.log('metroplex server:', server);
                 serverDetails = Servers.parseAddress(server);
@@ -112,6 +115,7 @@ module.exports = function(_s, _rf){
                         client.write({"m": "chat", "d":data});
                     });
                 });
+                */
             });
         };
 
