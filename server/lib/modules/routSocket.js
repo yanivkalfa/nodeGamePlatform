@@ -21,7 +21,7 @@ module.exports = function(_s, _rf){
         this.RoutChat.rout(spark, msg);
     };
 
-    RoutSocket.prototype.sjax = _s.oModules.SocketAjax.exec;
+    RoutSocket.prototype.sjax = _rf.SocketAjax.exec;
 
 
     return RoutSocket;
