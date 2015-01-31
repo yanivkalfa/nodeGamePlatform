@@ -108,6 +108,7 @@ module.exports = function(_s, _rf){
                         data.m = 'rmMsg';
                         data.d.d.fromSpark = spark.id;
                         data.d.d.toSpark = user.spark;
+                        console.log('data', data);
                         client.write({"m": "chat", "d":data});
                     });
                 });

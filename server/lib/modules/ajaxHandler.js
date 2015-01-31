@@ -2,17 +2,6 @@
 module.exports = function(_s, req, res) {
     var _this = this;
     var _ = _s.oReq.lodash;
-    var checkConnections = function(req, res){
-        var connections = 0;
-        _s.primus.forEach(function (spark, next) {
-            connections++;
-            next();
-        }, function (err) { });
-
-        console.log(connections);
-        if(connections >= 2)return res.status(502).end();
-
-    };
 
     this.body = req.body;
     this.result = {
@@ -28,7 +17,6 @@ module.exports = function(_s, req, res) {
     });
 
     this.init = function(){
-        checkConnections(req, res);
         return (!_.isUndefined(_this.body.data))
             ? _this[_this.body.method](_this.body.data)
             : _this[_this.body.method]() ;

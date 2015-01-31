@@ -6,18 +6,6 @@ module.exports = function(_s){
         , sessMaxAge = _s.oConfig.session.maxAge
         , checkConnections
         ;
-
-    checkConnections = function(req, res){
-        var connections = 0;
-        _s.primus.forEach(function (spark, next) {
-            connections++;
-            next();
-        }, function (err) { });
-
-        if(connections > 2){
-            res.status(502).end();
-        }
-    };
     _s.oReq.app.use(_s.oReq.session({
         store: new _s.oReq.RedisStore({
             port : _s.oConfig.connections[sessCon].port,
@@ -42,7 +30,6 @@ module.exports = function(_s){
     _s.oReq.app.post('/ajaxHandler', _.partial(_s.oModules.ajaxHandler, _s));
 
     _s.oReq.app.get('/contents/:content', function (req, res) {
-        checkConnections(req, res);
         return res.render(_s.sServerDirname + '/tpl/contents/' + req.params.content + '.jade');
 
 
@@ -61,7 +48,6 @@ module.exports = function(_s){
     });
 
     _s.oReq.app.get('/*', function (req, res) {
-        checkConnections(req, res);
 
         res.locals.user = {};
         if(req.session.user){
