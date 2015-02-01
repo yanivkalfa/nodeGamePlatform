@@ -7,7 +7,7 @@ div(class="statusBar")
     div(class="multiPlayer fLeft" ng-mouseenter="$root.ngp.bar.stats.hover = true" ng-mouseleave="$root.ngp.bar.stats.hover = false")
         img(src="")
         span(class="multiPlayerLabel") Queue for MultiPlayer
-        ul(class="multiPlayerGamesList fLeft ng-show="$root.ngp.bar.stats.hover"")
+        ul(class="multiPlayerGamesList fLeft" ng-show="$root.ngp.bar.stats.hover")
             li latency:&nbsp;
     div(class="statsDiv fLeft" ng-mouseenter="$root.ngp.bar.stats.hover = true" ng-mouseleave="$root.ngp.bar.stats.hover = false") Stats
         ul(class="stats fLeft" ng-show="$root.ngp.bar.stats.hover")
