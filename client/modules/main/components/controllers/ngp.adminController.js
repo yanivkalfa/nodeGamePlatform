@@ -71,7 +71,11 @@ function adminController(
         this.api.doRequest(options).then(success).catch(fail);
     };
 
-    AdminController.prototype.queue = function(game){
+    AdminController.prototype.queueMP = function(game){
+        console.log(game);
+    };
+
+    AdminController.prototype.queueSP = function(game){
         console.log(game);
     };
 
