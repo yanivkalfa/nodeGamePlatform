@@ -1,13 +1,13 @@
 div(class="statusBar")
     div(class="userDetails fLeft") Hey&nbsp;{{admin.Authorization.username}}
-    div(class="singlePlayer fLeft")
+    div(class="singlePlayer fLeft" ng-mouseenter="$root.ngp.bar.sp.hover = true" ng-mouseleave="$root.ngp.bar.sp.hover = false")
         img(src="")
         span(class="singlePlayerLabel") play Single Player
-        ul(class="singlePlayerGamesList fLeft displayNone")
-    div(class="multiPlayer fLeft" ng-mouseenter="$root.ngp.bar.stats.hover = true" ng-mouseleave="$root.ngp.bar.stats.hover = false")
+        ul(class="singlePlayerGamesList fLeft" ng-show="$root.ngp.bar.sp.hover")
+    div(class="multiPlayer fLeft" ng-mouseenter="$root.ngp.bar.mp.hover = true" ng-mouseleave="$root.ngp.bar.mp.hover = false")
         img(src="")
         span(class="multiPlayerLabel") Queue for MultiPlayer
-        ul(class="multiPlayerGamesList fLeft" ng-show="$root.ngp.bar.stats.hover")
+        ul(class="multiPlayerGamesList fLeft" ng-show="$root.ngp.bar.mp.hover")
             li latency:&nbsp;
     div(class="statsDiv fLeft" ng-mouseenter="$root.ngp.bar.stats.hover = true" ng-mouseleave="$root.ngp.bar.stats.hover = false") Stats
         ul(class="stats fLeft" ng-show="$root.ngp.bar.stats.hover")

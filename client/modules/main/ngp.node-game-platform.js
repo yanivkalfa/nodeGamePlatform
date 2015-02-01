@@ -23,6 +23,12 @@ function runFactory(
                 latency : 0
             }
         },
+        mp : {
+            hover : false
+        },
+        sp : {
+            hover : false
+        },
         rooms : []
     };
 
