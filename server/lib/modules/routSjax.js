@@ -13,8 +13,8 @@ module.exports = function(_s, _rf){
 
     RoutSjax.prototype.req = function(spark,msg){
         var RoutSocket = new _s.oModules.RoutSocket(_s.primus);
-        var data = RoutSocket.rout(spark, msg);
         console.log('request : ', msg);
+        var data = RoutSocket.rout(spark, msg);
         var resp = {
             "m":"sjax",
             "d" : {
