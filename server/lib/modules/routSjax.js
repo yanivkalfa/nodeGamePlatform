@@ -1,7 +1,7 @@
 module.exports = function(_s, _rf){
 
     var router = _rf.Router
-        , sJax = _s.oModules.SocketAjax;
+        , sJax = _rf.SocketAjax;
 
     function RoutSjax (){
         router.apply(this,arguments);
