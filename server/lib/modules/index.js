@@ -17,6 +17,7 @@ module.exports = function(_s){
     rf.RoutRemoteMsg = require('./routRemoteMsg.js')(_s,rf);
     rf.RoutRoom = require('./routRoom.js')(_s,rf);
     rf.RoutChat = require('./routChat.js')(_s,rf);
+    rf.RoutSjax = require('./routSjax.js')(_s,rf);
     rf.RoutSocket = require('./routSocket.js')(_s, rf);
 
     return rf;

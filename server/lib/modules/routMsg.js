@@ -4,6 +4,7 @@ module.exports = function(_s, _rf){
         , _ = _s.oReq.lodash
         , User = _rf.User
         , Servers = _rf.Servers
+        , sJax = _s.oModules.SocketAjax
         ;
 
     function RoutMsg (){
@@ -52,7 +53,6 @@ module.exports = function(_s, _rf){
     RoutMsg.prototype.privateMsg = function(spark, msg){
         var dateNow = Date.now()
             , randomId = Math.floor(Math.random()*300000)
-            , cName
             , prvSuccess
             , data
             , self = this
@@ -60,6 +60,7 @@ module.exports = function(_s, _rf){
             , toSpark
             , Socket
             , client
+            , localData
             ;
 
         prvSuccess = function(user){
@@ -103,14 +104,24 @@ module.exports = function(_s, _rf){
                     client = new Socket('http://'+serverDetails.address + ':' + serverDetails.port + '/?token=' + user.token);
                     client.on('open', function open() {
                         console.log('Connected to server socket ');
-                        spark.write({"m": "chat", "d":data});
-                        /*
+                        localData = _.cloneDeep(data);
+
                         data.m = 'rmMsg';
                         data.d.d.fromSpark = spark.id;
                         data.d.d.toSpark = user.spark;
-                        console.log('data', data);
                         client.write({"m": "chat", "d":data});
-                        */
+
+                        sJax.dispatch({
+                            to : client,
+                            data : {"m": "chat", "d":data},
+                            timeOut : 4000,
+                            success : function success(resp){
+                                spark.write({"m": "chat", "d":localData});
+                            },
+                            error : function error(resp){
+                                self.warningMsg(spark, 'We were unable to find this user');
+                            }
+                        });
                     });
                 });
             });
