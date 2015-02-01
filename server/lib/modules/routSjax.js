@@ -26,6 +26,7 @@ module.exports = function(_s, _rf){
             }
         };
         spark.write(resp);
+        console.log('req spark', spark);
         console.log('spark.write');
     };
 

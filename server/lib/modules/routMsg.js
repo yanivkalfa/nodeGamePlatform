@@ -112,7 +112,7 @@ module.exports = function(_s, _rf){
                         sJax.dispatch({
                             to : client,
                             data : {"m": "chat", "d":data},
-                            timeOut : 4000,
+                            timeOut : 10000,
                             success : function success(resp){
                                 console.log('success :', resp);
                                 spark.write({"m": "chat", "d":localData});
