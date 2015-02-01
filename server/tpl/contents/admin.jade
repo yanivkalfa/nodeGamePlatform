@@ -4,10 +4,16 @@ div(class="statusBar")
         img(src="")
         span(class="singlePlayerLabel") play Single Player
         ul(class="singlePlayerGamesList fLeft displayNone")
-    div(class="multiPlayer fLeft")
+    div(class="multiPlayer fLeft" ng-mouseenter="$root.ngp.bar.stats.hover = true" ng-mouseleave="$root.ngp.bar.stats.hover = false")
         img(src="")
         span(class="multiPlayerLabel") Queue for MultiPlayer
-        ul(class="multiPlayerGamesList fLeft displayNone")
+        ul(class="multiPlayerGamesList fLeft ng-show="$root.ngp.bar.stats.hover"")
+            li latency:&nbsp;
+                span(class="latency" id="latency") {{ $root.ngp.bar.stats.latency }}
+            li Total Members:&nbsp;
+                span(class="totalMembers" id="totalMembers")
+            li Total Games:&nbsp;
+                span(class="totalGames" id="totalGames")
     div(class="statsDiv fLeft" ng-mouseenter="$root.ngp.bar.stats.hover = true" ng-mouseleave="$root.ngp.bar.stats.hover = false") Stats
         ul(class="stats fLeft" ng-show="$root.ngp.bar.stats.hover")
             li latency:&nbsp;
