@@ -42,7 +42,7 @@ module.exports = function(_s, _rf){
             data.d.d.fromSpark = msg.fromSpark;
             data.d.d.toSpark = msg.toSpark;
             spark.write({"m": "chat", "d":data});
-            spark.end();
+            //spark.end();
             return true;
         }
 

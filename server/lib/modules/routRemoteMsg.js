@@ -15,15 +15,18 @@ module.exports = function(_s, _rf){
     RoutRemoteMsg.prototype.constructor = RoutRemoteMsg;
 
     RoutRemoteMsg.prototype.warningMsg = function(spark, msg){
+        /*
         var toSpark;
         msg.m = 'msg';
         delete msg.d.d.fromSpark;
         delete msg.d.d.toSpark;
         toSpark = _s.primus.spark(msg.fromSpark);
         toSpark.write({"m": "chat", "d":msg});
+        */
     };
 
     RoutRemoteMsg.prototype.privateMsg = function(spark, msg){
+        /*
         var  toSpark;
 
         console.log('privateMsg', msg);
@@ -40,11 +43,12 @@ module.exports = function(_s, _rf){
         delete msg.d.d.toSpark;
 
         toSpark.write({"m": "chat", "d":msg});
-        spark.end();
+        spark.end();*/
     };
 
 
 
 
     return RoutRemoteMsg;
+
 };
