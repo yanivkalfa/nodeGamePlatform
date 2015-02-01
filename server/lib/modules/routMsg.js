@@ -53,14 +53,10 @@ module.exports = function(_s, _rf){
     RoutMsg.prototype.privateMsg = function(spark, msg){
         var dateNow = Date.now()
             , randomId = Math.floor(Math.random()*300000)
-            , prvSuccess
-            , data
-            , self = this
-            , serverDetails
-            , toSpark
-            , Socket
-            , client
+            , prvSuccess , data , self = this
+            , serverDetails , toSpark, Socket , client
             , localData
+            , RoutSocket = new _s.oModules.RoutSocket(_s.primus)
             ;
 
         prvSuccess = function(user){
@@ -123,6 +119,10 @@ module.exports = function(_s, _rf){
                                 self.warningMsg(spark, resp);
                             }
                         });
+                    });
+
+                    client.on('data', function (msg) {
+                        RoutSocket.rout(client, msg);
                     });
                 });
             });
