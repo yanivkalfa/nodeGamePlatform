@@ -34,7 +34,43 @@ function adminController(
         this.api = Api.createNewApi(ngp.const.app.ajaxUrl);
         this.Authorization = Authorization.getUser();
         this.commandLine = '';
+        this.games = [];
+        this.init();
     }
+
+    AdminController.prototype.init = function(){
+        this.getGames();
+
+    };
+
+    AdminController.prototype.getGames = function(){
+        var success,fail, options, self = this;
+
+        success = function(resp){
+            if(resp.payload.success){
+               self.games = resp.payload.data;
+                console.log(self.games);
+            }else{
+                Notify.error('Error: ' + resp.payload.data);
+            }
+        };
+
+        fail = function(err){  Notify.error('Error: ' + err); };
+
+        options = {
+            method: 'post',
+            url: ngp.const.app.ajaxUrl,
+            data: {
+                "method" : 'getGames',
+                "status" : 0,
+                "success" : false,
+                "data" : ''
+            }
+        };
+
+        this.api.doRequest(options).then(success).catch(fail);
+    };
+
 
     AdminController.prototype.logout = function(){
         var success,fail, options;

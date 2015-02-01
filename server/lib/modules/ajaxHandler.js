@@ -100,5 +100,23 @@ module.exports = function(_s, req, res) {
         });
     };
 
+    this.getGames = function(){
+        _s.oModules.GamesApi.fetch().then(function(games){
+            if(games)
+            {
+                _this._setResp(games, true);
+                return res.json(_this.toReturn);
+            }
+            else
+            {
+                _this._setResp("No games were found", false);
+                return res.json(_this.toReturn);
+            }
+        }).catch(function(err){
+            _this._setResp("Some Error Occur please try again later", false);
+            return res.json(_this.toReturn);
+        });
+    };
+
     this.init();
 };

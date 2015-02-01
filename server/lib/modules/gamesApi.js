@@ -7,9 +7,9 @@ module.exports = function(_s){
     ServersClass.prototype =  {
 
 
-        fetchAll : function(){
+        fetch : function(query){
             return new _s.oReq.Promise(function(resolve, reject) {
-                Games.find().exec(function (err, succ) {
+                Games.find(query).exec(function (err, succ) {
                     if(err) return reject(err);
                     return resolve(succ);
                 });
