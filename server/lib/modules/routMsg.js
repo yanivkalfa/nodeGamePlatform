@@ -4,7 +4,7 @@ module.exports = function(_s, _rf){
         , _ = _s.oReq.lodash
         , User = _rf.User
         , Servers = _rf.Servers
-        , sJax = _s.oModules.SocketAjax
+        , sJax = _s._rf.SocketAjax
         ;
 
     function RoutMsg (){
