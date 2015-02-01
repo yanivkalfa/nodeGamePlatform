@@ -10,15 +10,17 @@ module.exports = function(_s){
     SocketAjax.prototype.noop = function(){};
 
     SocketAjax.prototype.dispatch = function(request){
-        console.log('dispatch - request: ', request);
         var self = this
             , id
             ;
+        console.log('request.timeOut || self.timeOut', request.timeOut || self.timeOut);
         if(!self.checkRequest(request)) return false;
         id = self.queueRequest(request);
         request.timer = setTimeout(function(){
             self.trigger(false, id, 'request timed out!');
         }, request.timeOut || self.timeOut);
+
+        console.log('dispatch - request id: ', id);
 
         request.to.write(self.prepareRequest(id));
     };
