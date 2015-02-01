@@ -21,10 +21,12 @@ module.exports = function(_s, _rf){
                 "m" : "res",
                 "d" : {
                     "id" : msg.id,
-                    "d" :  {s: true, d : data}
+                    "d" :  data
                 }
             }
         };
+
+        //
         spark.write(resp);
         console.log('spark.write');
         return true;

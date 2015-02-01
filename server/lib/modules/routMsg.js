@@ -93,11 +93,11 @@ module.exports = function(_s, _rf){
                 if(!serverDetails || !serverDetails.port || !serverDetails.address) return self.warningMsg(spark, 'We were unable to find this user');
                 console.log('spark found in: ', serverDetails);
 
-                Servers.login(serverDetails).then(function(user){
-                    console.log('login user: ', user);
+                Servers.login(serverDetails).then(function(authorizedUser){
+                    console.log('login user: ', authorizedUser);
 
                     Socket = _s.primus.Socket;
-                    client = new Socket('http://'+serverDetails.address + ':' + serverDetails.port + '/?token=' + user.token);
+                    client = new Socket('http://'+serverDetails.address + ':' + serverDetails.port + '/?token=' + authorizedUser.token);
                     client.on('open', function open() {
                         console.log('Connected to server socket ');
                         localData = _.cloneDeep(data);

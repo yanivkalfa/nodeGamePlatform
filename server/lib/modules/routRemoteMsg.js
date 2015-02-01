@@ -27,16 +27,11 @@ module.exports = function(_s, _rf){
 
     RoutRemoteMsg.prototype.privateMsg = function(spark, msg){
         console.log('private message :', msg);
-        /*
         var  toSpark;
 
-        console.log('privateMsg', msg);
         toSpark = _s.primus.spark(msg.toSpark);
         if(!toSpark) {
-            var RoutMsg = new _rf.RoutMsg();
-            RoutMsg.warningMsg(spark, msg,'Could not find socket');
-            spark.end();
-            return
+            return {s: false, d : 'We were unable to find this user'};
         }
 
         msg.m = 'msg';
@@ -44,7 +39,6 @@ module.exports = function(_s, _rf){
         delete msg.d.d.toSpark;
 
         toSpark.write({"m": "chat", "d":msg});
-        spark.end();*/
     };
 
 
