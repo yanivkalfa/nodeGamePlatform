@@ -29,7 +29,7 @@ module.exports = function(_s, _rf){
         console.log('spark.write');
     };
 
-    RoutSjax.prototype.res = sJax.response;
+    RoutSjax.prototype.res = sJax.response.bind(sJax);
 
     return RoutSjax;
 };
