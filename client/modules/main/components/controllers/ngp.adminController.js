@@ -71,6 +71,9 @@ function adminController(
         this.api.doRequest(options).then(success).catch(fail);
     };
 
+    AdminController.prototype.queue = function(game){
+        console.log(game);
+    };
 
     AdminController.prototype.logout = function(){
         var success,fail, options;
