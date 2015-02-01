@@ -1,5 +1,6 @@
 module.exports = function(_s){
     var rf = {};
+    rf.GamesApi = require('./gamesApi.js')(_s);
     rf.SocketAjax = require('./socketAjax.js')(_s);
     rf.HttpTransit = require('./httpTransit.js')(_s);
     rf.User = require('./user.js')(_s);

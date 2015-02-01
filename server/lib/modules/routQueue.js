@@ -7,15 +7,15 @@ module.exports = function(_s, _rf){
         , Servers = _rf.Servers
         ;
 
-    function RoutRemoteMsg (){
+    function RoutQueue (){
         router.apply(this,arguments);
     }
 
-    RoutRemoteMsg.prototype = Object.create(router.prototype);
-    RoutRemoteMsg.prototype.constructor = RoutRemoteMsg;
+    RoutQueue.prototype = Object.create(router.prototype);
+    RoutQueue.prototype.constructor = RoutQueue;
 
 
-    RoutRemoteMsg.prototype.privateMsg = function(spark, msg){
+    RoutQueue.prototype.privateMsg = function(spark, msg){
         console.log('private message :', msg);
         var  toSpark;
 
@@ -42,6 +42,6 @@ module.exports = function(_s, _rf){
 
 
 
-    return RoutRemoteMsg;
+    return RoutQueue;
 
 };

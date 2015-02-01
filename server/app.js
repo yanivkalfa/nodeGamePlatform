@@ -14,6 +14,13 @@ _s.oReq.http.listen(_s.details.port, function(){
     console.log('listening on *:' + _s.details.port);
 });
 
+_s.oModules.GamesApi.add({
+    "name" : 'pong',
+    "playerCount" : 2,
+    "queueName" : 'pong'
+}).then(function(game){
+    console.log(game);
+});
 /*
 var servers = new _s.oModules.Servers();
 var sName =  process.argv[2] || 'testSlave01';
