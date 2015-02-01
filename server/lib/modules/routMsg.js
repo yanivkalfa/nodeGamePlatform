@@ -117,6 +117,7 @@ module.exports = function(_s, _rf){
                             timeOut : 4000,
                             success : function success(resp){
                                 spark.write({"m": "chat", "d":localData});
+                                //client.end();
                             },
                             error : function error(resp){
                                 self.warningMsg(spark, 'We were unable to find this user');
