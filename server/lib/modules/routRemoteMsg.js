@@ -39,6 +39,7 @@ module.exports = function(_s, _rf){
         delete msg.d.d.toSpark;
 
         toSpark.write({"m": "chat", "d":msg});
+        return {s: true, d : 'Message sent successfully'};
     };
 
 
