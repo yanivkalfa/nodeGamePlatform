@@ -18,6 +18,7 @@ module.exports = function(_s, _rf){
     };
 
     RoutChat.prototype.rmMsg = function(spark, msg){
+        console.log('rmMsg routing -> ');
         return this.RoutRemoteMsg.rout(spark, msg);
     };
 

@@ -21,7 +21,7 @@ module.exports = function(_s, _rf){
                 "m" : "res",
                 "d" : {
                     "id" : msg.id,
-                    "d" :  {s: true, d :'Some error happened'}
+                    "d" :  {s: true, d : data}
                 }
             }
         };

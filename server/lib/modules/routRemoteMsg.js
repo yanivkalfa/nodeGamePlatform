@@ -26,6 +26,7 @@ module.exports = function(_s, _rf){
     };
 
     RoutRemoteMsg.prototype.privateMsg = function(spark, msg){
+        console.log('private message :', msg);
         /*
         var  toSpark;
 
