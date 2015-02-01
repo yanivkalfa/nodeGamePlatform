@@ -109,13 +109,12 @@ module.exports = function(_s, _rf){
                         data.m = 'rmMsg';
                         data.d.d.fromSpark = spark.id;
                         data.d.d.toSpark = user.spark;
-                        client.write({"m": "chat", "d":data});
-
                         sJax.dispatch({
                             to : client,
                             data : {"m": "chat", "d":data},
                             timeOut : 4000,
                             success : function success(resp){
+                                console.log(resp);
                                 spark.write({"m": "chat", "d":localData});
                                 //client.end();
                             },

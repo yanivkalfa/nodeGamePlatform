@@ -10,6 +10,7 @@ module.exports = function(_s){
     SocketAjax.prototype.noop = function(){};
 
     SocketAjax.prototype.dispatch = function(request){
+        console.log('dispatch - request: ', request);
         var self = this
             , id
             ;
