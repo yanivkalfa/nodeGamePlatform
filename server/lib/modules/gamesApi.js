@@ -10,6 +10,7 @@ module.exports = function(_s){
             var self = this;
             if(_.isEmpty(games)) return false;
             games = _.isArray(games) ? games : [games];
+            console.log(games);
             _(games).forEach(function(game, i){
                 games[i] = _.pick(games, self.visibleField);
             });
