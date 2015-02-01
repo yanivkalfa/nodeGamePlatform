@@ -26,7 +26,7 @@ module.exports = function(_s, _rf){
     RoutRemoteMsg.prototype.privateMsg = function(spark, msg){
         var  toSpark;
 
-        console.log(msg);
+        console.log('privateMsg', msg);
         toSpark = _s.primus.spark(msg.toSpark);
         if(!toSpark) {
             var RoutMsg = new _rf.RoutMsg();

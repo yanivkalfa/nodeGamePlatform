@@ -4,7 +4,6 @@ module.exports = function(_s){
         , sessCon = _s.oConfig.session.connection
         , sessSecret = _s.oConfig.session.secret
         , sessMaxAge = _s.oConfig.session.maxAge
-        , checkConnections
         ;
     _s.oReq.app.use(_s.oReq.session({
         store: new _s.oReq.RedisStore({

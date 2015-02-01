@@ -89,7 +89,7 @@ module.exports = function(_s){
                         }
 
                         spark.on('data', function (msg) {
-                            console.log(msg);
+                            console.log('webSocket', msg);
                             RoutSocket.rout(spark, msg);
                         });
 

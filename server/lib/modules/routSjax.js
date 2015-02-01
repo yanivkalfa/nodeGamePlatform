@@ -26,9 +26,13 @@ module.exports = function(_s, _rf){
             }
         };
         spark.write(resp);
+        console.log('spark.write');
     };
 
-    RoutSjax.prototype.res = sJax.response;
+    RoutSjax.prototype.res = function(spark,msg){
+        console.log('response', msg);
+        sJax.response(spark,msg);
+    };
 
     return RoutSjax;
 };
