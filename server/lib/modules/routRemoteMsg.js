@@ -34,11 +34,18 @@ module.exports = function(_s, _rf){
             return {s: false, d : 'We were unable to find this user'};
         }
 
-        msg.m = 'msg';
-        delete msg.d.d.fromSpark;
-        delete msg.d.d.toSpark;
+        var data = {
+            "m" : 'msg',
+            "d" : {
+                "m" : "privateMsg",
+                "d" : msg
+            }
+        };
 
-        toSpark.write({"m": "chat", "d":msg});
+        delete data.d.d.fromSpark;
+        delete data.d.d.toSpark;
+
+        toSpark.write({"m": "chat", "d":data});
         return {s: true, d : 'Message sent successfully'};
     };
 
