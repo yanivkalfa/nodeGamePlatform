@@ -3,17 +3,17 @@ module.exports = function(_s, _rf){
     var router = _rf.Router
         , sJax = _rf.SocketAjax;
 
+
     function RoutSjax (){
         router.apply(this,arguments);
-        this.RoutChat = new _rf.RoutChat();
     }
 
     RoutSjax.prototype = Object.create(router.prototype);
     RoutSjax.prototype.constructor = RoutSjax;
 
     RoutSjax.prototype.req = function(spark,msg){
-
-        var data = this.RoutChat.rout(spark, msg);
+        var RoutSocket = new _s.oModules.RoutSocket(_s.primus);
+        var data = RoutSocket.rout(spark, msg);
         console.log('request : ', msg);
         var resp = {
             "m":"sjax",
@@ -27,6 +27,7 @@ module.exports = function(_s, _rf){
         };
         spark.write(resp);
         console.log('spark.write');
+        return true;
     };
 
     RoutSjax.prototype.res = sJax.response.bind(sJax);

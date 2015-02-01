@@ -6,7 +6,7 @@ module.exports = function(){
 
         rout: function(spark, msg){
             var self = this;
-            self[msg.m](spark, msg.d);
+            return self[msg.m](spark, msg.d);
         }
     };
 

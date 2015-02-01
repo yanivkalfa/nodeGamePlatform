@@ -14,15 +14,15 @@ module.exports = function(_s, _rf){
     RoutChat.prototype.constructor = RoutChat;
 
     RoutChat.prototype.msg = function(spark,msg){
-        this.RoutMsg.rout(spark,msg);
+        return this.RoutMsg.rout(spark,msg);
     };
 
     RoutChat.prototype.rmMsg = function(spark, msg){
-        this.RoutRemoteMsg.rout(spark, msg);
+        return this.RoutRemoteMsg.rout(spark, msg);
     };
 
     RoutChat.prototype.room = function(spark, msg){
-        this.RoutRoom.rout(spark, msg);
+        return this.RoutRoom.rout(spark, msg);
     };
 
 
