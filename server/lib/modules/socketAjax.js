@@ -62,7 +62,7 @@ module.exports = function(_s){
             ;
 
         request = {
-            "m":"sJax",
+            "m":"sjax",
             "d" : {
                 "m" : "req",
                 "d" : {

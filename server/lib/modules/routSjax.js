@@ -16,7 +16,7 @@ module.exports = function(_s, _rf){
         //var data = this.RoutChat.rout(spark, msg);
         console.log('request : ', msg);
         var resp = {
-            "m":"sJax",
+            "m":"sjax",
             "d" : {
                 "m" : "res",
                 "d" : {
