@@ -120,7 +120,7 @@ module.exports = function(_s, _rf){
                             },
                             error : function error(resp){
                                 console.log('error :', resp);
-                                self.warningMsg(spark, 'We were unable to find this user');
+                                self.warningMsg(spark, resp);
                             }
                         });
                     });
