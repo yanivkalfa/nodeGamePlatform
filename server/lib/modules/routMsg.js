@@ -112,7 +112,7 @@ module.exports = function(_s, _rf){
                             success : function success(resp){
                                 console.log('success :', resp);
                                 spark.write({"m": "chat", "d":localData});
-                                //client.end();
+                                client.end();
                             },
                             error : function error(resp){
                                 console.log('error :', resp);

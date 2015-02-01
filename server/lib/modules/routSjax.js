@@ -13,8 +13,8 @@ module.exports = function(_s, _rf){
 
     RoutSjax.prototype.req = function(spark,msg){
 
-        //var data = this.RoutChat.rout(spark, msg);
-        console.log('request : ', msg.id);
+        var data = this.RoutChat.rout(spark, msg);
+        console.log('request : ', msg);
         var resp = {
             "m":"sjax",
             "d" : {
