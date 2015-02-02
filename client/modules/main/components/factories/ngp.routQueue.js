@@ -4,18 +4,18 @@
 angular.module(ngp.const.app.name)
     .factory('RoutQueue', [
         '$rootScope',
-        '$scope',
+        //'$scope',
         '$modal',
-        '$log',
+        //'$log',
         'Router',
         RoutQueue
     ]);
 
 function RoutQueue(
     $rootScope,
-    $scope,
+    //$scope,
     $modal,
-    $log,
+    //$log,
     Router
     ) {
 
