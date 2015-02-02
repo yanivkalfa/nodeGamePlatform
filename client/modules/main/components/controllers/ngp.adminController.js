@@ -52,15 +52,22 @@ function adminController(
         game.img = game.name + '.png';
     };
 
+    AdminController.prototype.prepareGames = function(games){
+        var self = this;
+        _(games).forEach(function(game){
+            game.img = game.name + '.png';
+            game.inQueue = false;
+        });
+
+        this.games = games;
+    };
+
     AdminController.prototype.getGames = function(){
         var success,fail, options, self = this;
 
         success = function(resp){
             if(resp.payload.success){
-                self.games = resp.payload.data;
-                _(self.games).forEach(function(game){
-                    game.img = game.name + '.png';
-                })
+                self.prepareGames(resp.payload.data)
             }else{
                 Notify.error('Error: ' + resp.payload.data);
             }
