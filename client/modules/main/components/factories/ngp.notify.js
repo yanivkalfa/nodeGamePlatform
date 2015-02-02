@@ -38,8 +38,9 @@ function Notify($rootScope) {
         },
         message : function(args) {
             var _self = this
-                , msg = args.join(' ')
+                , msg = Array.prototype.join.apply(args, [' '])
                 ;
+            console.log(args, msg);
             this.msg = msg;
             this.show = true;
             if(this.options.timeout){
