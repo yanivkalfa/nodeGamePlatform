@@ -12,7 +12,7 @@ function Notify($rootScope) {
 
 
     function NotifyFactory(){
-        this.options = { timeout : 5000 };
+        this.options = { timeout : false };
         this.reset();
     }
 
@@ -40,10 +40,10 @@ function Notify($rootScope) {
             var _self = this;
             this.msg = msg;
             this.show = true;
+            $rootScope.$apply();
             if(this.options.timeout){
                 setTimeout(function(){
                     _self.reset();
-                    $rootScope.$apply();
                 },_self.options.timeout);
             }
         }
