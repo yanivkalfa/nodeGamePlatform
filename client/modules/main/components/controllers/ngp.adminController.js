@@ -44,7 +44,7 @@ function adminController(
         this.imgUrl = ngp.const.app.imgUrl;
         this.RoutQueue = new RoutQueue();
         WebSocket.queue = function(msg){
-            self.RoutChat.rout(msg);
+            self.RoutQueue.rout(msg);
         };
         this.init();
 
