@@ -13,6 +13,7 @@ angular.module(ngp.const.app.name)
         'Notify',
         'ChatOut',
         'Chat',
+        'QueueOut',
         adminController
     ]);
 
@@ -26,7 +27,8 @@ function adminController(
     Authorization,
     Notify,
     ChatOut,
-    Chat
+    Chat,
+    QueueOut
     ) {
 
     function AdminController(){
@@ -106,6 +108,10 @@ function adminController(
         this.setSearchImg(game);
         this.inQueue(game);
         console.log(game);
+
+        if(QueueOut.analyseMessage("join " + game.queueName)){
+            Notify.success('Queued for: ', game.queueName);
+        }
     };
 
     AdminController.prototype.queueSP = function(game){

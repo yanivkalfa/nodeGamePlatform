@@ -26,6 +26,11 @@ module.exports = function(_s, _rf){
         return this.RoutSjax.rout(spark, msg);
     };
 
+    RoutSocket.prototype.queue = function(spark, msg){
+        console.log(msg);
+        //return this.RoutSjax.rout(spark, msg);
+    };
+
 
     return RoutSocket;
 };
