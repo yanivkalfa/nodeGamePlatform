@@ -2,17 +2,23 @@
  * Created by Yaniv-Kalfa on 1/2/15.
  */
 angular.module(ngp.const.app.name)
-    .service('ChatOut', [
+    .factory('ChatOut', [
+        'Terminal',
         'WebSocket',
         'Authorization',
         ChatOut
     ]);
 
-function ChatOut(WebSocket, Authorization) {
+function ChatOut(Terminal,WebSocket, Authorization) {
 
-    function ChatOutFactory(){ }
+    function ChatOutFactory(){
+        Terminal.apply(this, arguments);
+    }
 
-    ChatOutFactory.prototype =  {
+    ChatOutFactory.prototype = Object.create(Terminal.prototype);
+    ChatOutFactory.prototype.constructor = ChatOutFactory;
+
+    var prototypeExtend =  {
         w : function(args){
             this.msg(args, 'privateMsg', 'add');
         },
@@ -80,5 +86,7 @@ function ChatOut(WebSocket, Authorization) {
 
     };
 
-    return ChatOutFactory;
+    _.assign(ChatOutFactory.prototype, prototypeExtend);
+
+    return new ChatOutFactory();
 }

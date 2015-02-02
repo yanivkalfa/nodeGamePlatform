@@ -11,7 +11,7 @@ angular.module(ngp.const.app.name)
         'Api',
         'Authorization',
         'Notify',
-        'Terminal',
+        'ChatOut',
         'Chat',
         adminController
     ]);
@@ -25,7 +25,7 @@ function adminController(
     Api,
     Authorization,
     Notify,
-    Terminal,
+    ChatOut,
     Chat
     ) {
 
@@ -44,7 +44,19 @@ function adminController(
 
     };
 
-    AdminController.prototype.setGameSearchImg = function(game){
+    AdminController.prototype.inQueue = function(game){
+        game.inQueue = true;
+    };
+
+    AdminController.prototype.outOfQueue = function(game){
+        game.inQueue = false;
+    };
+
+    AdminController.prototype.setSearchImg = function(game){
+        game.img = 'queueSearching.gif';
+    };
+
+    AdminController.prototype.setSearchImg = function(game){
         game.img = 'queueSearching.gif';
     };
 
@@ -90,7 +102,8 @@ function adminController(
     };
 
     AdminController.prototype.queueMP = function(game){
-        this.setGameSearchImg(game);
+        this.setSearchImg(game);
+        this.inQueue(game);
         console.log(game);
     };
 
@@ -140,11 +153,11 @@ function adminController(
             , msg
             ;
 
-        if(msg = Terminal.isMessageACommend(this.commandLine)){
-            Terminal.analyseMessage(msg);
+        if(msg = ChatOut.isMessageACommend(this.commandLine)){
+            ChatOut.analyseMessage(msg);
         }else{
             msg = "add " + rName + " " + this.commandLine;
-            Terminal.analyseMessage(msg);
+            ChatOut.analyseMessage(msg);
         }
         this.commandLine = '';
     };

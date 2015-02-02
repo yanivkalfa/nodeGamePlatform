@@ -9,22 +9,17 @@ angular.module(ngp.const.app.name)
 
 function Terminal(ChatOut) {
 
-    function TerminalService(){
-        ChatOut.apply(this, arguments);
-
+    function TerminalFactory(){
         this._commend = "";
         this._arguments = "";
     }
 
-    TerminalService.prototype = Object.create(ChatOut.prototype);
-    TerminalService.prototype.constructor = TerminalService;
 
-
-    TerminalService.prototype.isMessageACommend = function(msg){
+    TerminalFactory.prototype.isMessageACommend = function(msg){
         return (msg.slice(0, 1) == "/") ? msg.slice(1) : false ;
     };
 
-    TerminalService.prototype.analyseMessage = function(msg){
+    TerminalFactory.prototype.analyseMessage = function(msg){
         var temp = msg.split(" "), self = this;
         self._commend = temp[0];
         self._arguments = temp.splice(1);
@@ -36,5 +31,5 @@ function Terminal(ChatOut) {
         return {"success":false,"msg":"4004", errorIn: self._commend}
     };
 
-    return new TerminalService();
+    return TerminalFactory;
 }
