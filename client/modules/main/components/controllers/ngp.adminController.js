@@ -39,7 +39,7 @@ function adminController(
         this.games = [];
         this.imgUrl = ngp.const.app.imgUrl;
         this.init();
-        console.log(ChatOut);
+        console.log($scope);
     }
 
     AdminController.prototype.init = function(){
@@ -107,8 +107,6 @@ function adminController(
     AdminController.prototype.queueMP = function(game){
         this.setSearchImg(game);
         this.inQueue(game);
-        console.log(game);
-
         if(QueueOut.analyseMessage("join " + game.queueName)){
             Notify.success('Queued for: ', game.queueName);
         }
