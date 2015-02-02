@@ -15,8 +15,6 @@ angular.module(ngp.const.app.name)
         'Chat',
         'Queues',
         'QueueOut',
-        //'RoutQueue',
-        //'WebSocket',
         adminController
     ]);
 
@@ -33,8 +31,6 @@ function adminController(
     Chat,
     Queues,
     QueueOut
-    //RoutQueue,
-    //WebSocket
     ) {
 
     function AdminController(){
@@ -44,13 +40,6 @@ function adminController(
         this.commandLine = '';
         this.games = [];
         this.imgUrl = ngp.const.app.imgUrl;
-        /*
-        this.RoutQueue = new RoutQueue();
-        WebSocket.queue = function(msg){
-            console.log(msg);
-            self.RoutQueue.rout(msg);
-        };
-        */
         this.init();
 
     }
