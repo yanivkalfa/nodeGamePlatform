@@ -35,6 +35,7 @@ function adminController(
         this.Authorization = Authorization.getUser();
         this.commandLine = '';
         this.games = [];
+        this.imgUrl = ngp.const.app.imgUrl;
         this.init();
     }
 
