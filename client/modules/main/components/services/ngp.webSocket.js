@@ -35,6 +35,13 @@ function webSocket($rootScope, $q, Authorization, RoutChat) {
                 self[msg.m](msg.d);
             });
 
+            this.Primus.on('incoming::pong', function(msg){
+                console.log('incoming',msg);
+            });
+            this.Primus.on('outgoing::ping', function(msg){
+                console.log('outgoing',msg);
+            });
+
             this.Primus.on('open', function open() {
                 self.connected = true;
                 console.log(self.Primus);

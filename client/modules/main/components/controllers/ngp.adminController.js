@@ -13,6 +13,7 @@ angular.module(ngp.const.app.name)
         'Notify',
         'ChatOut',
         'Chat',
+        'Queues',
         'QueueOut',
         'RoutQueue',
         'WebSocket',
@@ -30,6 +31,7 @@ function adminController(
     Notify,
     ChatOut,
     Chat,
+    Queues,
     QueueOut,
     RoutQueue,
     WebSocket
@@ -52,9 +54,8 @@ function adminController(
 
     AdminController.prototype.init = function(){
         this.getGames();
-
     };
-
+/*
     AdminController.prototype.inQueue = function(game){
         game.inQueue = true;
     };
@@ -65,7 +66,7 @@ function adminController(
 
     AdminController.prototype.setSearchImg = function(game){
         game.img = 'queueSearching.gif';
-    };
+    };*/
 
     AdminController.prototype.setSearchImg = function(game){
         game.img = 'queueSearching.gif';
@@ -79,7 +80,6 @@ function adminController(
         var self = this;
         _(games).forEach(function(game){
             game.img = game.name + '.png';
-            game.inQueue = false;
         });
 
         this.games = games;
@@ -112,11 +112,22 @@ function adminController(
         this.api.doRequest(options).then(success).catch(fail);
     };
 
-    AdminController.prototype.queueMP = function(game){
-        this.setSearchImg(game);
-        this.inQueue(game);
-        if(QueueOut.analyseMessage("join " + game.queueName)){
-            Notify.success('Queued for: ', game.queueName);
+    AdminController.prototype.queueMP = function(g){
+        var self = this
+            , queue = {
+                users : {id : self.Authorization.id, username : self.Authorization.username},
+                name:g.queueName,
+                end : function(id){
+                    self.setGameImg(g);
+                },
+                ready : function(){}
+            };
+
+        Queues.add(queue);
+        this.setSearchImg(g);
+
+        if(QueueOut.analyseMessage("join " + g.queueName)){
+            Notify.success('Queued for: ', g.queueName);
         }
     };
 
