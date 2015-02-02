@@ -76,6 +76,9 @@
     color: white;
     padding:5px 10px;
     font-weight: bold;
+    position: absolute;
+    top: 30px;
+    left: 33%;
 }
 
 .notify-success{
