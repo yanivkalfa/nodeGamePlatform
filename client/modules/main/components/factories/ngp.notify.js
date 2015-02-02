@@ -37,9 +37,10 @@ function Notify($rootScope) {
             this.message(arguments);
         },
         message : function(args) {
-            console.log(args);
-            var _self = this;
-            this.msg = args;
+            var _self = this
+                , msg = args.join(' ')
+                ;
+            this.msg = msg;
             this.show = true;
             if(this.options.timeout){
                 setTimeout(function(){
