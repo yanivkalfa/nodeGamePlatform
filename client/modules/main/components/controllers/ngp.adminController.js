@@ -48,8 +48,10 @@ function adminController(
 
         success = function(resp){
             if(resp.payload.success){
-               self.games = resp.payload.data;
-                console.log(self.games);
+                self.games = resp.payload.data;
+                _(self.games).forEach(function(game){
+                    game.img = game.name + '.png';
+                })
             }else{
                 Notify.error('Error: ' + resp.payload.data);
             }
