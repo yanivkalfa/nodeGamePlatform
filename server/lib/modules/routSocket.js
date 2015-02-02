@@ -26,13 +26,10 @@ module.exports = function(_s, _rf){
         console.log(msg);
         var data = {
             "m" : 'ready',
-            "d" : {
-                "queue" : msg.d.queue,
-                "users" : msg.d.users
-            }
+            "d" : msg.d
         };
 
-        spark.write({"m":'queue', d:{}});
+        spark.write({"m":'queue', d:data});
         //return this.RoutSjax.rout(spark, msg);
     };
 
