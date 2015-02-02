@@ -28,6 +28,15 @@ module.exports = function(_s, _rf){
 
     RoutSocket.prototype.queue = function(spark, msg){
         console.log(msg);
+        var data = {
+            "m" : 'ready',
+            "d" : {
+                "queue" : msg.d.d.queue,
+                "users" : msg.d.d.users
+            }
+        };
+
+        spark.write({"m":'queue', d:{}});
         //return this.RoutSjax.rout(spark, msg);
     };
 

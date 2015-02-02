@@ -15,29 +15,7 @@ module.exports = function(_s, _rf){
     RoutQueue.prototype.constructor = RoutQueue;
 
 
-    RoutQueue.prototype.privateMsg = function(spark, msg){
-        console.log('private message :', msg);
-        var  toSpark;
-
-        toSpark = _s.primus.spark(msg.toSpark);
-        if(!toSpark) {
-            return {s: false, d : 'We were unable to find this user'};
-        }
-
-        var data = {
-            "m" : 'msg',
-            "d" : {
-                "m" : "privateMsg",
-                "d" : msg
-            }
-        };
-
-        delete data.d.d.fromSpark;
-        delete data.d.d.toSpark;
-
-        toSpark.write({"m": "chat", "d":data});
-        return {s: true, d : 'Message sent successfully'};
-    };
+    RoutQueue.prototype.privateMsg = function(spark, msg){};
 
 
 
