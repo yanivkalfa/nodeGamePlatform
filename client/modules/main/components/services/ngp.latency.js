@@ -41,8 +41,8 @@ function Latency() {
         },
         incomingPong : function(unixTimestamp){
             var self = this;
-            console.log('incomingPong',unixTimestamp);
-            this._pingreturn = unixTimestamp;
+            console.log('incomingPong',parseInt(unixTimestamp));
+            this._pingreturn = parseInt(unixTimestamp);
             self.calculateLatency();
 
         },
