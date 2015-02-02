@@ -44,6 +44,14 @@ function adminController(
 
     };
 
+    AdminController.prototype.setGameSearchImg = function(game){
+        game.img = 'queueSearching.gif';
+    };
+
+    AdminController.prototype.setGameImg = function(game){
+        game.img = game.name + '.png';
+    };
+
     AdminController.prototype.getGames = function(){
         var success,fail, options, self = this;
 
@@ -75,6 +83,7 @@ function adminController(
     };
 
     AdminController.prototype.queueMP = function(game){
+        this.setGameSearchImg(game);
         console.log(game);
     };
 
