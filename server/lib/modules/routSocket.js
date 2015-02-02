@@ -31,8 +31,8 @@ module.exports = function(_s, _rf){
         var data = {
             "m" : 'ready',
             "d" : {
-                "queue" : msg.d.d.queue,
-                "users" : msg.d.d.users
+                "queue" : msg.d.queue,
+                "users" : msg.d.users
             }
         };
 
