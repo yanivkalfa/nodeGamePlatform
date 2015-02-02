@@ -42,7 +42,7 @@ function Queue(
     QueueFactory.prototype.init = function(){
         var self = this;
         self.setMinDetails();
-        this._timer = setTimeout(_.bind(self.timedOut,self), self.maxWaitTime);
+        this._timer = setTimeout(_.bind(self.queueTimedOut,self), self.maxWaitTime);
     };
 
     QueueFactory.prototype.setMinDetails = function(){
