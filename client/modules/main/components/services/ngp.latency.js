@@ -35,11 +35,13 @@ function Latency() {
         },
 
         outgoingPing : function(unixTimestamp){
+            console.log('outgoingPing',unixTimestamp);
             this._pingSent = unixTimestamp;
             if(this.cycleTime <= this._timeElapsed) this.init();
         },
         incomingPong : function(unixTimestamp){
             var self = this;
+            console.log('incomingPong',unixTimestamp);
             this._pingreturn = unixTimestamp;
             self.calculateLatency();
 

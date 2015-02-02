@@ -43,6 +43,7 @@ function webSocket($rootScope, $q, Authorization, RoutChat, Latency) {
 
             this.Primus.on('incoming::pong', function(msg){
                 Latency.incomingPong(msg);
+                console.log(Latency.getLatency());
                 $rootScope.ngp.bar.stats.latency = Latency.getLatency();
                 $rootScope.$apply();
                 console.log('incoming');
