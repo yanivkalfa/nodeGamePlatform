@@ -14,6 +14,7 @@ angular.module(ngp.const.app.name)
         'ChatOut',
         'Chat',
         'QueueOut',
+        'RoutQueue',
         adminController
     ]);
 
@@ -28,7 +29,8 @@ function adminController(
     Notify,
     ChatOut,
     Chat,
-    QueueOut
+    QueueOut,
+    RoutQueue
     ) {
 
     function AdminController(){
@@ -39,7 +41,6 @@ function adminController(
         this.games = [];
         this.imgUrl = ngp.const.app.imgUrl;
         this.init();
-        console.log($scope);
     }
 
     AdminController.prototype.init = function(){

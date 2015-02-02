@@ -4,13 +4,14 @@
 angular.module(ngp.const.app.name)
     .factory('RoutQueue', [
         '$rootScope',
+        '$scope',
         'Authorization',
         'Chat',
         'Router',
         RoutQueue
     ]);
 
-function RoutQueue($rootScope,Authorization, Chat, Router) {
+function RoutQueue($rootScope,$scope,Authorization, Chat, Router) {
 
     function RoutQueueFactory(){
         Router.apply(this, arguments);
