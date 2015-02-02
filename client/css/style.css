@@ -68,16 +68,16 @@
 }
 
 .notifyWindow{
-    width:700px;
-    margin:-590px auto 0;
-    border:1px solid black;
+    width: 620px;
+    border: 1px solid #000;
     opacity: 0.9;
-    z-index: 9999;
-    color: white;
-    padding:5px 10px;
+    z-index: 2147483647;
+    color: #FFF;
+    padding: 5px 10px;
     font-weight: bold;
     position: absolute;
-    left: 33%;
+    left: 31%;
+    top: 90px;
 }
 
 .notify-success{
