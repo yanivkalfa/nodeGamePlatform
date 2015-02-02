@@ -8,7 +8,10 @@ angular.module(ngp.const.app.name)
         RoutQueue
     ]);
 
-function RoutQueue($rootScope,Router) {
+function RoutQueue(
+    $rootScope,
+    Router
+    ) {
 
     function RoutQueueFactory(){
         Router.apply(this, arguments);

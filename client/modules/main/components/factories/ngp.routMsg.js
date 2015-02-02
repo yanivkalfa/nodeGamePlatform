@@ -11,7 +11,13 @@ angular.module(ngp.const.app.name)
         RoutMsg
     ]);
 
-function RoutMsg($rootScope, Router, Authorization, Chat, UtilFunc) {
+function RoutMsg(
+    $rootScope,
+    Router,
+    Authorization,
+    Chat,
+    UtilFunc
+    ) {
 
     function RoutMsgFactory(){
         Router.apply(this, arguments);

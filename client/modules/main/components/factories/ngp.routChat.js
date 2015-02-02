@@ -9,7 +9,11 @@ angular.module(ngp.const.app.name)
         RoutChat
     ]);
 
-function RoutChat(Router, RoutMsg, RoutRoom) {
+function RoutChat(
+    Router,
+    RoutMsg,
+    RoutRoom
+    ) {
 
     function RoutChatFactory(){
         Router.apply(this, arguments);

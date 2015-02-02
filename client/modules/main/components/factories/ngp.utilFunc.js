@@ -4,11 +4,10 @@
 
 angular.module(ngp.const.app.name)
     .factory('UtilFunc', [
-        '$rootScope',
         UtilFunc
     ]);
 
-function UtilFunc($rootScope) {
+function UtilFunc() {
 
 
     function UtilFuncFactory(){}
@@ -28,6 +27,10 @@ function UtilFunc($rootScope) {
                 if(this[i] == index) return i;
             }
             return -1;
+        },
+
+        toArray : function(item){
+            return !_.isArray(item) ? [item] : item;
         }
     };
 

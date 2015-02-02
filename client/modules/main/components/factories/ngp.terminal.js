@@ -6,7 +6,7 @@ angular.module(ngp.const.app.name)
         Terminal
     ]);
 
-function Terminal(ChatOut) {
+function Terminal() {
 
     function TerminalFactory(){
         this._commend = "";

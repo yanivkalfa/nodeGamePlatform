@@ -8,7 +8,9 @@ angular.module(ngp.const.app.name)
         Notify
     ]);
 
-function Notify($rootScope) {
+function Notify(
+    $rootScope
+    ) {
 
 
     function NotifyFactory(){

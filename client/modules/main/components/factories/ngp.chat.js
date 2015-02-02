@@ -9,7 +9,10 @@ angular.module(ngp.const.app.name)
         Chat
     ]);
 
-function Chat($rootScope, UtilFunc) {
+function Chat(
+    $rootScope,
+    UtilFunc
+    ) {
 
 
     function ChatFactory(){}

@@ -121,13 +121,20 @@ function adminController(
                     self.setGameImg(g);
                 },
                 ready : function(){}
-            };
+                ,
+                timedOut : function(){}
+            }
+            , analysed
+            ;
 
-        Queues.add(queue);
+        queue = Queues.add(queue);
         this.setSearchImg(g);
 
-        if(QueueOut.analyseMessage("join " + g.queueName)){
-            Notify.success('Queued for: ', g.queueName);
+        analysed = QueueOut.analyseMessage("join " + queue.id);
+        if(analysed.success){
+            Notify.success('Queued for: ', queue.name);
+        }else{
+            Notify.error(analysed.msg);
         }
     };
 

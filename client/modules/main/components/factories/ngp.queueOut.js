@@ -5,11 +5,17 @@ angular.module(ngp.const.app.name)
     .factory('QueueOut', [
         'Terminal',
         'WebSocket',
-        'Authorization',
+        //'Authorization',
+        'Queues',
         QueueOut
     ]);
 
-function QueueOut(Terminal,WebSocket, Authorization) {
+function QueueOut(
+    Terminal,
+    WebSocket,
+    //Authorization,
+    Queues
+    ) {
 
     function QueueOutFactory(){
         Terminal.apply(this, arguments);
@@ -28,19 +34,17 @@ function QueueOut(Terminal,WebSocket, Authorization) {
         },
 
         queue : function(args, action){
-            var user = Authorization.getUser();
+            var queue = Queues.get(args[0]);
+            if(!queue) return {success:false, "msg" : 'Queue was not found'};
             var data  = {
                 "m" : 'queue',
                 "d" : {
                     "m" : action,
-                    "d" : {
-                        "queue" : args[0],
-                        "users" : {username : user.username, id : user.id}
-                    }
+                    "d" : queue.getMinDetails()
                 }
             };
             WebSocket.Primus.write(data);
-            return true;
+            return {success:true};
         }
     };
 

@@ -17,24 +17,23 @@ function Queues(
 
     QueuesService.prototype.add =  function(q){
         var self = this
-            , id
             ;
 
         q.id = self.createRequestId();
         return self.queues[q.id] = new Queue(q);
     };
 
-    QueuesService.prototype.remove =  function(qId){
+    QueuesService.prototype.remove =  function(id){
         var self = this;
-        if(_.isEmpty(self.queues[qId])) return false;
-        self.queues[qId].end();
-        delete self.queues[qId];
+        if(_.isEmpty(self.queues[id])) return false;
+        self.queues[id].endQueue('Queue removed');
+        delete self.queues[id];
     };
 
-    QueuesService.prototype.get =  function(qId){
+    QueuesService.prototype.get =  function(id){
         var self = this;
-        if(_.isEmpty(self.queues[qId])) return false;
-        return self.queues[qId];
+        if(_.isEmpty(self.queues[id])) return false;
+        return self.queues[id];
     };
 
     QueuesService.prototype.createRequestId = function(){

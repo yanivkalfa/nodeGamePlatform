@@ -9,7 +9,11 @@ angular.module(ngp.const.app.name)
         ChatOut
     ]);
 
-function ChatOut(Terminal,WebSocket, Authorization) {
+function ChatOut(
+    Terminal,
+    WebSocket,
+    Authorization
+    ) {
 
     function ChatOutFactory(){
         Terminal.apply(this, arguments);

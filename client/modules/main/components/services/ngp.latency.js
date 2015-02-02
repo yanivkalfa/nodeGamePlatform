@@ -65,7 +65,6 @@ function Latency($rootScope,WebSocket) {
         },
         calculateLatency : function(){
             var tripTime = this._pingreturn - this._pingSent;
-            console.log(tripTime);
             this._rounds++;
             this._timeElapsed += tripTime;
             this._accomulativeLatency += tripTime;
