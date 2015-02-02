@@ -8,7 +8,7 @@ angular.module(ngp.const.app.name)
         '$q',
         'Authorization',
         'RoutChat',
-        'Latency'.
+        'Latency',
         webSocket
     ]);
 
