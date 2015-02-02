@@ -36,18 +36,8 @@ function webSocket($rootScope, $q, Authorization, RoutChat, Latency) {
                 self[msg.m](msg.d);
             });
 
-            this.Primus.on('outgoing::ping', function(msg){
-                Latency.outgoingPing(msg);
-                console.log('outgoing');
-            });
-
-            this.Primus.on('incoming::pong', function(msg){
-                Latency.incomingPong(msg);
-                console.log(Latency.getLatency());
-                $rootScope.ngp.bar.stats.latency = Latency.getLatency();
-                $rootScope.$apply();
-                console.log('incoming');
-            });
+            this.Primus.on('outgoing::ping', _.bind(Latency.outgoingPing,Latency));
+            this.Primus.on('incoming::pong', _.bind(Latency.incomingPong,Latency));
 
 
 

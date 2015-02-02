@@ -3,10 +3,11 @@
  */
 angular.module(ngp.const.app.name)
     .service('Latency', [
+        '$rootScope',
         Latency
     ]);
 
-function Latency() {
+function Latency($rootScope) {
 
     function LatencyService(){
         this._pingSent = 0;
@@ -35,22 +36,22 @@ function Latency() {
         },
 
         outgoingPing : function(unixTimestamp){
-            console.log('outgoingPing',unixTimestamp);
-            this._pingSent = unixTimestamp;
+            this._pingSent = Date.now();
             if(this.cycleTime <= this._timeElapsed) this.init();
         },
         incomingPong : function(unixTimestamp){
             var self = this;
-            console.log('incomingPong',parseInt(unixTimestamp));
-            this._pingreturn = parseInt(unixTimestamp);
+            this._pingreturn = Date.now();
             self.calculateLatency();
-
+            $rootScope.ngp.bar.stats.latency = self.getLatency();
+            $rootScope.$apply();
         },
         calculateLatency : function(){
-            var tipTime = this._pingreturn - this._pingSent;
+            var tripTime = this._pingreturn - this._pingSent;
+            console.log(tripTime);
             this._rounds++;
-            this._timeElapsed += tipTime;
-            this._accomulativeLatency += tipTime;
+            this._timeElapsed += tripTime;
+            this._accomulativeLatency += tripTime;
             this._latency = this._accomulativeLatency/this._rounds;
         },
         getLatency : function(){
