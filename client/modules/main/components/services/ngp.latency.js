@@ -4,10 +4,11 @@
 angular.module(ngp.const.app.name)
     .service('Latency', [
         '$rootScope',
+        'WebSocket',
         Latency
     ]);
 
-function Latency($rootScope) {
+function Latency($rootScope,WebSocket) {
 
     function LatencyService(){
         this._pingSent = 0;
@@ -18,21 +19,37 @@ function Latency($rootScope) {
         this._timeElapsed = 0;
 
         this.cycleTime = 60*60*1000;
-        //this.pingEvery = 30*1000;
-        //this.pingInterval = false;
     }
 
     LatencyService.prototype =  {
 
         init : function(){
             var self = this;
-            self._pingSent = 0;
-            self._pingreturn = 0;
-            self._accomulativeLatency = 0;
-            self._timeElapsed = 0;
-            self._latency = 0;
-            self._rounds = 0;
+            self.reset();
+            self.bindSocket();
             return self;
+        },
+
+        reset : function(){
+            this._pingSent = 0;
+            this._pingreturn = 0;
+            this._accomulativeLatency = 0;
+            this._timeElapsed = 0;
+            this._latency = 0;
+            this._rounds = 0;
+            this.unbindSocket();
+        },
+
+        unbindSocket : function(){
+            var self = this;
+            //WebSocket.Primus.on('outgoing::ping', _.bind(self.outgoingPing,self));
+            //WebSocket.Primus.on('incoming::pong', _.bind(self.incomingPong,self));
+        },
+
+        bindSocket : function(){
+            var self = this;
+            WebSocket.Primus.on('outgoing::ping', _.bind(self.outgoingPing,self));
+            WebSocket.Primus.on('incoming::pong', _.bind(self.incomingPong,self));
         },
 
         outgoingPing : function(unixTimestamp){
@@ -57,43 +74,6 @@ function Latency($rootScope) {
         getLatency : function(){
             return Math.round(this._latency);
         }
-        /*
-        destroy : function(){
-            this.reset();
-        },
-
-        pingServer : function(){
-            this._pingSent = Date.now();
-            WebSocket.Primus.write({"m": "ping", "d":"p"});
-
-            if(this.cycleTime <= this._timeElapsed) this.init();
-
-            this._timeElapsed += this.pingEvery;
-        },
-
-        reset : function(){
-            this._pingSent = 0;
-            this._pingreturn = 0;
-            this._accomulativeLatency = 0;
-            this._timeElapsed = 0;
-            this._latency = 0;
-            this._rounds = 0;
-            //clearInterval(this.pingInterval);
-        },*/
-
-
-        /*
-        bindPing : function(){
-            var self = this;
-            WebSocket.ping = function(data){
-                self.calculateLatency(data);
-                $rootScope.ngp.bar.stats.latency = self.getLatency();
-                $rootScope.$apply();
-            };
-        }
-        */
-
-
     };
 
     return new LatencyService();
