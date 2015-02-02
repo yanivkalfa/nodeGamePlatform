@@ -24,26 +24,27 @@ function Notify($rootScope) {
             this.show = false;
         },
 
-        success : function(msg) {
+        success : function() {
             this.class = 'notify-success';
-            this.message(msg);
+            this.message(arguments);
         },
-        error : function(msg) {
+        error : function() {
             this.class = 'notify-failed';
-            this.message(msg);
+            this.message(arguments);
         },
-        warning : function(msg) {
+        warning : function() {
             this.class = 'notify-warning';
-            this.message(msg);
+            this.message(arguments);
         },
-        message : function(msg) {
+        message : function(args) {
+            console.log(args);
             var _self = this;
-            this.msg = msg;
+            this.msg = args;
             this.show = true;
-            $rootScope.$apply();
             if(this.options.timeout){
                 setTimeout(function(){
                     _self.reset();
+                    $rootScope.$apply();
                 },_self.options.timeout);
             }
         }
