@@ -3,7 +3,6 @@
  */
 angular.module(ngp.const.app.name)
     .service('Terminal', [
-        'ChatOut',
         Terminal
     ]);
 

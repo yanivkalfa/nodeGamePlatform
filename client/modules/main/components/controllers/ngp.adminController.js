@@ -37,6 +37,7 @@ function adminController(
         this.games = [];
         this.imgUrl = ngp.const.app.imgUrl;
         this.init();
+        console.log(ChatOut);
     }
 
     AdminController.prototype.init = function(){
