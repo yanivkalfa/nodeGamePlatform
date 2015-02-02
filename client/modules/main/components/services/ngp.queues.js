@@ -20,6 +20,7 @@ function Queues(
             ;
 
         q.id = self.createRequestId();
+        console.log('got here: c');
         return self.queues[q.id] = new Queue(q);
     };
 

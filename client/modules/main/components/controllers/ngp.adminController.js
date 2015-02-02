@@ -128,9 +128,12 @@ function adminController(
             ;
 
         queue = Queues.add(queue);
+        console.log('got here: a');
         this.setSearchImg(g);
 
         analysed = QueueOut.analyseMessage("join " + queue.id);
+
+        console.log('got here: end');
         if(analysed.success){
             Notify.success('Queued for: ', queue.name);
         }else{

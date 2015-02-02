@@ -13,6 +13,7 @@ function Queue(
     ){
 
     function QueueFactory(queue){
+        console.log('got here: d');
         this._startTime = Date.now();
         this._endTime = undefined;
         this._timer = undefined;
@@ -33,7 +34,9 @@ function Queue(
 
         this.timedOut = queue.timedOut || [];
         this.timedOut = UtilFunc.toArray(this.timedOut);
+        console.log('got here: f');
         this.init();
+        console.log('got here: g');
     }
 
     QueueFactory.prototype.init = function(){

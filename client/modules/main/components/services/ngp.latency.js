@@ -42,8 +42,8 @@ function Latency($rootScope,WebSocket) {
 
         unbindSocket : function(){
             var self = this;
-            //WebSocket.Primus.on('outgoing::ping', _.bind(self.outgoingPing,self));
-            //WebSocket.Primus.on('incoming::pong', _.bind(self.incomingPong,self));
+            WebSocket.Primus.removeListener('outgoing::ping', _.bind(self.outgoingPing,self));
+            WebSocket.Primus.removeListener('incoming::pong', _.bind(self.incomingPong,self));
         },
 
         bindSocket : function(){

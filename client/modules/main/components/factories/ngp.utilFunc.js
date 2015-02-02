@@ -30,6 +30,7 @@ function UtilFunc() {
         },
 
         toArray : function(item){
+            console.log('got here: d');
             return !_.isArray(item) ? [item] : item;
         }
     };
