@@ -18,8 +18,8 @@ function RoutQueue($rootScope,Router) {
     RoutQueueFactory.prototype.constructor = RoutQueueFactory;
 
 
-    RoutQueueFactory.prototype.ready = function(room){
-
+    RoutQueueFactory.prototype.ready = function(msg){
+        console.log(msg);
     };
 
     RoutQueueFactory.prototype.leave = function(room){

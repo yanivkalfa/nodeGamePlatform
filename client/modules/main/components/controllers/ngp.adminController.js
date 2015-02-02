@@ -42,8 +42,12 @@ function adminController(
         this.commandLine = '';
         this.games = [];
         this.imgUrl = ngp.const.app.imgUrl;
+        this.RoutQueue = new RoutQueue();
+        WebSocket.queue = function(msg){
+            self.RoutChat.rout(msg);
+        };
         this.init();
-        console.log(WebSocket);
+
     }
 
     AdminController.prototype.init = function(){
