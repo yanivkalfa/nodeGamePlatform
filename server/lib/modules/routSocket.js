@@ -13,10 +13,6 @@ module.exports = function(_s, _rf){
     RoutSocket.prototype = Object.create(router.prototype);
     RoutSocket.prototype.constructor = RoutSocket;
 
-    RoutSocket.prototype.ping = function(spark, data){
-        spark.write({"m": "ping", "d":"p"});
-        return true;
-    };
 
     RoutSocket.prototype.chat = function(spark, msg){
         return this.RoutChat.rout(spark, msg);

@@ -14,6 +14,7 @@ angular.module(ngp.const.app.name)
 function webSocket($rootScope, $q, Authorization, RoutChat) {
 
     var RoutChat = new RoutChat();
+    var RoutQueue = new RoutQueue();
 
     function WebSocketService(){
         this.Primus = false;

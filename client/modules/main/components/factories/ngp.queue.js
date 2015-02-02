@@ -66,7 +66,6 @@ function Queue(
         index = self.indexOf(user.id);
         if(index !== -1)return false;
         self.users.push(user);
-
     };
     
     QueueFactory.prototype.removeUser = function(id){
