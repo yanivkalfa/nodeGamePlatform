@@ -4,7 +4,7 @@
 angular.module(ngp.const.app.name)
     .factory('RoutMsg', [
         '$rootScope',
-        //'$scope',$scope,
+        '$scope',
         'Router',
         'Authorization',
         'Chat',
@@ -12,11 +12,11 @@ angular.module(ngp.const.app.name)
         RoutMsg
     ]);
 
-function RoutMsg($rootScope, Router, Authorization, Chat, UtilFunc) {
+function RoutMsg($rootScope,$scope, Router, Authorization, Chat, UtilFunc) {
 
     function RoutMsgFactory(){
         Router.apply(this, arguments);
-        //console.log('$scope', $scope);
+        console.log('$scope', $scope);
     }
 
     RoutMsgFactory.prototype = Object.create(Router.prototype);
