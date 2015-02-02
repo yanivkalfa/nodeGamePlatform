@@ -8,13 +8,14 @@ angular.module(ngp.const.app.name)
         '$q',
         'Authorization',
         'RoutChat',
+        'RoutQueue',
         webSocket
     ]);
 
-function webSocket($rootScope, $q, Authorization, RoutChat) {
+function webSocket($rootScope, $q, Authorization, RoutChat, RoutQueue) {
 
     var RoutChat = new RoutChat();
-    //var RoutQueue = new RoutQueue();
+    var RoutQueue = new RoutQueue();
 
     function WebSocketService(){
         this.Primus = false;
@@ -61,6 +62,10 @@ function webSocket($rootScope, $q, Authorization, RoutChat) {
 
         chat : function(msg){
             RoutChat.rout(msg);
+        },
+
+        queue : function(msg){
+            RoutQueue.rout(msg);
         },
 
         end : function(){ this.Primus.end(); },
