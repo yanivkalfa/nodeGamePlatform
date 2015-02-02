@@ -105,6 +105,7 @@ function adminController(
     };
 
     AdminController.prototype.queueMP = function(game){
+        /*
         this.setSearchImg(game);
         this.inQueue(game);
         console.log(game);
@@ -112,6 +113,7 @@ function adminController(
         if(QueueOut.analyseMessage("join " + game.queueName)){
             Notify.success('Queued for: ', game.queueName);
         }
+        */
     };
 
     AdminController.prototype.queueSP = function(game){

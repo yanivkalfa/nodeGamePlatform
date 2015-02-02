@@ -6,10 +6,10 @@ angular.module(ngp.const.app.name)
         'Terminal',
         'WebSocket',
         'Authorization',
-        ChatOut
+        QueueOut
     ]);
 
-function ChatOut(Terminal,WebSocket, Authorization) {
+function QueueOut(Terminal,WebSocket, Authorization) {
 
     function QueueOutFactory(){
         Terminal.apply(this, arguments);
