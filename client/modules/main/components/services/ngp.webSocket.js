@@ -8,10 +8,11 @@ angular.module(ngp.const.app.name)
         '$q',
         'Authorization',
         'RoutChat',
+        'Latency'.
         webSocket
     ]);
 
-function webSocket($rootScope, $q, Authorization, RoutChat) {
+function webSocket($rootScope, $q, Authorization, RoutChat, Latency) {
 
     var RoutChat = new RoutChat();
 
@@ -35,12 +36,20 @@ function webSocket($rootScope, $q, Authorization, RoutChat) {
                 self[msg.m](msg.d);
             });
 
-            this.Primus.on('incoming::pong', function(msg){
-                console.log('incoming',msg);
-            });
             this.Primus.on('outgoing::ping', function(msg){
-                console.log('outgoing',msg);
+                Latency.outgoingPing(msg);
+                console.log('outgoing');
             });
+
+            this.Primus.on('incoming::pong', function(msg){
+                Latency.incomingPong(msg);
+                $rootScope.ngp.bar.stats.latency = Latency.getLatency();
+                $rootScope.$apply();
+                console.log('incoming');
+            });
+
+
+
 
             this.Primus.on('open', function open() {
                 self.connected = true;

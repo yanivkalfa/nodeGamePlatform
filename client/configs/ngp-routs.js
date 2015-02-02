@@ -65,7 +65,7 @@ function siteRouts($stateProvider, $urlRouterProvider, $locationProvider) {
 
             /*ChatIn: ['ChatIn', function(ChatIn) { return ChatIn.init(); } ],*/
             /**/
-            Latency: ['Latency', function(Latency) { return Latency.init(); } ]
+            //Latency: ['Latency', function(Latency) { return Latency.init(); } ]
         },
         data: {
             roles: ['registered']

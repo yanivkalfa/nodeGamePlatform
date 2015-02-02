@@ -3,12 +3,10 @@
  */
 angular.module(ngp.const.app.name)
     .service('Latency', [
-        '$rootScope',
-        'WebSocket',
         Latency
     ]);
 
-function Latency($rootScope, WebSocket) {
+function Latency() {
 
     function LatencyService(){
         this._pingSent = 0;
@@ -19,24 +17,44 @@ function Latency($rootScope, WebSocket) {
         this._timeElapsed = 0;
 
         this.cycleTime = 60*60*1000;
-        this.pingEvery = 30*1000;
-        this.pingInterval = false;
+        //this.pingEvery = 30*1000;
+        //this.pingInterval = false;
     }
 
     LatencyService.prototype =  {
 
         init : function(){
-
-            console.log('latency');
             var self = this;
-            this.reset();
-            this.bindPing();
-            this.pingServer();
-            clearInterval(this.pingInterval);
-            this.pingInterval = setInterval(_.bind(this.pingServer, this),this.pingEvery);
+            self._pingSent = 0;
+            self._pingreturn = 0;
+            self._accomulativeLatency = 0;
+            self._timeElapsed = 0;
+            self._latency = 0;
+            self._rounds = 0;
             return self;
         },
 
+        outgoingPing : function(unixTimestamp){
+            this._pingSent = unixTimestamp;
+            if(this.cycleTime <= this._timeElapsed) this.init();
+        },
+        incomingPong : function(unixTimestamp){
+            var self = this;
+            this._pingreturn = unixTimestamp;
+            self.calculateLatency();
+
+        },
+        calculateLatency : function(){
+            var tipTime = this._pingreturn - this._pingSent;
+            this._rounds++;
+            this._timeElapsed += tipTime;
+            this._accomulativeLatency += tipTime;
+            this._latency = this._accomulativeLatency/this._rounds;
+        },
+        getLatency : function(){
+            return Math.round(this._latency);
+        }
+        /*
         destroy : function(){
             this.reset();
         },
@@ -57,18 +75,11 @@ function Latency($rootScope, WebSocket) {
             this._timeElapsed = 0;
             this._latency = 0;
             this._rounds = 0;
-            clearInterval(this.pingInterval);
-        },
-        calculateLatency : function(){
-            this._rounds++;
-            this._pingreturn = Date.now();
-            this._accomulativeLatency += this._pingreturn - this._pingSent;
-            this._latency = this._accomulativeLatency/this._rounds;
-        },
-        getLatency : function(){
-            return Math.round(this._latency);
-        },
+            //clearInterval(this.pingInterval);
+        },*/
 
+
+        /*
         bindPing : function(){
             var self = this;
             WebSocket.ping = function(data){
@@ -77,6 +88,7 @@ function Latency($rootScope, WebSocket) {
                 $rootScope.$apply();
             };
         }
+        */
 
 
     };
