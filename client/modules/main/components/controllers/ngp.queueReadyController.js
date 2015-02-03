@@ -20,18 +20,19 @@ function queueReadyController(
     ) {
     function QueueReadyController(){
         this.queue = queue;
-        this.meIndex = queue.getMeUser();
+        this.myIndex = queue.getMyIndex();
+        this.user = queue.getUser();
     }
 
-    QueueReadyController.prototype.accept = function(user,index){
-        var analysed = QueueOut.analyseMessage("accept " + queue.id + " " + this.meIndex);
+    QueueReadyController.prototype.accept = function(){
+        var analysed = QueueOut.analyseMessage("accept " + queue.id + " " + this.myIndex);
         if(!analysed.success){
             Notify.error(analysed.msg);
         }
     };
 
     QueueReadyController.prototype.leaveQueue = function(){
-        var analysed = QueueOut.analyseMessage("decline " + queue.id +" " + this.meIndex);
+        var analysed = QueueOut.analyseMessage("decline " + queue.id +" " + this.myIndex);
         if(!analysed.success){
             Notify.error(analysed.msg);
         }

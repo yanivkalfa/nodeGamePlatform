@@ -69,7 +69,7 @@ function Queue(
         return  this.minDetails;
     };
 
-    QueueFactory.prototype.getMeUser = function(){
+    QueueFactory.prototype.getMyIndex = function(){
         var self = this
             , i
             ;
