@@ -59,6 +59,10 @@
 .mr_20{ margin-right: 20px; }
 .mr_25{ margin-right: 25px; }
 
+.t-a-l{text-align: left;}
+.t-a-r{text-align: right;}
+.t-a-c{text-align: center;}
+
 .pageWrap{
     width:800px;
     height:600px;
