@@ -13,7 +13,6 @@ function queueReadyController(
     queue
     ) {
     function QueueReadyController(){
-        var self = this;
         this.queue = queue;
     }
 
