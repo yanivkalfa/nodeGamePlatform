@@ -15,10 +15,9 @@ module.exports = function(_s, _rf){
     RoutQueue.prototype.constructor = RoutQueue;
 
     RoutQueue.prototype.join = function(spark, msg){
-        console.log('join',msg);
         var data = {
             "m" : 'ready',
-            "d" : msg.d
+            "d" : msg
         };
 
         spark.write({"m":'queue', d:data});
