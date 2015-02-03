@@ -6,7 +6,7 @@
         <li ng-repeat="(index, user) in qready.queue.users">
             <span class="queue-window-username">{{user.username}}: </span>
             <span class="queue-window-accepted">{{ user.accepted ? 'O.K' : 'waiting...' }}</span>
-            <button ng-show="{{user.isMe && user.accepted}}" class="btn btn-primary" ng-click="qready.accept(user, index)">ACCEPT</button>
+            <button ng-show="{{user.isMe && !user.accepted}}" class="btn btn-primary" ng-click="qready.accept(user, index)">ACCEPT</button>
         </li>
     </ul>
 </div>
