@@ -109,6 +109,7 @@ function adminController(
             , queue = {
                 users : {id : self.Authorization.id, username : self.Authorization.username, accepted : false, isMe:true},
                 name:g.queueName,
+                userCount : 1,
                 end : function(id){
                     self.setGameImg(g);
                 },
