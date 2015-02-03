@@ -2,7 +2,6 @@
     <h3 class="modal-title">Waiting for players to accept</h3>
 </div>
 <div class="modal-body">
-    {{qready}}
     <ul>
         <li ng-repeat="(index, user) in qready.queue.users">
             <span class="queue-window-username">{{user.username}}: </span>
