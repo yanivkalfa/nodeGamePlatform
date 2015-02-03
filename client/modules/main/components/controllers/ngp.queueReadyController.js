@@ -3,6 +3,9 @@
  */
 angular.module(ngp.const.app.name)
     .controller('queueReadyController', [
+        '$scope',
+        '$modalInstance',
+        'aQueue',
         queueReadyController
     ]);
 
