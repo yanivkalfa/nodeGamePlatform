@@ -26,10 +26,9 @@ function RoutQueue(
     RoutQueueFactory.prototype = Object.create(Router.prototype);
     RoutQueueFactory.prototype.constructor = RoutQueueFactory;
 
-    RoutQueueFactory.prototype.ready = function(queue){
-        var queue = Queues.get(queue.id);
+    RoutQueueFactory.prototype.ready = function(q){
+        var queue = Queues.get(q.id);
         queue.setRoom(queue.room);
-        console.log(queue);
 
         var modalInstance = $modal.open({
             templateUrl: ngp.const.app.url + '/tpl/directives/queuePopUp.html',
@@ -50,12 +49,12 @@ function RoutQueue(
         });
     };
 
-    RoutQueueFactory.prototype.leave = function(queue){
-        Queues.remove(queue.id);
+    RoutQueueFactory.prototype.leave = function(q){
+        Queues.remove(q.id);
     };
 
-    RoutQueueFactory.prototype.accept = function(queue){
-        var queue = Queues.getByRoomName(queue.room);
+    RoutQueueFactory.prototype.accept = function(q){
+        var queue = Queues.getByRoomName(q.room);
         queue.accept(queue.user);
         if(queue.usersReady()){
             queue.getWindow().close('Starting game');
@@ -63,8 +62,8 @@ function RoutQueue(
         }
     };
 
-    RoutQueueFactory.prototype.decline = function(queue){
-        var queue = Queues.getByRoomName(queue.room);
+    RoutQueueFactory.prototype.decline = function(q){
+        var queue = Queues.getByRoomName(q.room);
         queue.decline(queue.user);
         Queues.remove(queue.id);
         queue.getWindow().close('Decline game');
