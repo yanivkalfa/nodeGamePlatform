@@ -259,7 +259,7 @@ ul.multiPlayerGamesList li{
     margin-top:4px;
 }
 
-.modal-body {
+.modal-dialog {
     width:400px !important;
 }
 
