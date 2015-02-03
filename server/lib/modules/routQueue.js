@@ -28,22 +28,17 @@ module.exports = function(_s, _rf){
 
     RoutQueue.prototype.leave = function(spark, msg){
         var data = {
-            "m" : 'ready',
-            "d" : msg.d
+            "m" : 'leave',
+            "d" : msg
         };
-
         spark.write({"m":'queue', d:data});
     };
 
 
     RoutQueue.prototype.ready = function(spark, msg){
-        var data = {
-            "m" : 'ready',
-            "d" : msg.d
-        };
-
-        spark.write({"m":'queue', d:data});
+        /* future use*/
     };
+
     RoutQueue.prototype.accept = function(spark, msg){
 
         var data = {
@@ -54,15 +49,11 @@ module.exports = function(_s, _rf){
     };
 
     RoutQueue.prototype.decline = function(spark, msg){
-        console.log(msg);
-        /*
-         var data = {
-         "m" : 'ready',
-         "d" : msg.d
-         };
-
-         spark.write({"m":'queue', d:data});
-         */
+        var data = {
+            "m" : 'decline',
+            "d" : msg
+        };
+        _s.primus.room(msg.room).write({"m": "queue", "d":data});
     };
 
 

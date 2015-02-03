@@ -26,10 +26,9 @@ function RoutQueue(
     RoutQueueFactory.prototype = Object.create(Router.prototype);
     RoutQueueFactory.prototype.constructor = RoutQueueFactory;
 
-    RoutQueueFactory.prototype.ready = function(msg){
-        console.log('ready',msg);
-        var queue = Queues.get(msg.id);
-        queue.setRoom(msg.room);
+    RoutQueueFactory.prototype.ready = function(queue){
+        var queue = Queues.get(queue.id);
+        queue.setRoom(queue.room);
 
         var modalInstance = $modal.open({
             templateUrl: ngp.const.app.url + '/tpl/directives/queuePopUp.html',
@@ -44,27 +43,31 @@ function RoutQueue(
         queue.setWindow(modalInstance);
 
         modalInstance.result.then(function (close) {
-            //$scope.selected = selectedItem;
-            // start game/
             queue.endQueue(close);
         }, function () {
             console.log('something happened');
         });
     };
 
-    RoutQueueFactory.prototype.leave = function(room){
+    RoutQueueFactory.prototype.leave = function(queue){
+        Queues.remove(queue.id);
     };
 
-    RoutQueueFactory.prototype.accept = function(msg){
-        var queue = Queues.getByRoomName(msg.room);
-        queue.accept(msg.user);
-        if(queue.allReady()){
+    RoutQueueFactory.prototype.accept = function(queue){
+        var queue = Queues.getByRoomName(queue.room);
+        queue.accept(queue.user);
+        if(queue.usersReady()){
             queue.getWindow().close('Starting game');
             Notify.success('Starting game');
         }
     };
 
-    RoutQueueFactory.prototype.decline = function(room){
+    RoutQueueFactory.prototype.decline = function(queue){
+        var queue = Queues.getByRoomName(queue.room);
+        queue.decline(queue.user);
+        Queues.remove(queue.id);
+        queue.getWindow().close('Decline game');
+        Notify.success('Declined game');
     };
 
     return RoutQueueFactory;

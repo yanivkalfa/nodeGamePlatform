@@ -115,7 +115,14 @@ function Queue(
         return u.accepted = true;
     };
 
-    QueueFactory.prototype.allReady = function(){
+    QueueFactory.prototype.decline = function(user){
+        var self = this, u;
+        u = self.getUser(user.id);
+        if(!u) return false;
+        return u.accepted = false;
+    };
+
+    QueueFactory.prototype.usersReady = function(){
         var self = this, i, len;
         len = self.users.length;
         if(len !== self.userCount) return false;
