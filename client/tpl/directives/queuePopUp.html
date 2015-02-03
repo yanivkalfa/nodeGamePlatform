@@ -2,13 +2,29 @@
     <h3 class="modal-title">Waiting for players to accept</h3>
 </div>
 <div class="modal-body">
-    <ul>
-        <li ng-repeat="(index, user) in qready.queue.users">
-            <span class="queue-window-username">{{user.username}}: </span>
-            <span class="queue-window-accepted">{{ user.accepted ? 'O.K' : 'waiting...' }}</span>
-            <button ng-show="user.isMe && !user.accepted" class="btn btn-primary" ng-click="qready.accept(user, index)">ACCEPT</button>
-        </li>
-    </ul>
+    <table>
+        <thead>
+        <tr>
+            <th>player</th>
+            <th>status</th>
+            <th></th>
+        </tr>
+        </thead>
+
+        <tbody>
+        <tr ng-repeat="(index, user) in qready.queue.users">
+            <td>
+                <span class="queue-window-username">{{user.username}}:</span>
+            </td>
+            <td>
+                <span class="queue-window-accepted">{{ user.accepted ? 'O.K' : 'waiting...' }}</span>
+            </td>
+            <td>
+                <button ng-show="user.isMe && !user.accepted" class="btn btn-primary" ng-click="qready.accept(user, index)">ACCEPT</button>
+            </td>
+        </tr>
+        </tbody>
+    </table>
 </div>
 <div class="modal-footer">
     <button class="btn btn-warning" ng-click="qready.leaveQueue()">Leave Queue</button>
