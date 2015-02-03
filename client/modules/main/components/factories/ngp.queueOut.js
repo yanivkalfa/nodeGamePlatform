@@ -63,11 +63,8 @@ function QueueOut(
             if(!room) return {"success":false, "msg" : 'Room was not found'};
 
             var data  = {
-                "m" : 'updatequeue',
-                "d" : {
-                    "m" : action,
-                    "d" : {"id":queue.id, "room":queue.getRoom(), "user" : user }
-                }
+                "m" : action,
+                "d" : {"id":queue.id, "room":queue.getRoom(), "user" : user }
             };
 
             WebSocket.Primus.write({"m":"queue", "d": data});

@@ -16,12 +16,14 @@ module.exports = function(_s, _rf){
 
     RoutQueue.prototype.join = function(spark, msg){
         msg.room = 'madeUpRoomName';
-        var data = {
-            "m" : 'ready',
-            "d" : msg
-        };
+        spark.join(msg.room, function(err, succ){
+            var data = {
+                "m" : 'ready',
+                "d" : msg
+            };
 
-        spark.write({"m":'queue', d:data});
+            spark.write({"m":'queue', d:data});
+        });
     };
 
     RoutQueue.prototype.leave = function(spark, msg){
@@ -42,16 +44,25 @@ module.exports = function(_s, _rf){
 
         spark.write({"m":'queue', d:data});
     };
-    RoutQueue.prototype.updatequeue = function(spark, msg){
+    RoutQueue.prototype.accept = function(spark, msg){
+
+        var data = {
+            "m" : 'accept',
+            "d" : msg
+        };
+        _s.primus.room(msg.room).write({"m": "queue", "d":data});
+    };
+
+    RoutQueue.prototype.decline = function(spark, msg){
         console.log(msg);
         /*
-        var data = {
-            "m" : 'ready',
-            "d" : msg.d
-        };
+         var data = {
+         "m" : 'ready',
+         "d" : msg.d
+         };
 
-        spark.write({"m":'queue', d:data});
-        */
+         spark.write({"m":'queue', d:data});
+         */
     };
 
 

@@ -53,5 +53,12 @@ function RoutQueue(
     RoutQueueFactory.prototype.leave = function(room){
     };
 
+    RoutQueueFactory.prototype.accept = function(msg){
+        console.log(msg);
+    };
+
+    RoutQueueFactory.prototype.decline = function(room){
+    };
+
     return RoutQueueFactory;
 }
