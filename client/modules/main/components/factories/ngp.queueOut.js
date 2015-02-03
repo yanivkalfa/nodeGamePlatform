@@ -54,6 +54,7 @@ function QueueOut(
         },
 
         updateQueue : function(args, action){
+            console.log(args);
             var queue = Queues.get(args[0])
                 , user = queue.getUser(args[1])
                 , room = queue.getRoom()
