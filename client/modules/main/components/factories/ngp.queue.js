@@ -117,7 +117,7 @@ function Queue(
 
     QueueFactory.prototype.allReady = function(){
         var self = this, i, len;
-        len = self.users.length
+        len = self.users.length;
         if(len !== self.userCount) return false;
 
         for(i = 0; i < len; i++) {
