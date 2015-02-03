@@ -17,7 +17,7 @@ function queueReadyController(
 
     console.log('arguments', arguments);
 
-    console.log(queue);
+    console.log('queue', queue);
     function QueueReadyController(){
         var self = this;
         this.queue = queue;
