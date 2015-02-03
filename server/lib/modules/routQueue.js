@@ -15,6 +15,7 @@ module.exports = function(_s, _rf){
     RoutQueue.prototype.constructor = RoutQueue;
 
     RoutQueue.prototype.join = function(spark, msg){
+        msg.room = 'madeUpRoomName';
         var data = {
             "m" : 'ready',
             "d" : msg

@@ -27,6 +27,7 @@ function RoutQueue(
     RoutQueueFactory.prototype.ready = function(msg){
         console.log('ready',msg);
         var queue = Queues.get(msg.id);
+        queue.setRoom(msg.room);
 
         var modalInstance = $modal.open({
             templateUrl: ngp.const.app.url + '/tpl/directives/queuePopUp.html',
