@@ -66,11 +66,11 @@ function QueueOut(
                 "m" : 'updatequeue',
                 "d" : {
                     "m" : action,
-                    "d" : {"id":queue.id, "room":queue.getRoom(), user : user }
+                    "d" : {"id":queue.id, "room":queue.getRoom(), "user" : user }
                 }
             };
 
-            WebSocket.Primus.write(data);
+            WebSocket.Primus.write({"m":"queue", "d": data});
             return {"success":true};
         }
     };
