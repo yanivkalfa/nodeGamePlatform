@@ -13,6 +13,8 @@ function queueReadyController(
     queue
     ) {
     this.something ='hello';
+
+    /*
     function QueueReadyController(){
         this.queue = queue;
     }
@@ -27,4 +29,5 @@ function queueReadyController(
 
 
     return new QueueReadyController();
+    */
 }
