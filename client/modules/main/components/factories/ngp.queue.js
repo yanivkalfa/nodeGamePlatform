@@ -69,6 +69,18 @@ function Queue(
         return  this.minDetails;
     };
 
+    QueueFactory.prototype.getMeUser = function(){
+        var self = this
+            , i
+            ;
+
+        for(i=0; i < self.users.length ; i++){
+            if(self.users[i].isMe) return i;
+        }
+
+        return -1;
+    };
+
     QueueFactory.prototype.getUser = function(id){
         var self = this
             , index

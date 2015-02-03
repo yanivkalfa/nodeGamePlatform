@@ -20,6 +20,8 @@ function queueReadyController(
     ) {
     function QueueReadyController(){
         this.queue = queue;
+        this.meIndex = queue.getMeUser();
+        this.meUser = queue.getUser(this.meIndex);
     }
 
     QueueReadyController.prototype.accept = function(user,index){
