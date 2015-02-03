@@ -20,6 +20,7 @@ function queueReadyController(
     console.log('queue', queue);
     function QueueReadyController(){
         var self = this;
+        $scope.queue = queue;
         this.queue = queue;
     }
 
