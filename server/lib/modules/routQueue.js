@@ -43,7 +43,7 @@ module.exports = function(_s, _rf){
         spark.write({"m":'queue', d:data});
     };
     RoutQueue.prototype.updatequeue = function(spark, msg){
-        console.log(spark, msg);
+        console.log(msg);
         /*
         var data = {
             "m" : 'ready',
