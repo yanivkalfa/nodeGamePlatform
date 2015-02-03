@@ -263,9 +263,9 @@ ul.multiPlayerGamesList li{
     width:400px !important;
 }
 
-.queue-window .t-a-l{text-align: left;}
-.queue-window .t-a-r{text-align: right;}
-.queue-window .t-a-c{text-align: center;}
+.queue-window .t-a-l{text-align: left !important;}
+.queue-window .t-a-r{text-align: right !important;}
+.queue-window .t-a-c{text-align: center !important;}
 
 .queue-window-table th,
 .queue-window-table td{
