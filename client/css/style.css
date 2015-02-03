@@ -259,11 +259,11 @@ ul.multiPlayerGamesList li{
     width:100%;
 }
 
-.queue-window-table .th,
-.queue-window-table .th{
+.queue-window-table th,
+.queue-window-table th{
     padding:0px 10px;
 }
 
-.queue-window-table .td{
+.queue-window-table td{
 
 }
