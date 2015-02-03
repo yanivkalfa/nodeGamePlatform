@@ -16,6 +16,7 @@ function Queue(
         this._startTime = Date.now();
         this._endTime = undefined;
         this._timer = undefined;
+        this._window = undefined;
 
         this.id = queue.id || undefined;
         this.name = queue.name || undefined;
@@ -40,6 +41,14 @@ function Queue(
         var self = this;
         self.setMinDetails();
         this._timer = setTimeout(_.bind(self.queueTimedOut,self), self.maxWaitTime);
+    };
+
+    QueueFactory.prototype.setWindow = function(window){
+        this._window = window;
+    };
+
+    QueueFactory.prototype.getWindow = function(){
+        return this._window;
     };
 
     QueueFactory.prototype.setMinDetails = function(){

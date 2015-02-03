@@ -4,19 +4,17 @@
 angular.module(ngp.const.app.name)
     .factory('RoutQueue', [
         '$rootScope',
-        //'$scope',
         '$modal',
-        //'$log',
         'Router',
+        'Queues',
         RoutQueue
     ]);
 
 function RoutQueue(
     $rootScope,
-    //$scope,
     $modal,
-    //$log,
-    Router
+    Router,
+    Queues
     ) {
 
     function RoutQueueFactory(){
@@ -26,9 +24,31 @@ function RoutQueue(
     RoutQueueFactory.prototype = Object.create(Router.prototype);
     RoutQueueFactory.prototype.constructor = RoutQueueFactory;
 
-
     RoutQueueFactory.prototype.ready = function(msg){
-        console.log(msg);
+        var queue = Queues.get(msg.id);
+
+        console.log(queue);
+
+        var modalInstance = $modal.open({
+            templateUrl: ngp.const.app.url + '/tpl/directives/queuePopUp.html',
+            controller: 'queueReadyController',
+            controllerAs : 'qready',
+            size: 'sm',
+            resolve: {
+                queue: function () {
+                    return queue;
+                }
+            }
+        });
+        queue.setWindow(modalInstance);
+
+        modalInstance.result.then(function (close) {
+            //$scope.selected = selectedItem;
+            // start game/
+            queue.endQueue(close);
+        }, function () {
+            console.log('something happened');
+        });
     };
 
     RoutQueueFactory.prototype.leave = function(room){

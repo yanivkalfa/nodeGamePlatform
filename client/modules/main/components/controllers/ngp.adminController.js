@@ -107,7 +107,7 @@ function adminController(
     AdminController.prototype.queueMP = function(g){
         var self = this
             , queue = {
-                users : {id : self.Authorization.id, username : self.Authorization.username},
+                users : {id : self.Authorization.id, username : self.Authorization.username, accepted : false},
                 name:g.queueName,
                 end : function(id){
                     self.setGameImg(g);
