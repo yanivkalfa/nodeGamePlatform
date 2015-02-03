@@ -12,7 +12,7 @@ function queueReadyController(
     $modalInstance,
     queue
     ) {
-    console.log(this);
+    this.something ='hello';
     function QueueReadyController(){
         this.queue = queue;
     }
