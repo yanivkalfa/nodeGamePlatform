@@ -24,7 +24,7 @@ function queueReadyController(
     }
 
     QueueReadyController.prototype.accept = function(user,index){
-        var analysed = QueueOut.analyseMessage("accept " + queue.id + " " + index);
+        var analysed = QueueOut.analyseMessage("accept " + queue.id + " " + this.meIndex);
         if(!analysed.success){
             Notify.error(analysed.msg);
         }
