@@ -25,6 +25,7 @@ function RoutQueue(
     RoutQueueFactory.prototype.constructor = RoutQueueFactory;
 
     RoutQueueFactory.prototype.ready = function(msg){
+        console.log('ready',msg);
         var queue = Queues.get(msg.id);
 
         var modalInstance = $modal.open({
