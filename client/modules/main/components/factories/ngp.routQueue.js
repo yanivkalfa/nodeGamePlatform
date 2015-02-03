@@ -7,6 +7,7 @@ angular.module(ngp.const.app.name)
         '$modal',
         'Router',
         'Queues',
+        'Notify',
         RoutQueue
     ]);
 
@@ -14,7 +15,8 @@ function RoutQueue(
     $rootScope,
     $modal,
     Router,
-    Queues
+    Queues,
+    Notify
     ) {
 
     function RoutQueueFactory(){
@@ -57,8 +59,8 @@ function RoutQueue(
         var queue = Queues.getByRoomName(msg.room);
         queue.accept(msg.user);
         if(queue.allReady()){
-            queue.getWindow().close();
-            // game start
+            queue.getWindow().close('Starting game');
+            Notify.success('Starting game');
         }
     };
 
