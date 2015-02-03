@@ -21,7 +21,8 @@ function queueReadyController(
     function QueueReadyController(){
         this.queue = queue;
         this.myIndex = queue.getMyIndex();
-        this.user = queue.getUser();
+        this.user = queue.getUser(this.myIndex);
+        console.log(this.user);
     }
 
     QueueReadyController.prototype.accept = function(){
