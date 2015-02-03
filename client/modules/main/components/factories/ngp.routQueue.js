@@ -54,7 +54,12 @@ function RoutQueue(
     };
 
     RoutQueueFactory.prototype.accept = function(msg){
-        console.log(msg);
+        var queue = Queues.getByRoomName(msg.room);
+        queue.accept(msg.user);
+        if(queue.allReady()){
+            queue.getWindow().close();
+            // game start
+        }
     };
 
     RoutQueueFactory.prototype.decline = function(room){

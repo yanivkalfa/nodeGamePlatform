@@ -24,7 +24,7 @@ function Queue(
         this.users = queue.users || [];
         this.users = UtilFunc.toArray(this.users);
         this.maxWaitTime = queue.maxWaitTime || 3600000;
-        this.maxUserCount = queue.maxUserCount || 2;
+        this.userCount = queue.userCount || 2;
         this.minDetails = {};
 
         this.end = queue.end || [];
@@ -106,6 +106,24 @@ function Queue(
         });
 
         return index;
+    };
+
+    QueueFactory.prototype.accept = function(user){
+        var self = this, u;
+        u = self.getUser(user.id);
+        if(!u) return false;
+        return u.accepted = true;
+    };
+
+    QueueFactory.prototype.allReady = function(){
+        var self = this, i, len;
+        len = self.users.length
+        if(len !== self.userCount) return false;
+
+        for(i = 0; i < len; i++) {
+            if(!self.users[i].accepted) return false;
+        }
+        return true;
     };
 
 

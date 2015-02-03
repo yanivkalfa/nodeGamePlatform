@@ -64,7 +64,7 @@ function QueueOut(
 
             var data  = {
                 "m" : action,
-                "d" : {"id":queue.id, "room":queue.getRoom(), "user" : user }
+                "d" : {"room":queue.getRoom(), "user" : user }
             };
 
             WebSocket.Primus.write({"m":"queue", "d": data});
