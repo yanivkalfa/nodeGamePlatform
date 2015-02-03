@@ -109,18 +109,16 @@ function adminController(
             , queue = {
                 users : {id : self.Authorization.id, username : self.Authorization.username, accepted : false, isMe:true},
                 name:g.queueName,
-                userCount : 1,
-                end : function(id){
-                    self.setGameImg(g);
-                },
-                ready : function(){}
-                ,
-                timedOut : function(){}
+                userCount : 1
             }
             , analysed
+            , end = function(id){
+                self.setGameImg(g);
+            }
             ;
 
         queue = Queues.add(queue);
+        queue.on('end', end);
         this.setSearchImg(g);
 
         analysed = QueueOut.analyseMessage("join " + queue.id);

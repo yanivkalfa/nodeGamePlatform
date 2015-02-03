@@ -1,7 +1,7 @@
 module.exports = function(_s){
     var _user = undefined
         , _ = _s.oReq.lodash
-        , visibleField = ['id','username', 'firName','lastName','email','roles','rooms','token', 'type']
+        , visibleField = ['id','username', 'firstName','lastName','email','roles','rooms','token', 'type']
         ;
 
     return {

@@ -5,14 +5,17 @@
 angular.module(ngp.const.app.name)
     .factory('Queue', [
         'UtilFunc',
+        'Event',
         Queue
     ]);
 
 function Queue(
-    UtilFunc
+    UtilFunc,
+    EventEmitter
     ){
 
     function QueueFactory(queue){
+        EventEmitter.apply(this, arguments);
         this._startTime = Date.now();
         this._endTime = undefined;
         this._timer = undefined;
@@ -26,17 +29,11 @@ function Queue(
         this.maxWaitTime = queue.maxWaitTime || 3600000;
         this.userCount = queue.userCount || 2;
         this.minDetails = {};
-
-        this.end = queue.end || [];
-        this.end = UtilFunc.toArray(this.end);
-
-        this.ready = queue.ready || [];
-        this.ready = UtilFunc.toArray(this.ready);
-
-        this.timedOut = queue.timedOut || [];
-        this.timedOut = UtilFunc.toArray(this.timedOut);
         this.init();
     }
+
+    QueueFactory.prototype = Object.create(EventEmitter.prototype);
+    QueueFactory.prototype.constructor = QueueFactory;
 
     QueueFactory.prototype.init = function(){
         var self = this;
@@ -146,19 +143,19 @@ function Queue(
     };
 
 
-    QueueFactory.prototype.queueReady = function(data){
-        this.ready.forEach(function(fn){ fn(data);});
+    QueueFactory.prototype.ready = function(data){
+        this.trigger('ready', data);
     };
 
-    QueueFactory.prototype.queueTimedOut = function(data){
+    QueueFactory.prototype.timedOut = function(data){
         var self = this;
-        self.timedOut.forEach(function(fn){ fn(data);});
+        this.trigger('timedOut', data);
         self.endTimers();
     };
 
-    QueueFactory.prototype.endQueue = function(data){
+    QueueFactory.prototype.end = function(data){
         var self = this;
-        self.end.forEach(function(fn){ fn(data);});
+        this.trigger('end', data);
         self.endTimers();
     };
 
