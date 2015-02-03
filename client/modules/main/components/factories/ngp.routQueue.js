@@ -33,7 +33,7 @@ function RoutQueue(
             controllerAs : 'qready',
             size: 'sm',
             resolve: {
-                aQueue: function () {
+                queue: function () {
                     return queue;
                 }
             }

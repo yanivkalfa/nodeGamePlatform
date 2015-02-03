@@ -5,19 +5,19 @@ angular.module(ngp.const.app.name)
     .controller('queueReadyController', [
         '$scope',
         '$modalInstance',
-        'aQueue',
+        'queue',
         queueReadyController
     ]);
 
 function queueReadyController(
     $scope,
     $modalInstance,
-    aQueue
+    queue
     ) {
 
     console.log('arguments', arguments);
 
-    console.log(aQueue);
+    console.log(queue);
     function QueueReadyController(){
         var self = this;
         this.queue = queue;
