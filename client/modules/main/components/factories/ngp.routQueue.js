@@ -31,7 +31,7 @@ function RoutQueue(
             templateUrl: ngp.const.app.url + '/tpl/directives/queuePopUp.html',
             controller: 'queueReadyController',
             controllerAs : 'qready',
-            size: 'sm',
+            size: 'lg',
             resolve: {
                 queue: function () {
                     return queue;
