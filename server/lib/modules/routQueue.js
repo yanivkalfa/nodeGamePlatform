@@ -14,6 +14,24 @@ module.exports = function(_s, _rf){
     RoutQueue.prototype = Object.create(router.prototype);
     RoutQueue.prototype.constructor = RoutQueue;
 
+    RoutQueue.prototype.join = function(spark, msg){
+        var data = {
+            "m" : 'ready',
+            "d" : msg.d
+        };
+
+        spark.write({"m":'queue', d:data});
+    };
+
+    RoutQueue.prototype.leave = function(spark, msg){
+        var data = {
+            "m" : 'ready',
+            "d" : msg.d
+        };
+
+        spark.write({"m":'queue', d:data});
+    };
+
 
     RoutQueue.prototype.ready = function(spark, msg){
         var data = {
