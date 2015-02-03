@@ -8,6 +8,7 @@ module.exports = function(_s, _rf){
         router.apply(this,arguments);
         this.RoutChat = new _rf.RoutChat();
         this.RoutSjax = new _rf.RoutSjax();
+        this.RoutQueue = new _rf.RoutQueue();
     }
 
     RoutSocket.prototype = Object.create(router.prototype);
@@ -23,14 +24,7 @@ module.exports = function(_s, _rf){
     };
 
     RoutSocket.prototype.queue = function(spark, msg){
-        console.log(msg);
-        var data = {
-            "m" : 'ready',
-            "d" : msg.d
-        };
-
-        spark.write({"m":'queue', d:data});
-        //return this.RoutSjax.rout(spark, msg);
+        return this.RoutQueue.rout(spark, msg);
     };
 
 

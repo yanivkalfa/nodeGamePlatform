@@ -6,25 +6,38 @@ angular.module(ngp.const.app.name)
         '$scope',
         '$modalInstance',
         'queue',
+        'QueueOut',
+        'Notify',
         queueReadyController
     ]);
 
 function queueReadyController(
     $scope,
     $modalInstance,
-    queue
+    queue,
+    QueueOut,
+    Notify
     ) {
     function QueueReadyController(){
         this.queue = queue;
     }
 
     QueueReadyController.prototype.accept = function(user,index){
-        user.accepted = true;
+        //user.accepted = true;
+        var analysed = QueueOut.analyseMessage("accept " + queue.id + " " + index);
+        if(!analysed.success){
+            Notify.error(analysed.msg);
+        }
         console.log(user,index);
         //$modalInstance.close($scope.selected.item);
     };
 
-    QueueReadyController.prototype.leaveQueue = function(){
+    QueueReadyController.prototype.leaveQueue = function(user,index){
+        //user.accepted = false;
+        var analysed = QueueOut.analyseMessage("decline " + queue.id +" " + index);
+        if(!analysed.success){
+            Notify.error(analysed.msg);
+        }
         //$modalInstance.dismiss('cancel');
     };
 

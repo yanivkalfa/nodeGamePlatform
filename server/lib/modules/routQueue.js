@@ -15,7 +15,25 @@ module.exports = function(_s, _rf){
     RoutQueue.prototype.constructor = RoutQueue;
 
 
-    RoutQueue.prototype.privateMsg = function(spark, msg){};
+    RoutQueue.prototype.ready = function(spark, msg){
+        var data = {
+            "m" : 'ready',
+            "d" : msg.d
+        };
+
+        spark.write({"m":'queue', d:data});
+    };
+    RoutQueue.prototype.updatequeue = function(spark, msg){
+        console.log(spark, msg);
+        /*
+        var data = {
+            "m" : 'ready',
+            "d" : msg.d
+        };
+
+        spark.write({"m":'queue', d:data});
+        */
+    };
 
 
 

@@ -17,6 +17,7 @@ function Queue(
         this._endTime = undefined;
         this._timer = undefined;
         this._window = undefined;
+        this._room = undefined;
 
         this.id = queue.id || undefined;
         this.name = queue.name || undefined;
@@ -43,6 +44,14 @@ function Queue(
         this._timer = setTimeout(_.bind(self.queueTimedOut,self), self.maxWaitTime);
     };
 
+    QueueFactory.prototype.setRoom = function(room){
+        this._room = room;
+    };
+
+    QueueFactory.prototype.getRoom = function(){
+        return this._room;
+    };
+
     QueueFactory.prototype.setWindow = function(window){
         this._window = window;
     };
@@ -63,7 +72,9 @@ function Queue(
     QueueFactory.prototype.getUser = function(id){
         var self = this
             , index
+            , user = self.users[id]
             ;
+        if(user) return user;
         index = self.indexOf(id);
         return index == -1 ? false : self.users[index];
     };
