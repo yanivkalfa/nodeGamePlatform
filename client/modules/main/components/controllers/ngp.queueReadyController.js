@@ -3,18 +3,17 @@
  */
 angular.module(ngp.const.app.name)
     .controller('queueReadyController', [
+        '$scope',
         '$modalInstance',
         'queue',
         queueReadyController
     ]);
 
 function queueReadyController(
+    $scope,
     $modalInstance,
     queue
     ) {
-    this.something ='hello';
-
-    /*
     function QueueReadyController(){
         this.queue = queue;
     }
@@ -27,7 +26,5 @@ function queueReadyController(
         //$modalInstance.dismiss('cancel');
     };
 
-
-    return new QueueReadyController();
-    */
+    $scope.qready = new QueueReadyController();
 }
