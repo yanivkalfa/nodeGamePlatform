@@ -19,6 +19,8 @@ function queueReadyController(
     }
 
     QueueReadyController.prototype.accept = function(user,index){
+        user.accepted = true;
+        console.log(user,index);
         //$modalInstance.close($scope.selected.item);
     };
 
