@@ -63,7 +63,9 @@ function RoutQueue(
     };
 
     RoutQueueFactory.prototype.decline = function(q){
+
         var queue = Queues.getByRoomName(q.room);
+        console.log(queue);
         queue.decline(q.user);
         Queues.remove(q.id);
         queue.getWindow().close('Decline game');
