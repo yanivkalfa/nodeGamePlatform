@@ -9,10 +9,12 @@ angular.module(ngp.const.app.name)
 function queueReadyController(
     $scope,
     $modalInstance,
-    queue
+    aQueue
     ) {
 
-    console.log(queue);
+    console.log('arguments', arguments);
+
+    console.log(aQueue);
     function QueueReadyController(){
         var self = this;
         this.queue = queue;

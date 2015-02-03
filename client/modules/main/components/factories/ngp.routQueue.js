@@ -27,15 +27,13 @@ function RoutQueue(
     RoutQueueFactory.prototype.ready = function(msg){
         var queue = Queues.get(msg.id);
 
-        console.log(queue);
-
         var modalInstance = $modal.open({
             templateUrl: ngp.const.app.url + '/tpl/directives/queuePopUp.html',
             controller: 'queueReadyController',
             controllerAs : 'qready',
             size: 'sm',
             resolve: {
-                queue: function () {
+                aQueue: function () {
                     return queue;
                 }
             }
