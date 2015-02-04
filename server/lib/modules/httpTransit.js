@@ -38,7 +38,7 @@ module.exports = function(_s, _rf){
         return new _s.oReq.Promise(function(resolve, reject) {
             var req;
             req = http.request(options, function(res) {
-                _s.oModules.uf.concat(res).then(function(fullResponse){
+                _s.oModules.uf.concat(_s, res).then(function(fullResponse){
                     return resolve(fullResponse);
                 }).catch(function(err){
                     return reject(err);

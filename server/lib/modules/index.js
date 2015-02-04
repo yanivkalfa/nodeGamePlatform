@@ -1,5 +1,8 @@
 module.exports = function(_s){
     var rf = {};
+    rf.uf = require('./../../shared/scripts/utilFunc.js')(_s);
+
+    console.log(rf.uf);
     rf.GamesApi = require('./gamesApi.js')(_s);
     rf.SocketAjax = require('./socketAjax.js')(_s);
     rf.HttpTransit = require('./httpTransit.js')(_s);
@@ -8,7 +11,6 @@ module.exports = function(_s){
     rf.Authorization = require('./authorization.js')(_s);
     rf.Validation = require('./supers/validation.js')();
     rf.ValidationReg = require('./validationReg.js')(_s,rf);
-    rf.uf = require('./utilFunc.js')(_s);
     rf.ajaxHandler = require('./ajaxHandler.js');
     rf.RoomHandler = require('./roomHandler.js')(_s,rf);
     rf.GetRooms = require('./getRooms.js')(_s,rf);
