@@ -20,6 +20,19 @@ module.exports = function(_s){
     _s.oReq.app.use(_s.oReq.bodyParser.urlencoded({ extended: true }));
     _s.oReq.app.use(_s.oReq.express.static(_s.sClientDirname));
 
+    _s.oReq.app.get('/shared/:filepath', function (req, res) {
+        var path = '../../shared/contents/' + req.params.filepath;
+        _s.oReq.fs.exists(path, function(exists) {
+            if (exists) {
+                return res.sendFile(path);
+            }
+            else
+            {
+                return res.status(404).send('404 page !!!!');
+            }
+        });
+    });
+
 
     _s.oReq.app.set('views', _s.sServerDirname + '/tpl');
     _s.oReq.app.set('view engine', "jade");
