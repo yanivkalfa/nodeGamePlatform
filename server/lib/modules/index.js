@@ -1,8 +1,8 @@
 module.exports = function(_s){
     var rf = {};
-    rf.uf = require('../../../shared/scripts/utilFunc.js')//();//(_s);
+    rf.uf = require('../../../shared/scripts/utilFunc.js');//();//(_s);
 
-    console.log(rf.uf);
+    console.log(rf.uf.formatMsgDate);
     rf.GamesApi = require('./gamesApi.js')(_s);
     rf.SocketAjax = require('./socketAjax.js')(_s);
     rf.HttpTransit = require('./httpTransit.js')(_s);
