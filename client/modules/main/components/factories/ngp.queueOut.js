@@ -56,7 +56,7 @@ function QueueOut(
         updateQueue : function(args, action){
             console.log(args);
             var queue = Queues.get(args[0])
-                , user = queue.getUser(args[1])
+                , user = queue.users.get(args[1])
                 , room = queue.getRoom()
                 ;
             if(!queue) return {"success":false, "msg" : 'Queue was not found'};
