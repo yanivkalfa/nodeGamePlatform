@@ -9,42 +9,45 @@ angular.module(ngp.const.app.name)
 function Lists() {
 
     function ListsFactory(){
-        this.lists = {};
+        this.list = {};
+        this.length = 0;
     }
 
     ListsFactory.prototype.add =  function(l, id){
-        console.log('add', arguments);
         var self = this, lId;
-        lId = id || l.id;
-        if(self.lists.hasOwnProperty(lId)) return false;
-        return self.lists[lId] = l;
+        lId = id || l.id || false;
+        if(!lId) return false;
+        if(self.list.hasOwnProperty(lId)) return false;
+        this.length++;
+        return self.list[lId] = l;
     };
 
     ListsFactory.prototype.update =  function(l, id){
         var self = this, lId;
         lId = id || l.id;
-        if(!self.lists.hasOwnProperty(lId)) return false;
-        return self.lists[lId] = l;
+        if(!self.list.hasOwnProperty(lId)) return false;
+        return self.list[lId] = l;
     };
 
     ListsFactory.prototype.remove =  function(id){
         var self = this;
-        if(_.isEmpty(self.lists[id])) return false;
-        return delete self.lists[id];
+        if(_.isEmpty(self.list[id])) return false;
+        this.length--;
+        return delete self.list[id];
     };
 
     ListsFactory.prototype.get =  function(id){
         var self = this;
-        if(!id) return self.lists;
-        if(_.isEmpty(self.lists[id])) return false;
-        return self.lists[id];
+        if(!id) return self.list;
+        if(_.isEmpty(self.list[id])) return false;
+        return self.list[id];
     };
 
     ListsFactory.prototype.getByPropName =  function(prop, name){
         var self = this, list;
-        for(var id in self.lists){
-            if(!self.lists.hasOwnProperty(id)) continue;
-            if(name == self.lists[id][prop]) list = self.lists[id];
+        for(var id in self.list){
+            if(!self.list.hasOwnProperty(id)) continue;
+            if(name == self.list[id][prop]) list = self.list[id];
             break;
         }
 
@@ -62,10 +65,26 @@ function Lists() {
             , id = genRandomId()
             ;
 
-        while(!_.isEmpty(self.lists[id])){
+        while(!_.isEmpty(self.list[id])){
             id = genRandomId();
         }
         return id;
+    };
+
+    ListsFactory.prototype.listLength = function(){
+        var self = this
+            , id
+            , length = 0
+            ;
+
+        if(this.length == Object.getOwnPropertyNames(this.list).length) return this.length;
+
+        for(id in self.list){
+            if(!self.list.hasOwnProperty(id)) continue;
+            length++;
+        }
+
+        return this.length = length;
     };
 
     return ListsFactory;

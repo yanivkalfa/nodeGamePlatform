@@ -6,12 +6,16 @@ angular.module(ngp.const.app.name)
     .factory('Queue', [
         'UtilFunc',
         'EventEmitter',
+        'QueueUser',
+        'UserLists',
         Queue
     ]);
 
 function Queue(
     UtilFunc,
-    EventEmitter
+    EventEmitter,
+    QueueUser,
+    UserLists
     ){
 
     function QueueFactory(queue){
@@ -24,11 +28,13 @@ function Queue(
 
         this.id = queue.id || undefined;
         this.name = queue.name || undefined;
-        this.users = queue.users || [];
-        this.users = UtilFunc.toArray(this.users);
+        this.users = new UserLists();
         this.maxWaitTime = queue.maxWaitTime || 3600000;
         this.userCount = queue.userCount || 2;
         this.minDetails = {};
+
+        _(UtilFunc.toArray(queue.users)||[]).forEach(_.bind(this.users.add,this));
+
         this.init();
     }
 
@@ -59,85 +65,23 @@ function Queue(
 
     QueueFactory.prototype.setMinDetails = function(){
         var self = this;
-        return self.minDetails = {"id" : self.id, "name" : self.name, "users" : self.users};
+        return self.minDetails = {"id" : self.id, "name" : self.name, "users" : self.users.get()};
     };
 
     QueueFactory.prototype.getMinDetails = function(){
         return  this.minDetails;
     };
 
-    QueueFactory.prototype.getMyIndex = function(){
-        var self = this
-            , i
-            ;
-
-        for(i=0; i < self.users.length ; i++){
-            if(self.users[i].isMe) return i;
-        }
-
-        return -1;
-    };
-
-    QueueFactory.prototype.getUser = function(id){
-        var self = this
-            , index
-            , user = self.users[id]
-            ;
-        if(user) return user;
-        index = self.indexOf(id);
-        return index == -1 ? false : self.users[index];
-    };
-
-    QueueFactory.prototype.addUser = function(user){
-        var self = this
-            , index
-            ;
-        index = self.indexOf(user.id);
-        if(index !== -1)return false;
-        self.users.push(user);
-    };
-    
-    QueueFactory.prototype.removeUser = function(id){
-        var self = this
-            , index
-            ;
-        index = self.indexOf(id);
-        if(index === -1) return false;
-        self.users.splice(index,1);
-    };
-
-    QueueFactory.prototype.indexOf = function(id){
-        var self = this, index = -1;
-
-        _(self.users).forEach(function(user, i){
-            if(id == user.id) index = i;
-            return false;
-        });
-
-        return index;
-    };
-
-    QueueFactory.prototype.accept = function(user){
-        var self = this, u;
-        u = self.getUser(user.id);
-        if(!u) return false;
-        return u.accepted = true;
-    };
-
-    QueueFactory.prototype.decline = function(user){
-        var self = this, u;
-        u = self.getUser(user.id);
-        if(!u) return false;
-        return u.accepted = false;
-    };
 
     QueueFactory.prototype.usersReady = function(){
-        var self = this, i, len;
-        len = self.users.length;
+        var self = this, id, len, list;
+        len = self.users.listLength();
         if(len !== self.userCount) return false;
 
-        for(i = 0; i < len; i++) {
-            if(!self.users[i].accepted) return false;
+        list = self.users.list;
+        for(id in list) {
+            if(!list.hasOwnProperty(id)) continue;
+            if(!list[id].accepted) return false;
         }
         return true;
     };

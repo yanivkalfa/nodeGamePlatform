@@ -20,20 +20,20 @@ function queueReadyController(
     ) {
     function QueueReadyController(){
         this.queue = queue;
-        this.myIndex = queue.getMyIndex();
-        this.user = queue.getUser(this.myIndex);
+        this.myId = queue.users.getMyIndex();
+        this.user = queue.users.get(this.myId);
         console.log(this.user);
     }
 
     QueueReadyController.prototype.accept = function(){
-        var analysed = QueueOut.analyseMessage("accept " + queue.id + " " + this.myIndex);
+        var analysed = QueueOut.analyseMessage("accept " + queue.id + " " + this.myId);
         if(!analysed.success){
             Notify.error(analysed.msg);
         }
     };
 
     QueueReadyController.prototype.leaveQueue = function(){
-        var analysed = QueueOut.analyseMessage("decline " + queue.id +" " + this.myIndex);
+        var analysed = QueueOut.analyseMessage("decline " + queue.id +" " + this.myId);
         if(!analysed.success){
             Notify.error(analysed.msg);
         }

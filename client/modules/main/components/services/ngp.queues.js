@@ -29,9 +29,9 @@ function Queues(
 
     QueuesService.prototype.remove =  function(id){
         var self = this;
-        if(_.isEmpty(this.lists[id])) return false;
-        this.lists[id].end('Queue removed');
-        return delete self.lists[id];
+        if(_.isEmpty(this.list[id])) return false;
+        this.list[id].end('Queue removed');
+        return delete self.list[id];
     };
 
     return new QueuesService();

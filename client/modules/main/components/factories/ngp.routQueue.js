@@ -55,7 +55,7 @@ function RoutQueue(
 
     RoutQueueFactory.prototype.accept = function(q){
         var queue = Queues.getByPropName('_room',q.room);
-        queue.accept(q.user);
+        queue.users.accept(q.user);
         if(queue.usersReady()){
             queue.getWindow().close('Starting game');
             Notify.success('Starting game');
@@ -64,7 +64,7 @@ function RoutQueue(
 
     RoutQueueFactory.prototype.decline = function(q){
         var queue = Queues.getByPropName('_room',q.room);
-        queue.decline(q.user);
+        queue.users.decline(q.user);
         Queues.remove(q.id);
         queue.getWindow().close('Decline game');
         Notify.success('Declined game');
