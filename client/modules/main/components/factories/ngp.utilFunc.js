@@ -35,5 +35,5 @@ function UtilFunc() {
         }
     };
 
-    return ngp.oFns.uf;
+    return new ngp.oFns.uf();
 }
