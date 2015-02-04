@@ -21,9 +21,8 @@ module.exports = function(_s){
     _s.oReq.app.use(_s.oReq.express.static(_s.sClientDirname));
 
     _s.oReq.app.get('/shared/*', function (req, res) {
-        console.log(req.params);
-        /*
-        var path = '../../shared/contents/' + req.params.filepath;
+        if(req.params[0].indexOf('..') > -1 || req.params[0].indexOf('../') > -1) return res.status(404).send('404 page !!!!');
+        var path = '../../shared/contents/' + req.params.req.params[0];
         _s.oReq.fs.exists(path, function(exists) {
             if (exists) {
                 return res.sendFile(path);
@@ -33,7 +32,6 @@ module.exports = function(_s){
                 return res.status(404).send('404 page !!!!');
             }
         });
-        */
     });
 
 
