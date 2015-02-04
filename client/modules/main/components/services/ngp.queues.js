@@ -14,7 +14,9 @@ function Queues(
     ) {
 
     function QueuesService(){
+        this.lists = {};
         Lists.apply(this,arguments);
+
     }
 
     QueuesService.prototype = Object.create(Lists.prototype);
