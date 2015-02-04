@@ -43,3 +43,8 @@ UtilFuncFactory.prototype =  {
 };
 
 
+if (typeof module !== 'undefined' && module.exports) {
+    module.exports = new UtilFuncFactory();
+}
+
+
