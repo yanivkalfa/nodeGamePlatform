@@ -44,17 +44,15 @@
         }
     };
 
-    var utilFuncFactory = new UtilFuncFactory();
-
     if (typeof module !== 'undefined' && module.exports) {
         console.log('aa');
-        module.exports = utilFuncFactory;
+        module.exports = new UtilFuncFactory();
     }else{
         if(window.ngp)
-            if(window.ngp.oFns)window.ngp.oFns.uf = utilFuncFactory;
+            if(window.ngp.oFns)window.ngp.oFns.uf = UtilFuncFactory;
             else{
                 window.ngp.oFns = {
-                    uf:utilFuncFactory
+                    uf:UtilFuncFactory
                 };
             }
     }
