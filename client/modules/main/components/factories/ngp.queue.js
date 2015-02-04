@@ -5,17 +5,17 @@
 angular.module(ngp.const.app.name)
     .factory('Queue', [
         'UtilFunc',
-        //'Event',
+        'EventEmitter',
         Queue
     ]);
 
 function Queue(
-    UtilFunc
-    //EventEmitter
+    UtilFunc,
+    EventEmitter
     ){
 
     function QueueFactory(queue){
-        //EventEmitter.apply(this, arguments);
+        EventEmitter.apply(this, arguments);
         this._startTime = Date.now();
         this._endTime = undefined;
         this._timer = undefined;
