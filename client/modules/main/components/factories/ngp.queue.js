@@ -33,7 +33,7 @@ function Queue(
         this.userCount = queue.userCount || 2;
         this.minDetails = {};
 
-        _(UtilFunc.toArray(queue.users)||[]).forEach(_.bind(this.users.add,this));
+        _(UtilFunc.toArray(queue.users)||[]).forEach(_.bind(this.users.add,this.users));
 
         this.init();
     }
