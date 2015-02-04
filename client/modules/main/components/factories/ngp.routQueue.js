@@ -54,7 +54,7 @@ function RoutQueue(
     };
 
     RoutQueueFactory.prototype.accept = function(q){
-        var queue = Queues.getByRoomName(q.room);
+        var queue = Queues.getByPropName('_room',q.room);
         queue.accept(q.user);
         if(queue.usersReady()){
             queue.getWindow().close('Starting game');
@@ -63,7 +63,7 @@ function RoutQueue(
     };
 
     RoutQueueFactory.prototype.decline = function(q){
-        var queue = Queues.getByRoomName(q.room);
+        var queue = Queues.getByPropName('_room',q.room);
         queue.decline(q.user);
         Queues.remove(q.id);
         queue.getWindow().close('Decline game');
