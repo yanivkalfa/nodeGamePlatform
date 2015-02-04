@@ -1,16 +1,18 @@
 /**
  * Created by Yaniv-Kalfa on 1/19/15.
  */
-angular.module(ngp.const.app.name)
-    .directive('ngpRoomContent',[ngpRoomContent]);
+(function(){
+    angular.module(ngp.const.app.name)
+        .directive('ngpRoomContent',[ngpRoomContent]);
 
-function ngpRoomContent() {
+    function ngpRoomContent() {
 
-    return {
-        scope: {
-            content: '=',
-            roomIndex: '='
-        },
-        templateUrl: ngp.const.app.url + '/tpl/directives/roomContent.html'
-    };
-}
+        return {
+            scope: {
+                content: '=',
+                roomIndex: '='
+            },
+            templateUrl: ngp.const.app.url + '/tpl/directives/roomContent.html'
+        };
+    }
+})();
