@@ -57,8 +57,6 @@ module.exports = function(_s, _rf){
             , joinRoom
             ;
 
-        console.log('_join -> join , ', room, noStore );
-
         if(!self._checkChannel(spark, room, 'Illegal room name "' + room.id + '"')) return false;
 
         joinRoom = function(user){

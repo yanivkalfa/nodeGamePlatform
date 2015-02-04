@@ -48,6 +48,19 @@ function RoutRoom(
             }
         }
 
+        /*
+        var user = Authorization.getUser();
+        if(!_.isArray(room.users) && user.id == room.users.id) Chat.joinRoom(Chat.createRoom(room));
+        else if(!_.isArray(room.users)) Chat.addMember(room.users, room);
+        else if(Chat.indexOf(room) == -1) Chat.joinRoom(Chat.createRoom(room));
+        else
+        {
+            _(room.users).forEach(function(user){
+                Chat.addMember(user, room);
+            })
+        }
+        */
+
         $rootScope.$apply();
     };
 
