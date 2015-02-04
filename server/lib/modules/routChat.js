@@ -23,6 +23,8 @@ module.exports = function(_s, _rf){
     };
 
     RoutChat.prototype.room = function(spark, msg){
+
+        console.log('room routing -> ');
         return this.RoutRoom.rout(spark, msg);
     };
 
