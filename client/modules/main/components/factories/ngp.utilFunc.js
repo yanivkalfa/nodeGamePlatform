@@ -3,11 +3,7 @@
  */
 
 angular.module(ngp.const.app.name)
-    .factory('UtilFunc', [
-        UtilFunc
-    ]);
-
-function UtilFunc() {
+    .factory('UtilFunc', [function () {
 
 
     function UtilFuncFactory(){}
@@ -36,4 +32,4 @@ function UtilFunc() {
     };
 
     return new ngp.oFns.uf();
-}
+}]);
