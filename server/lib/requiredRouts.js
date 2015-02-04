@@ -23,7 +23,7 @@ module.exports = function(_s){
     _s.oReq.app.get('/shared/*', function (req, res) {
         var reqPath = req.params[0];
         if(reqPath.indexOf('..') > -1 || reqPath.indexOf('../') > -1) return res.status(404).send('404 page !!!!');
-        var path = '../../../../shared/' + reqPath;
+        var path = '../../shared/' + reqPath;
         console.log(path);
         _s.oReq.fs.exists(path, function(exists) {
             if (exists) {
