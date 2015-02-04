@@ -117,14 +117,8 @@ function adminController(
                 self.setGameImg(g);
             }
             ;
-
-        console.log(Queues);
         queue = Queues.add(queue);
-
-        console.log('got here:', queue);
         queue.on('end', end);
-
-        console.log('a:', queue);
         this.setSearchImg(g);
 
         analysed = QueueOut.analyseMessage("join " + queue.id);

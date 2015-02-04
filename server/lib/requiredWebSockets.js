@@ -58,10 +58,12 @@ module.exports = function(_s){
                         var upSkSuccess = function (user){
 
                             // Joining terminal, lobby user rooms and saved rooms
-                            var userRoom = 'u_' + decoded.userId;
-                            spark.join('terminal '+ userRoom, function(err, succ){});
+                            //var userRoom = 'u_' + decoded.userId;
+                            //spark.join('terminal '+ userRoom, function(err, succ){});
 
+                            console.log('got user: ', user);
                             _.isArray(user.rooms) && _(user.rooms).forEach(function(room){
+                                console.log('room', room);
                                 var data  = {
                                     "m" : 'room',
                                     "d" : {
