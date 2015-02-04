@@ -19,6 +19,13 @@ function Lists() {
         return self.Lists[lId] = l;
     };
 
+    ListsFactory.prototype.update =  function(l, id){
+        var self = this, lId;
+        lId = id || l.id;
+        if(!self.Lists.hasOwnProperty(lId)) return false;
+        return self.Lists[lId] = l;
+    };
+
     ListsFactory.prototype.remove =  function(id){
         var self = this;
         if(_.isEmpty(self.Lists[id])) return false;
@@ -27,6 +34,7 @@ function Lists() {
 
     ListsFactory.prototype.get =  function(id){
         var self = this;
+        if(!id) return self.Lists;
         if(_.isEmpty(self.Lists[id])) return false;
         return self.Lists[id];
     };

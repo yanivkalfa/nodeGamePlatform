@@ -22,15 +22,16 @@ function Queues(
 
     QueuesService.prototype.add =  function(q){
         var self = this;
-        q.id = self.createRequestId();
-        return self.lists[q.id] = new Queue(q);
+        var args = Array.prototype.slice.call(arguments);
+        args.push(new Queue(q));
+        return Lists.prototype.add.apply(self, args);
     };
 
     QueuesService.prototype.remove =  function(id){
         var self = this;
         if(_.isEmpty(self.lists[id])) return false;
         self.lists[id].end('Queue removed');
-        delete self.lists[id];
+        return delete self.lists[id];
     };
 
     return new QueuesService();

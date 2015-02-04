@@ -107,6 +107,7 @@ function adminController(
     AdminController.prototype.queueMP = function(g){
         var self = this
             , queue = {
+                id : Queues.createRequestId(),
                 users : {id : self.Authorization.id, username : self.Authorization.username, accepted : false, isMe:true},
                 name:g.queueName,
                 userCount : 1
