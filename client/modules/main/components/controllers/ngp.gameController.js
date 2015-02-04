@@ -1,15 +1,17 @@
 /**
  * Created by Yaniv-Kalfa on 1/2/15.
  */
-angular.module(ngp.const.app.name)
-    .controller('gameController', [
-        gameController
-    ]);
+(function(){
+    angular.module(ngp.const.app.name)
+        .controller('gameController', [
+            gameController
+        ]);
 
-function gameController() {
+    function gameController() {
 
-    function GameController(){ }
+        function GameController(){ }
 
-    return new GameController();
+        return new GameController();
 
-}
+    }
+})();

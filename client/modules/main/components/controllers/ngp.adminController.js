@@ -1,196 +1,199 @@
 /**
  * Created by Yaniv-Kalfa on 1/2/15.
  */
-angular.module(ngp.const.app.name)
-    .controller('adminController', [
-        '$rootScope',
-        '$scope',
-        '$state',
-        '$location',
-        '$cookieStore',
-        'Api',
-        'Authorization',
-        'Notify',
-        'ChatOut',
-        'Chat',
-        'Queues',
-        'QueueOut',
-        adminController
-    ]);
+(function(){
+    angular.module(ngp.const.app.name)
+        .controller('adminController', [
+            '$rootScope',
+            '$scope',
+            '$state',
+            '$location',
+            '$cookieStore',
+            'Api',
+            'Authorization',
+            'Notify',
+            'ChatOut',
+            'Chat',
+            'Queues',
+            'QueueOut',
+            adminController
+        ]);
 
-function adminController(
-    $rootScope,
-    $scope,
-    $state,
-    $location,
-    $cookieStore,
-    Api,
-    Authorization,
-    Notify,
-    ChatOut,
-    Chat,
-    Queues,
-    QueueOut
-    ) {
+    function adminController(
+        $rootScope,
+        $scope,
+        $state,
+        $location,
+        $cookieStore,
+        Api,
+        Authorization,
+        Notify,
+        ChatOut,
+        Chat,
+        Queues,
+        QueueOut
+        ) {
 
-    function AdminController(){
-        var self = this;
-        this.api = Api.createNewApi(ngp.const.app.ajaxUrl);
-        this.Authorization = Authorization.getUser();
-        this.commandLine = '';
-        this.games = [];
-        this.imgUrl = ngp.const.app.imgUrl;
-        this.init();
+        function AdminController(){
+            var self = this;
+            this.api = Api.createNewApi(ngp.const.app.ajaxUrl);
+            this.Authorization = Authorization.getUser();
+            this.commandLine = '';
+            this.games = [];
+            this.imgUrl = ngp.const.app.imgUrl;
+            this.init();
 
-    }
+        }
 
-    AdminController.prototype.init = function(){
-        this.getGames();
-    };
-/*
-    AdminController.prototype.inQueue = function(game){
-        game.inQueue = true;
-    };
+        AdminController.prototype.init = function(){
+            this.getGames();
+        };
+        /*
+         AdminController.prototype.inQueue = function(game){
+         game.inQueue = true;
+         };
 
-    AdminController.prototype.outOfQueue = function(game){
-        game.inQueue = false;
-    };
+         AdminController.prototype.outOfQueue = function(game){
+         game.inQueue = false;
+         };
 
-    AdminController.prototype.setSearchImg = function(game){
-        game.img = 'queueSearching.gif';
-    };*/
+         AdminController.prototype.setSearchImg = function(game){
+         game.img = 'queueSearching.gif';
+         };*/
 
-    AdminController.prototype.setSearchImg = function(game){
-        game.img = 'queueSearching.gif';
-    };
+        AdminController.prototype.setSearchImg = function(game){
+            game.img = 'queueSearching.gif';
+        };
 
-    AdminController.prototype.setGameImg = function(game){
-        game.img = game.name + '.png';
-    };
-
-    AdminController.prototype.prepareGames = function(games){
-        var self = this;
-        _(games).forEach(function(game){
+        AdminController.prototype.setGameImg = function(game){
             game.img = game.name + '.png';
-        });
+        };
 
-        this.games = games;
-    };
+        AdminController.prototype.prepareGames = function(games){
+            var self = this;
+            _(games).forEach(function(game){
+                game.img = game.name + '.png';
+            });
 
-    AdminController.prototype.getGames = function(){
-        var success,fail, options, self = this;
+            this.games = games;
+        };
 
-        success = function(resp){
-            if(resp.payload.success){
-                self.prepareGames(resp.payload.data)
+        AdminController.prototype.getGames = function(){
+            var success,fail, options, self = this;
+
+            success = function(resp){
+                if(resp.payload.success){
+                    self.prepareGames(resp.payload.data)
+                }else{
+                    Notify.error('Error: ' + resp.payload.data);
+                }
+            };
+
+            fail = function(err){  Notify.error('Error: ' + err); };
+
+            options = {
+                method: 'post',
+                url: ngp.const.app.ajaxUrl,
+                data: {
+                    "method" : 'getGames',
+                    "status" : 0,
+                    "success" : false,
+                    "data" : ''
+                }
+            };
+
+            this.api.doRequest(options).then(success).catch(fail);
+        };
+
+        AdminController.prototype.queueMP = function(g){
+            var self = this
+                , queue = {
+                    id : Queues.createRequestId(),
+                    users : {id : self.Authorization.id, username : self.Authorization.username, accepted : false, isMe:true},
+                    name:g.queueName,
+                    userCount : 1
+                }
+                , analysed
+                , end = function(id){
+                    self.setGameImg(g);
+                }
+                ;
+            queue = Queues.add(queue);
+            queue.on('end', end);
+            this.setSearchImg(g);
+
+            analysed = QueueOut.analyseMessage("join " + queue.id);
+
+            if(analysed.success){
+                Notify.success('Queued for: ', queue.name);
             }else{
-                Notify.error('Error: ' + resp.payload.data);
+                Notify.error(analysed.msg);
             }
         };
 
-        fail = function(err){  Notify.error('Error: ' + err); };
-
-        options = {
-            method: 'post',
-            url: ngp.const.app.ajaxUrl,
-            data: {
-                "method" : 'getGames',
-                "status" : 0,
-                "success" : false,
-                "data" : ''
-            }
+        AdminController.prototype.queueSP = function(game){
+            console.log(game);
         };
 
-        this.api.doRequest(options).then(success).catch(fail);
-    };
+        AdminController.prototype.logout = function(){
+            var success,fail, options;
 
-    AdminController.prototype.queueMP = function(g){
-        var self = this
-            , queue = {
-                id : Queues.createRequestId(),
-                users : {id : self.Authorization.id, username : self.Authorization.username, accepted : false, isMe:true},
-                name:g.queueName,
-                userCount : 1
-            }
-            , analysed
-            , end = function(id){
-                self.setGameImg(g);
-            }
-            ;
-        queue = Queues.add(queue);
-        queue.on('end', end);
-        this.setSearchImg(g);
+            success = function(resp){
+                if(resp.payload.success){
+                    Authorization.logout();
+                }else{
+                    Notify.error('Logout Failed: ' + resp.payload.data);
+                }
+            };
 
-        analysed = QueueOut.analyseMessage("join " + queue.id);
+            fail = function(err){  Notify.error('There was some communication error: ' + err); };
 
-        if(analysed.success){
-            Notify.success('Queued for: ', queue.name);
-        }else{
-            Notify.error(analysed.msg);
-        }
-    };
+            options = {
+                method: 'post',
+                url: ngp.const.app.ajaxUrl,
+                data: {
+                    "method" : 'logout',
+                    "status" : 0,
+                    "success" : false,
+                    "data" : {}
+                }
+            };
 
-    AdminController.prototype.queueSP = function(game){
-        console.log(game);
-    };
+            this.api.doRequest(options).then(success).catch(fail);
+        };
 
-    AdminController.prototype.logout = function(){
-        var success,fail, options;
+        AdminController.prototype.msgInput = function(e){
+            var key = e.keyCode || e.which;
+            if(key === 13 && this.commandLine) this.sendMessage();
+        };
 
-        success = function(resp){
-            if(resp.payload.success){
-                Authorization.logout();
+        AdminController.prototype.msgButton = function(){
+            if(this.commandLine) this.sendMessage();
+        };
+
+        AdminController.prototype.sendMessage = function(){
+            var rIndex = Chat.getActiveRoom()
+                , rName = $rootScope.ngp.rooms[rIndex].id
+                , msg
+                ;
+
+            if(msg = ChatOut.isMessageACommend(this.commandLine)){
+                ChatOut.analyseMessage(msg);
             }else{
-                Notify.error('Logout Failed: ' + resp.payload.data);
+                msg = "add " + rName + " " + this.commandLine;
+                ChatOut.analyseMessage(msg);
             }
+            this.commandLine = '';
         };
 
-        fail = function(err){  Notify.error('There was some communication error: ' + err); };
 
-        options = {
-            method: 'post',
-            url: ngp.const.app.ajaxUrl,
-            data: {
-                "method" : 'logout',
-                "status" : 0,
-                "success" : false,
-                "data" : {}
-            }
+        AdminController.prototype.roomSelected = function(rIndex){
+            Chat.resetNotification(rIndex);
         };
 
-        this.api.doRequest(options).then(success).catch(fail);
-    };
-
-    AdminController.prototype.msgInput = function(e){
-        var key = e.keyCode || e.which;
-        if(key === 13 && this.commandLine) this.sendMessage();
-    };
-
-    AdminController.prototype.msgButton = function(){
-        if(this.commandLine) this.sendMessage();
-    };
-
-    AdminController.prototype.sendMessage = function(){
-        var rIndex = Chat.getActiveRoom()
-            , rName = $rootScope.ngp.rooms[rIndex].id
-            , msg
-            ;
-
-        if(msg = ChatOut.isMessageACommend(this.commandLine)){
-            ChatOut.analyseMessage(msg);
-        }else{
-            msg = "add " + rName + " " + this.commandLine;
-            ChatOut.analyseMessage(msg);
-        }
-        this.commandLine = '';
-    };
 
 
-    AdminController.prototype.roomSelected = function(rIndex){
-        Chat.resetNotification(rIndex);
-    };
+        return new AdminController();
+    }
+})();
 
-
-
-    return new AdminController();
-}
