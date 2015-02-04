@@ -35,5 +35,5 @@ function UtilFunc() {
         }
     };
 
-    return new UtilFuncFactory();
+    return new ngp.oFns.uf();
 }
