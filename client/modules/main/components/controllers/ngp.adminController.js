@@ -40,6 +40,7 @@ function adminController(
         this.commandLine = '';
         this.games = [];
         this.imgUrl = ngp.const.app.imgUrl;
+        console.log('aaa');
         this.init();
 
     }
