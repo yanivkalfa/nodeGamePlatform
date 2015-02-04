@@ -20,7 +20,9 @@ module.exports = function(_s){
     _s.oReq.app.use(_s.oReq.bodyParser.urlencoded({ extended: true }));
     _s.oReq.app.use(_s.oReq.express.static(_s.sClientDirname));
 
-    _s.oReq.app.get('/shared/:filepath', function (req, res) {
+    _s.oReq.app.get('/shared/*', function (req, res) {
+        console.log(req.params);
+        /*
         var path = '../../shared/contents/' + req.params.filepath;
         _s.oReq.fs.exists(path, function(exists) {
             if (exists) {
@@ -31,6 +33,7 @@ module.exports = function(_s){
                 return res.status(404).send('404 page !!!!');
             }
         });
+        */
     });
 
 
