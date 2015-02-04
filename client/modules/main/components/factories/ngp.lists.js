@@ -9,42 +9,42 @@ angular.module(ngp.const.app.name)
 function Lists() {
 
     function ListsFactory(){
-        this.Lists = {};
+        this.lists = {};
     }
 
     ListsFactory.prototype.add =  function(l, id){
         console.log('add', arguments);
         var self = this, lId;
         lId = id || l.id;
-        if(self.Lists.hasOwnProperty(lId)) return false;
-        return self.Lists[lId] = l;
+        if(self.lists.hasOwnProperty(lId)) return false;
+        return self.lists[lId] = l;
     };
 
     ListsFactory.prototype.update =  function(l, id){
         var self = this, lId;
         lId = id || l.id;
-        if(!self.Lists.hasOwnProperty(lId)) return false;
-        return self.Lists[lId] = l;
+        if(!self.lists.hasOwnProperty(lId)) return false;
+        return self.lists[lId] = l;
     };
 
     ListsFactory.prototype.remove =  function(id){
         var self = this;
-        if(_.isEmpty(self.Lists[id])) return false;
-        return delete self.Lists[id];
+        if(_.isEmpty(self.lists[id])) return false;
+        return delete self.lists[id];
     };
 
     ListsFactory.prototype.get =  function(id){
         var self = this;
-        if(!id) return self.Lists;
-        if(_.isEmpty(self.Lists[id])) return false;
-        return self.Lists[id];
+        if(!id) return self.lists;
+        if(_.isEmpty(self.lists[id])) return false;
+        return self.lists[id];
     };
 
     ListsFactory.prototype.getByPropName =  function(prop, name){
         var self = this, list;
-        for(var id in self.Lists){
-            if(!self.Lists.hasOwnProperty(id)) continue;
-            if(name == self.Lists[id][prop]) list = self.Lists[id];
+        for(var id in self.lists){
+            if(!self.lists.hasOwnProperty(id)) continue;
+            if(name == self.lists[id][prop]) list = self.lists[id];
             break;
         }
 
@@ -62,7 +62,7 @@ function Lists() {
             , id = genRandomId()
             ;
 
-        while(!_.isEmpty(self.Lists[id])){
+        while(!_.isEmpty(self.lists[id])){
             id = genRandomId();
         }
         return id;

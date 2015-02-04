@@ -15,7 +15,6 @@ function Queues(
 
     function QueuesService(){
         Lists.apply(this,arguments);
-
     }
 
     QueuesService.prototype = Object.create(Lists.prototype);
@@ -37,3 +36,6 @@ function Queues(
 
     return new QueuesService();
 }
+
+
+
