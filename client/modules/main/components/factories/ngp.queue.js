@@ -144,18 +144,18 @@ function Queue(
 
 
     QueueFactory.prototype.ready = function(data){
-        //this.trigger('ready', data);
+        this.trigger('ready', data);
     };
 
     QueueFactory.prototype.timedOut = function(data){
         var self = this;
-        //this.trigger('timedOut', data);
+        this.trigger('timedOut', data);
         self.endTimers();
     };
 
     QueueFactory.prototype.end = function(data){
         var self = this;
-        //this.trigger('end', data);
+        this.trigger('end', data);
         self.endTimers();
     };
 

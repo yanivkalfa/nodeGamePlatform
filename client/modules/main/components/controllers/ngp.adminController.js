@@ -40,7 +40,6 @@ function adminController(
         this.commandLine = '';
         this.games = [];
         this.imgUrl = ngp.const.app.imgUrl;
-        console.log('aaa');
         this.init();
 
     }
@@ -119,6 +118,7 @@ function adminController(
             }
             ;
 
+        console.log('got here:', queue);
         queue = Queues.add(queue);
         queue.on('end', end);
         this.setSearchImg(g);
