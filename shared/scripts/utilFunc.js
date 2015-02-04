@@ -44,6 +44,7 @@ UtilFuncFactory.prototype =  {
 
 
 if (typeof module !== 'undefined' && module.exports) {
+    console.log('aa');
     module.exports = new UtilFuncFactory();
 }
 
