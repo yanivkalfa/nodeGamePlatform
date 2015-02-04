@@ -43,7 +43,7 @@ function RoutQueue(
         queue.setWindow(modalInstance);
 
         modalInstance.result.then(function (close) {
-            queue.endQueue(close);
+            queue.end(close);
         }, function () {
             console.log('something happened');
         });

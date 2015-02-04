@@ -14,7 +14,6 @@ function Queues(
     ) {
 
     function QueuesService(){
-        this.lists = {};
         Lists.apply(this,arguments);
 
     }
@@ -31,8 +30,8 @@ function Queues(
 
     QueuesService.prototype.remove =  function(id){
         var self = this;
-        if(_.isEmpty(self.lists[id])) return false;
-        self.lists[id].end('Queue removed');
+        if(_.isEmpty(this.lists[id])) return false;
+        this.lists[id].end('Queue removed');
         return delete self.lists[id];
     };
 

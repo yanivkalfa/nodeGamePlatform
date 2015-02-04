@@ -118,6 +118,7 @@ function adminController(
             }
             ;
 
+        console.log(Queues);
         queue = Queues.add(queue);
 
         console.log('got here:', queue);
