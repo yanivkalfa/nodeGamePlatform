@@ -13,6 +13,7 @@ function Lists() {
     }
 
     ListsFactory.prototype.add =  function(l, id){
+        console.log('add', arguments);
         var self = this, lId;
         lId = id || l.id;
         if(self.Lists.hasOwnProperty(lId)) return false;
