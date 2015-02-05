@@ -23,9 +23,13 @@ module.exports = function(_s){
     rf.RoutMsg = require(pathsList.RoutMsg)(_s,rf);
     console.log('got here ');
     rf.RoutRemoteMsg = require(pathsList.RoutRemoteMsg)(_s,rf);
+    console.log('got here a');
     rf.RoutRoom = require(pathsList.RoutRoom)(_s,rf);
+    console.log('got here b');
     rf.RoutChat = require(pathsList.RoutChat)(_s,rf);
+    console.log('got here c');
     rf.RoutSjax = require(pathsList.RoutSjax)(_s,rf);
+    console.log('got here d');
     rf.RoutQueue = require(pathsList.RoutQueue)(_s,rf);
     console.log('got here ');
     rf.RoutSocket = require(pathsList.RoutSocket)(_s, rf);
