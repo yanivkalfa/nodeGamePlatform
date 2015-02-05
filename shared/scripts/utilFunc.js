@@ -8,7 +8,7 @@
             if(window.ngp.oFns)window.ngp.oFns.UtilFunc = new UtilFunc();
             else{
                 window.ngp.oFns = {
-                    UtilFunc:new UtilFunc()
+                    UtilFunc : new UtilFunc()
                 };
             }
     }
