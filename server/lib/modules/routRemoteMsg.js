@@ -11,10 +11,10 @@ module.exports = function(_s, _rf){
 
     var pathsList = _s.oConfig.pathsList
         , router = require(pathsList.Router)
-        , User = require(pathsList.User)(_s)
-        , _ = _s.oReq.lodash
-        , HttpTransit = require(pathsList.HttpTransit)(_s)
-        , Servers = require(pathsList.Servers)(_s)
+        //, User = require(pathsList.User)(_s)
+        //, _ = _s.oReq.lodash
+        //, HttpTransit = require(pathsList.HttpTransit)(_s)
+        //, Servers = require(pathsList.Servers)(_s)
         ;
 
     function RoutRemoteMsg (){

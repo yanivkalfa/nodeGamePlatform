@@ -6,10 +6,10 @@ module.exports = function(_s, _rf){
         ;
     */
     var pathsList = _s.oConfig.pathsList
-        , router = require(pathsList.Router)
+        //, router = require(pathsList.Router)
         , User = require(pathsList.User)(_s)
         , _ = _s.oReq.lodash
-        , RoutRemoteMsg = require(pathsList.RoutRemoteMsg)(_s)
+        //, RoutRemoteMsg = require(pathsList.RoutRemoteMsg)(_s)
         ;
 
     function GetRoom(){
