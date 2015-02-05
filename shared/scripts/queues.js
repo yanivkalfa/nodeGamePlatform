@@ -5,8 +5,8 @@
         ;
 
     if (typeof module !== 'undefined' && module.exports) {
-        List = require('./list.js')();
-        Queue = require('./queue.js')();
+        List = require('./list.js');
+        Queue = require('./queue.js');
     }else{
         List = window.ngp.oFns.List;
         Queue = window.ngp.oFns.Queue;

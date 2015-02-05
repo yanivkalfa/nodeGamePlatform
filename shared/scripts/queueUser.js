@@ -1,18 +1,7 @@
 (function(){
     var User;
-    if (typeof module !== 'undefined' && module.exports) {
-        User = require('./user.js');
-        module.exports = function(){ return QueueUser; };
-    }else{
-        if(window.ngp)
-            if(window.ngp.oFns)window.ngp.oFns.QueueUser = QueueUser;
-            else{
-                window.ngp.oFns = {
-                    QueueUser:QueueUser
-                };
-            }
-        User = window.ngp.oFns.User;
-    }
+    if (typeof module !== 'undefined' && module.exports) User = require('./user.js');
+    else User = window.ngp.oFns.User;
 
     function QueueUser(user){
         User.apply(this,arguments);
@@ -34,4 +23,16 @@
         setIsMe: function(isMe) { this.isMe = isMe; },
         setAccepted: function(accepted) { this.accepted = accepted; }
     };
+
+    if (typeof module !== 'undefined' && module.exports) {
+        module.exports = QueueUser;
+    }else{
+        if(window.ngp)
+            if(window.ngp.oFns)window.ngp.oFns.QueueUser = QueueUser;
+            else{
+                window.ngp.oFns = {
+                    QueueUser:QueueUser
+                };
+            }
+    }
 })();

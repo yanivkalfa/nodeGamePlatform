@@ -2,16 +2,7 @@
     var User;
     if (typeof module !== 'undefined' && module.exports) {
         User = require('./user.js');
-
-        module.exports = function(){ return BasicUser;};
     }else{
-        if(window.ngp)
-            if(window.ngp.oFns)window.ngp.oFns.BasicUser = BasicUser;
-            else{
-                window.ngp.oFns = {
-                    BasicUser:BasicUser
-                };
-            }
         User = window.ngp.oFns.User;
     }
 
@@ -35,5 +26,18 @@
         setEmail: function(email) { this.email = email; },
         setRoles: function(roles) { this.roles = roles; }
     };
+
+
+    if (typeof module !== 'undefined' && module.exports) {
+        module.exports = BasicUser
+    }else{
+        if(window.ngp)
+            if(window.ngp.oFns)window.ngp.oFns.BasicUser = BasicUser;
+            else{
+                window.ngp.oFns = {
+                    BasicUser:BasicUser
+                };
+            }
+    }
 
 })();

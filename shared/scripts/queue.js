@@ -9,15 +9,7 @@
         UtilFunc = require('./utilFunc.js');
         EventEmitter = require('./eventEmitter.js');
         UsersList = require('./usersList.js');
-        module.exports = function(){ return Queue;};
     }else{
-        if(window.ngp)
-            if(window.ngp.oFns)window.ngp.oFns.Queue = Queue;
-            else{
-                window.ngp.oFns = {
-                    Queue:Queue
-                };
-            }
         UtilFunc = window.ngp.oFns.UtilFunc;
         EventEmitter = window.ngp.oFns.EventEmitter;
         UsersList = window.ngp.oFns.UsersList;
@@ -113,4 +105,16 @@
         self._endTime = Date.now();
         clearTimeout(self._timer);
     };
+
+    if (typeof module !== 'undefined' && module.exports) {
+        module.exports = Queue;
+    }else{
+        if(window.ngp)
+            if(window.ngp.oFns)window.ngp.oFns.Queue = Queue;
+            else{
+                window.ngp.oFns = {
+                    Queue:Queue
+                };
+            }
+    }
 })();

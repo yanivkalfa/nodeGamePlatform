@@ -1,18 +1,7 @@
 (function(){
     var List;
-    if (typeof module !== 'undefined' && module.exports) {
-        List = require('./list.js');
-        module.exports = function(){ return UsersList; };
-    }else{
-        if(window.ngp)
-            if(window.ngp.oFns)window.ngp.oFns.UsersList = UsersList;
-            else{
-                window.ngp.oFns = {
-                    UsersList:UsersList
-                };
-            }
-        List = window.ngp.oFns.List;
-    }
+    if (typeof module !== 'undefined' && module.exports) List = require('./list.js');
+    else List = window.ngp.oFns.List;
 
     function UsersList(){
         List.apply(this, arguments);
@@ -47,4 +36,16 @@
         if(!u) return false;
         return u.accepted = false;
     };
+
+    if (typeof module !== 'undefined' && module.exports) {
+        module.exports = UsersList;
+    }else{
+        if(window.ngp)
+            if(window.ngp.oFns)window.ngp.oFns.UsersList = UsersList;
+            else{
+                window.ngp.oFns = {
+                    UsersList:UsersList
+                };
+            }
+    }
 })();
