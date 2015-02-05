@@ -2,4 +2,4 @@
  * Created by Yaniv-Kalfa on 1/2/15.
  */
 angular.module(ngp.const.app.name)
-    .factory('Queue', [ngp.oFns.Queue]);
+    .factory('EventEmitter', [ngp.oFns.EventEmitter]);
