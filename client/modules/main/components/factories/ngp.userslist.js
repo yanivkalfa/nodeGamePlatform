@@ -3,23 +3,23 @@
  */
 (function(){
     angular.module(ngp.const.app.name)
-        .factory('UserLists', [
-            'Lists',
-            UserLists
+        .factory('UsersList', [
+            'List',
+            UsersList
         ]);
 
-    function UserLists(
-        Lists
+    function UsersList(
+        List
         ) {
 
-        function UserListsFactory(){
-            Lists.apply(this, arguments);
+        function UsersListFactory(){
+            List.apply(this, arguments);
         }
 
-        UserListsFactory.prototype = Object.create(Lists.prototype);
-        UserListsFactory.prototype.constructor = UserListsFactory;
+        UsersListFactory.prototype = Object.create(List.prototype);
+        UsersListFactory.prototype.constructor = UsersListFactory;
 
-        UserListsFactory.prototype.getMyIndex = function(){
+        UsersListFactory.prototype.getMyIndex = function(){
             var self = this
                 , id
                 ;
@@ -32,14 +32,14 @@
             return -1;
         };
 
-        UserListsFactory.prototype.accept = function(user){
+        UsersListFactory.prototype.accept = function(user){
             var self = this, u;
             u = self.get(user.id);
             if(!u) return false;
             return u.accepted = true;
         };
 
-        UserListsFactory.prototype.decline = function(user){
+        UsersListFactory.prototype.decline = function(user){
             var self = this, u;
             u = self.get(user.id);
             if(!u) return false;
@@ -47,6 +47,6 @@
         };
 
 
-        return UserListsFactory;
+        return UsersListFactory;
     }
 })();

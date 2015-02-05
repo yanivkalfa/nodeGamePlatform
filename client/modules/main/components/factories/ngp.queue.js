@@ -6,16 +6,14 @@
         .factory('Queue', [
             'UtilFunc',
             'EventEmitter',
-            'QueueUser',
-            'UserLists',
+            'UsersList',
             Queue
         ]);
 
     function Queue(
         UtilFunc,
         EventEmitter,
-        QueueUser,
-        UserLists
+        UsersList
         ){
 
         function QueueFactory(queue){
@@ -28,7 +26,7 @@
 
             this.id = queue.id || undefined;
             this.name = queue.name || undefined;
-            this.users = new UserLists();
+            this.users = new UsersList();
             this.maxWaitTime = queue.maxWaitTime || 3600000;
             this.userCount = queue.userCount || 2;
             this.minDetails = {};

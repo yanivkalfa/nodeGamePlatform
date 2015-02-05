@@ -4,28 +4,28 @@
 (function(){
     angular.module(ngp.const.app.name)
         .service('Queues', [
-            'Lists',
+            'List',
             'Queue',
             Queues
         ]);
 
     function Queues(
-        Lists,
+        List,
         Queue
         ) {
 
         function QueuesService(){
-            Lists.apply(this,arguments);
+            List.apply(this,arguments);
         }
 
-        QueuesService.prototype = Object.create(Lists.prototype);
+        QueuesService.prototype = Object.create(List.prototype);
         QueuesService.prototype.constructor = QueuesService;
 
         QueuesService.prototype.add =  function(q){
             var self = this;
             var args = Array.prototype.slice.call(arguments, -1,-1);
             args.push(new Queue(q));
-            return Lists.prototype.add.apply(self, args);
+            return List.prototype.add.apply(self, args);
         };
 
         QueuesService.prototype.remove =  function(id){

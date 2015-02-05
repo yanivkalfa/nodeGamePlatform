@@ -1,19 +1,22 @@
-/**
- * Created by Yaniv-Kalfa on 1/2/15.
- */
-angular.module(ngp.const.app.name)
-    .factory('Lists', [
-        Lists
-    ]);
+(function(){
+    if (typeof module !== 'undefined' && module.exports) {
+        module.exports = List;
+    }else{
+        if(window.ngp)
+            if(window.ngp.oFns)window.ngp.oFns.List = List;
+            else{
+                window.ngp.oFns = {
+                    List:List
+                };
+            }
+    }
 
-function Lists() {
-
-    function ListsFactory(){
+    function List(){
         this.list = {};
         this.length = 0;
     }
 
-    ListsFactory.prototype.add =  function(l, id){
+    List.prototype.add =  function(l, id){
         var self = this, lId;
         lId = id || l.id || false;
         if(!lId) return false;
@@ -22,28 +25,28 @@ function Lists() {
         return self.list[lId] = l;
     };
 
-    ListsFactory.prototype.update =  function(l, id){
+    List.prototype.update =  function(l, id){
         var self = this, lId;
         lId = id || l.id;
         if(!self.list.hasOwnProperty(lId)) return false;
         return self.list[lId] = l;
     };
 
-    ListsFactory.prototype.remove =  function(id){
+    List.prototype.remove =  function(id){
         var self = this;
         if(_.isEmpty(self.list[id])) return false;
         this.length--;
         return delete self.list[id];
     };
 
-    ListsFactory.prototype.get =  function(id){
+    List.prototype.get =  function(id){
         var self = this;
         if(!id) return self.list;
         if(_.isEmpty(self.list[id])) return false;
         return self.list[id];
     };
 
-    ListsFactory.prototype.getByPropName =  function(prop, name){
+    List.prototype.getByPropName =  function(prop, name){
         var self = this, list;
         for(var id in self.list){
             if(!self.list.hasOwnProperty(id)) continue;
@@ -54,7 +57,7 @@ function Lists() {
         return list;
     };
 
-    ListsFactory.prototype.createRequestId = function(){
+    List.prototype.createRequestId = function(){
         var genRandomId = function(){
                 var start = Math.floor(Math.random()*30000).toString()
                     , dateNow = Date.now().toString()
@@ -71,7 +74,7 @@ function Lists() {
         return id;
     };
 
-    ListsFactory.prototype.listLength = function(){
+    List.prototype.listLength = function(){
         var self = this
             , id
             , length = 0
@@ -86,6 +89,4 @@ function Lists() {
 
         return this.length = length;
     };
-
-    return ListsFactory;
-}
+})();

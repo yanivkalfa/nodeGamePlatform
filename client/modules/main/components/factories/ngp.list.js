@@ -3,18 +3,18 @@
  */
 (function(){
     angular.module(ngp.const.app.name)
-        .factory('Lists', [
-            Lists
+        .factory('List', [
+            List
         ]);
 
-    function Lists() {
+    function List() {
 
-        function ListsFactory(){
+        function ListFactory(){
             this.list = {};
             this.length = 0;
         }
 
-        ListsFactory.prototype.add =  function(l, id){
+        ListFactory.prototype.add =  function(l, id){
             var self = this, lId;
             lId = id || l.id || false;
             if(!lId) return false;
@@ -23,28 +23,28 @@
             return self.list[lId] = l;
         };
 
-        ListsFactory.prototype.update =  function(l, id){
+        ListFactory.prototype.update =  function(l, id){
             var self = this, lId;
             lId = id || l.id;
             if(!self.list.hasOwnProperty(lId)) return false;
             return self.list[lId] = l;
         };
 
-        ListsFactory.prototype.remove =  function(id){
+        ListFactory.prototype.remove =  function(id){
             var self = this;
             if(_.isEmpty(self.list[id])) return false;
             this.length--;
             return delete self.list[id];
         };
 
-        ListsFactory.prototype.get =  function(id){
+        ListFactory.prototype.get =  function(id){
             var self = this;
             if(!id) return self.list;
             if(_.isEmpty(self.list[id])) return false;
             return self.list[id];
         };
 
-        ListsFactory.prototype.getByPropName =  function(prop, name){
+        ListFactory.prototype.getByPropName =  function(prop, name){
             var self = this, list;
             for(var id in self.list){
                 if(!self.list.hasOwnProperty(id)) continue;
@@ -55,7 +55,7 @@
             return list;
         };
 
-        ListsFactory.prototype.createRequestId = function(){
+        ListFactory.prototype.createRequestId = function(){
             var genRandomId = function(){
                     var start = Math.floor(Math.random()*30000).toString()
                         , dateNow = Date.now().toString()
@@ -72,7 +72,7 @@
             return id;
         };
 
-        ListsFactory.prototype.listLength = function(){
+        ListFactory.prototype.listLength = function(){
             var self = this
                 , id
                 , length = 0
@@ -88,6 +88,6 @@
             return this.length = length;
         };
 
-        return ListsFactory;
+        return ListFactory;
     }
 })();

@@ -16,6 +16,7 @@
             'Chat',
             'Queues',
             'QueueOut',
+            'QueueUser',
             adminController
         ]);
 
@@ -31,7 +32,8 @@
         ChatOut,
         Chat,
         Queues,
-        QueueOut
+        QueueOut,
+        QueueUser
         ) {
 
         function AdminController(){
@@ -109,7 +111,7 @@
             var self = this
                 , queue = {
                     id : Queues.createRequestId(),
-                    users : {id : self.Authorization.id, username : self.Authorization.username, accepted : false, isMe:true},
+                    users : new QueueUser({id : self.Authorization.id, username : self.Authorization.username, accepted : false, isMe:true}),
                     name:g.queueName,
                     userCount : 1
                 }

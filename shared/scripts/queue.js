@@ -1,24 +1,29 @@
-/**
- * Created by Yaniv-Kalfa on 1/2/15.
- */
+(function(){
 
-angular.module(ngp.const.app.name)
-    .factory('Queue', [
-        'UtilFunc',
-        'EventEmitter',
-        'QueueUser',
-        'UserLists',
-        Queue
-    ]);
+    var UtilFunc
+        , EventEmitter
+        , UsersList
+        ;
 
-function Queue(
-    UtilFunc,
-    EventEmitter,
-    QueueUser,
-    UserLists
-    ){
+    if (typeof module !== 'undefined' && module.exports) {
+        module.exports = Queue;
+        UtilFunc = require('./utilFunc.js');
+        EventEmitter = require('./eventEmitter.js');
+        UsersList = require('./usersList.js');
+    }else{
+        if(window.ngp)
+            if(window.ngp.oFns)window.ngp.oFns.Queue = Queue;
+            else{
+                window.ngp.oFns = {
+                    Queue:Queue
+                };
+            }
+        UtilFunc = window.ngp.oFns.UtilFunc;
+        EventEmitter = window.ngp.oFns.EventEmitter;
+        UsersList = window.ngp.oFns.UsersList;
+    }
 
-    function QueueFactory(queue){
+    function Queue(queue){
         EventEmitter.apply(this, arguments);
         this._startTime = Date.now();
         this._endTime = undefined;
@@ -28,7 +33,7 @@ function Queue(
 
         this.id = queue.id || undefined;
         this.name = queue.name || undefined;
-        this.users = new UserLists();
+        this.users = new UsersList();
         this.maxWaitTime = queue.maxWaitTime || 3600000;
         this.userCount = queue.userCount || 2;
         this.minDetails = {};
@@ -38,42 +43,42 @@ function Queue(
         this.init();
     }
 
-    QueueFactory.prototype = Object.create(EventEmitter.prototype);
-    QueueFactory.prototype.constructor = QueueFactory;
+    Queue.prototype = Object.create(EventEmitter.prototype);
+    Queue.prototype.constructor = Queue;
 
-    QueueFactory.prototype.init = function(){
+    Queue.prototype.init = function(){
         var self = this;
         self.setMinDetails();
         this._timer = setTimeout(_.bind(self.timedOut,self), self.maxWaitTime);
     };
 
-    QueueFactory.prototype.setRoom = function(room){
+    Queue.prototype.setRoom = function(room){
         this._room = room;
     };
 
-    QueueFactory.prototype.getRoom = function(){
+    Queue.prototype.getRoom = function(){
         return this._room;
     };
 
-    QueueFactory.prototype.setWindow = function(window){
+    Queue.prototype.setWindow = function(window){
         this._window = window;
     };
 
-    QueueFactory.prototype.getWindow = function(){
+    Queue.prototype.getWindow = function(){
         return this._window;
     };
 
-    QueueFactory.prototype.setMinDetails = function(){
+    Queue.prototype.setMinDetails = function(){
         var self = this;
         return self.minDetails = {"id" : self.id, "name" : self.name, "users" : self.users.get()};
     };
 
-    QueueFactory.prototype.getMinDetails = function(){
+    Queue.prototype.getMinDetails = function(){
         return  this.minDetails;
     };
 
 
-    QueueFactory.prototype.usersReady = function(){
+    Queue.prototype.usersReady = function(){
         var self = this, id, len, list;
         len = self.users.listLength();
         if(len !== self.userCount) return false;
@@ -87,27 +92,25 @@ function Queue(
     };
 
 
-    QueueFactory.prototype.ready = function(data){
+    Queue.prototype.ready = function(data){
         this.trigger('ready', data);
     };
 
-    QueueFactory.prototype.timedOut = function(data){
+    Queue.prototype.timedOut = function(data){
         var self = this;
         this.trigger('timedOut', data);
         self.endTimers();
     };
 
-    QueueFactory.prototype.end = function(data){
+    Queue.prototype.end = function(data){
         var self = this;
         this.trigger('end', data);
         self.endTimers();
     };
 
-    QueueFactory.prototype.endTimers = function(){
+    Queue.prototype.endTimers = function(){
         var self = this;
         self._endTime = Date.now();
         clearTimeout(self._timer);
     };
-
-    return QueueFactory;
-}
+})();

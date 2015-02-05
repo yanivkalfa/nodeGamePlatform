@@ -1,8 +1,21 @@
 
 (function(){
-    var UtilFuncFactory = function(){};
 
-    UtilFuncFactory.prototype =  {
+    if (typeof module !== 'undefined' && module.exports) {
+        module.exports = new UtilFunc();
+    }else{
+        if(window.ngp)
+            if(window.ngp.oFns)window.ngp.oFns.UtilFunc = UtilFunc;
+            else{
+                window.ngp.oFns = {
+                    UtilFunc:UtilFunc
+                };
+            }
+    }
+
+    var UtilFunc = function(){};
+
+    UtilFunc.prototype =  {
 
         formatMsgDate : function(unixDate) { return moment(new Date(unixDate)).format('HH:mm:ss'); },
 
@@ -43,17 +56,4 @@
             }
         }
     };
-
-    if (typeof module !== 'undefined' && module.exports) {
-        console.log('aa');
-        module.exports = new UtilFuncFactory();
-    }else{
-        if(window.ngp)
-            if(window.ngp.oFns)window.ngp.oFns.uf = UtilFuncFactory;
-            else{
-                window.ngp.oFns = {
-                    uf:UtilFuncFactory
-                };
-            }
-    }
 })();
