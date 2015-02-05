@@ -4,7 +4,10 @@ module.exports = function(_s){
         , sessCon = _s.oConfig.session.connection
         , sessSecret = _s.oConfig.session.secret
         , sessMaxAge = _s.oConfig.session.maxAge
+        , pathsList = _s.oConfig.pathsList
+        , ajaxHandler = require(pathsList.ajaxHandler)
         ;
+
     _s.oReq.app.use(_s.oReq.session({
         store: new _s.oReq.RedisStore({
             port : _s.oConfig.connections[sessCon].port,
@@ -39,8 +42,8 @@ module.exports = function(_s){
     _s.oReq.app.set('view engine', "jade");
     _s.oReq.app.engine('jade', _s.oReq.jade.__express);
 
-    _s.oReq.app.get('/ajaxHandler', _.partial(_s.oModules.ajaxHandler, _s));
-    _s.oReq.app.post('/ajaxHandler', _.partial(_s.oModules.ajaxHandler, _s));
+    _s.oReq.app.get('/ajaxHandler', _.partial(ajaxHandler, _s));
+    _s.oReq.app.post('/ajaxHandler', _.partial(ajaxHandler, _s));
 
     _s.oReq.app.get('/contents/:content', function (req, res) {
         return res.render(_s.sServerDirname + '/tpl/contents/' + req.params.content + '.jade');

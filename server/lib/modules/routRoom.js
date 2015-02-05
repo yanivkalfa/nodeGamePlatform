@@ -1,9 +1,19 @@
 module.exports = function(_s, _rf){
 
+    /*
     var router = _rf.Router
         , _ = _s.oReq.lodash
         , User = _rf.User
         , RoutMsg = new _rf.RoutMsg()
+        ;
+    */
+
+    var pathsList = _s.oConfig.pathsList
+        , router = require(pathsList.Router)
+        , User = require(pathsList.User)(_s)
+        , RoutMsg = new require(pathsList.RoutMsg)(_s)
+        , GetRoom = require(pathsList.GetRoom)(_s)
+        , RoomHandler = require(pathsList.RoomHandler)(_s)
         ;
 
     
@@ -16,7 +26,7 @@ module.exports = function(_s, _rf){
 
 
     RoutRoom.prototype.getRoom = function(spark, room){
-        var GetRoom = new _rf.GetRoom();
+        var GetRoom = new GetRoom();
         return new _s.oReq.Promise(function(resolve, reject) {
             GetRoom.getSparksInRoom(room)
                 .then(function(roomSparks){
@@ -85,7 +95,7 @@ module.exports = function(_s, _rf){
         if(noStore){
             User.fetchUser({"id":spark.user.id}).then(joinRoom).catch(RoutMsg.warningMsg.bind(spark));
         }else{
-            User.fetchUser({"id":spark.user.id}).then(_rf.RoomHandler.joinRoom.bind(this,room.id)).then(joinRoom).catch(RoutMsg.warningMsg.bind(spark));
+            User.fetchUser({"id":spark.user.id}).then(RoomHandler.joinRoom.bind(this,room.id)).then(joinRoom).catch(RoutMsg.warningMsg.bind(spark));
         }
 
     };
@@ -119,7 +129,7 @@ module.exports = function(_s, _rf){
         if(noStore){
             User.fetchUser({"id":spark.user.id}).then(leaveRoom).catch(RoutMsg.warningMsg.bind(spark));
         }else{
-            User.fetchUser({"id":spark.user.id}).then(_rf.RoomHandler.leaveRoom.bind(this,room.id)).then(leaveRoom).catch(RoutMsg.warningMsg.bind(spark));
+            User.fetchUser({"id":spark.user.id}).then(RoomHandler.leaveRoom.bind(this,room.id)).then(leaveRoom).catch(RoutMsg.warningMsg.bind(spark));
         }
     };
 

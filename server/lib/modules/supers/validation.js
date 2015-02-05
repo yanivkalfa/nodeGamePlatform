@@ -1,20 +1,15 @@
-module.exports = function(){
+function Validation (details){
+    this._isValid = false;
 
-    function Validation (details){
-        this._isValid = false;
+    this.validate(details);
+}
 
-        this.validate(details);
-    }
+Validation.prototype = {
+    validate : function(details){
+        this._isValid = true;
+    },
+    isValid : function(){
+        return this._isValid; }
 
-    Validation.prototype = {
-        validate : function(details){
-            this._isValid = true;
-        },
-        isValid : function(){
-            return this._isValid; }
-
-    };
-
-
-    return Validation;
 };
+ module.exports = Validation;

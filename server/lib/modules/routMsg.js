@@ -1,10 +1,20 @@
 module.exports = function(_s, _rf){
 
+    /*
     var router = _rf.Router
         , _ = _s.oReq.lodash
         , User = _rf.User
         , Servers = _rf.Servers
         , sJax = _rf.SocketAjax
+        ;
+    */
+
+    var pathsList = _s.oConfig.pathsList
+        , router = require(pathsList.Router)
+        , User = require(pathsList.User)(_s)
+        , _ = _s.oReq.lodash
+        , SocketAjax = require(pathsList.SocketAjax)(_s)
+        , Servers = require(pathsList.Servers)(_s)
         ;
 
     function RoutMsg (){
@@ -105,7 +115,7 @@ module.exports = function(_s, _rf){
                         data.m = 'rmMsg';
                         data.d.d.fromSpark = spark.id;
                         data.d.d.toSpark = user.spark;
-                        sJax.dispatch({
+                        SocketAjax.dispatch({
                             to : client,
                             data : {"m": "chat", "d":data},
                             timeOut : 10000,

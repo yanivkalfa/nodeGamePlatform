@@ -1,7 +1,9 @@
 // export the class
 module.exports = function(_s, req, res) {
-    var _this = this;
-    var _ = _s.oReq.lodash;
+    var _this = this
+        ,_ = _s.oReq.lodash
+        , pathsList = _s.oConfig.pathsList
+        ;
 
     this.body = req.body;
     this.result = {
@@ -36,7 +38,8 @@ module.exports = function(_s, req, res) {
     };
 
     this.logout = function(){
-        _s.oModules.Authorization.logout(req, res);
+        var Authorization = require(pathsList.Authorization)(_s);
+        Authorization.logout(req, res);
         _this._setResp(true, true);
         return res.json(_this.toReturn);
     };
@@ -45,7 +48,9 @@ module.exports = function(_s, req, res) {
         var success
             , failed
             , wrongUserDetails
-            , visibleField = _s.oModules.User.visibleField()
+            , User = require(pathsList.User)(_s)
+            , ValidationReg = require(pathsList.ValidationReg)(_s)
+            , visibleField = User.visibleField()
             ;
 
         wrongUserDetails = function(){
@@ -53,7 +58,7 @@ module.exports = function(_s, req, res) {
             return res.json(_this.toReturn);
         };
 
-        var validator = new _s.oModules.ValidationReg(userDetails);
+        var validator = new ValidationReg(userDetails);
         if(!validator.isValid()) wrongUserDetails();
 
         success = function(user){
@@ -72,8 +77,11 @@ module.exports = function(_s, req, res) {
     };
 
     this.login = function(userDetails){
+        var Authorization = require(pathsList.Authorization)(_s)
+            ,User = require(pathsList.User)(_s)
+            ;
 
-        _s.oModules.Authorization.login(userDetails).then(function(user){
+        Authorization.login(userDetails).then(function(user){
             if(user)
             {
                 var payLoard = { userId : user.id }
@@ -81,7 +89,7 @@ module.exports = function(_s, req, res) {
                         algorithm: 'HS512',
                         expiresInMinutes : _s.oConfig.session.maxAge / 1000 / 60
                     }
-                    , visibleField = _s.oModules.User.visibleField()
+                    , visibleField = User.visibleField()
                     ;
 
                 user.token = _s.oReq.jwt.sign(payLoard , _s.oConfig.session.secret, options);
@@ -101,7 +109,9 @@ module.exports = function(_s, req, res) {
     };
 
     this.getGames = function(){
-        _s.oModules.GamesApi.fetch().then(function(games){
+        var GamesApi = require(pathsList.GamesApi)(_s);
+
+        GamesApi.fetch().then(function(games){
             if(games)
             {
                 _this._setResp(games, true);

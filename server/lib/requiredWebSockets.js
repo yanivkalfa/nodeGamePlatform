@@ -1,9 +1,14 @@
 
 module.exports = function(_s){
-    var _ = _s.oReq.lodash,
-        sessCon = _s.oConfig.session.connection,
-        sessSecret = _s.oConfig.session.secret,
-        primusOptions = {
+    var _ = _s.oReq.lodash
+        , pathsList = _s.oConfig.pathsList
+        , Authorization = require(pathsList.Authorization)(_s)
+        , RoutSocket = require(pathsList.RoutSocket)(_s)
+        , RoutRoom = require(pathsList.RoutRoom)(_s)
+        , User = require(pathsList.User)(_s)
+        , sessCon = _s.oConfig.session.connection
+        , sessSecret = _s.oConfig.session.secret
+        , primusOptions = {
             cluster: {
                 redis: {
                     port: _s.oConfig.connections[sessCon].port,
@@ -15,6 +20,7 @@ module.exports = function(_s){
             address : _s.details.address + ':' + _s.details.port,
             redis: _s.oReq.redis.createClient(_s.oConfig.connections.redis.port,_s.oConfig.connections.redis.host)
         };
+
     _s.primus = new _s.oReq.Primus(_s.oReq.http, primusOptions);
 
 
@@ -31,7 +37,7 @@ module.exports = function(_s){
         console.log('trying');
         _s.oReq.jwt.verify(spark.query.token, sessSecret, function(err, decoded) {
             if(!_.isUndefined(decoded) && !_.isUndefined(decoded.userId)){
-                _s.oModules.Authorization.login({"_id" : decoded.userId}).then(function(user){
+                Authorization.login({"_id" : decoded.userId}).then(function(user){
                     if(user === null)
                     {
                         spark.end({"method" : "disconnect", msg : "Could not authenticate user a."} );
@@ -41,7 +47,7 @@ module.exports = function(_s){
                         console.log('connected:',user.username);
                         // Attaching user to spark - for logout and maybe future needs
                         spark.user = user;
-                        var RoutSocket = new _s.oModules.RoutSocket(_s.primus);
+                        var RoutSocket = new RoutSocket();
 
                         // Update user's spark id in database - in-case its needed
                         var updateSpark = function(user){
@@ -122,8 +128,8 @@ module.exports = function(_s){
     _s.primus.on('leaveallrooms', function (rooms, spark) {
         if(!spark) return false;
         try{
-            var RoutRoom = new _s.oModules.RoutRoom(_s.primus);
-            _s.oModules.User.fetchUser({"id":spark.user.id}).then(function(user){
+            var RoutRoom = new RoutRoom(_s.primus);
+            User.fetchUser({"id":spark.user.id}).then(function(user){
                 _.isArray(user.rooms) && _(user.rooms).forEach(function(room){
                     var aRoom  = {
                         "id" : room,

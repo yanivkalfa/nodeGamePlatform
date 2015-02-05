@@ -1,13 +1,20 @@
 module.exports = function(_s, _rf){
 
-    var router = _rf.Router;
+    //var router = _rf.Router;
+
+    var pathsList = _s.oConfig.pathsList
+        , router = require(pathsList.Router)
+        , RoutMsg = require(pathsList.RoutMsg)(_s)
+        , RoutRoom = require(pathsList.RoutRoom)(_s)
+        , RoutRemoteMsg = require(pathsList.RoutRemoteMsg)(_s)
+        ;
 
     function RoutChat (){
         router.apply(this,arguments);
 
-        this.RoutMsg = new _rf.RoutMsg();
-        this.RoutRoom = new _rf.RoutRoom();
-        this.RoutRemoteMsg = new _rf.RoutRemoteMsg();
+        this.RoutMsg = new RoutMsg();
+        this.RoutRoom = new RoutRoom();
+        this.RoutRemoteMsg = new RoutRemoteMsg();
     }
 
     RoutChat.prototype = Object.create(router.prototype);

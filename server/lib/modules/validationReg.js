@@ -1,6 +1,7 @@
 module.exports = function(_s, _rf){
 
-    var validation = _rf.Validation;
+    //var validation = _rf.Validation;
+    var validation = require(_s.oConfig.pathsList.Validation);
 
     function RegValidation (details){
         validation.call(this,details);

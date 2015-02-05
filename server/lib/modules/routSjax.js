@@ -1,7 +1,15 @@
 module.exports = function(_s, _rf){
 
+    /*
     var router = _rf.Router
         , sJax = _rf.SocketAjax;
+    */
+
+    var pathsList = _s.oConfig.pathsList
+        , router = require(pathsList.Router)
+        , SocketAjax = require(pathsList.SocketAjax)(_s)
+        , RoutSocket = new require(pathsList.RoutSocket)(_s)
+        ;
 
 
     function RoutSjax (){
@@ -12,7 +20,7 @@ module.exports = function(_s, _rf){
     RoutSjax.prototype.constructor = RoutSjax;
 
     RoutSjax.prototype.req = function(spark,msg){
-        var RoutSocket = new _s.oModules.RoutSocket(_s.primus);
+        //var RoutSocket = new _s.oModules.RoutSocket(_s.primus);
         console.log('request : ', msg);
         var data = RoutSocket.rout(spark, msg.d);
         var resp = {
@@ -32,7 +40,7 @@ module.exports = function(_s, _rf){
         return true;
     };
 
-    RoutSjax.prototype.res = sJax.response.bind(sJax);
+    RoutSjax.prototype.res = SocketAjax.response.bind(SocketAjax);
 
     return RoutSjax;
 };

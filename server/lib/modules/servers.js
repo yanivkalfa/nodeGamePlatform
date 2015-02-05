@@ -1,6 +1,9 @@
 module.exports = function(_s, _rf){
     var _ = _s.oReq.lodash
-        , HttpTransit = _rf.HttpTransit
+        //, HttpTransit = _rf.HttpTransit
+        , HttpTransit = require(_s.oConfig.pathsList.HttpTransit)(_s)
+        ;
+
     function ServersClass(){
         this.visibleField = ["name","port", "address","user"];
     }

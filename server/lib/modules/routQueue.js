@@ -1,10 +1,16 @@
 module.exports = function(_s, _rf){
 
+    /*
     var router = _rf.Router
         , _ = _s.oReq.lodash
         , User = _rf.User
         , HttpTransit = _rf.HttpTransit
         , Servers = _rf.Servers
+        ;
+    */
+
+    var pathsList = _s.oConfig.pathsList
+        , router = require(pathsList.Router)
         ;
 
     function RoutQueue (){
