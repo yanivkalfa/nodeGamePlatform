@@ -39,6 +39,7 @@
         };
         */
 
+        console.log('aaa');
         return new ngp.Queues();
     }
 })();
