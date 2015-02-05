@@ -1,15 +1,22 @@
 var _s = {};
 _s.oReq = require('./lib/requiredFiles.js')(_s); // require files.
+console.log('a');
 _s.details = JSON.parse(_s.oReq.fs.readFileSync(__dirname + '/serverDetails.json').toString())[process.argv[2] || 'testSlave01'];
+console.log('b');
 _s.sServerDirname = __dirname; // Server dir
 _s.sClientDirname = _s.oReq.path.resolve(__dirname, '..') + '/client'; //Client dir
 _s.sSharedDirname = _s.oReq.path.resolve(__dirname, '..') + '/shared'; //Client dir
+console.log('c');
 _s.oConfig = require('./settings/config')(_s); // require config files.
+console.log('3');
 global.oCore = require('./core')(_s); // require core files.
+console.log('f');
 //_s.oModules = require('./lib/modules')(_s); // require utility functions
 
 _s.oRouts = require('./lib/requiredRouts.js')(_s);
+console.log('g');
 _s.oWebSockets = require('./lib/requiredWebSockets.js')(_s);
+console.log('h');
 
 _s.oReq.http.listen(_s.details.port, function(){
     console.log('listening on *:' + _s.details.port);
