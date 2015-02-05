@@ -40,6 +40,6 @@
         */
 
         console.log('aaa');
-        return new ngp.Queues();
+        return new ngp.oFns.Queues();
     }
 })();
