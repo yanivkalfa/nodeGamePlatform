@@ -4,11 +4,13 @@
     if (typeof module !== 'undefined' && module.exports) {
         module.exports = new UtilFunc();
     }else{
+        var util = new UtilFunc();
+        console.log(util, util.indexOf);
         if(window.ngp)
-            if(window.ngp.oFns)window.ngp.oFns.UtilFunc = new UtilFunc();
+            if(window.ngp.oFns)window.ngp.oFns.UtilFunc = util
             else{
                 window.ngp.oFns = {
-                    UtilFunc : new UtilFunc()
+                    UtilFunc : util
                 };
             }
     }
