@@ -70,6 +70,7 @@ module.exports = function(_s){
                             //spark.join('terminal '+ userRoom, function(err, succ){});
 
                             _.isArray(user.rooms) && _(user.rooms).forEach(function(room){
+
                                 var data  = {
                                     "m" : 'room',
                                     "d" : {
@@ -81,7 +82,7 @@ module.exports = function(_s){
                                         }
                                     }
                                 };
-
+                                console.log('join room: ', room);
                                 routSocket.chat(spark,data);
                             });
 
@@ -99,10 +100,6 @@ module.exports = function(_s){
                         spark.on('data', function (msg) {
                             console.log('webSocket', msg);
                             routSocket.rout(spark, msg);
-                        });
-
-                        _s.primus.metroplex.servers(function (err, servers) {
-                            //console.log('registered servers:', servers);
                         });
 
                     }
@@ -135,6 +132,7 @@ module.exports = function(_s){
     _s.primus.on('leaveallrooms', function (rooms, spark) {
         if(!spark) return false;
         try{
+            if(spark.user.uType != 'user') return;
             var routRoom = new RoutRoom(_s.primus);
             User.fetchUser({"id":spark.user.id}).then(function(user){
                 _.isArray(user.rooms) && _(user.rooms).forEach(function(room){
