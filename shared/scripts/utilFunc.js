@@ -1,19 +1,5 @@
 
 (function(){
-    console.log('util funciton happening');
-    if (typeof module !== 'undefined' && module.exports) {
-        module.exports = new UtilFunc();
-    }else{
-        var util = new UtilFunc();
-        console.log(util, util.indexOf);
-        if(window.ngp)
-            if(window.ngp.oFns)window.ngp.oFns.UtilFunc = util
-            else{
-                window.ngp.oFns = {
-                    UtilFunc : util
-                };
-            }
-    }
 
     function UtilFunc(){}
 
@@ -58,4 +44,17 @@
             }
         }
     };
+
+    if (typeof module !== 'undefined' && module.exports) {
+        module.exports = new UtilFunc();
+    }else{
+        if(window.ngp)
+            if(window.ngp.oFns)window.ngp.oFns.UtilFunc = new UtilFunc();
+            else{
+                window.ngp.oFns = {
+                    UtilFunc : new UtilFunc()
+                };
+            }
+    }
+
 })();
