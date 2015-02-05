@@ -16,7 +16,7 @@
             'Chat',
             'Queues',
             'QueueOut',
-            'QueueUser',
+            //'QueueUser',
             adminController
         ]);
 
@@ -32,8 +32,8 @@
         ChatOut,
         Chat,
         Queues,
-        QueueOut,
-        QueueUser
+        QueueOut
+        //QueueUser
         ) {
 
         function AdminController(){
