@@ -12,7 +12,7 @@ module.exports = function(_s, _rf){
     var pathsList = _s.oConfig.pathsList
         , router = require(pathsList.Router)()
         , User = require(pathsList.User)(_s)
-        , RoutMsg = new require(pathsList.RoutMsg)(_s)
+        , RoutMsg = new require(pathsList.RoutMsg)(_s)()
         , GetRoom = require(pathsList.GetRoom)(_s)
         , RoomHandler = require(pathsList.RoomHandler)(_s)
         ;
