@@ -13,7 +13,7 @@
             }
     }
 
-    var UtilFunc = function(){};
+    function UtilFunc(){}
 
     UtilFunc.prototype =  {
 
