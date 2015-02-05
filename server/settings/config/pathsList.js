@@ -23,6 +23,7 @@ module.exports = function(_s){
         "RoutRemoteMsg" : serverDirname + '/lib/modules/routRemoteMsg.js',
         "RoutRoom" : serverDirname + '/lib/modules/routRoom.js',
         "RoutChat" : serverDirname + '/lib/modules/routChat.js',
+        "RoutSjax" : serverDirname + '/lib/modules/routSjax.js',
         "RoutQueue" : serverDirname + '/lib/modules/routQueue.js',
         "RoutSocket" : serverDirname + '/lib/modules/routSocket.js',
         "Validation" : serverDirname + '/lib/modules/supers/validation.js',

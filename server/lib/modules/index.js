@@ -27,7 +27,7 @@ module.exports = function(_s){
     rf.RoutRoom = require(pathsList.RoutRoom)(_s,rf);
     console.log('got here b');
     rf.RoutChat = require(pathsList.RoutChat)(_s,rf);
-    console.log('got here c');
+    console.log('got here c', pathsList.RoutSjax);
     rf.RoutSjax = require(pathsList.RoutSjax)(_s,rf);
     console.log('got here d');
     rf.RoutQueue = require(pathsList.RoutQueue)(_s,rf);
