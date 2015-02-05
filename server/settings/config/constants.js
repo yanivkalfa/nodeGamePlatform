@@ -1,7 +1,7 @@
 /**
  * Created by yaniv-kalfa on 7/19/14.
  */
-module.exports.dependencies = function(_s){
+module.exports = function(_s){
     var serverDirname = _s.sServerDirname;
     return {
         "oReq" : serverDirname + '/lib/requiredFiles.js',
