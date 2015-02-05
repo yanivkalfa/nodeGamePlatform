@@ -32,12 +32,21 @@
                 console.log('websocket');
 
                 this.user = Authorization.getUser();
-                this.Primus = Primus.connect('ws://' + ngp.const.app.domain + '/?token=' + this.user.token);
+                //this.Primus = Primus.connect('ws://' + ngp.const.app.domain + '/?token=' + this.user.token);
+                this.Primus = Primus.connect('ws://54.164.203.197:8001/?token=' + this.user.token);
+                this.Primus2 = Primus.connect('ws://54.164.203.197:8002/?token=' + this.user.token);
                 this.Primus.on('data', function(msg){
                     self[msg.m](msg.d);
                 });
 
                 this.Primus.on('open', function open() {
+                    console.log('primus open');
+                    self.connected = true;
+                    console.log(self.Primus);
+                    deferred.resolve( self );
+                });
+                this.Primus2.on('open', function open() {
+                    console.log('primus2 open');
                     self.connected = true;
                     console.log(self.Primus);
                     deferred.resolve( self );

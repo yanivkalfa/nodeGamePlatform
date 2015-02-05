@@ -13,7 +13,7 @@ module.exports = {
             }
         },
 
-        playerCount : {
+        userCount : {
             type :String,
             required : true
         },

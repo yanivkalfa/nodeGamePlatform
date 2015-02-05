@@ -29,6 +29,7 @@
 
         RoutQueueFactory.prototype.ready = function(q){
             var queue = Queues.get(q.id);
+            queue.users.add(q.users);
             queue.setRoom(q.room);
 
             var modalInstance = $modal.open({

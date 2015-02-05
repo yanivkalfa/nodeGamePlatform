@@ -37,6 +37,16 @@ module.exports = function(_s){
             });
         },
 
+        fetchByQueueName : function(qName){
+            var self = this;
+            return new _s.oReq.Promise(function(resolve, reject) {
+                Games.findOne({queueName : qName}).exec(function (err, succ) {
+                    if(err) return reject(err);
+                    return resolve(self.filter(succ));
+                });
+            });
+        },
+
         add : function(game){
             var self = this;
             return new _s.oReq.Promise(function(resolve, reject) {
