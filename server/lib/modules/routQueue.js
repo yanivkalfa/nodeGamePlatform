@@ -10,7 +10,7 @@ module.exports = function(_s, _rf){
     */
 
     var pathsList = _s.oConfig.pathsList
-        , router = require(pathsList.Router)
+        , router = require(pathsList.Router)()
         ;
 
     function RoutQueue (){

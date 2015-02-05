@@ -3,7 +3,7 @@ module.exports = function(_s, _rf){
     //var router = _rf.Router;
 
     var pathsList = _s.oConfig.pathsList
-        , router = require(pathsList.Router)
+        , router = require(pathsList.Router)()
         , RoutMsg = require(pathsList.RoutMsg)(_s)
         , RoutRoom = require(pathsList.RoutRoom)(_s)
         , RoutRemoteMsg = require(pathsList.RoutRemoteMsg)(_s)

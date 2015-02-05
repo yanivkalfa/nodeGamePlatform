@@ -1,5 +1,4 @@
-module.exports = (function(){
-
+module.exports = function(){
     function Router (){}
 
     Router.prototype =  {
@@ -11,4 +10,4 @@ module.exports = (function(){
     };
 
     return Router;
-});
+};
