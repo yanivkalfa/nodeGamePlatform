@@ -3,11 +3,11 @@
  */
 module.exports = function(_s){
     var serverDirname = _s.sServerDirname;
+    var sharedDirname = _s.sSharedDirname;
     return {
         "oReq" : serverDirname + '/lib/requiredFiles.js',
         "oRouts" : serverDirname + '/lib/requiredRouts.js',
         "oWebSockets" : serverDirname + '/lib/requiredWebSockets.js',
-        "uf" : _s.sSharedDirname + '/scripts/utilFunc.js',
         "GamesApi" : serverDirname + '/lib/modules/gamesApi.js',
         "SocketAjax" : serverDirname + '/lib/modules/socketAjax.js',
         "HttpTransit" : serverDirname + '/lib/modules/httpTransit.js',
@@ -27,6 +27,16 @@ module.exports = function(_s){
         "RoutQueue" : serverDirname + '/lib/modules/routQueue.js',
         "RoutSocket" : serverDirname + '/lib/modules/routSocket.js',
         "Validation" : serverDirname + '/lib/modules/supers/validation.js',
-        "Router" : serverDirname + '/lib/modules/supers/router.js'
+        "Router" : serverDirname + '/lib/modules/supers/router.js',
+        "BasicUser" : sharedDirname + '/scripts/basicUser.js',
+        "EventEmitter" : sharedDirname + '/scripts/eventEmitter.js',
+        "List" : sharedDirname + '/scripts/list.js',
+        "Queue" : sharedDirname + '/scripts/queue.js',
+        "Queues" : sharedDirname + '/scripts/queues.js',
+        "QueueUser" : sharedDirname + '/scripts/queueUser.js',
+        "UserSuper" : sharedDirname + '/scripts/user.js',
+        "UsersList" : sharedDirname + '/scripts/UsersList.js',
+        "uf" : sharedDirname + '/scripts/utilFunc.js'
+
     };
 };

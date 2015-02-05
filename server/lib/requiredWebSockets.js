@@ -6,6 +6,7 @@ module.exports = function(_s){
         , RoutSocket = require(pathsList.RoutSocket)(_s)
         , RoutRoom = require(pathsList.RoutRoom)(_s)
         , User = require(pathsList.User)(_s)
+        , Queues = require(pathsList.Queues)(_s)
         , sessCon = _s.oConfig.session.connection
         , sessSecret = _s.oConfig.session.secret
         , primusOptions = {
@@ -46,6 +47,7 @@ module.exports = function(_s){
                         console.log('connected:',user.username);
                         // Attaching user to spark - for logout and maybe future needs
                         spark.user = user;
+                        spark.Queues = new Queues();
 
                         var routSocket = new RoutSocket();
 
@@ -64,10 +66,6 @@ module.exports = function(_s){
                         var upSkSuccess = function (user){
 
                             console.log('upSkSuccess got here');
-
-                            // Joining terminal, lobby user rooms and saved rooms
-                            //var userRoom = 'u_' + decoded.userId;
-                            //spark.join('terminal '+ userRoom, function(err, succ){});
 
                             _.isArray(user.rooms) && _(user.rooms).forEach(function(room){
 
