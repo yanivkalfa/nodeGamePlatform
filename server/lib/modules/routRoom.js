@@ -12,8 +12,9 @@ module.exports = function(_s, _rf){
     var pathsList = _s.oConfig.pathsList
         , router = require(pathsList.Router)()
         , User = require(pathsList.User)(_s)
-        , RoutMsg = new require(pathsList.RoutMsg)(_s)()
-        , GetRoom = require(pathsList.GetRoom)(_s)
+        , routMsg = require(pathsList.RoutMsg)(_s)
+        , RoutMsg = new routMsg()
+        , getRoom = require(pathsList.GetRoom)(_s)
         , RoomHandler = require(pathsList.RoomHandler)(_s)
         ;
 
@@ -27,7 +28,7 @@ module.exports = function(_s, _rf){
 
 
     RoutRoom.prototype.getRoom = function(spark, room){
-        var GetRoom = new GetRoom();
+        var GetRoom = new getRoom();
         return new _s.oReq.Promise(function(resolve, reject) {
             GetRoom.getSparksInRoom(room)
                 .then(function(roomSparks){
