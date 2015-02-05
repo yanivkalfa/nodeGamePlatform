@@ -1,3 +1,33 @@
+/*
+ var servers = new _s.oModules.Servers();
+ var sName =  process.argv[2] || 'testSlave01';
+
+ if(sName.toLowerCase() == 'servers'){
+ var filter = function(item, i){ return i !== 0 && i !== 1 && i !== 2; };
+ var success = function(){process.exit(1)};
+ var fail = function(err){
+ console.log(err);
+ process.exit(0)
+ };
+ servers.analys(process.argv.filter(filter)).then(success, fail).catch(fail);
+ }else{
+ var startServer = function(server){
+ if(!server) process.exit();
+
+ _s.details = server;
+ _s.oRouts = require('./lib/requiredRouts.js')(_s);
+ _s.oWebSockets = require('./lib/requiredWebSockets.js')(_s);
+
+ _s.oReq.http.listen(_s.details.port, function(){
+ console.log('listening on *:' + _s.details.port);
+ });
+ };
+
+ servers.fetchByName(sName).then(startServer).catch(console.log)
+
+ }
+ */
+
 //node app.js servers add '{"name":"testSlave02","port":8002,"address":"54.164.203.197","user":{"email":"testSlave02@gmail.com","password":"testSlave02"}}'
 
 
