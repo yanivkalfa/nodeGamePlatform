@@ -6,9 +6,10 @@ _s.sClientDirname = _s.oReq.path.resolve(__dirname, '..') + '/client'; //Client 
 _s.sSharedDirname = _s.oReq.path.resolve(__dirname, '..') + '/shared'; //Client dir
 _s.oConfig = require('./settings/config')(_s); // require config files.
 global.oCore = require('./core')(_s); // require core files.
-
-_s.oRouts = require('./lib/requiredRouts.js')(_s);
-_s.oWebSockets = require('./lib/requiredWebSockets.js')(_s);
+var pathsList = _s.oConfig.pathsList;
+_s.oSocketAjax = require(pathsList.SocketAjax)(_s);
+_s.oRouts = require(pathsList.oRouts)(_s);
+_s.oWebSockets = require(pathsList.oWebSockets)(_s);
 
 _s.oReq.http.listen(_s.details.port, function(){
     console.log('listening on *:' + _s.details.port);

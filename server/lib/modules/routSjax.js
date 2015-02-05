@@ -2,7 +2,7 @@ module.exports = function(_s){
 
     var pathsList = _s.oConfig.pathsList
         , router = require(pathsList.Router)()
-        , SocketAjax = require(pathsList.SocketAjax)(_s)
+        , SocketAjax = _s.oSocketAjax
         ;
 
 

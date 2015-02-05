@@ -4,7 +4,7 @@ module.exports = function(_s){
         , router = require(pathsList.Router)()
         , User = require(pathsList.User)(_s)
         , _ = _s.oReq.lodash
-        , SocketAjax = require(pathsList.SocketAjax)(_s)
+        , SocketAjax = _s.oSocketAjax
         , Servers = require(pathsList.Servers)(_s)
         ;
 
