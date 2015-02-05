@@ -113,7 +113,7 @@
                     id : Queues.createRequestId(),
                     users : new QueueUser({id : self.Authorization.id, username : self.Authorization.username, accepted : false, isMe:true}),
                     name:g.queueName,
-                    userCount : 1
+                    userCount : 2
                 }
                 , analysed
                 , end = function(id){

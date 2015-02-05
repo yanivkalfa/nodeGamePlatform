@@ -1,7 +1,7 @@
 module.exports = function(_s){
 
     var pathsList = _s.oConfig.pathsList
-        , router = require(pathsList.Router)()
+        , router = require(pathsList.Router)
         , User = require(pathsList.User)(_s)
         , routMsg = require(pathsList.RoutMsg)(_s)
         , RoutMsg = new routMsg()

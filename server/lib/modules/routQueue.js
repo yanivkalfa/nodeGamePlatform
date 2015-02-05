@@ -1,8 +1,8 @@
 module.exports = function(_s){
 
     var pathsList = _s.oConfig.pathsList
-        , router = require(pathsList.Router)()
-        , Queues = require(pathsList.Router)()
+        , router = require(pathsList.Router)
+        , Queue = require(pathsList.Queue)
         ;
 
     function RoutQueue (){
@@ -14,6 +14,22 @@ module.exports = function(_s){
 
     RoutQueue.prototype.join = function(spark, msg){
         msg.room = 'madeUpRoomName';
+
+        /*
+        var self = this
+            , queue = {
+                id : Queues.createRequestId(),
+                users : new QueueUser({id : self.Authorization.id, username : self.Authorization.username, accepted : false, isMe:true}),
+                name:g.queueName,
+                userCount : 2
+            }
+            , analysed
+            , end = function(id){
+                self.setGameImg(g);
+            }
+            ;
+        queue = Queues.add(queue);
+        */
         spark.join(msg.room, function(err, succ){
             var data = {
                 "m" : 'ready',

@@ -1,13 +1,10 @@
-module.exports = function(){
-    function Router (){}
+function Router (){}
 
-    Router.prototype =  {
+Router.prototype =  {
 
-        rout: function(spark, msg){
-            var self = this;
-            return self[msg.m](spark, msg.d);
-        }
-    };
-
-    return Router;
+    rout: function(spark, msg){
+        var self = this;
+        return self[msg.m](spark, msg.d);
+    }
 };
+module.exports = Router;

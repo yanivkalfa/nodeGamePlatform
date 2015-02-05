@@ -1,6 +1,6 @@
 module.exports = function(_s){
     var pathsList = _s.oConfig.pathsList
-        , router = require(pathsList.Router)()
+        , router = require(pathsList.Router)
         , RoutChat = require(pathsList.RoutChat)(_s)
         , RoutSjax = require(pathsList.RoutSjax)(_s)
         , RoutQueue = require(pathsList.RoutQueue)(_s)
