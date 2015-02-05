@@ -2,12 +2,13 @@ module.exports = function(_s){
     var rf = {}
         , pathsList = _s.oConfig.pathsList
         ;
-
-    console.log(pathsList);
     rf.uf = require(pathsList.uf);//();//(_s);
+    console.log('got here ');
     rf.GamesApi = require(pathsList.GamesApi)(_s);
     rf.SocketAjax = require(pathsList.SocketAjax)(_s);
+    console.log('got here ');
     rf.HttpTransit = require(pathsList.HttpTransit)(_s);
+    console.log('got here ');
     rf.User = require(pathsList.User)(_s);
     rf.Servers = require(pathsList.Servers)(_s, rf);
     rf.Authorization = require(pathsList.Authorization)(_s);
