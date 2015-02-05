@@ -63,6 +63,8 @@ module.exports = function(_s){
 
                         var upSkSuccess = function (user){
 
+                            console.log('upSkSuccess got here');
+
                             // Joining terminal, lobby user rooms and saved rooms
                             //var userRoom = 'u_' + decoded.userId;
                             //spark.join('terminal '+ userRoom, function(err, succ){});
