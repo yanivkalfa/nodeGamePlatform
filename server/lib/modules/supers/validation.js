@@ -1,6 +1,5 @@
 function Validation (details){
     this._isValid = false;
-
     this.validate(details);
 }
 
@@ -12,4 +11,4 @@ Validation.prototype = {
         return this._isValid; }
 
 };
- module.exports = Validation;
+module.exports = Validation;
