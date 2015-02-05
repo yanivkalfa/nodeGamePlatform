@@ -3,6 +3,7 @@
     var List
         , Queue
         ;
+    console.log('require queues');
     if (typeof module !== 'undefined' && module.exports) {
         List = require('./list.js');
         Queue = require('./queue.js');
@@ -20,7 +21,7 @@
         Queue = window.ngp.oFns.Queue;
     }
 
-    console.log(List, Queue);
+    console.log('List, Queue', List, Queue);
     function Queues(){
         List.apply(this,arguments);
     }
