@@ -8,7 +8,6 @@ module.exports = function(_s, _rf){
     var pathsList = _s.oConfig.pathsList
         , router = require(pathsList.Router)
         , SocketAjax = require(pathsList.SocketAjax)(_s)
-        , RoutSocket = new require(pathsList.RoutSocket)(_s)
         ;
 
 
@@ -20,7 +19,7 @@ module.exports = function(_s, _rf){
     RoutSjax.prototype.constructor = RoutSjax;
 
     RoutSjax.prototype.req = function(spark,msg){
-        //var RoutSocket = new _s.oModules.RoutSocket(_s.primus);
+        var RoutSocket = new require(pathsList.RoutSocket)(_s);
         console.log('request : ', msg);
         var data = RoutSocket.rout(spark, msg.d);
         var resp = {
