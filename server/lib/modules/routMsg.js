@@ -57,7 +57,8 @@ module.exports = function(_s){
             , prvSuccess , data , self = this
             , serverDetails , toSpark, Socket , client
             , localData
-            , RoutSocket = new _s.oModules.RoutSocket(_s.primus)
+            , routSocket = require(pathsList.RoutSocket)(_s)
+            , RoutSocket = new routSocket()
             ;
 
         prvSuccess = function(user){
