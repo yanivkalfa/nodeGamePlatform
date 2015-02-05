@@ -4,7 +4,7 @@ _s.details = JSON.parse(_s.oReq.fs.readFileSync(__dirname + '/serverDetails.json
 _s.sServerDirname = __dirname; // Server dir
 _s.sClientDirname = _s.oReq.path.resolve(__dirname, '..') + '/client'; //Client dir
 _s.sSharedDirname = _s.oReq.path.resolve(__dirname, '..') + '/shared'; //Client dir
-_s.oConfig = require('./settings/config'); // require config files.
+_s.oConfig = require('./settings/config')(_s); // require config files.
 global.oCore = require('./core')(_s); // require core files.
 _s.oModules = require('./lib/modules')(_s); // require utility functions
 
