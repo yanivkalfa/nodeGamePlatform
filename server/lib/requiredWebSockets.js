@@ -21,7 +21,7 @@ module.exports = function(_s){
             redis: _s.oReq.redis.createClient(_s.oConfig.connections.redis.port,_s.oConfig.connections.redis.host)
         };
 
-    console.log('got here a');
+    console.log('got here RoutSocket', RoutSocket );
     _s.primus = new _s.oReq.Primus(_s.oReq.http, primusOptions);
 
 
