@@ -1,27 +1,29 @@
 module.exports = function(_s){
-    console.log(_s.oConfig.pathsList.uf);
-    var rf = {};
-    rf.uf = require('../../../shared/scripts/utilFunc.js');//();//(_s);
-    rf.GamesApi = require('./gamesApi.js')(_s);
-    rf.SocketAjax = require('./socketAjax.js')(_s);
-    rf.HttpTransit = require('./httpTransit.js')(_s);
-    rf.User = require('./user.js')(_s);
-    rf.Servers = require('./servers.js')(_s, rf);
-    rf.Authorization = require('./authorization.js')(_s);
-    rf.Validation = require('./supers/validation.js')();
-    rf.ValidationReg = require('./validationReg.js')(_s,rf);
-    rf.ajaxHandler = require('./ajaxHandler.js');
-    rf.RoomHandler = require('./roomHandler.js')(_s,rf);
-    rf.GetRooms = require('./getRooms.js')(_s,rf);
-    rf.GetRoom = require('./getRoom.js')(_s,rf);
-    rf.Router = require('./supers/router.js')();
-    rf.RoutMsg = require('./routMsg.js')(_s,rf);
-    rf.RoutRemoteMsg = require('./routRemoteMsg.js')(_s,rf);
-    rf.RoutRoom = require('./routRoom.js')(_s,rf);
-    rf.RoutChat = require('./routChat.js')(_s,rf);
-    rf.RoutSjax = require('./routSjax.js')(_s,rf);
-    rf.RoutQueue = require('./routQueue.js')(_s,rf);
-    rf.RoutSocket = require('./routSocket.js')(_s, rf);
+    var rf = {}
+        , pathsList = _s.oConfig.pathsList
+        ;
+
+    rf.uf = require(pathsList.uf);//();//(_s);
+    rf.GamesApi = require(pathsList.GamesApi)(_s);
+    rf.SocketAjax = require(pathsList.SocketAjax)(_s);
+    rf.HttpTransit = require(pathsList.HttpTransit)(_s);
+    rf.User = require(pathsList.User)(_s);
+    rf.Servers = require(pathsList.Servers)(_s, rf);
+    rf.Authorization = require(pathsList.Authorization)(_s);
+    rf.Validation = require(pathsList.Validation)();
+    rf.ValidationReg = require(pathsList.ValidationReg)(_s,rf);
+    rf.ajaxHandler = require(pathsList.ajaxHandler);
+    rf.RoomHandler = require(pathsList.RoomHandler)(_s,rf);
+    rf.GetRooms = require(pathsList.GetRooms)(_s,rf);
+    rf.GetRoom = require(pathsList.GetRoom)(_s,rf);
+    rf.Router = require(pathsList.Router)();
+    rf.RoutMsg = require(pathsList.RoutMsg)(_s,rf);
+    rf.RoutRemoteMsg = require(pathsList.RoutRemoteMsg)(_s,rf);
+    rf.RoutRoom = require(pathsList.RoutRoom)(_s,rf);
+    rf.RoutChat = require(pathsList.RoutChat)(_s,rf);
+    rf.RoutSjax = require(pathsList.RoutSjax)(_s,rf);
+    rf.RoutQueue = require(pathsList.RoutQueue)(_s,rf);
+    rf.RoutSocket = require(pathsList.RoutSocket)(_s, rf);
 
     return rf;
 };
