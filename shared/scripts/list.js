@@ -1,4 +1,15 @@
 (function(){
+    if (typeof module !== 'undefined' && module.exports) {
+        module.exports = List;
+    }else{
+        if(window.ngp)
+            if(window.ngp.oFns)window.ngp.oFns.List = List;
+            else{
+                window.ngp.oFns = {
+                    List:List
+                };
+            }
+    }
 
     function List(){
         this.list = {};
@@ -78,16 +89,4 @@
 
         return this.length = length;
     };
-
-    if (typeof module !== 'undefined' && module.exports) {
-        module.exports = List;
-    }else{
-        if(window.ngp)
-            if(window.ngp.oFns)window.ngp.oFns.List = new List();
-            else{
-                window.ngp.oFns = {
-                    List: new List()
-                };
-            }
-    }
 })();

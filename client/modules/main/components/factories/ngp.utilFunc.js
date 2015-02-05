@@ -4,12 +4,11 @@
 (function(){
     angular.module(ngp.const.app.name)
         .factory('UtilFunc', [
-            UtilFunc
+            ngp.oFns.UtilFunc
         ]);
 
     function UtilFunc() {
-
-
+        /*
         function UtilFuncFactory(){}
 
         UtilFuncFactory.prototype =  {
@@ -34,6 +33,7 @@
                 return !_.isArray(item) ? [item] : item;
             }
         };
+        */
 
         return ngp.oFns.UtilFunc;
     }
