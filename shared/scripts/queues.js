@@ -4,9 +4,10 @@
         , Queue
         ;
     if (typeof module !== 'undefined' && module.exports) {
-        module.exports = Queues;
         List = require('./list.js');
         Queue = require('./queue.js');
+
+        module.exports = function(){return Queues; };
     }else{
         if(window.ngp)
             if(window.ngp.oFns)window.ngp.oFns.Queues = Queues;
