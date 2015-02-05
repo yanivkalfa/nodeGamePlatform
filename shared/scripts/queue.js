@@ -23,8 +23,6 @@
         UsersList = window.ngp.oFns.UsersList;
     }
 
-    console.log(EventEmitter);
-
     function Queue(queue){
         EventEmitter.apply(this, arguments);
         this._startTime = Date.now();
