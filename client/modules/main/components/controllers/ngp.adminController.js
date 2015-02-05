@@ -45,6 +45,8 @@
             this.imgUrl = ngp.const.app.imgUrl;
             this.init();
 
+            console.log(QueueUser);
+
         }
 
         AdminController.prototype.init = function(){
