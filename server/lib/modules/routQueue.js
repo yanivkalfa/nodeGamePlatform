@@ -15,6 +15,8 @@ module.exports = function(_s){
     RoutQueue.prototype.join = function(spark, msg){
         msg.room = 'madeUpRoomName';
 
+        console.log(msg);
+
         /*
         var self = this
             , queue = {
