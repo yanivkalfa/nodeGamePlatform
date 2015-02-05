@@ -8,7 +8,7 @@ _s.sClientDirname = _s.oReq.path.resolve(__dirname, '..') + '/client'; //Client 
 _s.sSharedDirname = _s.oReq.path.resolve(__dirname, '..') + '/shared'; //Client dir
 console.log('c');
 _s.oConfig = require('./settings/config')(_s); // require config files.
-console.log('3');
+console.log('d');
 global.oCore = require('./core')(_s); // require core files.
 console.log('f');
 //_s.oModules = require('./lib/modules')(_s); // require utility functions
