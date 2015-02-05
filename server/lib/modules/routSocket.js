@@ -8,7 +8,7 @@ module.exports = function(_s, _rf){
         , RoutQueue = require(pathsList.RoutQueue)(_s)
         ;
 
-    var validation = require(_s.oConfig.pathsList.HttpTransit)(_s);
+    //var validation = require(_s.oConfig.pathsList.HttpTransit)(_s);
 
     function RoutSocket (){
         router.apply(this,arguments);
