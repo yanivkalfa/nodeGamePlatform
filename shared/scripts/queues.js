@@ -20,6 +20,7 @@
         Queue = window.ngp.oFns.Queue;
     }
 
+    console.log(List, Queue);
     function Queues(){
         List.apply(this,arguments);
     }
