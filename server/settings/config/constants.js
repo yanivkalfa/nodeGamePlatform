@@ -7,7 +7,7 @@ module.exports = function(_s){
         "oReq" : serverDirname + '/lib/requiredFiles.js',
         "oRouts" : serverDirname + '/lib/requiredRouts.js',
         "oWebSockets" : serverDirname + '/lib/requiredWebSockets.js',
-        "uf" : serverDirname + '/',
+        "uf" : _s.sSharedDirname + '/scripts/utilFunc.js',
         "GamesApi" : serverDirname + '/',
         "SocketAjax" : serverDirname + '/lib/modules/socketAjax.js',
         "HttpTransit" : serverDirname + '/lib/modules/httpTransit.js',
