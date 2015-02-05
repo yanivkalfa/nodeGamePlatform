@@ -92,11 +92,11 @@ module.exports = function(_s){
 
                         var upSkFail = function(err){
                             console.log(err);
-                            if(err) updateSpark(user).then(upSkSuccess).catch(upSkFail)
+                            if(err) updateSpark(user).then(upSkSuccess)//.catch(upSkFail)
                         };
 
                         if(user.uType == 'user'){
-                            updateSpark(user).then(upSkSuccess).catch(upSkFail);
+                            updateSpark(user).then(upSkSuccess)//.catch(upSkFail);
                         }
 
                         spark.on('data', function (msg) {
