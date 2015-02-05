@@ -1,5 +1,5 @@
 
-module.exports = (function(){
+module.exports = function(){
     function Validation (details){
         this._isValid = false;
         this.validate(details);
@@ -15,4 +15,4 @@ module.exports = (function(){
     };
 
     return Validation
-});
+};

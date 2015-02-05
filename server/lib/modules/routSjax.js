@@ -19,7 +19,8 @@ module.exports = function(_s, _rf){
     RoutSjax.prototype.constructor = RoutSjax;
 
     RoutSjax.prototype.req = function(spark,msg){
-        var RoutSocket = new require(pathsList.RoutSocket)(_s);
+        var routSocket = require(pathsList.RoutSocket)(_s);
+        var RoutSocket = new routSocket();
         console.log('request : ', msg);
         var data = RoutSocket.rout(spark, msg.d);
         var resp = {
