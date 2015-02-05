@@ -1,6 +1,6 @@
 
 (function(){
-
+    console.log('util funciton happening');
     if (typeof module !== 'undefined' && module.exports) {
         module.exports = new UtilFunc();
     }else{

@@ -14,7 +14,7 @@
         UtilFunc
         ) {
 
-
+        console.log('chat happening');
         function ChatFactory(){}
 
         ChatFactory.prototype =  {
