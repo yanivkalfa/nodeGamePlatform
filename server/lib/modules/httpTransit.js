@@ -8,6 +8,19 @@ module.exports = function(_s){
 
     function HttpTransit (){ }
 
+    HttpTransit.prototype.concat = function (res) {
+        return new _s.oReq.Promise(function(resolve, reject) {
+            res.pipe(_s.oReq.concat(function(fullResp) {
+                var statusCode = parseInt(res.statusCode);
+                if(statusCode < 200 || statusCode > 299){
+                    return reject('{"error" : "There is some problem with the request status code: '+statusCode+'"}');
+                }else{
+                    return resolve(fullResp.toString());
+                }
+            }));
+        });
+    };
+
     HttpTransit.prototype.prepareRequest = function(options,cusHeader,params)
     {
         var defaults =
@@ -35,10 +48,13 @@ module.exports = function(_s){
     };
 
     HttpTransit.prototype.doRequest = function(options, params){
+        var self = this
+            , req
+            ;
+
         return new _s.oReq.Promise(function(resolve, reject) {
-            var req;
             req = http.request(options, function(res) {
-                _s.oModules.uf.concat(_s, res).then(function(fullResponse){
+                self.concat(res).then(function(fullResponse){
                     return resolve(fullResponse);
                 }).catch(function(err){
                     return reject(err);
