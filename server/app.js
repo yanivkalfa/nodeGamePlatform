@@ -10,13 +10,13 @@ console.log('c');
 _s.oConfig = require('./settings/config')(_s); // require config files.
 console.log('d');
 global.oCore = require('./core')(_s); // require core files.
-console.log('f');
+console.log('e');
 //_s.oModules = require('./lib/modules')(_s); // require utility functions
 
 _s.oRouts = require('./lib/requiredRouts.js')(_s);
-console.log('g');
+console.log('f');
 _s.oWebSockets = require('./lib/requiredWebSockets.js')(_s);
-console.log('h');
+console.log('g');
 
 _s.oReq.http.listen(_s.details.port, function(){
     console.log('listening on *:' + _s.details.port);
