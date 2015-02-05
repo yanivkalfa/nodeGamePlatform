@@ -35,6 +35,6 @@
             }
         };
 
-        return new ngp.oFns.UtilFunc();
+        return ngp.oFns.UtilFunc;
     }
 })();

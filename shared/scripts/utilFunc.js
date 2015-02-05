@@ -5,10 +5,10 @@
         module.exports = new UtilFunc();
     }else{
         if(window.ngp)
-            if(window.ngp.oFns)window.ngp.oFns.UtilFunc = UtilFunc;
+            if(window.ngp.oFns)window.ngp.oFns.UtilFunc = new UtilFunc();
             else{
                 window.ngp.oFns = {
-                    UtilFunc:UtilFunc
+                    UtilFunc:new UtilFunc()
                 };
             }
     }
