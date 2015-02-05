@@ -1,11 +1,14 @@
-function Router (){}
+module.exports = (function(){
 
-Router.prototype =  {
+    function Router (){}
 
-    rout: function(spark, msg){
-        var self = this;
-        return self[msg.m](spark, msg.d);
-    }
-};
+    Router.prototype =  {
 
-module.exports = Router;
+        rout: function(spark, msg){
+            var self = this;
+            return self[msg.m](spark, msg.d);
+        }
+    };
+
+    return Router;
+});

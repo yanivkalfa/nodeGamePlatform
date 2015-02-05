@@ -1,5 +1,6 @@
 module.exports = function(_s, _rf){
 
+    console.log('got to routROom');
     /*
     var router = _rf.Router
         , _ = _s.oReq.lodash

@@ -5,6 +5,8 @@ module.exports = function(_s){
         , _ = _s.oReq.lodash
         ;
 
+    console.log('got to autorization');
+
     return {
         get: function() {
             return _user;
