@@ -7,16 +7,7 @@
     if (typeof module !== 'undefined' && module.exports) {
         List = require('./list.js')();
         Queue = require('./queue.js')();
-
-        module.exports = function(){return Queues; };
     }else{
-        if(window.ngp)
-            if(window.ngp.oFns)window.ngp.oFns.Queues = Queues;
-            else{
-                window.ngp.oFns = {
-                    Queues:Queues
-                };
-            }
         List = window.ngp.oFns.List;
         Queue = window.ngp.oFns.Queue;
     }
@@ -42,4 +33,16 @@
         return delete self.list[id];
     };
 
+
+    if (typeof module !== 'undefined' && module.exports) {
+        module.exports = Queues;
+    }else{
+        if(window.ngp)
+            if(window.ngp.oFns)window.ngp.oFns.Queues = Queues;
+            else{
+                window.ngp.oFns = {
+                    Queues:Queues
+                };
+            }
+    }
 })();
