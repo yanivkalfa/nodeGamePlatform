@@ -38,6 +38,7 @@ module.exports = function(_s){
         console.log('trying');
         _s.oReq.jwt.verify(spark.query.token, sessSecret, function(err, decoded) {
             if(!_.isUndefined(decoded) && !_.isUndefined(decoded.userId)){
+                console.log('got here Authorization', Authorization );
                 Authorization.login({"_id" : decoded.userId}).then(function(user){
                     if(user === null)
                     {
@@ -48,7 +49,8 @@ module.exports = function(_s){
                         console.log('connected:',user.username);
                         // Attaching user to spark - for logout and maybe future needs
                         spark.user = user;
-                        var RoutSocket = new RoutSocket();
+                        console.log('got here RoutSocket', RoutSocket );
+                        var routSocket = new RoutSocket();
 
                         // Update user's spark id in database - in-case its needed
                         var updateSpark = function(user){
@@ -81,7 +83,7 @@ module.exports = function(_s){
                                     }
                                 };
 
-                                RoutSocket.chat(spark,data);
+                                routSocket.chat(spark,data);
                             });
 
                         };
@@ -97,7 +99,7 @@ module.exports = function(_s){
 
                         spark.on('data', function (msg) {
                             console.log('webSocket', msg);
-                            RoutSocket.rout(spark, msg);
+                            routSocket.rout(spark, msg);
                         });
 
                         _s.primus.metroplex.servers(function (err, servers) {
@@ -131,7 +133,7 @@ module.exports = function(_s){
     _s.primus.on('leaveallrooms', function (rooms, spark) {
         if(!spark) return false;
         try{
-            var RoutRoom = new RoutRoom(_s.primus);
+            var routRoom = new RoutRoom(_s.primus);
             User.fetchUser({"id":spark.user.id}).then(function(user){
                 _.isArray(user.rooms) && _(user.rooms).forEach(function(room){
                     var aRoom  = {
@@ -139,7 +141,7 @@ module.exports = function(_s){
                         "type" : 'chat',
                         "users" : {}
                     };
-                    RoutRoom._leave(spark, aRoom)
+                    routRoom._leave(spark, aRoom)
                 });
             }).catch(console.log);
         }catch(e){console.log(e)}
