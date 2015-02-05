@@ -1,6 +1,6 @@
 (function(){
     if (typeof module !== 'undefined' && module.exports) {
-        module.exports = List;
+        module.exports = function(){ return List; };
     }else{
         if(window.ngp)
             if(window.ngp.oFns)window.ngp.oFns.List = List;

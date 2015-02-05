@@ -1,8 +1,8 @@
 (function(){
     var List;
     if (typeof module !== 'undefined' && module.exports) {
-        module.exports = UsersList;
         List = require('./list.js');
+        module.exports = function(){ return UsersList; };
     }else{
         if(window.ngp)
             if(window.ngp.oFns)window.ngp.oFns.UsersList = UsersList;

@@ -1,6 +1,6 @@
 (function(){
     if (typeof module !== 'undefined' && module.exports) {
-        module.exports = User;
+        module.exports = function(){ return User; };
     }else{
         if(window.ngp)
             if(window.ngp.oFns)window.ngp.oFns.User = User;

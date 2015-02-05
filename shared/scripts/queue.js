@@ -6,10 +6,10 @@
         ;
 
     if (typeof module !== 'undefined' && module.exports) {
-        module.exports = Queue;
         UtilFunc = require('./utilFunc.js');
         EventEmitter = require('./eventEmitter.js');
         UsersList = require('./usersList.js');
+        module.exports = function(){ return Queue;};
     }else{
         if(window.ngp)
             if(window.ngp.oFns)window.ngp.oFns.Queue = Queue;

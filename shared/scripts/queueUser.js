@@ -1,8 +1,8 @@
 (function(){
     var User;
     if (typeof module !== 'undefined' && module.exports) {
-        module.exports = QueueUser;
         User = require('./user.js');
+        module.exports = function(){ return QueueUser; };
     }else{
         if(window.ngp)
             if(window.ngp.oFns)window.ngp.oFns.QueueUser = QueueUser;

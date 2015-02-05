@@ -1,8 +1,9 @@
 (function(){
     var User;
     if (typeof module !== 'undefined' && module.exports) {
-        module.exports = BasicUser;
         User = require('./user.js');
+
+        module.exports = function(){ return BasicUser;};
     }else{
         if(window.ngp)
             if(window.ngp.oFns)window.ngp.oFns.BasicUser = BasicUser;
