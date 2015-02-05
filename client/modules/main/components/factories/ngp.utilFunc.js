@@ -4,7 +4,7 @@
 (function(){
     angular.module(ngp.const.app.name)
         .factory('UtilFunc', [
-            ngp.oFns.UtilFunc
+            UtilFunc
         ]);
 
     function UtilFunc() {
