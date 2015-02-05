@@ -1,5 +1,4 @@
 module.exports = function(_s){
-    console.log('got to User');
     var _user = undefined
         , _ = _s.oReq.lodash
         , visibleField = ['id','username', 'firstName','lastName','email','roles','rooms','token', 'type']

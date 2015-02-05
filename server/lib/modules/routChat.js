@@ -1,6 +1,4 @@
-module.exports = function(_s, _rf){
-
-    //var router = _rf.Router;
+module.exports = function(_s){
 
     var pathsList = _s.oConfig.pathsList
         , router = require(pathsList.Router)()

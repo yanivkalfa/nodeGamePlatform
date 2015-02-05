@@ -1,13 +1,4 @@
-module.exports = function(_s, _rf){
-
-    console.log('got to routROom');
-    /*
-    var router = _rf.Router
-        , _ = _s.oReq.lodash
-        , User = _rf.User
-        , RoutMsg = new _rf.RoutMsg()
-        ;
-    */
+module.exports = function(_s){
 
     var pathsList = _s.oConfig.pathsList
         , router = require(pathsList.Router)()

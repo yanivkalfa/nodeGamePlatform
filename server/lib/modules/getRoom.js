@@ -1,15 +1,8 @@
-module.exports = function(_s, _rf){
+module.exports = function(_s){
 
-    /*
-    var  _ = _s.oReq.lodash
-        , User = _rf.User
-        ;
-    */
     var pathsList = _s.oConfig.pathsList
-        //, router = require(pathsList.Router)()
         , User = require(pathsList.User)(_s)
         , _ = _s.oReq.lodash
-        //, RoutRemoteMsg = require(pathsList.RoutRemoteMsg)(_s)
         ;
 
     function GetRoom(){

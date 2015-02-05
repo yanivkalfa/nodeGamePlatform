@@ -1,6 +1,6 @@
 
 
-module.exports = function(_s, _rf){
+module.exports = function(_s){
 
     var _ = _s.oReq.lodash
         , http = require('http')

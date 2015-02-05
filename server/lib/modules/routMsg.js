@@ -1,13 +1,4 @@
-module.exports = function(_s, _rf){
-
-    /*
-    var router = _rf.Router
-        , _ = _s.oReq.lodash
-        , User = _rf.User
-        , Servers = _rf.Servers
-        , sJax = _rf.SocketAjax
-        ;
-    */
+module.exports = function(_s){
 
     var pathsList = _s.oConfig.pathsList
         , router = require(pathsList.Router)()

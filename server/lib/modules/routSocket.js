@@ -1,24 +1,13 @@
-module.exports = function(_s, _rf){
-    console.log('got to rout sockets');
+module.exports = function(_s){
     var pathsList = _s.oConfig.pathsList
-        //, router = _rf.Router
         , router = require(pathsList.Router)()
         , RoutChat = require(pathsList.RoutChat)(_s)
         , RoutSjax = require(pathsList.RoutSjax)(_s)
         , RoutQueue = require(pathsList.RoutQueue)(_s)
         ;
 
-    //var validation = require(_s.oConfig.pathsList.HttpTransit)(_s);
-
     function RoutSocket (){
         router.apply(this,arguments);
-
-        /*
-        this.RoutChat = new _rf.RoutChat();
-        this.RoutSjax = new _rf.RoutSjax();
-        this.RoutQueue = new _rf.RoutQueue();
-        */
-
         this.RoutChat = new RoutChat();
         this.RoutSjax = new RoutSjax();
         this.RoutQueue = new RoutQueue();
@@ -29,7 +18,6 @@ module.exports = function(_s, _rf){
 
 
     RoutSocket.prototype.chat = function(spark, msg){
-        console.log('this.RoutChat', this.RoutChat);
         return this.RoutChat.rout(spark, msg);
     };
 

@@ -1,9 +1,4 @@
-module.exports = function(_s, _rf){
-
-    /*
-    var router = _rf.Router
-        , sJax = _rf.SocketAjax;
-    */
+module.exports = function(_s){
 
     var pathsList = _s.oConfig.pathsList
         , router = require(pathsList.Router)()
@@ -34,7 +29,6 @@ module.exports = function(_s, _rf){
             }
         };
 
-        //
         spark.write(resp);
         console.log('spark.write');
         return true;

@@ -21,7 +21,6 @@ module.exports = function(_s){
             redis: _s.oReq.redis.createClient(_s.oConfig.connections.redis.port,_s.oConfig.connections.redis.host)
         };
 
-    console.log('got here RoutSocket', RoutSocket );
     _s.primus = new _s.oReq.Primus(_s.oReq.http, primusOptions);
 
 
@@ -32,13 +31,11 @@ module.exports = function(_s){
     _s.primus.use('metroplex', _s.oReq.primusMetroplex);
     _s.primus.use('cluster', _s.oReq.primusCluster);
 
-    console.log('got here b');
     _s.primus.on('connection', function (spark) {
 
         console.log('trying');
         _s.oReq.jwt.verify(spark.query.token, sessSecret, function(err, decoded) {
             if(!_.isUndefined(decoded) && !_.isUndefined(decoded.userId)){
-                console.log('got here Authorization', Authorization );
                 Authorization.login({"_id" : decoded.userId}).then(function(user){
                     if(user === null)
                     {
@@ -51,8 +48,6 @@ module.exports = function(_s){
                         spark.user = user;
 
                         var routSocket = new RoutSocket();
-
-                        console.log('got here RoutSocket', routSocket );
 
                         // Update user's spark id in database - in-case its needed
                         var updateSpark = function(user){
@@ -92,11 +87,11 @@ module.exports = function(_s){
 
                         var upSkFail = function(err){
                             console.log(err);
-                            if(err) updateSpark(user).then(upSkSuccess)//.catch(upSkFail)
+                            if(err) updateSpark(user).then(upSkSuccess).catch(upSkFail)
                         };
 
                         if(user.uType == 'user'){
-                            updateSpark(user).then(upSkSuccess)//.catch(upSkFail);
+                            updateSpark(user).then(upSkSuccess).catch(upSkFail);
                         }
 
                         spark.on('data', function (msg) {
@@ -110,12 +105,10 @@ module.exports = function(_s){
 
                     }
 
-                });
-                    /*.catch(function(err){
+                }).catch(function(err){
                     console.log(err);
                     if(err) spark.end({"method" : "disconnect", msg : "Could not authenticate user b."} );
                 });
-                */
             }else{
                 console.log(err);
                 spark.end({"method" : "disconnect", msg : "Could not authenticate user c."} );
@@ -129,7 +122,12 @@ module.exports = function(_s){
     });
 
     _s.primus.on('disconnection', function (spark) {
-        console.log('disconnection ' , spark.user.username);
+        try{
+            console.log('disconnection ' , spark.user.username);
+        }catch(e){
+            console.log(e);
+        }
+
     });
 
     _s.primus.on('leaveallrooms', function (rooms, spark) {
