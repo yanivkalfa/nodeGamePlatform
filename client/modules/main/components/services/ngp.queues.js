@@ -6,7 +6,7 @@
         .service('Queues', [
             //'List',
             //'Queue',
-            Queues
+            ngp.oFns.Queues
         ]);
 
     function Queues(
