@@ -3,6 +3,7 @@ module.exports = function(_s){
         , pathsList = _s.oConfig.pathsList
         ;
 
+    console.log(pathsList);
     rf.uf = require(pathsList.uf);//();//(_s);
     rf.GamesApi = require(pathsList.GamesApi)(_s);
     rf.SocketAjax = require(pathsList.SocketAjax)(_s);
