@@ -83,10 +83,10 @@
         module.exports = List;
     }else{
         if(window.ngp)
-            if(window.ngp.oFns)window.ngp.oFns.List = List;
+            if(window.ngp.oFns)window.ngp.oFns.List = new List();
             else{
                 window.ngp.oFns = {
-                    List:List
+                    List: new List()
                 };
             }
     }
