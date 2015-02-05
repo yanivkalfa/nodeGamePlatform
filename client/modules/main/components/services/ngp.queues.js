@@ -4,15 +4,18 @@
 (function(){
     angular.module(ngp.const.app.name)
         .service('Queues', [
-            'List',
-            'Queue',
+            //'List',
+            //'Queue',
             Queues
         ]);
 
     function Queues(
-        List,
-        Queue
+        //List,
+        //Queue
         ) {
+        /*
+        var List = ngp.oFns;
+        var Queue = ngp.Queue;
 
         function QueuesService(){
             List.apply(this,arguments);
@@ -34,7 +37,8 @@
             this.list[id].end('Queue removed');
             return delete self.list[id];
         };
+        */
 
-        return new QueuesService();
+        return new ngp.Queues();
     }
 })();
