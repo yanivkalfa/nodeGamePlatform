@@ -49,8 +49,10 @@ module.exports = function(_s){
                         console.log('connected:',user.username);
                         // Attaching user to spark - for logout and maybe future needs
                         spark.user = user;
-                        console.log('got here RoutSocket', RoutSocket );
+
                         var routSocket = new RoutSocket();
+
+                        console.log('got here RoutSocket', routSocket );
 
                         // Update user's spark id in database - in-case its needed
                         var updateSpark = function(user){
