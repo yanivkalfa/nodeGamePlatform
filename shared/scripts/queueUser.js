@@ -1,5 +1,4 @@
 (function(){
-    console.log('QueueUser happening');
     var User;
     if (typeof module !== 'undefined' && module.exports) {
         module.exports = QueueUser;
@@ -16,7 +15,6 @@
     }
 
     function QueueUser(user){
-        console.log('QueueUser', user);
         User.apply(this,arguments);
         this.accepted = user.accepted || false;
         this.isMe = user.isMe || false;

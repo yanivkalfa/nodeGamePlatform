@@ -1,5 +1,4 @@
 (function(){
-    console.log('User happening');
     if (typeof module !== 'undefined' && module.exports) {
         module.exports = User;
     }else{
@@ -13,7 +12,6 @@
     }
 
     function User(user){
-        console.log('User', user);
         this.id = user.id || undefined;
         this.username = user.username || undefined;
     }
