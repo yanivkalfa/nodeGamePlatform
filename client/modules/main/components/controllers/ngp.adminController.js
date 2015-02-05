@@ -108,10 +108,12 @@
         };
 
         AdminController.prototype.queueMP = function(g){
+            var u = new QueueUser({id : self.Authorization.id, username : self.Authorization.username, accepted : false, isMe:true});
+            console.log(u);
             var self = this
                 , queue = {
                     id : Queues.createRequestId(),
-                    users : new QueueUser({id : self.Authorization.id, username : self.Authorization.username, accepted : false, isMe:true}),
+                    users : u,
                     name:g.queueName,
                     userCount : 1
                 }
