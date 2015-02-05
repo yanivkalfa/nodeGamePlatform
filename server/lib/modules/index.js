@@ -1,4 +1,5 @@
 module.exports = function(_s){
+    console.log(_s.oConfig.constants.uf);
     var rf = {};
     rf.uf = require('../../../shared/scripts/utilFunc.js');//();//(_s);
     rf.GamesApi = require('./gamesApi.js')(_s);
