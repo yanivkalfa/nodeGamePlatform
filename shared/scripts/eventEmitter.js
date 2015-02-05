@@ -1,12 +1,12 @@
 (function(){
     if (typeof module !== 'undefined' && module.exports) {
-        module.exports = EventEmitter;
+        module.exports = EventEmitter();
     }else{
         if(window.ngp)
-            if(window.ngp.oFns)window.ngp.oFns.EventEmitter = EventEmitter;
+            if(window.ngp.oFns)window.ngp.oFns.EventEmitter = EventEmitter();
             else{
                 window.ngp.oFns = {
-                    EventEmitter:EventEmitter
+                    EventEmitter:EventEmitter()
                 };
             }
     }

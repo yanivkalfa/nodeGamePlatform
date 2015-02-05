@@ -23,7 +23,7 @@
         UsersList = window.ngp.oFns.UsersList;
     }
 
-    console.log(UtilFunc.toArray);
+    console.log(EventEmitter);
 
     function Queue(queue){
         EventEmitter.apply(this, arguments);
