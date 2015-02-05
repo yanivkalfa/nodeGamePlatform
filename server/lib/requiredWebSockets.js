@@ -21,6 +21,7 @@ module.exports = function(_s){
             redis: _s.oReq.redis.createClient(_s.oConfig.connections.redis.port,_s.oConfig.connections.redis.host)
         };
 
+    console.log('got here a');
     _s.primus = new _s.oReq.Primus(_s.oReq.http, primusOptions);
 
 
@@ -31,7 +32,7 @@ module.exports = function(_s){
     _s.primus.use('metroplex', _s.oReq.primusMetroplex);
     _s.primus.use('cluster', _s.oReq.primusCluster);
 
-
+    console.log('got here b');
     _s.primus.on('connection', function (spark) {
 
         console.log('trying');
