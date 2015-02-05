@@ -16,7 +16,7 @@
             'Chat',
             'Queues',
             'QueueOut',
-            //'QueueUser',
+            'QueueUser',
             adminController
         ]);
 
@@ -32,8 +32,8 @@
         ChatOut,
         Chat,
         Queues,
-        QueueOut
-        //QueueUser
+        QueueOut,
+        QueueUser
         ) {
 
         function AdminController(){
@@ -44,8 +44,6 @@
             this.games = [];
             this.imgUrl = ngp.const.app.imgUrl;
             this.init();
-
-            console.log(QueueUser);
 
         }
 
@@ -110,12 +108,10 @@
         };
 
         AdminController.prototype.queueMP = function(g){
-            var u = new QueueUser({id : self.Authorization.id, username : self.Authorization.username, accepted : false, isMe:true});
-            console.log(u);
             var self = this
                 , queue = {
                     id : Queues.createRequestId(),
-                    users : u,
+                    users : new QueueUser({id : self.Authorization.id, username : self.Authorization.username, accepted : false, isMe:true}),
                     name:g.queueName,
                     userCount : 1
                 }

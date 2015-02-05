@@ -2,7 +2,7 @@
  * Created by Yaniv-Kalfa on 1/2/15.
  */
 angular.module(ngp.const.app.name)
-    .factory('User', [ngp.oFns.User]);
+    .factory('User', [function(){return ngp.oFns.User;}]);
 
 
 /*
