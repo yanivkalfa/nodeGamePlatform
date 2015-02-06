@@ -15,17 +15,11 @@ module.exports = {
             required : true
         },
 
-        passwordHash : {
-            type :String
-        },
+        passwordHash : String,
 
-        firName : {
-            type : String
-        },
+        firstName : String,
 
-        lastName : {
-            type : String
-        },
+        lastName : String,
 
         email : {
             type :String,
@@ -41,9 +35,9 @@ module.exports = {
             default : 'user'
         },
 
-        spark : {
-            type :String
-        },
+        spark : String,
+
+        server : Object,
 
         rooms : {
             type : Array,
@@ -55,12 +49,8 @@ module.exports = {
             default : ['registered']
         },
 
-        facebookToken : {
-            type : String
-        },
+        facebookToken : String,
 
-        token : {
-            type : String
-        }
+        token : String
     }
 };

@@ -54,6 +54,7 @@ module.exports = function(_s){
                         // Update user's spark id in database - in-case its needed
                         var updateSpark = function(user){
                             return new _s.oReq.Promise(function(resolve, reject) {
+                                user.server = {"address": _s.details.address, "port" : _s.details.port};
                                 user.spark = spark.id;
                                 user.save(function (err, user) {
                                     if(err) reject(err);

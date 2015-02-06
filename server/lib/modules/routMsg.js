@@ -90,42 +90,46 @@ module.exports = function(_s){
             }
 
             console.log('user.spark', user.spark);
-            _s.primus.metroplex.spark(user.spark, function (err, server) {
-                serverDetails = Servers.parseAddress(server);
-                if(!serverDetails || !serverDetails.port || !serverDetails.address) return self.warningMsg(spark, 'We were unable to find this user');
-                console.log('spark found in: ', serverDetails);
+            /*_
+            s.primus.metroplex.spark(user.spark, function (err, server) {
 
-                Servers.login(serverDetails).then(function(authorizedUser){
-                    console.log('login user: ', authorizedUser);
 
-                    Socket = _s.primus.Socket;
-                    client = new Socket('http://'+serverDetails.address + ':' + serverDetails.port + '/?token=' + authorizedUser.token);
-                    client.on('open', function open() {
-                        console.log('Connected to server socket ');
-                        localData = _.cloneDeep(data);
+            });*/
 
-                        data.m = 'rmMsg';
-                        data.d.d.fromSpark = spark.id;
-                        data.d.d.toSpark = user.spark;
-                        SocketAjax.dispatch({
-                            to : client,
-                            data : {"m": "chat", "d":data},
-                            timeOut : 10000,
-                            success : function success(resp){
-                                console.log('success :', resp);
-                                spark.write({"m": "chat", "d":localData});
-                                client.end();
-                            },
-                            error : function error(resp){
-                                console.log('error :', resp);
-                                self.warningMsg(spark, resp);
-                            }
-                        });
+            serverDetails = user.server;
+            if(!serverDetails || !serverDetails.port || !serverDetails.address) return self.warningMsg(spark, 'We were unable to find this user');
+            console.log('spark found in: ', serverDetails);
+
+            Servers.login(serverDetails).then(function(authorizedUser){
+                console.log('login user: ', authorizedUser);
+
+                Socket = _s.primus.Socket;
+                client = new Socket('http://'+serverDetails.address + ':' + serverDetails.port + '/?token=' + authorizedUser.token);
+                client.on('open', function open() {
+                    console.log('Connected to server socket ');
+                    localData = _.cloneDeep(data);
+
+                    data.m = 'rmMsg';
+                    data.d.d.fromSpark = spark.id;
+                    data.d.d.toSpark = user.spark;
+                    SocketAjax.dispatch({
+                        to : client,
+                        data : {"m": "chat", "d":data},
+                        timeOut : 10000,
+                        success : function success(resp){
+                            console.log('success :', resp);
+                            spark.write({"m": "chat", "d":localData});
+                            client.end();
+                        },
+                        error : function error(resp){
+                            console.log('error :', resp);
+                            self.warningMsg(spark, resp);
+                        }
                     });
+                });
 
-                    client.on('data', function (msg) {
-                        RoutSocket.rout(client, msg);
-                    });
+                client.on('data', function (msg) {
+                    RoutSocket.rout(client, msg);
                 });
             });
         };
