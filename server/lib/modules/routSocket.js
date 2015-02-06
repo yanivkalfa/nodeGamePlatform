@@ -18,15 +18,15 @@ module.exports = function(_s){
 
 
     RoutSocket.prototype.chat = function(spark, msg){
-        return this.RoutChat.rout(spark, msg);
+        return this.RoutChat.rout.apply(this,arguments);
     };
 
     RoutSocket.prototype.sjax = function(spark, msg){
-        return this.RoutSjax.rout(spark, msg);
+        return this.RoutSjax.rout.apply(this,arguments);
     };
 
     RoutSocket.prototype.queue = function(spark, msg){
-        return this.RoutQueue.rout(spark, msg);
+        return this.RoutQueue.apply(this,arguments);
     };
 
 
