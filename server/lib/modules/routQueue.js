@@ -77,7 +77,9 @@ module.exports = function(_s){
             }
             ;
 
+        console.log('qName', qName);
         GamesApi.fetchByQueueName(qName).then(function(game){
+            console.log('fetchByQueueName', game);
             if(!game) return joinResponse('joinFail','You cannot play this game!');
 
 
