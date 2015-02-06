@@ -49,7 +49,10 @@ module.exports = function(_s){
                         spark.user = user;
                         //spark.Queues = new Queues();
 
-                        console.log('user.queues',user.queues);
+                        console.log('user',user);
+                        Users.findOne(user._id).populate('queues').exec(function (err, user) {
+                            console.log('user savedUser fetch', user);
+                        });
 
                         var routSocket = new RoutSocket();
 
