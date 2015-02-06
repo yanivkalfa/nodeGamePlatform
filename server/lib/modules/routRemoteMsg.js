@@ -18,19 +18,13 @@ module.exports = function(_s){
         var  toSpark, sjaxRes, data;
 
         sjaxRes = {
-            "m":"sjax",
-            "d" : {
-                "m" : "res",
-                "d" : {
-                    "id" : sjaxId,
-                    "d" :  {}
-                }
-            }
+            "id" : sjaxId,
+            "d" :  {}
         };
 
         toSpark = _s.primus.spark(msg.toSpark);
         if(!toSpark) {
-            sjaxRes.d.d.d = {s: false, d : 'We were unable to find this user'};
+            sjaxRes.d = {s: false, d : 'We were unable to find this user'};
             spark.write(sjaxRes);
             return
         }
@@ -47,7 +41,7 @@ module.exports = function(_s){
         delete data.d.d.toSpark;
 
         toSpark.write({"m": "chat", "d":data});
-        sjaxRes.d.d.d  = {s: true, d : 'Message sent successfully'};
+        sjaxRes.d  = {s: true, d : 'Message sent successfully'};
 
 
 
