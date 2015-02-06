@@ -13,7 +13,9 @@ module.exports = function(_s){
             _(games).forEach(function(game, i){
                 games[i] = _.pick(game, self.visibleField);
             });
-            return games;
+
+
+            return games.length == 1 ? games[0] : games;
         },
 
 
