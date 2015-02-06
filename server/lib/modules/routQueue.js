@@ -162,6 +162,11 @@ module.exports = function(_s){
                 return spark.write({"m":'queue', d:data});
             }
             ;
+        var mongoose = require('mongoose')
+            , Schema = mongoose.Schema
+            ;
+
+        console.log(Schema.Types.ObjectId);
 
         console.log('qName', qName);
         GamesApi.fetchByQueueName(qName).then(function(game){
