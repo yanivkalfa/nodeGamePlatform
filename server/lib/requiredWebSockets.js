@@ -47,9 +47,9 @@ module.exports = function(_s){
                         console.log('connected:',user.username);
                         // Attaching user to spark - for logout and maybe future needs
                         spark.user = user;
-                        spark.Queues = new Queues();
+                        //spark.Queues = new Queues();
 
-                        console.log(user);
+                        console.log('user.queues',user.queues);
 
                         var routSocket = new RoutSocket();
 
