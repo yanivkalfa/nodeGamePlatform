@@ -1,7 +1,3 @@
-var mongoose = require('mongoose')
-    , Schema = mongoose.Schema
-    ;
-
 module.exports = {
 
     name : "Users",
@@ -46,8 +42,6 @@ module.exports = {
             type : Array,
             default : ['lobby']
         },
-
-        queues : [{ type: String, ref: 'Queues' }],
 
         roles : {
             type : Array,

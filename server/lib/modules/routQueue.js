@@ -169,35 +169,17 @@ module.exports = function(_s){
             if(!game) return joinResponse('joinFail','You cannot play this game!');
             QueuesApi.fetch({"name" : qName, "user" : spark.user.id}).then(function(queue){
                 if(queue) return joinResponse('joinFail','You cannot queue for same game twice!');
-                User.fetch(spark.user.id).then(function(user){
-                    var qDetails = {
-                        "out_id" : msg.id,
-                        "name" : qName,
-                        "room" : "",
-                        "start" : new Date(),
-                        "end" : "",
-                        "game" : game._id,
-                        "user" : spark.user.id
-                    };
+                var qDetails = {
+                    "out_id" : msg.id,
+                    "name" : qName,
+                    "room" : "",
+                    "start" : new Date(),
+                    "end" : "",
+                    "game" : game._id,
+                    "user" : spark.user.id
+                };
 
-                    QueuesApi.add(qDetails).then(function(queue){
-                        console.log('queue',queue);
-                        user.queues.push(queue);
-                        console.log('user',user);
-                        user.save(function (err, savedUser) {
-                            if(err) return joinResponse('joinFail','There was an error creating your queue a');
-                            console.log('saved God damnit ', savedUser);
-                            //return self.checkQueues(spark,msg)
-                        });
-                    });
-                        /*.catch(function(err){
-                        return joinResponse('joinFail','There was an error creating your queue b');
-                    })
-                    */
-
-                }).catch(function(err){
-                    return joinResponse('joinFail','There was an error creating your queue c');
-                })
+                QueuesApi.add(qDetails).then(self.checkQueues.bind(self,spark,msg));
             });
         }).catch(joinResponse.bind(self, 'joinFail'));
 
