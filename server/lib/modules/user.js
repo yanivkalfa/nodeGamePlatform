@@ -63,6 +63,15 @@ module.exports = function(_s){
             });
         },
 
+        fetch : function(query){
+            return new _s.oReq.Promise(function(resolve, reject) {
+                Users.findOne(query).populate('queues').exec(function (err, user) {
+                    if(err) return reject(err);
+                    return resolve(user);
+                });
+            });
+        },
+
         updateSpark : function(credentials, sparkId){
             return new _s.oReq.Promise(function(resolve, reject) {
                 Users.update(credentials, {spark : sparkId}).exec(function (err, user) {

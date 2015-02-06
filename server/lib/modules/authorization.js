@@ -29,7 +29,7 @@ module.exports = function(_s){
 
         login : function(credentials){
             return new _s.oReq.Promise(function(resolve, reject) {
-                Users.findOne(credentials).exec(function (err, user) {
+                Users.findOne(credentials).populate('queues').exec(function (err, user) {
                     if(err) return reject(err);
                     return resolve(user);
                 });

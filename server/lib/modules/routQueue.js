@@ -7,6 +7,7 @@ module.exports = function(_s){
         , GetRoom = require(pathsList.GetRoom)(_s)
         , getRoom = new GetRoom()
         , QueuesApi = require(pathsList.QueuesApi)(_s)
+        , User = require(pathsList.User)(_s)
         , _ = _s.oReq.lodash
         //, RoutMsg = require(pathsList.RoutMsg)(_s)
         //, routMsg = new RoutMsg()
@@ -168,18 +169,30 @@ module.exports = function(_s){
             if(!game) return joinResponse('joinFail','You cannot play this game!');
             QueuesApi.fetch({"name" : qName, "user" : spark.user.id}).then(function(queue){
                 if(queue) return joinResponse('joinFail','You cannot queue for same game twice!');
+                User.fetch(spark.user.id).then(function(user){
+                    var qDetails = {
+                        "out_id" : msg.id,
+                        "name" : qName,
+                        "room" : "",
+                        "start" : new Date(),
+                        "end" : "",
+                        "game" : game._id,
+                        "user" : spark.user.id
+                    };
 
-                var qDetails = {
-                    "out_id" : msg.id,
-                    "name" : qName,
-                    "room" : "",
-                    "start" : new Date(),
-                    "end" : "",
-                    "game" : game._id,
-                    "user" : spark.user.id
-                };
+                    QueuesApi.add(qDetails).then(function(queue){
+                        user.queues.push(queue);
+                        user.save(function (err, user) {
+                            if(err) return joinResponse('joinFail','There was an error creating your queue');
+                            return self.checkQueues(spark,msg);
+                        });
+                    }).catch(function(err){
+                        return joinResponse('joinFail','There was an error creating your queue');
+                    })
 
-                QueuesApi.add(qDetails).then(self.checkQueues.bind(self,spark,msg));
+                }).catch(function(err){
+                    return joinResponse('joinFail','There was an error creating your queue');
+                })
             });
         }).catch(joinResponse.bind(self, 'joinFail'));
 

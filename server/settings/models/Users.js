@@ -1,3 +1,6 @@
+var mongoose = require('mongoose')
+    , Schema = mongoose.Schema
+    ;
 
 module.exports = {
 
@@ -43,6 +46,8 @@ module.exports = {
             type : Array,
             default : ['lobby']
         },
+
+        queues : [{ type: Schema.Types.ObjectId, ref: 'Story' }],
 
         roles : {
             type : Array,
