@@ -23,11 +23,11 @@ module.exports = function(_s){
     RoutSocket.prototype.constructor = RoutSocket;
 
 
-    RoutSocket.prototype.chat = routChat.rout.apply(routChat);
+    RoutSocket.prototype.chat = routChat.rout.bind(routChat);
 
-    RoutSocket.prototype.sjax = routSjax.rout.apply(routSjax);
+    RoutSocket.prototype.sjax = routSjax.rout.bind(routSjax);
 
-    RoutSocket.prototype.queue = routQueue.apply(routQueue);
+    RoutSocket.prototype.queue = routQueue.rout.bind(routQueue);
 
 
     return RoutSocket;

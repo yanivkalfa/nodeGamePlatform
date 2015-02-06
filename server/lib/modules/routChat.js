@@ -23,11 +23,11 @@ module.exports = function(_s){
     RoutChat.prototype = Object.create(router.prototype);
     RoutChat.prototype.constructor = RoutChat;
 
-    RoutChat.prototype.msg = routMsg.rout.apply(routMsg);
+    RoutChat.prototype.msg = routMsg.rout.bind(routMsg);
 
-    RoutChat.prototype.rmMsg = routRemoteMsg.rout.apply(routRemoteMsg);
+    RoutChat.prototype.rmMsg = routRemoteMsg.rout.bind(routRemoteMsg);
 
-    RoutChat.prototype.room = routRoom.rout.apply(routRoom);
+    RoutChat.prototype.room = routRoom.rout.bind(routRoom);
 
 
     return RoutChat;
