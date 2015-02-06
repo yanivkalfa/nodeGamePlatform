@@ -9,6 +9,7 @@ module.exports = function(_s){
         "oRouts" : serverDirname + '/lib/requiredRouts.js',
         "oWebSockets" : serverDirname + '/lib/requiredWebSockets.js',
         "GamesApi" : serverDirname + '/lib/modules/gamesApi.js',
+        "QueuesApi" : serverDirname + '/lib/modules/queuesApi.js',
         "SocketAjax" : serverDirname + '/lib/modules/socketAjax.js',
         "HttpTransit" : serverDirname + '/lib/modules/httpTransit.js',
         "User" : serverDirname + '/lib/modules/user.js',

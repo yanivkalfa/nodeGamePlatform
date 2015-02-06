@@ -14,14 +14,27 @@ module.exports = function(_s){
 
     RoutRemoteMsg.prototype.privateMsg = function(spark, msg){
         console.log('private message :', msg);
-        var  toSpark;
+        var  toSpark, sjaxRes, data;
+
+        sjaxRes = {
+            "m":"sjax",
+            "d" : {
+                "m" : "res",
+                "d" : {
+                    "id" : msg.id,
+                    "d" :  {}
+                }
+            }
+        };
 
         toSpark = _s.primus.spark(msg.toSpark);
         if(!toSpark) {
-            return {s: false, d : 'We were unable to find this user'};
+            sjaxRes.d.d.d = {s: false, d : 'We were unable to find this user'};
+            spark.write(sjaxRes);
+            return
         }
 
-        var data = {
+        data = {
             "m" : 'msg',
             "d" : {
                 "m" : "privateMsg",
@@ -33,7 +46,11 @@ module.exports = function(_s){
         delete data.d.d.toSpark;
 
         toSpark.write({"m": "chat", "d":data});
-        return {s: true, d : 'Message sent successfully'};
+        sjaxRes.d.d.d  = {s: true, d : 'Message sent successfully'};
+
+
+
+        spark.write(sjaxRes);
     };
 
 

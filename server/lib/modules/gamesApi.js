@@ -1,10 +1,10 @@
 module.exports = function(_s){
     var _ = _s.oReq.lodash;
-    function ServersClass(){
-        this.visibleField = ["name","playerCount", "queueName"];
+    function GamesApi(){
+        this.visibleField = ['_id',"name","playerCount", "queueName"];
     }
 
-    ServersClass.prototype =  {
+    GamesApi.prototype =  {
 
         filter : function(games){
             var self = this;
@@ -71,5 +71,5 @@ module.exports = function(_s){
     };
 
 
-    return new ServersClass();
+    return new GamesApi();
 };

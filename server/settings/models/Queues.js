@@ -9,25 +9,23 @@ module.exports = {
 
     schema : {
 
-        out_id : {
-            type :String
-        },
+        out_id : String,
 
         name : {
             type :String,
             required : true
         },
 
-        room : {
-            type :String
-        },
+        room : String,
 
         start : {
             type :Date,
             required : true
         },
 
+        end :Date,
+
         game : { type: Schema.Types.ObjectId, ref: 'Games' },
-        users : { type: Schema.Types.ObjectId, ref: 'Users' }
+        user : { type: Schema.Types.ObjectId, ref: 'Users' }
     }
 };

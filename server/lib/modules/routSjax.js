@@ -17,20 +17,7 @@ module.exports = function(_s){
         var routSocket = require(pathsList.RoutSocket)(_s);
         var RoutSocket = new routSocket();
         console.log('request : ', msg);
-        var data = RoutSocket.rout(spark, msg.d);
-        var resp = {
-            "m":"sjax",
-            "d" : {
-                "m" : "res",
-                "d" : {
-                    "id" : msg.id,
-                    "d" :  data
-                }
-            }
-        };
-
-        spark.write(resp);
-        console.log('spark.write');
+        RoutSocket.rout(spark, msg.d, msg.id);
         return true;
     };
 
