@@ -1,7 +1,7 @@
 module.exports = function(_s){
     var _ = _s.oReq.lodash;
     function QueuesApi(){
-        this.visibleField = ["_id","out_id","name","room","start","end","game","user"];
+        this.visibleField = ["id","_id","out_id","name","room","start","end","game","user"];
     }
 
     QueuesApi.prototype =  {
