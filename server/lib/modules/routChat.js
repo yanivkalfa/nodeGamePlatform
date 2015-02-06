@@ -19,16 +19,16 @@ module.exports = function(_s){
     RoutChat.prototype.constructor = RoutChat;
 
     RoutChat.prototype.msg = function(spark,msg){
-        return this.RoutMsg.rout.apply(this,arguments);
+        return this.RoutMsg.rout.apply(this.RoutMsg,arguments);
     };
 
     RoutChat.prototype.rmMsg = function(spark, msg){
         console.log('rmMsg routing -> ');
-        return this.RoutRemoteMsg.rout.apply(this,arguments);
+        return this.RoutRemoteMsg.rout.apply(this.RoutRemoteMsg,arguments);
     };
 
     RoutChat.prototype.room = function(spark, msg){
-        return this.RoutRoom.rout.apply(this,arguments);
+        return this.RoutRoom.rout.apply(this.RoutRoom,arguments);
     };
 
 

@@ -22,11 +22,11 @@ module.exports = function(_s){
     };
 
     RoutSocket.prototype.sjax = function(spark, msg){
-        return this.RoutSjax.rout.apply(this,arguments);
+        return this.RoutSjax.rout.apply(this.RoutSjax,arguments);
     };
 
     RoutSocket.prototype.queue = function(spark, msg){
-        return this.RoutQueue.apply(this,arguments);
+        return this.RoutQueue.apply(this.RoutQueue,arguments);
     };
 
 
