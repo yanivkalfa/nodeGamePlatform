@@ -188,9 +188,11 @@ module.exports = function(_s){
                             if(err) return joinResponse('joinFail','There was an error creating your queue a');
                             return self.checkQueues(spark,msg);
                         });
-                    }).catch(function(err){
+                    });
+                        /*.catch(function(err){
                         return joinResponse('joinFail','There was an error creating your queue b');
                     })
+                    */
 
                 }).catch(function(err){
                     return joinResponse('joinFail','There was an error creating your queue c');
