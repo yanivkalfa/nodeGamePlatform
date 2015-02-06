@@ -12,7 +12,8 @@ module.exports = function(_s){
     RoutRemoteMsg.prototype.constructor = RoutRemoteMsg;
 
 
-    RoutRemoteMsg.prototype.privateMsg = function(spark, msg){
+    RoutRemoteMsg.prototype.privateMsg = function(spark, msg, sjaxId){
+        console.log(msg, sjaxId);
         console.log('private message :', msg);
         var  toSpark, sjaxRes, data;
 
@@ -21,7 +22,7 @@ module.exports = function(_s){
             "d" : {
                 "m" : "res",
                 "d" : {
-                    "id" : msg.id,
+                    "id" : sjaxId,
                     "d" :  {}
                 }
             }
