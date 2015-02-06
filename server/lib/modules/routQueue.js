@@ -77,9 +77,7 @@ module.exports = function(_s){
             }
             ;
 
-        console.log('qName', qName);
         GamesApi.fetchByQueueName(qName).then(function(game){
-            console.log('fetchByQueueName', game);
             if(!game) return joinResponse('joinFail','You cannot play this game!');
 
 
@@ -158,7 +156,9 @@ module.exports = function(_s){
             }
             ;
 
+        console.log('qName', qName);
         GamesApi.fetchByQueueName(qName).then(function(game){
+            console.log('fetchByQueueName', game);
             if(!game) return joinResponse('joinFail','You cannot play this game!');
             QueuesApi.fetch({"name" : qName, "user" : spark.user.id}).then(function(queue){
                 if(queue) return joinResponse('joinFail','You cannot queue for same game twice!');
