@@ -182,7 +182,7 @@ module.exports = function(_s){
 
                     QueuesApi.add(qDetails).then(function(queue){
                         console.log('queue',queue);
-                        user.queues.push(queue._id);
+                        user.queues.push(queue);
                         console.log('user',user);
                         user.save(function (err, savedUser) {
                             if(err) return joinResponse('joinFail','There was an error creating your queue a');
