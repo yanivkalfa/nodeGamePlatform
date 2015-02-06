@@ -7,6 +7,7 @@ module.exports = function(_s){
         , RoutRoom = require(pathsList.RoutRoom)(_s)
         , User = require(pathsList.User)(_s)
         , Queues = require(pathsList.Queues)
+        , QueuesApi = require(pathsList.QueuesApi)
         , sessCon = _s.oConfig.session.connection
         , sessSecret = _s.oConfig.session.secret
         , primusOptions = {
@@ -85,6 +86,10 @@ module.exports = function(_s){
                                 };
                                 console.log('join room: ', room);
                                 routSocket.chat(spark,data);
+                            });
+
+                            QueuesApi.fetch({user:user.id}).then(function(queues){
+                                console.log(queues);
                             });
 
                         };
