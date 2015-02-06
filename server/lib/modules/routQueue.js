@@ -80,9 +80,12 @@ module.exports = function(_s){
         GamesApi.fetchByQueueName(qName).then(function(game){
             if(!game) return joinResponse('joinFail','You cannot play this game!');
 
-
+            console.log('{"name" : qName}, date, game.userCount, game', {"name" : qName}, 'date', game.userCount, game);
             QueuesApi.fetchSortLimit({"name" : qName}, 'date', game.userCount).then(function(queues){
+                console.log('queues', queues);
                 if(_.isArray(queues) && queues.length < game.userCount) return joinResponse('joinSuccess');
+
+                console.log('got here fetchSortLimit');
 
                 var users = []
                     , remoteUsers = []
