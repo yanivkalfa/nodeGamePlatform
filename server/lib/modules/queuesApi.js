@@ -42,7 +42,7 @@ module.exports = function(_s){
             return new _s.oReq.Promise(function(resolve, reject) {
                 if('object' !== typeof queue|| _.isEmpty(queue)) return reject('Please supply correct queue details');
 
-                var success = function(queue){ return resolve(self.filter(queue)); };
+                var success = function(queue){ return resolve(queue); };
                 var fail = function(err){ return reject(err); };
                 Queues.create(queue).then(success,fail);
             });
