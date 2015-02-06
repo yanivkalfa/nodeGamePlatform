@@ -186,6 +186,7 @@ module.exports = function(_s){
                         user.queues.push(queue._id);
                         user.save(function (err, user) {
                             if(err) return joinResponse('joinFail','There was an error creating your queue a');
+                            console.log('saved sucessfully ', user);
                             return self.checkQueues(spark,msg);
                         });
                     });

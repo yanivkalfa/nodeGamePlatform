@@ -49,6 +49,8 @@ module.exports = function(_s){
                         spark.user = user;
                         spark.Queues = new Queues();
 
+                        console.log(user);
+
                         var routSocket = new RoutSocket();
 
                         // Update user's spark id in database - in-case its needed
