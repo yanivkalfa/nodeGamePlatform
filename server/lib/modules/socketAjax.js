@@ -34,10 +34,6 @@ module.exports = function(_s){
                         }
                     });
                 });
-
-                client.on('end', function(reason){
-                    return reject('end');
-                });
                 client.on('disconnection', function(reason){
                     return reject('disconnection');
                 });
