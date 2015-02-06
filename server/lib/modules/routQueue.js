@@ -183,15 +183,15 @@ module.exports = function(_s){
                     QueuesApi.add(qDetails).then(function(queue){
                         user.queues.push(queue);
                         user.save(function (err, user) {
-                            if(err) return joinResponse('joinFail','There was an error creating your queue');
+                            if(err) return joinResponse('joinFail','There was an error creating your queue a');
                             return self.checkQueues(spark,msg);
                         });
                     }).catch(function(err){
-                        return joinResponse('joinFail','There was an error creating your queue');
+                        return joinResponse('joinFail','There was an error creating your queue b');
                     })
 
                 }).catch(function(err){
-                    return joinResponse('joinFail','There was an error creating your queue');
+                    return joinResponse('joinFail','There was an error creating your queue c');
                 })
             });
         }).catch(joinResponse.bind(self, 'joinFail'));
