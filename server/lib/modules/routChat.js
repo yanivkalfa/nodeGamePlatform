@@ -3,33 +3,29 @@ module.exports = function(_s){
     var pathsList = _s.oConfig.pathsList
         , router = require(pathsList.Router)
         , RoutMsg = require(pathsList.RoutMsg)(_s)
+        , routMsg = new RoutMsg()
         , RoutRoom = require(pathsList.RoutRoom)(_s)
+        , routRoom = new RoutRoom()
         , RoutRemoteMsg = require(pathsList.RoutRemoteMsg)(_s)
+        , routRemoteMsg = new RoutRemoteMsg()
         ;
+
+    this.RoutMsg = new RoutMsg();
+    this.RoutRoom = new RoutRoom();
+    this.RoutRemoteMsg = new RoutRemoteMsg();
 
     function RoutChat (){
         router.apply(this,arguments);
-
-        this.RoutMsg = new RoutMsg();
-        this.RoutRoom = new RoutRoom();
-        this.RoutRemoteMsg = new RoutRemoteMsg();
     }
 
     RoutChat.prototype = Object.create(router.prototype);
     RoutChat.prototype.constructor = RoutChat;
 
-    RoutChat.prototype.msg = function(spark,msg){
-        return this.RoutMsg.rout.apply(this.RoutMsg,arguments);
-    };
+    RoutChat.prototype.msg = routMsg.rout.apply(routMsg,arguments);
 
-    RoutChat.prototype.rmMsg = function(spark, msg){
-        console.log('rmMsg routing -> ');
-        return this.RoutRemoteMsg.rout.apply(this.RoutRemoteMsg,arguments);
-    };
+    RoutChat.prototype.rmMsg = routRemoteMsg.rout.apply(routRemoteMsg,arguments);
 
-    RoutChat.prototype.room = function(spark, msg){
-        return this.RoutRoom.rout.apply(this.RoutRoom,arguments);
-    };
+    RoutChat.prototype.room = routRoom.rout.apply(routRoom,arguments);
 
 
     return RoutChat;
