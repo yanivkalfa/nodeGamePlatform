@@ -7,15 +7,16 @@ module.exports = function(_s){
     GamesApi.prototype =  {
 
         filter : function(games){
-            var self = this;
+            var self = this, isArray = _.isArray(games);
+
             if(_.isEmpty(games)) return false;
-            games = _.isArray(games) ? games : [games];
+            games = isArray ? games : [games];
             _(games).forEach(function(game, i){
                 games[i] = _.pick(game, self.visibleField);
             });
 
 
-            return games.length == 1 ? games[0] : games;
+            return isArray ? games : games[0];
         },
 
 
