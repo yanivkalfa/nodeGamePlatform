@@ -169,7 +169,7 @@ module.exports = function(_s){
                     "room" : "",
                     "start" : new Date(),
                     "end" : "",
-                    "game" : game._id,
+                    "game" : game.id,
                     "user" : spark.user.id
                 };
 
