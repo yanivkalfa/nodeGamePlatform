@@ -10,9 +10,11 @@ module.exports = function(_s){
         , routRemoteMsg = new RoutRemoteMsg()
         ;
 
+    /*
     this.RoutMsg = new RoutMsg();
     this.RoutRoom = new RoutRoom();
     this.RoutRemoteMsg = new RoutRemoteMsg();
+    */
 
     function RoutChat (){
         router.apply(this,arguments);
@@ -21,11 +23,11 @@ module.exports = function(_s){
     RoutChat.prototype = Object.create(router.prototype);
     RoutChat.prototype.constructor = RoutChat;
 
-    RoutChat.prototype.msg = routMsg.rout.apply(routMsg,arguments);
+    RoutChat.prototype.msg = routMsg.rout.apply(routMsg);
 
-    RoutChat.prototype.rmMsg = routRemoteMsg.rout.apply(routRemoteMsg,arguments);
+    RoutChat.prototype.rmMsg = routRemoteMsg.rout.apply(routRemoteMsg);
 
-    RoutChat.prototype.room = routRoom.rout.apply(routRoom,arguments);
+    RoutChat.prototype.room = routRoom.rout.apply(routRoom);
 
 
     return RoutChat;
