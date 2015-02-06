@@ -188,6 +188,11 @@ module.exports = function(_s){
                             if(err) return joinResponse('joinFail','There was an error creating your queue a');
                             console.log('saved God damnit ', savedUser);
                             //return self.checkQueues(spark,msg);
+
+
+                            Users.findOne(savedUser._id).populate('queues').exec(function (err, user) {
+                                console.log('user savedUser fetch', user);
+                            });
                         });
                     });
                         /*.catch(function(err){
