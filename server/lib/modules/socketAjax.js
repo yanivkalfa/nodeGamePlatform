@@ -9,6 +9,36 @@ module.exports = function(_s){
 
     SocketAjax.prototype.noop = function(){};
 
+    SocketAjax.prototype.sJax = function(details){
+        return new _s.oReq.Promise(function(resolve, reject) {
+            var self = this, serverDetails, Socket, client, Servers;
+            Servers = require(_s.oConfig.pathsList.Servers)(_s);
+            serverDetails = details.server;
+            Servers.login(serverDetails).then(function(authorizedUser){
+
+                Socket = _s.primus.Socket;
+                client = new Socket('http://'+serverDetails.address + ':' + serverDetails.port + '/?token=' + authorizedUser.token);
+                client.on('open', function open() {
+                    self.dispatch({
+                        to : client,
+                        data : details.data,
+                        timeOut : details.timeOut || 10000,
+                        success : function success(resp){
+                            client.end();
+                            return resolve(resp);
+                        },
+                        error : function error(resp){
+                            client.end();
+                            return resolve(resp);
+                        }
+                    });
+                });
+
+                client.on('data', self.response.bind(self, client));
+            });
+        });
+    };
+
     SocketAjax.prototype.dispatch = function(request){
         var self = this
             , id

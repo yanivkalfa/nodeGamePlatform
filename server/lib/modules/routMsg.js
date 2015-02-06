@@ -100,6 +100,20 @@ module.exports = function(_s){
             if(!serverDetails || !serverDetails.port || !serverDetails.address) return self.warningMsg(spark, 'We were unable to find this user');
             console.log('spark found in: ', serverDetails);
 
+            localData = _.cloneDeep(data);
+            data.m = 'rmMsg';
+            data.d.d.fromSpark = spark.id;
+            data.d.d.toSpark = user.spark;
+            var sjaxDetails = {
+                server : serverDetails,
+                data : {"m": "chat", "d":data}
+            };
+            SocketAjax.sJax(sjaxDetails).then(function(response){
+                spark.write({"m": "chat", "d":localData});
+            }).catch(function(err){
+                self.warningMsg(spark, err);
+            });
+/*
             Servers.login(serverDetails).then(function(authorizedUser){
                 console.log('login user: ', authorizedUser);
 
@@ -131,7 +145,7 @@ module.exports = function(_s){
                 client.on('data', function (msg) {
                     RoutSocket.rout(client, msg);
                 });
-            });
+            });*/
         };
 
         User.fetchUser(msg.to).then(prvSuccess).catch(self.warningMsg.bind(self, spark, 'User with this name does not exist'));
