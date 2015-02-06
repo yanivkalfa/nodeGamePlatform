@@ -19,8 +19,48 @@ module.exports = function(_s){
     RoutQueue.prototype = Object.create(router.prototype);
     RoutQueue.prototype.constructor = RoutQueue;
 
+    RoutQueue.prototype.remoteReady = function(spark, msg){
+        var sjaxRes = {
+            "m":"sjax",
+            "d" : {
+                "m" : "res",
+                "d" : {
+                    "id" : sjaxId,
+                    "d" :  {}
+                }
+            }
+        };
+
+        var toSpark  = _s.primus.spark(msg.spark);
+        if(!toSpark) {
+            sjaxRes.d.d.d = {s: false, d : 'Spark was not found'};
+            spark.write(sjaxRes);
+            return
+        }
+
+        toSpark.join(msg.room, function(err, succ){
+            var data = {
+                "m" : 'ready',
+                "d" : msg
+            };
+
+            toSpark.write({"m":'queue', d:data});
+
+            sjaxRes.d.d.d  = {s: true, d : 'Message sent successfully'};
+            spark.write(sjaxRes);
+        });
+
+    };
+
     RoutQueue.prototype.ready = function(spark, msg){
-        /* future use*/
+        spark.join(msg.room, function(err, succ){
+            var data = {
+                "m" : 'ready',
+                "d" : msg
+            };
+
+            spark.write({"m":'queue', d:data});
+        });
     };
 
     RoutQueue.prototype.checkQueues = function(spark, msg){
@@ -41,63 +81,65 @@ module.exports = function(_s){
             if(!game) return joinResponse('joinFail','You cannot play this game!');
 
 
-            QueuesApi.fetchSortLimit({"name" : qName}, 'date', game.userCount).then(function(queue){
-                if(queue) return joinResponse('joinFail','You cannot queue for same game twice!');
+            QueuesApi.fetchSortLimit({"name" : qName}, 'date', game.userCount).then(function(queues){
+                if(_.isArray(queues) && queues.length < game.userCount) return joinResponse('joinSuccess');
 
-                var qDetails = {
-                    "out_id" : msg.id,
-                    "name" : qName,
-                    "room" : "",
-                    "start" : new Date(),
-                    "end" : "",
-                    "game" : game._id,
-                    "user" : spark.user.id
+                var users = []
+                    , remoteUsers = []
+                    , localUsers = []
+                    , roomName = qName
+                    ;
+
+
+                var handleQueue = function(queue, index){
+                    var user = queue.user;
+                    roomName += '_' + user.id;
+                    users.push({
+                        id:user.id,
+                        username: user.name,
+                        accepted: false,
+                        isMe: false
+                    });
+                    var queueSpark  = _s.primus.spark(user.spark);
+
+                    if(!queueSpark) {
+                        remoteUsers.push({user : user, spark : false, queue : queue});
+                    }else{
+                        localUsers.push({user : user, spark : queueSpark, queue : queue});
+                    }
                 };
 
-                QueuesApi.add(qDetails).then(self.checkQueues.bind(self,spark,msg));
+                _(queues).forEach(handleQueue);
+
+                _(localUsers).forEach(function(user){
+                    var qDetails = {
+                        id : user.queue.out_id,
+                        users : users,
+                        name:qName,
+                        room : roomName,
+                        userCount : game.userCount
+                    };
+                    self.ready(user.spark, qDetails)
+                });
+
+                /*
+                _(remoteUsers).forEach(function(user){
+                    // remote stuff
+                    var qDetails = {
+                        id : user.queue.out_id,
+                        users : users,
+                        name:qName,
+                        room : roomName,
+                        userCount : game.userCount,
+                        spark : user.spark
+                    };
+                    self.ready(user.spark, qDetails)
+                });
+                */
+                //remoteReady
+
             });
         });
-
-
-
-
-
-
-
-
-
-        var queue, end, roomName = spark.user.id + '_' + qName + '_';
-        end = function(spark,rName){};
-
-        qDetails = {
-            id : msg.id,
-            users : [],
-            name:qName,
-            userCount : game.userCount
-        };
-
-        //
-
-        queue = spark.Queues.add(qDetails);
-
-        getRoom.getSparksInRoom(qName).then(function(sparks){
-            if(_.isArray(sparks) && sparks.length < game.userCount) return joinResponse('joinSuccess');
-            var sparkId;
-            _(sparks).forEach(function(spark_Id){
-                if(spark_Id == spark.id) return true;
-                sparkId = spark_Id;
-                return false;
-            });
-
-            var queueUserSpark  = _s.primus.spark(sparkId);
-
-            self.ready(spark, msg);
-            if(queueUserSpark){
-                self.ready(queueUserSpark, queue.getMinDetails());
-            }
-
-            // remote ready.
-        })
     };
 
     RoutQueue.prototype.join = function(spark, msg){

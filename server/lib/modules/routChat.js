@@ -10,12 +10,6 @@ module.exports = function(_s){
         , routRemoteMsg = new RoutRemoteMsg()
         ;
 
-    /*
-    this.RoutMsg = new RoutMsg();
-    this.RoutRoom = new RoutRoom();
-    this.RoutRemoteMsg = new RoutRemoteMsg();
-    */
-
     function RoutChat (){
         router.apply(this,arguments);
     }

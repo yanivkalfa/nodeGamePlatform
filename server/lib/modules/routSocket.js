@@ -9,11 +9,6 @@ module.exports = function(_s){
         , routQueue = new RoutQueue()
         ;
 
-    /*
-    this.RoutChat = new RoutChat();
-    this.RoutSjax = new RoutSjax();
-    this.RoutQueue = new RoutQueue();*/
-
     function RoutSocket (){
         router.apply(this,arguments);
 
