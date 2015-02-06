@@ -9,6 +9,8 @@ module.exports = {
 
     schema : {
 
+        _id : String,
+
         out_id : String,
 
         name : {
