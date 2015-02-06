@@ -47,7 +47,7 @@ module.exports = {
             default : ['lobby']
         },
 
-        queues : [{ type: String, ref: 'Queues' }],
+        queues : [{ type: Schema.Types.ObjectId, ref: 'Queues' }],
 
         roles : {
             type : Array,
