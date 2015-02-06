@@ -10,8 +10,9 @@ module.exports = function(_s){
     SocketAjax.prototype.noop = function(){};
 
     SocketAjax.prototype.sJax = function(details){
+        var self = this;
         return new _s.oReq.Promise(function(resolve, reject) {
-            var self = this, serverDetails, Socket, client, Servers;
+            var serverDetails, Socket, client, Servers;
             Servers = require(_s.oConfig.pathsList.Servers)(_s);
             serverDetails = details.server;
             Servers.login(serverDetails).then(function(authorizedUser){
@@ -29,9 +30,16 @@ module.exports = function(_s){
                         },
                         error : function error(resp){
                             client.end();
-                            return resolve(resp);
+                            return reject(resp);
                         }
                     });
+                });
+
+                client.on('end', function(reason){
+                    return reject('end');
+                });
+                client.on('disconnection', function(reason){
+                    return reject('disconnection');
                 });
 
                 client.on('data', self.response.bind(self, client));
