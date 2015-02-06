@@ -65,7 +65,7 @@ module.exports = function(_s){
 
     RoutQueue.prototype.checkQueues = function(spark, msg){
         var self = this
-            , qName = msg.queueName
+            , qName = msg.name
             , joinResponse = function(method, warrning){
                 if(warrning) msg.warrning = warrning;
                 var data = {
@@ -144,7 +144,7 @@ module.exports = function(_s){
 
     RoutQueue.prototype.join = function(spark, msg){
         var self = this
-            , qName = msg.queueName
+            , qName = msg.name
             , joinResponse = function(method, warrning){
                 if(warrning) msg.warrning = warrning;
                 var data = {
