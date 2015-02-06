@@ -20,7 +20,7 @@ module.exports = function(_s){
         fetch : function(query){
             var self = this;
             return new _s.oReq.Promise(function(resolve, reject) {
-                Queues.find(query).populate('game users').exec(function (err, succ) {
+                Queues.find(query).populate('game user').exec(function (err, succ) {
                     if(err) return reject(err);
                     return resolve(self.filter(succ));
                 });
@@ -30,7 +30,7 @@ module.exports = function(_s){
         fetchSortLimit : function(query, fName, limit){
             var self = this;
             return new _s.oReq.Promise(function(resolve, reject) {
-                Queues.find(query).populate('game users').sort('-'+fName).limit(limit).exec(function (err, succ) {
+                Queues.find(query).populate('game user').sort('-'+fName).limit(limit).exec(function (err, succ) {
                     if(err) return reject(err);
                     return resolve(self.filter(succ));
                 });

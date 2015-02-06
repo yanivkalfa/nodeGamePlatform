@@ -114,6 +114,9 @@ module.exports = function(_s){
 
                 _(queues).forEach(handleQueue);
 
+
+                console.log('localUsers', localUsers);
+                console.log('remoteUsers: ', remoteUsers);
                 _(localUsers).forEach(function(user){
                     var qDetails = {
                         id : user.queue.out_id,
