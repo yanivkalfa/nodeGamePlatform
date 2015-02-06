@@ -18,7 +18,7 @@ module.exports = function(_s){
 
 
     RoutSocket.prototype.chat = function(spark, msg){
-        return this.RoutChat.rout.apply(this,arguments);
+        return this.RoutChat.rout.apply(this.RoutChat,arguments);
     };
 
     RoutSocket.prototype.sjax = function(spark, msg){
