@@ -67,7 +67,9 @@
                 });
 
                 return true;
-            }
+            },
+
+            get : _.bind(this.games.get, this.games)
 
 
 
