@@ -118,7 +118,7 @@ module.exports = function(_s){
                 userCount : q.userCount
             };
             _(localUsers).forEach(function(localUser){
-                joinedPromises.push(self.joinGameRoom(localUser.spark, roomName).catch(console.log));
+                joinedPromises.push(self.joinGameRoom(localUser.spark, roomName));
             });
 
             _(remoteUsers).forEach(function(remoteUser){
@@ -157,7 +157,7 @@ module.exports = function(_s){
                 });
                 */
             };
-            //_s.oReq.Promise.all(joinedPromises).then(function(aa){}, fail);
+            _s.oReq.Promise.all(joinedPromises).then(function(aa){});
 
             //_s.oReq.Promise.all(joinedPromises).then(queueOut.ready.bind(queueOut, spark, qDetails), fail).catch(fail)
         });
