@@ -79,6 +79,7 @@
             game.setQueue(queue.id);
             game.setQueueImage();
             game.setBusy(false);
+            console.log('Game after changes', game);
             Notify.success('Queued for: ', q.name);
         };
 

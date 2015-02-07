@@ -59,6 +59,7 @@
                 ,qId
                 ;
 
+            console.log('game', g);
             if(g.isBusy()) return false;
             g.setBusy(true);
             if(!g.isQueued()) QueueOut.join(queue);
@@ -66,7 +67,7 @@
                 console.log('leaveing');
                 qId = g.getQueue();
                 queue = Queues.get(qId);
-                QueueOut.leave({ id : queue.id, name : g.queueName });
+                QueueOut.leave({ id : queue.id, name : queue.name });
             }
         };
 
