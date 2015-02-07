@@ -73,9 +73,9 @@
             console.log('game', game);
             game.setQueueImage();
             if(game.isQueued()) return Notify.error('You cannot queue to the same game twice');
-            game.setQueue(true);
-
-            return Queues.add(queue);
+            queue = Queues.add(queue);
+            game.setQueue(queue.id);
+            return queue
         };
 
         RoutQueueFactory.prototype.leave = function(q){
