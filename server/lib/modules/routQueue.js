@@ -84,7 +84,7 @@ module.exports = function(_s){
                 roomName += '_' + user.id;
                 users.push({
                     id:user.id,
-                    username: user.name
+                    username: user.username
                 });
                 var queueSpark  = _s.primus.spark(user.spark);
 
