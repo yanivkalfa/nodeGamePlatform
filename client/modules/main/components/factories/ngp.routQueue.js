@@ -46,7 +46,7 @@
 
             _.isArray(q.users) && _(q.users).forEach(function(user){
                 user = new QueueUser(user);
-                user.setIsMe(authorizedUser.id == q.user.id);
+                user.setIsMe(authorizedUser.id == user.id);
                 queue.users.add(user);
             });
             queue.setRoom(q.room);
