@@ -90,19 +90,21 @@ module.exports = function(_s){
 
                             QueuesApi.fetch({user:user.id}).then(function(queues){
                                 _.isArray(queues) && _(queues).forEach(function(queue){
-                                    /*
+
                                     var data  = {
                                         "m" : 'queue',
                                         "d" : {
                                             "m" : '_join',
                                             "d" : {
-                                                "users" : {username : user.username, id : user.id}
+                                                id : queue.out_id,
+                                                users : {id:queue.user.id,username : queue.user.username},
+                                                name:queue.name,
+                                                userCount : queue.game.userCount
                                             }
                                         }
                                     };
-                                    console.log('join room: ', room);
                                     routSocket.chat(spark,data);
-                                    */
+
                                 });
                             });
 

@@ -5,38 +5,38 @@
     angular.module(ngp.const.app.name)
         .controller('adminController', [
             '$rootScope',
-            '$scope',
+            /*'$scope',
             '$state',
             '$location',
-            '$cookieStore',
+            '$cookieStore',*/
             'Api',
             'Authorization',
             'Notify',
             'ChatOut',
             'Chat',
-            'Queues',
+            //'Queues',
             'QueueOut',
             'RoutQueue',
-            'QueueUser',
+            //'QueueUser',
             'Games',
             adminController
         ]);
 
     function adminController(
         $rootScope,
-        $scope,
+        /*$scope,
         $state,
         $location,
-        $cookieStore,
+        $cookieStore,*/
         Api,
         Authorization,
         Notify,
         ChatOut,
         Chat,
-        Queues,
+        //Queues,
         QueueOut,
         RoutQueue,
-        QueueUser,
+        //QueueUser,
         Games
         ) {
 
