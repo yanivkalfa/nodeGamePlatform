@@ -35,15 +35,12 @@
         return self.list[id];
     };
 
-    List.prototype.getByPropName =  function(prop, name){
-        var self = this, list;
+    List.prototype.getByPropName =  function(prop, val){
+        var self = this;
         for(var id in self.list){
             if(!self.list.hasOwnProperty(id)) continue;
-            if(name == self.list[id][prop]) list = self.list[id];
-            break;
+            if(val == self.list[id][prop]) return self.list[id];
         }
-
-        return list;
     };
 
     List.prototype.createRequestId = function(){

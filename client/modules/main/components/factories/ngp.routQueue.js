@@ -40,10 +40,11 @@
         };
         RoutQueueFactory.prototype.ready = function(q){
             console.log('ready', q);
-            var queue = Queues.get(q.id)
+            var queue = Queues.getByPropName('game', q.game)
                 , authorizedUser = Authorization.getUser()
                 ;
 
+            console.log('queue',queue);
             _.isArray(q.users) && _(q.users).forEach(function(user){
                 user = new QueueUser(user);
                 user.setIsMe(authorizedUser.id == user.id);
