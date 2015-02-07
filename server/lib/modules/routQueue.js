@@ -208,12 +208,14 @@ module.exports = function(_s){
         */
     };
 
-    RoutQueue.prototype.leave = function(spark, msg){
-        var data = {
-            "m" : 'leave',
-            "d" : msg
-        };
-        spark.write({"m":'queue', d:data});
+    RoutQueue.prototype.leave = function(spark, q){
+        QueuesApi.remove({"id" : q.id, "name" : q.name}).then(function(queue){
+            var data = {
+                "m" : 'leave',
+                "d" : q
+            };
+            spark.write({"m":'queue', d:data});
+        });
     };
 
     RoutQueue.prototype.accept = function(spark, msg){
