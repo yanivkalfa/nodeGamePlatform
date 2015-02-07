@@ -80,9 +80,10 @@
             game.setQueue(queue.id);
             console.log('Queue Id', queue.id);
             game.setQueueImage();
+            $rootScope.$apply();
             game.setBusy(false);
             console.log('Game after changes', game);
-            Notify.success('Queued for: ', q.name);
+            Notify.success('You\'ve queued for: ', q.name);
         };
 
         RoutQueueFactory.prototype.leave = function(q){
@@ -92,7 +93,9 @@
             Queues.remove(q.id);
             game.setQueue(undefined);
             game.resetQueueImage();
+            $rootScope.$apply();
             game.setBusy(false);
+            Notify.success('You\'ve left queue: ', q.name);
         };
 
         RoutQueueFactory.prototype.accept = function(q){
