@@ -143,6 +143,7 @@ module.exports = function(_s){
             , qName = msg.name
             ;
 
+        queueOut.joinFail(spark, msg, 'You cannot queue for same game twice!');
         if(noStore){
             queueOut.join(spark, msg);
             return self.checkQueues(spark,msg);
