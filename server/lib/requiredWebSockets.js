@@ -160,7 +160,7 @@ module.exports = function(_s){
                 });
 
                 user.spark = undefined;
-                user.server = {};
+                user.server = {"address" : undefined, "port" : undefined};
                 user.save();
             }).catch(console.log);
 

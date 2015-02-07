@@ -111,6 +111,7 @@ module.exports = function(_s){
     };
 
     SocketAjax.prototype.response = function(spark,msg){
+        console.log('msg',msg);
         var self = this;
         return self.trigger(msg.d.s, msg.id, msg.d);
     };

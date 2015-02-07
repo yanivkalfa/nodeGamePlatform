@@ -93,7 +93,6 @@ module.exports = function(_s){
                 , fail
                 ;
 
-
             var handleQueue = function(queue, index){
                 var user = queue.user;
                 roomName += '_' + user.id;
@@ -109,6 +108,7 @@ module.exports = function(_s){
                     localUsers.push({user : user, spark : queueSpark, queue : queue});
                 }
             };
+
             _(queues).forEach(handleQueue);
             _(queues).forEach(function(queue){
                 queue.room = roomName;
@@ -164,7 +164,7 @@ module.exports = function(_s){
                 */
             };
 
-            _s.oReq.Promise.all(joinedPromises).then(queueOut.ready.bind(queueOut, spark, qDetails), fail).catch(fail)
+            //_s.oReq.Promise.all(joinedPromises).then(queueOut.ready.bind(queueOut, spark, qDetails), fail).catch(fail)
         });
     };
     RoutQueue.prototype._join = function(spark, msg){
