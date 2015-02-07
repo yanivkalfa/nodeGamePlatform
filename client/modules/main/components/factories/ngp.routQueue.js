@@ -78,6 +78,7 @@
             queue.users.add(user);
             console.log('newly added queue', queue);
             game.setQueue(queue.id);
+            console.log('Queue Id', queue.id);
             game.setQueueImage();
             game.setBusy(false);
             console.log('Game after changes', game);
