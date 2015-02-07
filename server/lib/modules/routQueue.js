@@ -113,6 +113,7 @@ module.exports = function(_s){
             });
 
             fail = function(){
+                console.log('failing');
                 _(queues).forEach(function(queue){
                     queue.room = '';
                     queue.occupied = false;
@@ -167,10 +168,7 @@ module.exports = function(_s){
                 userCount : q.userCount
             };
 
-
-            //_s.oReq.Promise.all(joinedPromises).then(function(aa){}).catch(console.log);
-
-            //_s.oReq.Promise.all(joinedPromises).then(queueOut.ready.bind(queueOut, spark, qDetails), fail).catch(fail)
+            _s.oReq.Promise.all(joinedPromises).then(queueOut.ready.bind(queueOut, spark, qDetails), fail).catch(fail)
         });
     };
     RoutQueue.prototype._join = function(spark, msg){
