@@ -54,16 +54,6 @@
                     }
                 ],
 
-                WebSocket: ['$state','WebSocket',
-                    function($state, WebSocket) {
-                        return WebSocket.init().then(function(WebSocket){
-                            return WebSocket;
-                        }).catch(function(err){
-                            $state.go('login');
-                        });
-                    }
-                ],
-
                 games: ['Games',
                     function(Games) {
                         console.log('aaa');
@@ -72,6 +62,16 @@
                             return Games.setGames(games);
                         }).catch(function(err){
                             console.log(err);
+                        });
+                    }
+                ],
+
+                WebSocket: ['$state','WebSocket',
+                    function($state, WebSocket) {
+                        return WebSocket.init().then(function(WebSocket){
+                            return WebSocket;
+                        }).catch(function(err){
+                            $state.go('login');
                         });
                     }
                 ],
