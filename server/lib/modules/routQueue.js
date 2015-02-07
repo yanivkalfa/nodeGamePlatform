@@ -109,7 +109,7 @@ module.exports = function(_s){
             });
 
             var qDetails = {
-                id : user.queue.id,
+                game : q.game,
                 users : users,
                 name:qName,
                 room : roomName,
@@ -119,6 +119,7 @@ module.exports = function(_s){
                 joinedPromises.push(self.joinGameRoom(user.spark, roomName));
             });
 
+            /*
             _(remoteUsers).forEach(function(user){
                 joinedPromises.push(self.joinGameRoom(user.spark, roomName));
             });
@@ -131,6 +132,11 @@ module.exports = function(_s){
                 _(remoteUsers).forEach(function(user){
                     self.joinGameRoom(user.spark, roomName)
                 });
+            };
+            */
+
+            fail = function(err){
+                console.log(err);
             };
 
             /*
@@ -167,8 +173,7 @@ module.exports = function(_s){
         console.log('queue msg,', msg);
         if(noStore){
             queueOut.join(spark, msg);
-            return;
-            //return self.checkQueues(spark,msg);
+            return self.checkQueues(spark,msg);
         }
 
         return GamesApi.fetchByQueueName(qName).then(function(game){
@@ -188,7 +193,7 @@ module.exports = function(_s){
                     msg.id = q.id;
                     msg.game = game.id;
                     queueOut.join(spark, msg);
-                    //return self.checkQueues(spark,msg);
+                    return self.checkQueues(spark,msg);
                 });
 
 
