@@ -7,7 +7,7 @@
 
     List.prototype.add =  function(l, id){
         var self = this, lId;
-        lId = id || l.id || false;
+        lId = id || l.id || l._id ||false;
         if(!lId) return false;
         if(self.list.hasOwnProperty(lId)) return false;
         this.length++;
