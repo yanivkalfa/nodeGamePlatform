@@ -209,7 +209,9 @@ module.exports = function(_s){
     };
 
     RoutQueue.prototype.leave = function(spark, q){
-        QueuesApi.remove({"id" : q.id, "name" : q.name}).then(function(queue){
+        console.log(q);
+        QueuesApi.remove({"id" : q.id, "name" : q.name}).then(function(success){
+            console.log('success', success);
             var data = {
                 "m" : 'leave',
                 "d" : q
