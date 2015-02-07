@@ -121,11 +121,10 @@ module.exports = function(_s){
                 });
 
                 _(localUsers).forEach(function(localUser){
-                    self.leaveGameRoom(localUser.spark, roomName)
+                    self.leaveGameRoom(localUser.spark, roomName).catch(console.log);
                 });
 
                 _(remoteUsers).forEach(function(remoteUser){
-                    console.log('inside remoteUsers');
                     var sjaxDetails = {
                         "server" : remoteUser.user.server,
                         "data" : {
@@ -136,7 +135,7 @@ module.exports = function(_s){
                             }
                         }
                     };
-                    SocketAjax.sJax(sjaxDetails)
+                    SocketAjax.sJax(sjaxDetails).catch(console.log);
                 });
             };
 
