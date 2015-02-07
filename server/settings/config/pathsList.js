@@ -16,7 +16,7 @@ module.exports = function(_s){
         "oRouts" : serverDirname + '/lib/requiredRouts.js',
         "oWebSockets" : serverDirname + '/lib/requiredWebSockets.js',
         "QueuesApi" : serverDirname + '/lib/modules/queuesApi.js',
-        "QueueOut" : serverDirname + '/lib/modules/QueueOut.js',
+        "QueueOut" : serverDirname + '/lib/modules/queueOut.js',
         "RoomHandler" : serverDirname + '/lib/modules/roomHandler.js',
         "RoutMsg" : serverDirname + '/lib/modules/routMsg.js',
         "RoutRemoteMsg" : serverDirname + '/lib/modules/routRemoteMsg.js',
