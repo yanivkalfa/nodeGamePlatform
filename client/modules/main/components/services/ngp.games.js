@@ -69,7 +69,9 @@
                 return true;
             },
 
-            get : this.games.get.call(this.games)
+            get : function(){
+                this.games.get.apply(this.games, arguments);
+            }
 
             //_.bind(greet, object, 'hi');
 
