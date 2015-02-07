@@ -109,8 +109,6 @@ module.exports = function(_s){
                 }
             };
 
-
-
             _(queues).forEach(handleQueue);
             _(queues).forEach(function(queue){
                 queue.room = roomName;
@@ -119,7 +117,6 @@ module.exports = function(_s){
             });
 
             if(userOffline) return false;
-            console.log('aaaaaaaaaaaaaa');
 
             /*
             var qDetails = {
