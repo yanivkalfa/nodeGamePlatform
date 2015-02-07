@@ -55,30 +55,19 @@
             });
         };
         RoutQueueFactory.prototype.join = function(q){
-            console.log('q', q);
-            var self = this
-                , queue = {
-                    id : q.id || Queues.createRequestId(),
-                    users : new QueueUser(q.users),
-                    name:q.name,
-                    userCount : q.userCount
-                }
-                , game
-                ;
-            console.log('Games', Games);
+            var self = this , game, user, queue;
             game = Games.get(q.name);
-
-            console.log('q.queueName', q.name);
-
-            console.log('game', game);
-            game.setQueueImage();
             if(game.isQueued()) {
                 Notify.error('You cannot queue to the same game twice');
                 return false;
             }
-            queue = Queues.add(queue);
+            user = new QueueUser(q.user);
+            delete q.user;
+            queue = Queues.add(q);
+            queue.users.add(user);
             game.setQueue(queue.id);
-            return queue
+            game.setQueueImage();
+            Notify.success('Queued for: ', q.name);
         };
 
         RoutQueueFactory.prototype.leave = function(q){

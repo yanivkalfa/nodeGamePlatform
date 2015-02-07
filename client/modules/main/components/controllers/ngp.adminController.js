@@ -52,25 +52,25 @@
         AdminController.prototype.queueMP = function(g){
             var self = this
                 , queue = {
-                    id : undefined,
-                    users : {id : self.Authorization.id, username : self.Authorization.username, accepted : false, isMe:true},
+                    user : {id : self.Authorization.id, username : self.Authorization.username},
                     name:g.queueName,
                     userCount : g.userCount
-                }
-                , analysed
-                , q
-                , routQueue = new RoutQueue()
-                ;
+                };
+            QueueOut.join(queue);
+                //, analysed
+                //, q
+                //, //routQueue = new RoutQueue()
+                //;
 
-            q = routQueue.join(queue);
-            if(!q) return;
-            analysed = QueueOut.analyseMessage("join " + q.id);
+            //q = routQueue.join(queue);
+            //if(!q) return;
+            /*analysed =
 
             if(analysed.success){
                 Notify.success('Queued for: ', q.name);
             }else{
                 Notify.error(analysed.msg);
-            }
+            }*/
         };
 
         /*

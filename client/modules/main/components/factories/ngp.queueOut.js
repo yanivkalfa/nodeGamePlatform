@@ -25,26 +25,23 @@
         QueueOutFactory.prototype.constructor = QueueOutFactory;
 
         var prototypeExtend =  {
-            join : function(args){
-                return this.queue(args, "join");
+            join : function(q){
+                return this.queue("join", q);
             },
 
             leave : function(args){
-                return this.queue(args, "leave");
+                return this.queue("leave", q);
             },
 
-            queue : function(args, action){
-                var queue = Queues.get(args[0]);
-                if(!queue) return {success:false, "msg" : 'Queue was not found'};
+            queue : function(action, q){
                 var data  = {
                     "m" : 'queue',
                     "d" : {
                         "m" : action,
-                        "d" : queue.getMinDetails()
+                        "d" : q
                     }
                 };
                 WebSocket.Primus.write(data);
-                return {success:true};
             },
 
             accept : function(args){
