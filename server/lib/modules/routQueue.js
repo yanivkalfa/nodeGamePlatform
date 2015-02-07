@@ -102,19 +102,21 @@ module.exports = function(_s){
                 }else if(_s.details.address == user.server.address && _s.details.port == user.server.port){
                     localUsers.push({user : user, spark : queueSpark, queue : queue});
                 }else{
-                    userOffline = true
+                    userOffline = true;
                 }
             };
 
             if(userOffline) return false;
 
+            console.log('aaaaaaaaaaaaaa');
+
+            /*
             _(queues).forEach(handleQueue);
             _(queues).forEach(function(queue){
                 queue.room = roomName;
                 queue.occupied = true;
                 queue.save();
             });
-
             var qDetails = {
                 game : q.game,
                 users : users,
@@ -140,6 +142,7 @@ module.exports = function(_s){
                 };
                 joinedPromises.push(SocketAjax.sJax(sjaxDetails));
             });
+            */
 
             fail = function(){
                 /*
@@ -162,7 +165,7 @@ module.exports = function(_s){
                 });
                 */
             };
-            _s.oReq.Promise.all(joinedPromises).then(function(aa){}).catch(console.log);
+            //_s.oReq.Promise.all(joinedPromises).then(function(aa){}).catch(console.log);
 
             //_s.oReq.Promise.all(joinedPromises).then(queueOut.ready.bind(queueOut, spark, qDetails), fail).catch(fail)
         });
