@@ -16,6 +16,7 @@
             'Chat',
             'Queues',
             'QueueOut',
+            'RoutQueue',
             'QueueUser',
             'Games',
             adminController
@@ -34,6 +35,7 @@
         Chat,
         Queues,
         QueueOut,
+        RoutQueue,
         QueueUser,
         Games
         ) {
@@ -46,32 +48,32 @@
             this.imgUrl = ngp.const.app.imgUrl;
 
         }
-        /*
+
         AdminController.prototype.queueMP = function(g){
             var self = this
                 , queue = {
-                    id : Queues.createRequestId(),
-                    users : new QueueUser({id : self.Authorization.id, username : self.Authorization.username, accepted : false, isMe:true}),
+                    id : null,
+                    users : {id : self.Authorization.id, username : self.Authorization.username, accepted : false, isMe:true},
                     name:g.queueName,
-                    userCount : 2
+                    userCount : g.userCount
                 }
                 , analysed
-                , end = function(id){
-                    self.setGameImg(g);
-                }
+                , q
                 ;
-            queue = Queues.add(queue);
-            queue.on('end', end);
-            this.setSearchImg(g);
 
-            analysed = QueueOut.analyseMessage("join " + queue.id);
+            q = RoutQueue.join(queue);
+
+            analysed = QueueOut.analyseMessage("join " + q.id);
 
             if(analysed.success){
-                Notify.success('Queued for: ', queue.name);
+                Notify.success('Queued for: ', q.name);
             }else{
                 Notify.error(analysed.msg);
             }
         };
+
+        /*
+
 
         AdminController.prototype.queueSP = function(game){
             console.log(game);

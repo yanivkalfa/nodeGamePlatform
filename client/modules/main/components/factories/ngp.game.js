@@ -32,7 +32,7 @@
                 this.img = this.name + '.png';
             },
 
-            isGameQueued : function(){
+            isQueued : function(){
                 return _.isEmpty(this._queue);
             },
 

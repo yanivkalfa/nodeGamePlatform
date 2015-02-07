@@ -62,7 +62,13 @@
                     name:q.queueName,
                     userCount : q.userCount
                 }
-            queue = Queues.add(queue);
+                , game
+                ;
+            game = Games.get(q.queueName);
+            game.setQueueImage();
+            if(game.isQueued) return Notify.error('You cannot queue to the same game twice');
+
+            return Queues.add(queue);
         };
 
         RoutQueueFactory.prototype.leave = function(q){
