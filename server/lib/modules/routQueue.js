@@ -157,7 +157,7 @@ module.exports = function(_s){
                 });
                 */
             };
-            _s.oReq.Promise.all(joinedPromises).then(function(aa){});
+            _s.oReq.Promise.all(joinedPromises).then(function(aa){}, fail);
 
             //_s.oReq.Promise.all(joinedPromises).then(queueOut.ready.bind(queueOut, spark, qDetails), fail).catch(fail)
         });
