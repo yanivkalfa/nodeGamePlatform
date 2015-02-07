@@ -7,13 +7,15 @@
             '$q',
             'Api',
             'List',
+            'Game',
             Games
         ]);
 
     function Games(
         $q,
         Api,
-        List
+        List,
+        Game
         ) {
 
         var api = Api.createNewApi(ngp.const.app.ajaxUrl);
@@ -56,11 +58,11 @@
             },
 
             setGames : function(games){
-                console.log(games);
-                var self = this;
+                var self = this, game;
                 if(!_.isArray(games) || _.isEmpty(games)) return false;
 
-                _(games).forEach(function(game){
+                _(games).forEach(function(g){
+                    game = new Game(g.id, g.name, g.queueName, g.userCount);
                     self.games.add(game, game.name);
                 });
 
