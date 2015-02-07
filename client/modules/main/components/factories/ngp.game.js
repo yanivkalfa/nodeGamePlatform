@@ -33,7 +33,7 @@
             },
 
             isQueued : function(){
-                return _.isEmpty(this._queue);
+                return !_.isEmpty(this._queue);
             },
 
             getQueue : function(){
