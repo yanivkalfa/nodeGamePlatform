@@ -92,18 +92,15 @@ module.exports = function(_s){
                                 _.isArray(queues) && _(queues).forEach(function(queue){
 
                                     var data  = {
-                                        "m" : 'queue',
+                                        "m" : '_join',
                                         "d" : {
-                                            "m" : '_join',
-                                            "d" : {
-                                                id : queue.out_id,
-                                                users : {id:queue.user.id,username : queue.user.username},
-                                                name:queue.name,
-                                                userCount : queue.game.userCount
-                                            }
+                                            id : queue.out_id,
+                                            users : {id:queue.user.id,username : queue.user.username},
+                                            name:queue.name,
+                                            userCount : queue.game.userCount
                                         }
                                     };
-                                    routSocket.chat(spark,data);
+                                    routSocket.queue(spark,data);
 
                                 });
                             });
