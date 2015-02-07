@@ -115,7 +115,7 @@ module.exports = function(_s){
                 self.ready(user.spark, qDetails)
                 */
 
-                queueOut.join(user.spark, qDetails);
+                queueOut.ready(user.spark, qDetails);
             });
 
             /*

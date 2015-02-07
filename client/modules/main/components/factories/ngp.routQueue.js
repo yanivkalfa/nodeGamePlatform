@@ -39,6 +39,7 @@
             if(q.warrning) return Notify.error(q.warrning);
         };
         RoutQueueFactory.prototype.ready = function(q){
+            console.log('ready', q);
             var queue = Queues.get(q.id)
                 , authorizedUser = Authorization.getUser()
                 ;

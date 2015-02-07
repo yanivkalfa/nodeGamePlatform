@@ -32,7 +32,7 @@ module.exports = function(_s){
             return new _s.oReq.Promise(function(resolve, reject) {
                 Queues.find(query).populate('game user').sort('-'+fName).limit(limit).exec(function (err, succ) {
                     if(err) return reject(err);
-                    return resolve(self.filter(succ));
+                    return resolve(succ);
                 });
             });
         },
