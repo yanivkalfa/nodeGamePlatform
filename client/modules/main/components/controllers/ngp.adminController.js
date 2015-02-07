@@ -44,12 +44,12 @@
             this.Authorization = Authorization.getUser();
             this.commandLine = '';
             //this.games = Games.get();
-            console.log(this.games);
+            //console.log(this.games);
             this.imgUrl = ngp.const.app.imgUrl;
         }
 
 
-
+/*
         AdminController.prototype.queueMP = function(g){
             var self = this
                 , queue = {
@@ -79,6 +79,7 @@
         AdminController.prototype.queueSP = function(game){
             console.log(game);
         };
+        */
 
         AdminController.prototype.logout = function(){
             var success,fail, options;
