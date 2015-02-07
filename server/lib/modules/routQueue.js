@@ -31,19 +31,13 @@ module.exports = function(_s){
 
     RoutQueue.prototype.remoteActions = function(spark, msg, sjaxId, action){
         var sjaxRes = {
-            "m":"sjax",
-            "d" : {
-                "m" : "res",
-                "d" : {
-                    "id" : sjaxId,
-                    "d" :  {}
-                }
-            }
+            "id" : sjaxId,
+            "d" :  {}
         };
 
         var toSpark  = _s.primus.spark(msg.spark);
         if(!toSpark) {
-            sjaxRes.d.d.d = {s: false, d : 'Spark was not found'};
+            sjaxRes.d = {s: false, d : 'Spark was not found'};
             spark.write(sjaxRes);
             return
         }
@@ -51,9 +45,9 @@ module.exports = function(_s){
         toSpark[action](msg.room, function(err, succ){
 
             if(err){
-                sjaxRes.d.d.d = {"s": false, "d" : 'Could not join this room!'};
+                sjaxRes.d = {"s": false, "d" : 'Could not join this room!'};
             }else{
-                sjaxRes.d.d.d  = {"s": true, "d" : 'Joined room successful!'};
+                sjaxRes.d  = {"s": true, "d" : 'Joined room successful!'};
             }
 
             spark.write(sjaxRes);
