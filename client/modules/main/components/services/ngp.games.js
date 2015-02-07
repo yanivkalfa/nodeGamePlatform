@@ -73,8 +73,6 @@
                 this.games.get.apply(this.games, arguments);
             }
 
-            //_.bind(greet, object, 'hi');
-
         };
 
         return new GamesService();

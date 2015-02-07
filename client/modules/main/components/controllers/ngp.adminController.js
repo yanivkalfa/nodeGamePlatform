@@ -43,10 +43,8 @@
             this.api = Api.createNewApi(ngp.const.app.ajaxUrl);
             this.Authorization = Authorization.getUser();
             this.commandLine = '';
-            this.games = [];
+            this.games = Games.get();
             this.imgUrl = ngp.const.app.imgUrl;
-
-            console.log(Games);
 
         }
         /*
