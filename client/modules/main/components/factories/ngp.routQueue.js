@@ -72,7 +72,10 @@
 
             console.log('game', game);
             game.setQueueImage();
-            if(game.isQueued()) return Notify.error('You cannot queue to the same game twice');
+            if(game.isQueued()) {
+                Notify.error('You cannot queue to the same game twice');
+                return false;
+            }
             queue = Queues.add(queue);
             game.setQueue(queue.id);
             return queue

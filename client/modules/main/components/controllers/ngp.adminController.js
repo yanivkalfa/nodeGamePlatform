@@ -63,7 +63,7 @@
                 ;
 
             q = routQueue.join(queue);
-
+            if(!q) return;
             analysed = QueueOut.analyseMessage("join " + q.id);
 
             if(analysed.success){
