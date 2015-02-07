@@ -64,6 +64,7 @@
                     }
                 ],
 
+                /*
                 games: ['Games',
                     function(Games) {
                         console.log('aaa');
@@ -74,7 +75,7 @@
                             console.log(err);
                         });
                     }
-                ],
+                ],*/
 
                 /*ChatIn: ['ChatIn', function(ChatIn) { return ChatIn.init(); } ],*/
                 /**/
