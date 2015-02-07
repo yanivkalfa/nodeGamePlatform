@@ -67,9 +67,9 @@
                 });
 
                 return true;
-            }
+            },
 
-            //get : _.bind(this.games.get, this.games)
+            get : this.games.get.call(this.games)
 
             //_.bind(greet, object, 'hi');
 
