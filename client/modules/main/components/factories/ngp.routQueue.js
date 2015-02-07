@@ -34,7 +34,7 @@
 
 
         RoutQueueFactory.prototype.joinFail = function(q){
-            if(g.warrning) return Notify.error(g.warrning);
+            if(q.warrning) return Notify.error(q.warrning);
         };
         RoutQueueFactory.prototype.ready = function(q){
             var queue = Queues.get(q.id);
