@@ -56,11 +56,12 @@
             },
 
             setGames : function(games){
+                console.log(games);
                 var self = this;
                 if(!_.isArray(games) || _.isEmpty(games)) return false;
 
                 _(games).forEach(function(game){
-                    self.games.add(game);
+                    self.games.add(game, game.name);
                 });
 
                 return true;
