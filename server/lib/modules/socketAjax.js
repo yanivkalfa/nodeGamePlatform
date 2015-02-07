@@ -23,7 +23,7 @@ module.exports = function(_s){
                     self.dispatch({
                         to : client,
                         data : details.data,
-                        timeOut : 0,//details.timeOut || 50,
+                        timeOut : 0,//details.timeOut || 10000,
                         success : function success(resp){
                             client.end();
                             return resolve(resp);
@@ -40,7 +40,6 @@ module.exports = function(_s){
 
                 client.on('data', self.response.bind(self, client));
             }).catch(function(err){
-                console.log('no login');
                 return reject(err);
             });
         });
@@ -54,9 +53,7 @@ module.exports = function(_s){
         if(!self.checkRequest(request)) return false;
         id = self.queueRequest(request);
         request.timer = setTimeout(function(){
-            console.log(request.timeOut || self.timeOut);
             self.trigger(false, id, 'request timed out!');
-            console.log('timed out');
         }, request.timeOut || self.timeOut);
 
         console.log('dispatch - request id: ', id);
