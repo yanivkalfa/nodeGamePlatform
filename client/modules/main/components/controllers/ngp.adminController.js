@@ -59,8 +59,7 @@
                 ,qId
                 ;
 
-            console.log('game', g);
-            if(g.isBusy()) return false;
+            if(g.isBusy()) return Notify.error('Your previous action is still in progress');
             g.setBusy(true);
             if(!g.isQueued()) QueueOut.join(queue);
             else {
