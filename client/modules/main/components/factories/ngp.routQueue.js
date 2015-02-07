@@ -31,6 +31,11 @@
         RoutQueueFactory.prototype = Object.create(Router.prototype);
         RoutQueueFactory.prototype.constructor = RoutQueueFactory;
 
+
+
+        RoutQueueFactory.prototype.joinFail = function(q){
+            if(g.warrning) return Notify.error(g.warrning);
+        };
         RoutQueueFactory.prototype.ready = function(q){
             var queue = Queues.get(q.id);
             queue.users.add(q.users);
