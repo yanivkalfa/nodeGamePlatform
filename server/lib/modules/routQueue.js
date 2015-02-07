@@ -198,6 +198,7 @@ module.exports = function(_s){
 
     RoutQueue.prototype.leave = function(spark, q){
         QueuesApi.remove(q.id).then(function(success){
+            console.log(success);
             if(success) queueOut.leave(spark, q);
         });
     };

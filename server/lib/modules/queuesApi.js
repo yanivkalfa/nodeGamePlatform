@@ -41,7 +41,6 @@ module.exports = function(_s){
             var self = this;
             return new _s.oReq.Promise(function(resolve, reject) {
                 if('object' !== typeof queue|| _.isEmpty(queue)) return reject('Please supply correct queue details');
-
                 var success = function(queue){ return resolve(queue); };
                 var fail = function(err){ return reject(err); };
                 Queues.create(queue).then(success,fail);
@@ -52,7 +51,6 @@ module.exports = function(_s){
             var self = this;
             return new _s.oReq.Promise(function(resolve, reject) {
                 if(_.isEmpty(queue)) return reject('We could not remove this queue');
-                console.log('queue query', queue);
                 Queues.remove(queue, function (err) {
                     if (err) return reject(err);
                     return resolve(true);
