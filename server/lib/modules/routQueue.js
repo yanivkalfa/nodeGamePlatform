@@ -8,9 +8,9 @@ module.exports = function(_s){
         , getRoom = new GetRoom()
         , QueuesApi = require(pathsList.QueuesApi)(_s)
         , User = require(pathsList.User)(_s)
+        , QueueOut = require(pathsList.QueueOut)(_s)
+        , queueOut = new QueueOut()
         , _ = _s.oReq.lodash
-        //, RoutMsg = require(pathsList.RoutMsg)(_s)
-        //, routMsg = new RoutMsg()
         ;
 
     function RoutQueue (){
@@ -67,15 +67,6 @@ module.exports = function(_s){
     RoutQueue.prototype.checkQueues = function(spark, q){
         var self = this
             , qName = q.name
-            , joinResponse = function(method, warrning){
-                if(warrning) msg.warrning = warrning;
-                var data = {
-                    "m" : method,
-                    "d" : q
-                };
-
-                return spark.write({"m":'queue', d:data});
-            }
             ;
         QueuesApi.fetchSortLimit({"name" : qName}, 'date', q.userCount).then(function(queues){
             console.log('queues', queues);
@@ -143,37 +134,24 @@ module.exports = function(_s){
         });
     };
     RoutQueue.prototype._join = function(spark, msg){
-        console.log('msg', msg);
         this.join(spark, msg, true);
     };
 
     RoutQueue.prototype.join = function(spark, msg, noStore){
-        console.log('msg, noStore', msg, noStore);
 
         var self = this
             , qName = msg.name
-            , joinResponse = function(method, warrning){
-                if(warrning) msg.warrning = warrning;
-                var data = {
-                    "m" : method,
-                    "d" : msg
-                };
-
-                return spark.write({"m":'queue', d:data});
-            }
             ;
 
         if(noStore){
-            joinResponse('join');
+            queueOut.join(spark, msg);
             return self.checkQueues(spark,msg);
         }
 
-        console.log('qName', qName);
         return GamesApi.fetchByQueueName(qName).then(function(game){
-            console.log('fetchByQueueName', game);
-            if(!game) return joinResponse('joinFail','You cannot play this game!');
+            if(!game) return queueOut.joinFail(spark, msg, 'You cannot play this game!');
             QueuesApi.fetch({"name" : qName, "user" : spark.user.id}).then(function(queue){
-                if(queue) return joinResponse('joinFail','You cannot queue for same game twice!');
+                if(queue) return queueOut.joinFail(spark, msg, 'You cannot queue for same game twice!');
                 var qDetails = {
                     "name" : qName,
                     "room" : "",
@@ -185,13 +163,13 @@ module.exports = function(_s){
 
                 QueuesApi.add(qDetails).then(function(q){
                     msg.id = q.id;
-                    joinResponse('join');
-                    self.checkQueues(spark,msg);
+                    queueOut.join(spark, msg);
+                    return self.checkQueues(spark,msg);
                 });
 
 
             });
-        }).catch(joinResponse.bind(self, 'joinFail'));
+        }).catch(queueOut.joinFail.bind(queueOut,spark, msg));
 
         /*
         msg.room = 'madeUpRoomName';
@@ -210,11 +188,15 @@ module.exports = function(_s){
 
     RoutQueue.prototype.leave = function(spark, q){
         QueuesApi.remove(q.id).then(function(success){
+            /*
             var data = {
                 "m" : 'leave',
                 "d" : q
             };
             spark.write({"m":'queue', d:data});
+            */
+
+            queueOut.leave(spark, q);
         });
     };
 

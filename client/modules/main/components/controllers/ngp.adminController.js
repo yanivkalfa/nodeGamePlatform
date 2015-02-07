@@ -16,8 +16,6 @@
             'Chat',
             'Queues',
             'QueueOut',
-            'RoutQueue',
-            //'QueueUser',
             'Games',
             adminController
         ]);
@@ -35,8 +33,6 @@
         Chat,
         Queues,
         QueueOut,
-        RoutQueue,
-        //QueueUser,
         Games
         ) {
 
@@ -63,7 +59,6 @@
             g.setBusy(true);
             if(!g.isQueued()) QueueOut.join(queue);
             else {
-                console.log('leaveing');
                 qId = g.getQueue();
                 queue = Queues.get(qId);
                 QueueOut.leave({ id : queue.id, name : queue.name });
