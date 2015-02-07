@@ -4,7 +4,7 @@ module.exports = function(_s){
 
     function SocketAjax (){
         this.requests = {};
-        this.timeout = 4000;
+        this.timeout = 0;//4000;
     }
 
     SocketAjax.prototype.noop = function(){};
@@ -54,6 +54,7 @@ module.exports = function(_s){
         if(!self.checkRequest(request)) return false;
         id = self.queueRequest(request);
         request.timer = setTimeout(function(){
+            console.log(request.timeOut || self.timeOut);
             self.trigger(false, id, 'request timed out!');
             console.log('timed out');
         }, request.timeOut || self.timeOut);
