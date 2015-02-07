@@ -52,7 +52,7 @@
         AdminController.prototype.queueMP = function(g){
             var self = this
                 , queue = {
-                    id : null,
+                    id : undefined,
                     users : {id : self.Authorization.id, username : self.Authorization.username, accepted : false, isMe:true},
                     name:g.queueName,
                     userCount : g.userCount

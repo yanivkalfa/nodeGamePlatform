@@ -60,15 +60,15 @@
                 , queue = {
                     id : q.id || Queues.createRequestId(),
                     users : new QueueUser(q.users),
-                    name:q.queueName,
+                    name:q.name,
                     userCount : q.userCount
                 }
                 , game
                 ;
             console.log('Games', Games);
-            game = Games.get(q.queueName);
+            game = Games.get(q.name);
 
-            console.log('q.queueName', q.queueName);
+            console.log('q.queueName', q.name);
 
             console.log('game', game);
             game.setQueueImage();
