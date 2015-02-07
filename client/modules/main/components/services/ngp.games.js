@@ -4,12 +4,14 @@
 (function(){
     angular.module(ngp.const.app.name)
         .service('Games', [
+            '$q',
             'Api',
             'List',
             Games
         ]);
 
     function Games(
+        $q,
         Api,
         List
         ) {
