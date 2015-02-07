@@ -76,6 +76,7 @@
             delete q.user;
             queue = Queues.add(q);
             queue.users.add(user);
+            console.log('newly added queue', queue);
             game.setQueue(queue.id);
             game.setQueueImage();
             game.setBusy(false);
