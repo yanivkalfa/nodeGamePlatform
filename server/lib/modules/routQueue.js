@@ -118,7 +118,7 @@ module.exports = function(_s){
                 userCount : q.userCount
             };
             _(localUsers).forEach(function(localUser){
-                joinedPromises.push(self.joinGameRoom(localUser.spark, roomName));
+                joinedPromises.push(self.joinGameRoom(localUser.spark, roomName).catch(console.log));
             });
 
             _(remoteUsers).forEach(function(remoteUser){
