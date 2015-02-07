@@ -165,7 +165,7 @@ module.exports = function(_s){
 
         if(noStore){
             joinResponse('join');
-            self.checkQueues(spark,msg);
+            return self.checkQueues(spark,msg);
         }
 
         console.log('qName', qName);
