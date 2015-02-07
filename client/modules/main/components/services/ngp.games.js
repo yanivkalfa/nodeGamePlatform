@@ -23,9 +23,7 @@
         GamesService.prototype =  {
 
             init : function(){
-                var deferred = $q.defer();
-
-                var success,fail, options;
+                var deferred = $q.defer(),success,fail, options;
 
                 options = {
                     method: 'post',
