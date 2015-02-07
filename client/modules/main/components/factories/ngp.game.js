@@ -26,7 +26,7 @@
             },
 
             setBusy : function(state){
-                this._queue = state;
+                this._isBusy = state;
             },
 
             setQueueImage : function(){
@@ -42,7 +42,7 @@
             },
 
             isBusy : function(){
-                return this._queue;
+                return this._isBusy;
             },
 
             isQueued : function(){
