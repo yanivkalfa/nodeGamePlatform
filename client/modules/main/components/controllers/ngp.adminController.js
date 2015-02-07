@@ -43,73 +43,14 @@
             this.api = Api.createNewApi(ngp.const.app.ajaxUrl);
             this.Authorization = Authorization.getUser();
             this.commandLine = '';
-            this.games = [];
+            this.games = Games.get();
+            console.log(this.games);
             this.imgUrl = ngp.const.app.imgUrl;
             this.init();
 
-            console.log(Games);
-
         }
 
-        AdminController.prototype.init = function(){
-            this.getGames();
-        };
-        /*
-         AdminController.prototype.inQueue = function(game){
-         game.inQueue = true;
-         };
 
-         AdminController.prototype.outOfQueue = function(game){
-         game.inQueue = false;
-         };
-
-         AdminController.prototype.setSearchImg = function(game){
-         game.img = 'queueSearching.gif';
-         };*/
-
-        AdminController.prototype.setSearchImg = function(game){
-            game.img = 'queueSearching.gif';
-        };
-
-        AdminController.prototype.setGameImg = function(game){
-            game.img = game.name + '.png';
-        };
-
-        AdminController.prototype.prepareGames = function(games){
-            var self = this;
-            _(games).forEach(function(game){
-                game.img = game.name + '.png';
-            });
-
-            this.games = games;
-        };
-
-        AdminController.prototype.getGames = function(){
-            var success,fail, options, self = this;
-
-            success = function(resp){
-                if(resp.payload.success){
-                    self.prepareGames(resp.payload.data)
-                }else{
-                    Notify.error('Error: ' + resp.payload.data);
-                }
-            };
-
-            fail = function(err){  Notify.error('Error: ' + err); };
-
-            options = {
-                method: 'post',
-                url: ngp.const.app.ajaxUrl,
-                data: {
-                    "method" : 'getGames',
-                    "status" : 0,
-                    "success" : false,
-                    "data" : ''
-                }
-            };
-
-            this.api.doRequest(options).then(success).catch(fail);
-        };
 
         AdminController.prototype.queueMP = function(g){
             var self = this
