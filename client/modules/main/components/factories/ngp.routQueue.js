@@ -55,6 +55,7 @@
             });
         };
         RoutQueueFactory.prototype.join = function(q){
+            console.log('q', q);
             var self = this
                 , queue = {
                     id : q.id || Queues.createRequestId(),
@@ -64,8 +65,12 @@
                 }
                 , game
                 ;
-            console.log(Games);
+            console.log('Games', Games);
             game = Games.get(q.queueName);
+
+            console.log('q.queueName', q.queueName);
+
+            console.log('game', game);
             game.setQueueImage();
             if(game.isQueued) return Notify.error('You cannot queue to the same game twice');
 
