@@ -66,7 +66,9 @@
 
                 games: ['Games',
                     function(Games) {
+                        console.log('aaa');
                         return Games.init().then(function(games){
+                            console.log('games', games);
                             return Games.setGames(games);
                         }).catch(function(err){
                             console.log(err);

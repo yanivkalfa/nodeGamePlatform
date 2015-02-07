@@ -9,7 +9,10 @@
             Games
         ]);
 
-    function Games(Api, List) {
+    function Games(
+        Api,
+        List
+        ) {
 
         var api = Api.createNewApi(ngp.const.app.ajaxUrl);
 
