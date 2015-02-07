@@ -4,7 +4,7 @@ module.exports = function(_s){
 
     function SocketAjax (){
         this.requests = {};
-        this.timeout = 0;//4000;
+        this.timeout = 4000;
     }
 
     SocketAjax.prototype.noop = function(){};
@@ -23,7 +23,7 @@ module.exports = function(_s){
                     self.dispatch({
                         to : client,
                         data : details.data,
-                        timeOut : 0,//details.timeOut || 10000,
+                        timeOut : details.timeOut || 10000,
                         success : function success(resp){
                             client.end();
                             return resolve(resp);
@@ -55,7 +55,6 @@ module.exports = function(_s){
         request.timer = setTimeout(function(){
             self.trigger(false, id, 'request timed out!');
         }, request.timeOut || self.timeOut);
-
         console.log('dispatch - request id: ', id);
 
         request.to.write(self.prepareRequest(id));
