@@ -59,9 +59,10 @@
                 }
                 , analysed
                 , q
+                , routQueue = new RoutQueue()
                 ;
 
-            q = RoutQueue.join(queue);
+            q = routQueue.join(queue);
 
             analysed = QueueOut.analyseMessage("join " + q.id);
 
