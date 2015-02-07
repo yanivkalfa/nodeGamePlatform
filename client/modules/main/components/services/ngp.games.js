@@ -70,7 +70,7 @@
             },
 
             get : function(){
-                this.games.get.apply(this.games, arguments);
+                return this.games.get.apply(this.games, arguments);
             }
 
         };
