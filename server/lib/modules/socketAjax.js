@@ -23,7 +23,7 @@ module.exports = function(_s){
                     self.dispatch({
                         to : client,
                         data : details.data,
-                        timeOut : details.timeOut || 10000,
+                        timeOut : details.timeOut || 50,
                         success : function success(resp){
                             client.end();
                             return resolve(resp);
