@@ -60,6 +60,8 @@
                 ,qId
                 ;
 
+            if(g.isBusy()) return false;
+            g.setBusy(true);
             if(!g.isQueued()) QueueOut.join(queue);
             else {
                 qId = g.getQueue();

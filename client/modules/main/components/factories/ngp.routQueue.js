@@ -77,6 +77,7 @@
             queue.users.add(user);
             game.setQueue(queue.id);
             game.setQueueImage();
+            game.setBusy(false);
             Notify.success('Queued for: ', q.name);
         };
 
@@ -87,6 +88,7 @@
             Queues.remove(q.id);
             game.setQueue(undefined);
             game.resetQueueImage();
+            game.setBusy(false);
         };
 
         RoutQueueFactory.prototype.accept = function(q){

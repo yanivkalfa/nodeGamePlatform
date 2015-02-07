@@ -11,6 +11,7 @@
 
         function GameFactory(id,name,queueName, userCount, img){
             this._queue = undefined;
+            this._isBusy = false;
 
             this.id = id || undefined;
             this.name = name || undefined;
@@ -24,6 +25,10 @@
                 this._queue = queue;
             },
 
+            setBusy : function(state){
+                this._queue = state;
+            },
+
             setQueueImage : function(){
                 this.img = 'queueSearching.gif';
             },
@@ -32,12 +37,16 @@
                 this.img = this.name + '.png';
             },
 
-            isQueued : function(){
-                return !_.isEmpty(this._queue);
-            },
-
             getQueue : function(){
                 return this._queue;
+            },
+
+            isBusy : function(){
+                return this._queue;
+            },
+
+            isQueued : function(){
+                return !_.isEmpty(this._queue);
             }
 
         };
