@@ -64,7 +64,7 @@
 
             _(games).forEach(function(g){
                 game = new Game(g.id, g.name, g.queueName, g.userCount);
-                self.list.add(game, game.name);
+                self.add(game, game.name);
             });
 
             return true;
