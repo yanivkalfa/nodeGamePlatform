@@ -64,6 +64,7 @@
             user = new QueueUser(q.user);
             delete q.user;
             queue = Queues.add(q);
+            console.log(user);
             queue.users.add(user);
             game.setQueue(queue.id);
             game.setQueueImage();

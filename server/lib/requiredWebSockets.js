@@ -95,7 +95,7 @@ module.exports = function(_s){
                                         "m" : '_join',
                                         "d" : {
                                             id : queue.out_id,
-                                            users : {id:queue.user.id,username : queue.user.username},
+                                            user : {id:queue.user.id,username : queue.user.username},
                                             name:queue.name,
                                             userCount : queue.game.userCount
                                         }
