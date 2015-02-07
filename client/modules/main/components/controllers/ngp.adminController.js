@@ -46,8 +46,6 @@
             //this.games = Games.get();
             console.log(this.games);
             this.imgUrl = ngp.const.app.imgUrl;
-            this.init();
-
         }
 
 
