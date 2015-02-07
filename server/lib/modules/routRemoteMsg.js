@@ -13,8 +13,6 @@ module.exports = function(_s){
 
 
     RoutRemoteMsg.prototype.privateMsg = function(spark, msg, sjaxId){
-        console.log(msg, sjaxId);
-        console.log('private message :', msg);
         var  toSpark, sjaxRes, data;
 
         sjaxRes = {
@@ -42,8 +40,6 @@ module.exports = function(_s){
 
         toSpark.write({"m": "chat", "d":data});
         sjaxRes.d  = {s: true, d : 'Message sent successfully'};
-
-
 
         spark.write(sjaxRes);
     };

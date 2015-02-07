@@ -128,6 +128,7 @@ module.exports = function(_s){
             });
 
             _(remoteUsers).forEach(function(remoteUser){
+                console.log('inside remoteUsers');
                 var sjaxDetails = {
                     "server" : remoteUser.user.server,
                     "data" : {
@@ -142,6 +143,7 @@ module.exports = function(_s){
             });
 
             fail = function(){
+                /*
                 _(localUsers).forEach(function(localUser){
                     self.leaveGameRoom(localUser.spark, roomName);
                 });
@@ -159,6 +161,7 @@ module.exports = function(_s){
                     };
                     joinedPromises.push(SocketAjax.sJax(sjaxDetails));
                 });
+                */
             };
 
             _s.oReq.Promise.all(joinedPromises).then(queueOut.ready.bind(queueOut, spark, qDetails), fail).catch(fail)
