@@ -9,8 +9,6 @@ module.exports = {
 
     schema : {
 
-        out_id : String,
-
         name : {
             type :String,
             required : true

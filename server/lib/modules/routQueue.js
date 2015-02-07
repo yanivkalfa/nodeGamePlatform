@@ -175,7 +175,6 @@ module.exports = function(_s){
             QueuesApi.fetch({"name" : qName, "user" : spark.user.id}).then(function(queue){
                 if(queue) return joinResponse('joinFail','You cannot queue for same game twice!');
                 var qDetails = {
-                    "out_id" : msg.id,
                     "name" : qName,
                     "room" : "",
                     "start" : new Date(),
@@ -184,8 +183,9 @@ module.exports = function(_s){
                     "user" : spark.user.id
                 };
 
-                QueuesApi.add(qDetails).then(function(){
-                    joinResponse('joinSuccess');
+                QueuesApi.add(qDetails).then(function(q){
+                    msg.id = q.id;
+                    joinResponse('join');
                     self.checkQueues(spark,msg);
                 });
 
