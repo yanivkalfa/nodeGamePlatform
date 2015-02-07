@@ -50,7 +50,6 @@
         }
 
         AdminController.prototype.queueMP = function(g){
-            console.log(g);
             var self = this
                 , queue = {
                     user : {id : self.Authorization.id, username : self.Authorization.username},
@@ -64,6 +63,7 @@
             g.setBusy(true);
             if(!g.isQueued()) QueueOut.join(queue);
             else {
+                console.log('leaveing');
                 qId = g.getQueue();
                 queue = Queues.get(qId);
                 QueueOut.leave({ id : queue.id, name : g.queueName });

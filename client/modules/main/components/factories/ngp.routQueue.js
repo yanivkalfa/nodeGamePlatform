@@ -65,6 +65,7 @@
             var self = this , game, user, queue;
             game = Games.get(q.name);
             if(game.isQueued()) {
+                game.setBusy(false);
                 Notify.error('You cannot queue to the same game twice');
                 return false;
             }
