@@ -101,8 +101,6 @@ module.exports = function(_s){
                                         }
                                     };
                                     routSocket.queue(spark,data);
-                                    routSocket.queue(spark,data);
-
                                 });
                             });
 
