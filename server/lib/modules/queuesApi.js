@@ -1,7 +1,7 @@
 module.exports = function(_s){
     var _ = _s.oReq.lodash;
     function QueuesApi(){
-        this.visibleField = ["id","_id","out_id","name","room","start","end","game","user"];
+        this.visibleField = ["id","_id","out_id","name","room","start","end","game", "occupied", "user"];
     }
 
     QueuesApi.prototype =  {
@@ -22,7 +22,7 @@ module.exports = function(_s){
             return new _s.oReq.Promise(function(resolve, reject) {
                 Queues.find(query).populate('game user').exec(function (err, succ) {
                     if(err) return reject(err);
-                    return resolve(self.filter(succ));
+                    return resolve(succ);
                 });
             });
         },
