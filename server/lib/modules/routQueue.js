@@ -85,6 +85,7 @@ module.exports = function(_s){
                 , roomName = qName
                 , joinedPromises = []
                 , fail
+                , userOffline
                 ;
 
             var handleQueue = function(queue, index){
@@ -96,12 +97,16 @@ module.exports = function(_s){
                 });
                 var queueSpark  = _s.primus.spark(user.spark);
 
-                if(!queueSpark) {
+                if(!queueSpark && (_s.details.address != user.server.address || _s.details.port != user.server.port)) {
                     remoteUsers.push({user : user, spark : user.spark, queue : queue});
-                }else{
+                }else if(_s.details.address == user.server.address && _s.details.port == user.server.port){
                     localUsers.push({user : user, spark : queueSpark, queue : queue});
+                }else{
+                    userOffline = true
                 }
             };
+
+            if(userOffline) return false;
 
             _(queues).forEach(handleQueue);
             _(queues).forEach(function(queue){
