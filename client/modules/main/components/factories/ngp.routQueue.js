@@ -39,12 +39,10 @@
             if(q.warrning) return Notify.error(q.warrning);
         };
         RoutQueueFactory.prototype.ready = function(q){
-            console.log('ready', q);
             var queue = Queues.getByPropName('game', q.game)
                 , authorizedUser = Authorization.getUser()
                 ;
 
-            console.log('queue',queue);
             _.isArray(q.users) && _(q.users).forEach(function(user){
                 user = new QueueUser(user);
                 user.setIsMe(authorizedUser.id == user.id);
@@ -64,8 +62,6 @@
             });
             queue.setWindow(modalInstance);
 
-
-            console.log(queue);
             modalInstance.result.then(function (close) {
                 queue.end(close);
             }, function () {

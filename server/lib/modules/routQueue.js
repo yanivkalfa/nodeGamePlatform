@@ -10,6 +10,7 @@ module.exports = function(_s){
         , User = require(pathsList.User)(_s)
         , QueueOut = require(pathsList.QueueOut)(_s)
         , queueOut = new QueueOut()
+        , SocketAjax = _s.oSocketAjax
         , _ = _s.oReq.lodash
         ;
 
@@ -20,7 +21,15 @@ module.exports = function(_s){
     RoutQueue.prototype = Object.create(router.prototype);
     RoutQueue.prototype.constructor = RoutQueue;
 
-    RoutQueue.prototype.remoteJoinGameRoom = function(spark, msg){
+    RoutQueue.prototype.remoteJoinGameRoom = function(spark, msg, sjaxId){
+        this.remoteActions(spark, msg, sjaxId, 'join');
+    };
+
+    RoutQueue.prototype.remoteLeaveGameRoom = function(spark, msg, sjaxId){
+        this.remoteActions(spark, msg, sjaxId, 'leave');
+    };
+
+    RoutQueue.prototype.remoteActions = function(spark, msg, sjaxId, action){
         var sjaxRes = {
             "m":"sjax",
             "d" : {
@@ -39,18 +48,16 @@ module.exports = function(_s){
             return
         }
 
-        toSpark.join(msg.room, function(err, succ){
-            var data = {
-                "m" : 'ready',
-                "d" : msg
-            };
+        toSpark[action](msg.room, function(err, succ){
 
-            toSpark.write({"m":'queue', d:data});
+            if(err){
+                sjaxRes.d.d.d = {"s": false, "d" : 'Could not join this room!'};
+            }else{
+                sjaxRes.d.d.d  = {"s": true, "d" : 'Joined room successful!'};
+            }
 
-            sjaxRes.d.d.d  = {s: true, d : 'Message sent successfully'};
             spark.write(sjaxRes);
         });
-
     };
 
     RoutQueue.prototype.joinGameRoom = function(spark, room){
@@ -97,7 +104,7 @@ module.exports = function(_s){
                 var queueSpark  = _s.primus.spark(user.spark);
 
                 if(!queueSpark) {
-                    remoteUsers.push({user : user, spark : false, queue : queue});
+                    remoteUsers.push({user : user, spark : user.spark, queue : queue});
                 }else{
                     localUsers.push({user : user, spark : queueSpark, queue : queue});
                 }
@@ -105,6 +112,7 @@ module.exports = function(_s){
             _(queues).forEach(handleQueue);
             _(queues).forEach(function(queue){
                 queue.room = roomName;
+                queue.occupied = true;
                 queue.save();
             });
 
@@ -115,48 +123,44 @@ module.exports = function(_s){
                 room : roomName,
                 userCount : q.userCount
             };
-            _(localUsers).forEach(function(user){
-                joinedPromises.push(self.joinGameRoom(user.spark, roomName));
+            _(localUsers).forEach(function(localUser){
+                joinedPromises.push(self.joinGameRoom(localUser.spark, roomName));
             });
 
-            /*
-            _(remoteUsers).forEach(function(user){
-                joinedPromises.push(self.joinGameRoom(user.spark, roomName));
+            _(remoteUsers).forEach(function(remoteUser){
+                var sjaxDetails = {
+                    "server" : remoteUser.user.server,
+                    "data" : {
+                        "m": "queue",
+                        "d": {
+                            "m" : 'remoteJoinGameRoom',
+                            "d" : {"room": roomName, "spark" : remoteUser.spark}
+                        }
+                    }
+                };
+                joinedPromises.push(SocketAjax.sJax(sjaxDetails));
             });
 
             fail = function(){
-                _(localUsers).forEach(function(user){
-                    self.leaveGameRoom(user.spark, roomName)
+                _(localUsers).forEach(function(localUser){
+                    self.leaveGameRoom(localUser.spark, roomName);
                 });
 
-                _(remoteUsers).forEach(function(user){
-                    self.joinGameRoom(user.spark, roomName)
+                _(remoteUsers).forEach(function(remoteUser){
+                    var sjaxDetails = {
+                        "server" : remoteUser.user.server,
+                        "data" : {
+                            "m": "queue",
+                            "d": {
+                                "m" : 'remoteLeaveGameRoom',
+                                "d" : {"room": roomName, "spark" : remoteUser.spark}
+                            }
+                        }
+                    };
+                    joinedPromises.push(SocketAjax.sJax(sjaxDetails));
                 });
             };
-            */
 
-            fail = function(err){
-                console.log(err);
-            };
-
-            /*
-             _(remoteUsers).forEach(function(user){
-             // remote stuff
-             var qDetails = {
-             id : user.queue.out_id,
-             users : users,
-             name:qName,
-             room : roomName,
-             userCount : game.userCount,
-             spark : user.spark
-             };
-             self.ready(user.spark, qDetails)
-             });
-             */
-            //remoteReady
-
-
-            //
             _s.oReq.Promise.all(joinedPromises).then(queueOut.ready.bind(queueOut, spark, qDetails), fail).catch(fail)
         });
     };
