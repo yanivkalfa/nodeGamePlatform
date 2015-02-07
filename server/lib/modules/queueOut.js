@@ -73,7 +73,7 @@ module.exports = function(_s){
             "d" : q
         };
 
-        return spark.write({"m":'queue', d:data});
+        return _s.primus.room(q.room).write({"m": "queue", "d":data});
     };
 
     return QueueOut;

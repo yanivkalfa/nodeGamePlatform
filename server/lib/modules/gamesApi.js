@@ -1,7 +1,7 @@
 module.exports = function(_s){
     var _ = _s.oReq.lodash;
     function GamesApi(){
-        this.visibleField = ['_id',"name","userCount", "queueName"];
+        this.visibleField = ['id','_id',"name","userCount", "queueName"];
     }
 
     GamesApi.prototype =  {

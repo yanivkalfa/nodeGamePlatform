@@ -64,7 +64,7 @@
 
                 var data  = {
                     "m" : action,
-                    "d" : {"id":queue.id, "room":queue.getRoom(), "user" : user }
+                    "d" : {"id":queue.id, "user" : user }
                 };
 
                 WebSocket.Primus.write({"m":"queue", "d": data});

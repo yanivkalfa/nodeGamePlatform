@@ -20,7 +20,7 @@ module.exports = function(_s){
     RoutQueue.prototype = Object.create(router.prototype);
     RoutQueue.prototype.constructor = RoutQueue;
 
-    RoutQueue.prototype.remoteReady = function(spark, msg){
+    RoutQueue.prototype.remoteJoinGameRoom = function(spark, msg){
         var sjaxRes = {
             "m":"sjax",
             "d" : {
@@ -53,14 +53,20 @@ module.exports = function(_s){
 
     };
 
-    RoutQueue.prototype.ready = function(spark, msg){
-        spark.join(msg.room, function(err, succ){
-            var data = {
-                "m" : 'ready',
-                "d" : msg
-            };
+    RoutQueue.prototype.joinGameRoom = function(spark, room){
+        return new _s.oReq.Promise(function(resolve, reject) {
+            spark.join(room, function(err, succ){
+                if(err) return reject(err);
+                return resolve(succ);
+            });
+        });
+    };
 
-            spark.write({"m":'queue', d:data});
+    RoutQueue.prototype.leaveGameRoom = function(spark, room){
+        return new _s.oReq.Promise(function(resolve, reject) {
+            spark.leave(room, function(err, succ){
+                return resolve(succ);
+            });
         });
     };
 
@@ -76,6 +82,8 @@ module.exports = function(_s){
                 , remoteUsers = []
                 , localUsers = []
                 , roomName = qName
+                , joinedPromises = []
+                , fail
                 ;
 
 
@@ -100,23 +108,30 @@ module.exports = function(_s){
                 queue.save();
             });
 
-
-            console.log('localUsers', localUsers);
-            console.log('remoteUsers: ', remoteUsers);
+            var qDetails = {
+                id : user.queue.id,
+                users : users,
+                name:qName,
+                room : roomName,
+                userCount : q.userCount
+            };
             _(localUsers).forEach(function(user){
-                var qDetails = {
-                    id : user.queue.id,
-                    users : users,
-                    name:qName,
-                    room : roomName,
-                    userCount : q.userCount
-                };
-                /*
-                self.ready(user.spark, qDetails)
-                */
-
-                queueOut.ready(user.spark, qDetails);
+                joinedPromises.push(self.joinGameRoom(user.spark, roomName));
             });
+
+            _(remoteUsers).forEach(function(user){
+                joinedPromises.push(self.joinGameRoom(user.spark, roomName));
+            });
+
+            fail = function(){
+                _(localUsers).forEach(function(user){
+                    self.leaveGameRoom(user.spark, roomName)
+                });
+
+                _(remoteUsers).forEach(function(user){
+                    self.joinGameRoom(user.spark, roomName)
+                });
+            };
 
             /*
              _(remoteUsers).forEach(function(user){
@@ -134,6 +149,9 @@ module.exports = function(_s){
              */
             //remoteReady
 
+
+            //
+            _s.oReq.Promise.all(joinedPromises).then(queueOut.ready.bind(queueOut, spark, qDetails), fail).catch(fail)
         });
     };
     RoutQueue.prototype._join = function(spark, msg){
@@ -146,12 +164,13 @@ module.exports = function(_s){
             , qName = msg.name
             ;
 
+        console.log('queue msg,', msg);
         if(noStore){
             queueOut.join(spark, msg);
-            return self.checkQueues(spark,msg);
+            //return self.checkQueues(spark,msg);
         }
 
-        return GamesApi.fetchByQueueName(qName).then(function(game){
+        return GamesApi.fetch(qName).then(function(game){
             if(!game) return queueOut.joinFail(spark, msg, 'You cannot play this game!');
             QueuesApi.fetch({"name" : qName, "user" : spark.user.id}).then(function(queue){
                 if(queue) return queueOut.joinFail(spark, msg, 'You cannot queue for same game twice!');
@@ -166,8 +185,9 @@ module.exports = function(_s){
 
                 QueuesApi.add(qDetails).then(function(q){
                     msg.id = q.id;
+                    msg.game = game._id;
                     queueOut.join(spark, msg);
-                    return self.checkQueues(spark,msg);
+                    //return self.checkQueues(spark,msg);
                 });
 
 

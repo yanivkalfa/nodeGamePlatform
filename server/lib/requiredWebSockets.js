@@ -95,6 +95,7 @@ module.exports = function(_s){
                                         "m" : '_join',
                                         "d" : {
                                             id : queue.id,
+                                            game : queue.game.id,
                                             user : {id:queue.user.id,username : queue.user.username},
                                             name:queue.name,
                                             userCount : queue.game.userCount
@@ -151,7 +152,8 @@ module.exports = function(_s){
         if(!spark) return false;
         try{
             if(spark.user.uType != 'user') return;
-            var routRoom = new RoutRoom(_s.primus);
+            var routRoom = new RoutRoom();
+            var routSocket = new RoutSocket();
             User.fetchUser({"id":spark.user.id}).then(function(user){
                 _.isArray(user.rooms) && _(user.rooms).forEach(function(room){
                     var aRoom  = {
@@ -161,7 +163,26 @@ module.exports = function(_s){
                     };
                     routRoom._leave(spark, aRoom)
                 });
+
+                user.spark = undefined;
+                user.server = {};
+                user.save();
             }).catch(console.log);
+
+            QueuesApi.fetch({"user" : spark.user.id}).then(function(queues){
+                _.isArray(queues) && _(queues).forEach(function(queue){
+                    var data  = {
+                        "m" : 'decline',
+                        "d" : {
+                            id : queue.id,
+                            user : {id:queue.user.id,username : queue.user.username}
+                        }
+                    };
+                    routSocket.queue(spark,data);
+                    queue.start = new Date();
+                    queue.save();
+                });
+            });
         }catch(e){console.log(e)}
 
         return true;

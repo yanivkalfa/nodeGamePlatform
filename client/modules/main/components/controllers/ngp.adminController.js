@@ -48,6 +48,7 @@
         AdminController.prototype.queueMP = function(g){
             var self = this
                 , queue = {
+                    game : g.id,
                     user : {id : self.Authorization.id, username : self.Authorization.username},
                     name:g.queueName,
                     userCount : g.userCount
@@ -61,7 +62,7 @@
             else {
                 qId = g.getQueue();
                 queue = Queues.get(qId);
-                QueueOut.leave({ id : queue.id, name : queue.name });
+                QueueOut.leave({ id : queue.id, name : queue.name});
             }
         };
 

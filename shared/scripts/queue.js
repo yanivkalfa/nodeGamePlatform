@@ -23,14 +23,14 @@
         this._window = undefined;
         this._room = undefined;
 
+        this.users = new UsersList();
+
         this.id = queue.id || undefined;
         this.name = queue.name || undefined;
-        this.users = new UsersList();
+        this.game = queue.game || undefined;
         this.maxWaitTime = queue.maxWaitTime || 3600000;
         this.userCount = queue.userCount || 2;
         this.minDetails = {};
-
-        //_(UtilFunc.toArray(queue.users)||[]).forEach(_.bind(this.users.add,this.users));
 
         this.init();
     }

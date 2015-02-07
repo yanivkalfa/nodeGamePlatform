@@ -63,27 +63,31 @@
             });
             queue.setWindow(modalInstance);
 
+
+            console.log(queue);
             modalInstance.result.then(function (close) {
                 queue.end(close);
             }, function () {
                 console.log('something happened');
             });
         };
+
+
+        //user
+        //var authorizedUser = Authorization.getUser();
+        //q.user.accepted = false;
+        //user = new QueueUser(q.user);
+        //user.setIsMe(authorizedUser.id == q.user.id);
+        //queue.users.add(user);
         RoutQueueFactory.prototype.join = function(q){
-            var self = this , game, user, queue;
+            var self = this , game, queue;
             game = Games.get(q.name);
             if(game.isQueued()) {
                 game.setBusy(false);
                 Notify.error('You cannot queue to the same game twice');
                 return false;
             }
-            //var authorizedUser = Authorization.getUser();
-            //q.user.accepted = false;
-            //user = new QueueUser(q.user);
-            //user.setIsMe(authorizedUser.id == q.user.id);
-            delete q.user;
             queue = Queues.add(q);
-            //queue.users.add(user);
             console.log('newly added queue', queue);
             game.setQueue(queue.id);
             console.log('Queue Id', queue.id);

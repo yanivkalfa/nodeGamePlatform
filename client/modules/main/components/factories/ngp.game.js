@@ -41,6 +41,10 @@
                 return this._queue;
             },
 
+            getId : function(){
+                return this.id;
+            },
+
             isBusy : function(){
                 return this._isBusy;
             },
