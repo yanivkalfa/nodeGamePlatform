@@ -39,8 +39,15 @@
             if(q.warrning) return Notify.error(q.warrning);
         };
         RoutQueueFactory.prototype.ready = function(q){
-            var queue = Queues.get(q.id);
-            queue.users.add(q.users);
+            var queue = Queues.get(q.id)
+                , authorizedUser = Authorization.getUser()
+                ;
+
+            _.isArray(q.users) && _(q.users).forEach(function(user){
+                user = new QueueUser(user);
+                user.setIsMe(authorizedUser.id == q.user.id);
+                queue.users.add(user);
+            });
             queue.setRoom(q.room);
 
             var modalInstance = $modal.open({
@@ -69,13 +76,13 @@
                 Notify.error('You cannot queue to the same game twice');
                 return false;
             }
-            var authorizedUser = Authorization.getUser();
-            q.user.accepted = false;
-            user = new QueueUser(q.user);
-            user.setIsMe(authorizedUser.id == q.user.id);
+            //var authorizedUser = Authorization.getUser();
+            //q.user.accepted = false;
+            //user = new QueueUser(q.user);
+            //user.setIsMe(authorizedUser.id == q.user.id);
             delete q.user;
             queue = Queues.add(q);
-            queue.users.add(user);
+            //queue.users.add(user);
             console.log('newly added queue', queue);
             game.setQueue(queue.id);
             console.log('Queue Id', queue.id);

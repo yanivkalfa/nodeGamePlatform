@@ -69,10 +69,8 @@ module.exports = function(_s){
             , qName = q.name
             ;
         QueuesApi.fetchSortLimit({"name" : qName}, 'date', q.userCount).then(function(queues){
-            console.log('queues', queues);
             if(_.isArray(queues) && queues.length < q.userCount) return false;
-
-            console.log('got here fetchSortLimit');
+            console.log('enough people queued');
 
             var users = []
                 , remoteUsers = []
@@ -86,9 +84,7 @@ module.exports = function(_s){
                 roomName += '_' + user.id;
                 users.push({
                     id:user.id,
-                    username: user.name,
-                    accepted: false,
-                    isMe: false
+                    username: user.name
                 });
                 var queueSpark  = _s.primus.spark(user.spark);
 
@@ -98,21 +94,28 @@ module.exports = function(_s){
                     localUsers.push({user : user, spark : queueSpark, queue : queue});
                 }
             };
-
             _(queues).forEach(handleQueue);
+            _(queues).forEach(function(queue){
+                queue.room = roomName;
+                queue.save();
+            });
 
 
             console.log('localUsers', localUsers);
             console.log('remoteUsers: ', remoteUsers);
             _(localUsers).forEach(function(user){
                 var qDetails = {
-                    id : user.queue.out_id,
+                    id : user.queue.id,
                     users : users,
                     name:qName,
                     room : roomName,
                     userCount : q.userCount
                 };
+                /*
                 self.ready(user.spark, qDetails)
+                */
+
+                queueOut.join(user.spark, qDetails);
             });
 
             /*
@@ -143,7 +146,6 @@ module.exports = function(_s){
             , qName = msg.name
             ;
 
-        queueOut.joinFail(spark, msg, 'You cannot queue for same game twice!');
         if(noStore){
             queueOut.join(spark, msg);
             return self.checkQueues(spark,msg);
@@ -171,33 +173,11 @@ module.exports = function(_s){
 
             });
         }).catch(queueOut.joinFail.bind(queueOut,spark, msg));
-
-        /*
-        msg.room = 'madeUpRoomName';
-
-
-        spark.join(msg.room, function(err, succ){
-            var data = {
-                "m" : 'ready',
-                "d" : msg
-            };
-
-            spark.write({"m":'queue', d:data});
-        });
-        */
     };
 
     RoutQueue.prototype.leave = function(spark, q){
         QueuesApi.remove(q.id).then(function(success){
-            /*
-            var data = {
-                "m" : 'leave',
-                "d" : q
-            };
-            spark.write({"m":'queue', d:data});
-            */
-
-            queueOut.leave(spark, q);
+            if(success) queueOut.leave(spark, q);
         });
     };
 
