@@ -14,7 +14,7 @@
             'Notify',
             'ChatOut',
             'Chat',
-            //'Queues',
+            'Queues',
             'QueueOut',
             'RoutQueue',
             //'QueueUser',
@@ -33,7 +33,7 @@
         Notify,
         ChatOut,
         Chat,
-        //Queues,
+        Queues,
         QueueOut,
         RoutQueue,
         //QueueUser,
@@ -50,27 +50,22 @@
         }
 
         AdminController.prototype.queueMP = function(g){
+            console.log(g);
             var self = this
                 , queue = {
                     user : {id : self.Authorization.id, username : self.Authorization.username},
                     name:g.queueName,
                     userCount : g.userCount
-                };
-            QueueOut.join(queue);
-                //, analysed
-                //, q
-                //, //routQueue = new RoutQueue()
-                //;
+                }
+                ,qId
+                ;
 
-            //q = routQueue.join(queue);
-            //if(!q) return;
-            /*analysed =
-
-            if(analysed.success){
-                Notify.success('Queued for: ', q.name);
-            }else{
-                Notify.error(analysed.msg);
-            }*/
+            if(!g.isQueued()) QueueOut.join(queue);
+            else {
+                qId = g.getQueue();
+                queue = Queues.get(qId);
+                QueueOut.leave({ id : queue.id, name : g.queueName });
+            }
         };
 
         /*

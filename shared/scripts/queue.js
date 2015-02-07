@@ -62,7 +62,7 @@
 
     Queue.prototype.setMinDetails = function(){
         var self = this;
-        return self.minDetails = {"id" : self.id, "name" : self.name, "users" : self.users.get()};
+        return self.minDetails = {"id" : self.id, "name" : self.name, "user" : self.users.get()};
     };
 
     Queue.prototype.getMinDetails = function(){

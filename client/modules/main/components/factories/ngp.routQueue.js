@@ -74,7 +74,6 @@
             user.setIsMe(authorizedUser.id == q.user.id);
             delete q.user;
             queue = Queues.add(q);
-            console.log(user);
             queue.users.add(user);
             game.setQueue(queue.id);
             game.setQueueImage();
@@ -82,7 +81,12 @@
         };
 
         RoutQueueFactory.prototype.leave = function(q){
+            var game;
+            game = Games.get(q.name);
+            if(!game.isQueued()) return false;
             Queues.remove(q.id);
+            game.setQueue(undefined);
+            game.resetQueueImage();
         };
 
         RoutQueueFactory.prototype.accept = function(q){
