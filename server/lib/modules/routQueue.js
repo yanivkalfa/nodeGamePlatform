@@ -106,17 +106,19 @@ module.exports = function(_s){
                 }
             };
 
-            if(userOffline) return false;
 
-            console.log('aaaaaaaaaaaaaa');
 
-            /*
             _(queues).forEach(handleQueue);
             _(queues).forEach(function(queue){
                 queue.room = roomName;
                 queue.occupied = true;
                 queue.save();
             });
+
+            if(userOffline) return false;
+            console.log('aaaaaaaaaaaaaa');
+
+            /*
             var qDetails = {
                 game : q.game,
                 users : users,
