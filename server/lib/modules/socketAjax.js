@@ -52,6 +52,7 @@ module.exports = function(_s){
         id = self.queueRequest(request);
         request.timer = setTimeout(function(){
             self.trigger(false, id, 'request timed out!');
+            console.log('timed out');
         }, request.timeOut || self.timeOut);
 
         console.log('dispatch - request id: ', id);
