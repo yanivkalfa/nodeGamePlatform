@@ -29,7 +29,7 @@
                 return this.queue("join", q);
             },
 
-            leave : function(args){
+            leave : function(q){
                 return this.queue("leave", q);
             },
 
