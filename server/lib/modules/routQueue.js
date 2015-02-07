@@ -100,7 +100,7 @@ module.exports = function(_s){
                 if(!queueSpark && (_s.details.address != user.server.address || _s.details.port != user.server.port)) {
                     console.log('if');
                     remoteUsers.push({user : user, spark : user.spark, queue : queue});
-                }else if(_s.details.address == user.server.address && _s.details.port == user.server.port){
+                }else if(queueSpark && _s.details.address == user.server.address && _s.details.port == user.server.port){
                     console.log('else if');
                     localUsers.push({user : user, spark : queueSpark, queue : queue});
                 }else{
