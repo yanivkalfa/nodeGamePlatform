@@ -143,10 +143,10 @@ module.exports = function(_s){
         });
     };
     RoutQueue.prototype._join = function(spark, msg){
-        this.checkQueues.apply(this,arguments);
+        this.join(spark, msg, true);
     };
 
-    RoutQueue.prototype.join = function(spark, msg){
+    RoutQueue.prototype.join = function(spark, msg, noStore){
         var self = this
             , qName = msg.name
             , joinResponse = function(method, warrning){
@@ -160,8 +160,13 @@ module.exports = function(_s){
             }
             ;
 
+        if(noStore){
+            joinResponse('join');
+            self.checkQueues(spark,msg);
+        }
+
         console.log('qName', qName);
-        GamesApi.fetchByQueueName(qName).then(function(game){
+        return GamesApi.fetchByQueueName(qName).then(function(game){
             console.log('fetchByQueueName', game);
             if(!game) return joinResponse('joinFail','You cannot play this game!');
             QueuesApi.fetch({"name" : qName, "user" : spark.user.id}).then(function(queue){
@@ -176,7 +181,12 @@ module.exports = function(_s){
                     "user" : spark.user.id
                 };
 
-                QueuesApi.add(qDetails).then(self.checkQueues.bind(self,spark,msg));
+                QueuesApi.add(qDetails).then(function(){
+                    joinResponse('joinSuccess');
+                    self.checkQueues(spark,msg);
+                });
+
+
             });
         }).catch(joinResponse.bind(self, 'joinFail'));
 
