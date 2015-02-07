@@ -39,6 +39,9 @@ module.exports = function(_s){
                 });
 
                 client.on('data', self.response.bind(self, client));
+            }).catch(function(err){
+                console.log('no login');
+                return reject(err);
             });
         });
     };
@@ -112,7 +115,6 @@ module.exports = function(_s){
     };
 
     SocketAjax.prototype.response = function(spark,msg){
-        console.log('msg',msg);
         var self = this;
         return self.trigger(msg.d.s, msg.id, msg.d);
     };
