@@ -172,16 +172,16 @@ module.exports = function(_s){
         }
 
         return GamesApi.fetch(qName).then(function(game){
+            console.log('game  aaaa', game);
             if(!game) return queueOut.joinFail(spark, msg, 'You cannot play this game!');
             QueuesApi.fetch({"name" : qName, "user" : spark.user.id}).then(function(queues){
-                console.log(queues);
                 if(queues.length > 0) return queueOut.joinFail(spark, msg, 'You cannot queue for same game twice!');
                 var qDetails = {
                     "name" : qName,
                     "room" : "",
                     "start" : new Date(),
                     "end" : "",
-                    "game" : game._id,
+                    "game" : game.id,
                     "user" : spark.user.id
                 };
 
