@@ -45,8 +45,6 @@
             this.games = Games.get();
             this.imgUrl = ngp.const.app.imgUrl;
 
-            console.log(this);
-
         }
         /*
         AdminController.prototype.queueMP = function(g){

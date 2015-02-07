@@ -7,7 +7,9 @@
             '$rootScope',
             '$modal',
             'Router',
+            'Games',
             'Queues',
+            'QueueUser',
             'Notify',
             RoutQueue
         ]);
@@ -16,7 +18,9 @@
         $rootScope,
         $modal,
         Router,
+        Games,
         Queues,
+        QueueUser,
         Notify
         ) {
 
@@ -49,6 +53,16 @@
             }, function () {
                 console.log('something happened');
             });
+        };
+        RoutQueueFactory.prototype.join = function(q){
+            var self = this
+                , queue = {
+                    id : q.id || Queues.createRequestId(),
+                    users : new QueueUser(q.users),
+                    name:q.queueName,
+                    userCount : q.userCount
+                }
+            queue = Queues.add(queue);
         };
 
         RoutQueueFactory.prototype.leave = function(q){
