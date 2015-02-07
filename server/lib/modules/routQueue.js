@@ -79,7 +79,7 @@ module.exports = function(_s){
             ;
         QueuesApi.fetchSortLimit({"name" : qName}, 'date', q.userCount).then(function(queues){
             console.log('queues', queues);
-            if(_.isArray(queues) && queues.length < q.userCount) return joinResponse('joinSuccess');
+            if(_.isArray(queues) && queues.length < q.userCount) return false;
 
             console.log('got here fetchSortLimit');
 
@@ -143,10 +143,13 @@ module.exports = function(_s){
         });
     };
     RoutQueue.prototype._join = function(spark, msg){
+        console.log('msg', msg);
         this.join(spark, msg, true);
     };
 
     RoutQueue.prototype.join = function(spark, msg, noStore){
+        console.log('msg, noStore', msg, noStore);
+
         var self = this
             , qName = msg.name
             , joinResponse = function(method, warrning){
