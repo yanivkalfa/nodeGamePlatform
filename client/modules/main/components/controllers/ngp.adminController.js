@@ -17,6 +17,7 @@
             'Queues',
             'QueueOut',
             'QueueUser',
+            'Games',
             adminController
         ]);
 
@@ -33,7 +34,8 @@
         Chat,
         Queues,
         QueueOut,
-        QueueUser
+        QueueUser,
+        Games
         ) {
 
         function AdminController(){
@@ -44,6 +46,8 @@
             this.games = [];
             this.imgUrl = ngp.const.app.imgUrl;
             this.init();
+
+            console.log(Games);
 
         }
 

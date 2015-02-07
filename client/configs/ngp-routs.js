@@ -64,6 +64,16 @@
                     }
                 ],
 
+                games: ['Games',
+                    function(Games) {
+                        return Games.init().then(function(games){
+                            return Games.setGames(games);
+                        }).catch(function(err){
+                            console.log(err);
+                        });
+                    }
+                ],
+
                 /*ChatIn: ['ChatIn', function(ChatIn) { return ChatIn.init(); } ],*/
                 /**/
                 Latency: ['Latency', function(Latency) { return Latency.init(); } ]
