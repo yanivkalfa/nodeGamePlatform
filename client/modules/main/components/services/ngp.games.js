@@ -67,11 +67,11 @@
                 });
 
                 return true;
-            },
+            }
 
-            get : _.bind(this.games.get, this.games)
+            //get : _.bind(this.games.get, this.games)
 
-
+            //_.bind(greet, object, 'hi');
 
         };
 
