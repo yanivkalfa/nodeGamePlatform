@@ -88,13 +88,10 @@
                 return false;
             }
             queue = Queues.add(q);
-            console.log('newly added queue', queue);
             game.setQueue(queue.id);
-            console.log('Queue Id', queue.id);
             game.setQueueImage();
             $rootScope.$apply();
             game.setBusy(false);
-            console.log('Game after changes', game);
             Notify.success('You\'ve queued for: ', q.name);
         };
 
