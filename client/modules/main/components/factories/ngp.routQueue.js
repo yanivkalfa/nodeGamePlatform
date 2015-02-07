@@ -11,6 +11,7 @@
             'Queues',
             'QueueUser',
             'Notify',
+            'Authorization',
             RoutQueue
         ]);
 
@@ -21,7 +22,8 @@
         Games,
         Queues,
         QueueUser,
-        Notify
+        Notify,
+        Authorization
         ) {
 
         function RoutQueueFactory(){
@@ -66,7 +68,10 @@
                 Notify.error('You cannot queue to the same game twice');
                 return false;
             }
+            var authorizedUser = Authorization.getUser();
+            q.user.accepted = false;
             user = new QueueUser(q.user);
+            user.setIsMe(authorizedUser.id == q.user.id);
             delete q.user;
             queue = Queues.add(q);
             console.log(user);
