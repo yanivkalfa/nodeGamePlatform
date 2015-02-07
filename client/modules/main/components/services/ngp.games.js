@@ -8,6 +8,7 @@
             'Api',
             'List',
             'Game',
+            'Notify',
             Games
         ]);
 
@@ -15,7 +16,8 @@
         $q,
         Api,
         List,
-        Game
+        Game,
+        Notify
         ) {
 
         var api = Api.createNewApi(ngp.const.app.ajaxUrl);
@@ -50,8 +52,7 @@
             };
 
             fail = function(err){
-                console.log(err);
-                api.doRequest(options).then(success).catch(fail);
+                Notify.error(err);
             };
             api.doRequest(options).then(success).catch(fail);
 
