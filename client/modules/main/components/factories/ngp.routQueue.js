@@ -112,12 +112,15 @@
         };
 
         RoutQueueFactory.prototype.decline = function(q){
-            console.log('q', q);
+            var window;
             var queue = Queues.getByPropName('_room', q.room);
             console.log('queue', queue);
             queue.users.decline(q.user);
-            queue.getWindow().close();
-            queue.setWindow(undefined);
+            window = queue.getWindow();
+            if(window){
+                window.close();
+                queue.setWindow(undefined);
+            }
             Notify.success('Declined game');
         };
 
