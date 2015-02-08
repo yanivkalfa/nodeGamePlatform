@@ -45,12 +45,6 @@
                 , window
                 ;
 
-            /*
-            window = queue.getWindow();
-            queue.clearTimers( function(){ $rootScope.$apply(); });
-            queue.users.clear();
-            */
-
             queue.reset();
 
             _.isArray(q.users) && _(q.users).forEach(function(user){
@@ -60,7 +54,6 @@
             });
             queue.setRoom(q.room);
             $rootScope.$apply();
-            if(window) return false;
 
             window = $modal.open({
                 templateUrl: ngp.const.app.url + '/tpl/directives/queuePopUp.html',
@@ -120,24 +113,11 @@
         };
 
         RoutQueueFactory.prototype.decline = function(q){
-            var window, apply, close;
             var queue = Queues.getByPropName('_room', q.room);
             if(queue.users.length > 0){
                 queue.users.decline(q.user);
                 $rootScope.$apply();
             }
-
-            //window = queue.getWindow();
-            //if(window){
-                /*
-                close = function(){
-                    window.close();
-                    queue.setWindow(undefined);
-                    queue.users.clear();
-                };
-                */
-
-            //}
             queue.startTimer(3, _.bind(queue.reset, queue));
         };
 

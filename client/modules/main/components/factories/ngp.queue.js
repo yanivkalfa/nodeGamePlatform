@@ -77,18 +77,17 @@
             $rootScope.$apply();
             self._interval = setInterval(function(){
                 self.timer--;
-                $rootScope.$apply();
                 if(self.timer <= 0){
                     self.clearTimers();
                     if('function' === typeof endFn) endFn();
                 }
+                $rootScope.$apply();
             }, 1000);
         };
 
         QueueFactory.prototype.clearTimers = function(){
             clearInterval(this._interval);
             this.timer = '';
-            $rootScope.$apply();
         };
 
         QueueFactory.prototype.setRoom = function(room){
