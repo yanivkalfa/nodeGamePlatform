@@ -45,15 +45,16 @@
                 , window
                 ;
 
+            window = queue.getWindow();
+            if(window) return false;
+
             _.isArray(q.users) && _(q.users).forEach(function(user){
                 user = new QueueUser(user);
                 user.setIsMe(authorizedUser.id == user.id);
                 queue.users.add(user);
             });
             queue.setRoom(q.room);
-            window = queue.getWindow();
 
-            if(window) return false;
 
             window = $modal.open({
                 templateUrl: ngp.const.app.url + '/tpl/directives/queuePopUp.html',
