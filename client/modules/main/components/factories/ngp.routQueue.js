@@ -67,9 +67,11 @@
             });
             queue.setWindow(window);
 
-            window.result.then(function () {
+            window.result.then(function (something) {
                 //self.decline(queue);
-            }, function () {
+                console.log(something);
+            }, function (something) {
+                console.log(something);
                 self.decline(queue);
             });
         };
