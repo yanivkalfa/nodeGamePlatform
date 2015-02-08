@@ -238,13 +238,17 @@ module.exports = function(_s){
     };
 
     RoutQueue.prototype.accept = function(spark, q){
-        var self = this, queue;
-        console.log('accepting');
+        var self = this
+        console.log('accepting', q);
         QueuesApi.fetch(q.id).then(function(queues){
+            var queue;
             if(!_.isArray(queues)) return false;
+            console.log('fetched', queues);
             queue = queues[0];
             queue.accepted = true;
+            console.log('queue before save', queue);
             queue.save(function (err, queue) {
+                console.log('saved', queue);
                 if(err) return console.log(err);
                 q.accepted = true;
                 var data = {
