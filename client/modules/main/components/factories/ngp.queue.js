@@ -55,7 +55,7 @@
             if(this._window) this._window.close();
             this._window = undefined;
 
-            this._room = undefined;
+            //this._room = undefined;
             this.timer = '';
 
             self.users.clear();
