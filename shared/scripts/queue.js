@@ -19,7 +19,7 @@
         EventEmitter.apply(this, arguments);
         this._startTime = Date.now();
         this._endTime = undefined;
-        this.timer = undefined;
+        this.timer = '';
         this._window = undefined;
         this._room = undefined;
 
@@ -51,7 +51,7 @@
             self.timer--;
             if('function' === typeof fn) fn();
             if(self.timer <= 0){
-                self.timer = undefined;
+                self.timer = '';
                 clearInterval(interval)
             }
         }, 1000);
