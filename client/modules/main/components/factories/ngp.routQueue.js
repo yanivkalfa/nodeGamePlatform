@@ -48,7 +48,6 @@
             window = queue.getWindow();
             queue.clearTimers( function(){ $rootScope.$apply(); });
             queue.users.clear();
-            $rootScope.$apply();
 
             _.isArray(q.users) && _(q.users).forEach(function(user){
                 user = new QueueUser(user);
@@ -56,7 +55,7 @@
                 queue.users.add(user);
             });
             queue.setRoom(q.room);
-
+            $rootScope.$apply();
             if(window) return false;
 
             window = $modal.open({
