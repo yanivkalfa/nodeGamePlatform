@@ -48,8 +48,8 @@
         if(seconds <=0) return false;
         self.timer = seconds;
         var interval = setInterval(function(){
-            self.timer--;
             if('function' === typeof fn) fn();
+            self.timer--;
             if(self.timer <= 0){
                 self.timer = '';
                 clearInterval(interval)
