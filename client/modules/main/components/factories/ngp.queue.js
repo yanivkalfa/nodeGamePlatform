@@ -72,13 +72,13 @@
         QueueFactory.prototype.startTimer = function(seconds, endFn){
             var self = this;
             if(seconds <=0) return false;
+            self.clearTimers();
             self.timer = seconds;
             $rootScope.$apply();
             self._interval = setInterval(function(){
                 self.timer--;
                 $rootScope.$apply();
                 if(self.timer <= 0){
-                    console.log('aaaaaaaaa');
                     self.clearTimers();
                     if('function' === typeof endFn) endFn();
                 }
