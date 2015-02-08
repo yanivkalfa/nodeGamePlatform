@@ -216,21 +216,47 @@ module.exports = function(_s){
         });
     };
 
-    RoutQueue.prototype.accept = function(spark, msg){
+    RoutQueue.prototype.accept = function(spark, q){
+        QueuesApi.fetch(q.id).then(function(queues){
+            if(!_.isArray(queues)) return false;
+            var queue = queues[0];
+            queue.accepted = true;
+            queue.save();
+            queue.save(function (err, queue) {
+                if(err) return console.log(err);
+                q.accepted = true;
+                var data = {
+                    "m" : 'accept',
+                    "d" : q
+                };
+                _s.primus.room(q.room).write({"m": "queue", "d":data});
 
-        var data = {
-            "m" : 'accept',
-            "d" : msg
-        };
-        _s.primus.room(msg.room).write({"m": "queue", "d":data});
+                // checkAccepted
+
+            });
+        });
     };
 
-    RoutQueue.prototype.decline = function(spark, msg){
-        var data = {
-            "m" : 'decline',
-            "d" : msg
-        };
-        _s.primus.room(msg.room).write({"m": "queue", "d":data});
+    RoutQueue.prototype.decline = function(spark, q){
+
+        QueuesApi.fetch(q.id).then(function(queues){
+            if(!_.isArray(queues)) return false;
+            var queue = queues[0];
+            queue.accepted = false;
+            queue.save();
+            queue.save(function (err, queue) {
+                if(err) return console.log(err);
+                q.accepted = false;
+                var data = {
+                    "m" : 'decline',
+                    "d" : q
+                };
+                _s.primus.room(q.room).write({"m": "queue", "d":data});
+
+                // checkAccepted
+
+            });
+        });
     };
 
 
