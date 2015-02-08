@@ -226,6 +226,7 @@ module.exports = function(_s){
         GamesApi.fetch(q.game).then(function(games){
             if(!games) return false;
             QueuesApi.fetch({room: q.room, accepted : true}).then(function(queues){
+                console.log('all accepted queues');
                 console.log(queues);
                 if(_.isArray(queues) && queues.length < games[0].userCount) return false;
 
