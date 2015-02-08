@@ -68,9 +68,11 @@
             queue.setWindow(window);
 
             window.result.then(function () {
-                self.decline(queue);
+                console.log('aaaaa');
+                //self.decline(queue);
             }, function () {
-                self.decline(queue);
+                console.log('bbbbb');
+                //self.decline(queue);
             });
         };
 
