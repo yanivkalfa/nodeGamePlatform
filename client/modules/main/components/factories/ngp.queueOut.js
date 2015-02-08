@@ -53,15 +53,18 @@
             },
 
             updateQueue : function(method, q, u){
-                var room = q.getRoom();
+                var room = q.getRoom()
+                    , game = q.game
+                    ;
 
                 if(!q) return {"success":false, "msg" : 'Queue was not found'};
                 if(!u) return {"success":false, "msg" : 'User was not found'};
                 if(!room) return {"success":false, "msg" : 'Room was not found'};
+                if(!game) return {"success":false, "msg" : 'Game was not found'};
 
                 var data  = {
                     "m" : method,
-                    "d" : {"id":q.id, "room" : room, "user" : { id : u.id, username : u.username } }
+                    "d" : {"id":q.id, "room" : room, "user" : { id : u.id, username : u.username }, game :  game}
                 };
 
                 WebSocket.Primus.write({"m":"queue", "d": data});

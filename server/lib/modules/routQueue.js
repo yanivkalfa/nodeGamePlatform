@@ -221,9 +221,17 @@ module.exports = function(_s){
 
     RoutQueue.prototype.checkAccepted = function(spark, q){
 
-        QueuesApi.fetch({room: q.room}).then(function(queues){
-           console.log(queues);
+        GamesApi.fetch(q.game).then(function(games){
+            if(!games) return false;
+            QueuesApi.fetch({room: q.room, accepted : true}).then(function(queues){
+                console.log(queues);
+                if(_.isArray(queues) && queues.length < games[0].userCount) return false;
+
+                console.log('enough accepted go a head and redirect to game server');
+
+            });
         });
+
     };
 
     RoutQueue.prototype.accept = function(spark, q){
