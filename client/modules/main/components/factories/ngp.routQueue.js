@@ -48,7 +48,6 @@
             window = queue.getWindow();
             queue.clearTimers( function(){ $rootScope.$apply(); });
             queue.users.clear();
-            if(window) return false;
 
             _.isArray(q.users) && _(q.users).forEach(function(user){
                 user = new QueueUser(user);
@@ -56,6 +55,8 @@
                 queue.users.add(user);
             });
             queue.setRoom(q.room);
+
+            if(window) return false;
 
             window = $modal.open({
                 templateUrl: ngp.const.app.url + '/tpl/directives/queuePopUp.html',
