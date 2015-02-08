@@ -116,8 +116,6 @@
             var queue = Queues.getByPropName('_room', q.room);
             console.log('queue', queue);
             queue.users.decline(q.user);
-            Queues.get(q.id);
-            Queues.remove(q.id);
             queue.getWindow().close('Decline game');
             Notify.success('Declined game');
         };
