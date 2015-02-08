@@ -48,6 +48,7 @@
             window = queue.getWindow();
             queue.clearTimers( function(){ $rootScope.$apply(); });
             queue.users.clear();
+            $rootScope.$apply();
 
             _.isArray(q.users) && _(q.users).forEach(function(user){
                 user = new QueueUser(user);
