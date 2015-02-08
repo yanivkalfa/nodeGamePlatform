@@ -90,6 +90,7 @@
         };
 
         RoutQueueFactory.prototype.leave = function(q){
+            console.log('leaveing queue');
             var game;
             game = Games.get(q.name);
             if(!game.isQueued()) return false;
@@ -113,8 +114,9 @@
 
         RoutQueueFactory.prototype.decline = function(q){
             console.log('q', q);
+            console.log('Queues', Queues)
             var queue = Queues.get(q.id);
-            console.log(queue);
+            console.log('queue', queue);
             queue.users.decline(q.user);
             Queues.remove(q.id);
             queue.getWindow().close('Decline game');

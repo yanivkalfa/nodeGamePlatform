@@ -33,6 +33,13 @@
         return delete self.list[id];
     };
 
+    Queues.prototype.reset =  function(id){
+        var self = this;
+        if(_.isEmpty(this.list[id])) return false;
+        this.list[id].end('Queue removed');
+        return delete self.list[id];
+    };
+
 
     if (typeof module !== 'undefined' && module.exports) {
         module.exports = Queues;
