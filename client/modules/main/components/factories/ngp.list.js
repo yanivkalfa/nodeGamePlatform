@@ -39,6 +39,7 @@
 
         ListFactory.prototype.clear =  function(id){
             var self = this;
+            this.length = 0;
             return self.list = {};
         };
 
