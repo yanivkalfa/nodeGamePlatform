@@ -114,8 +114,8 @@
         RoutQueueFactory.prototype.decline = function(q){
             console.log('q', q);
             var queue = Queues.get(q.id);
+            console.log(queue);
             queue.users.decline(q.user);
-            Queues.get(q.id);
             Queues.remove(q.id);
             queue.getWindow().close('Decline game');
             Notify.success('Declined game');
