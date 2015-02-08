@@ -78,6 +78,7 @@
                 self.timer--;
                 $rootScope.$apply();
                 if(self.timer <= 0){
+                    console.log('aaaaaaaaa');
                     self.clearTimers();
                     if('function' === typeof endFn) endFn();
                 }
