@@ -28,7 +28,8 @@
         };
 
         QueueReadyController.prototype.leaveQueue = function(){
-            var analysed = QueueOut.decline(this.queue,this.user);
+            QueueOut.decline(this.queue,this.user);
+
         };
 
         $scope.qready = new QueueReadyController();
