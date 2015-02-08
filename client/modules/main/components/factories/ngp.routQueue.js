@@ -46,9 +46,9 @@
                 ;
 
             window = queue.getWindow();
-            if(window) return false;
-            console.log(queue);
             queue.clearTimers();
+            if(window) return false;
+
             _.isArray(q.users) && _(q.users).forEach(function(user){
                 user = new QueueUser(user);
                 user.setIsMe(authorizedUser.id == user.id);
