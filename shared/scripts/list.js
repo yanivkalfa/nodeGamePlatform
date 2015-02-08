@@ -28,6 +28,11 @@
         return delete self.list[id];
     };
 
+    List.prototype.clear =  function(id){
+        var self = this;
+        return self.list = {};
+    };
+
     List.prototype.get =  function(id){
         var self = this;
         if(!id) return self.list;

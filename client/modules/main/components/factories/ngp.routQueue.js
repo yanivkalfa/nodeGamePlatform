@@ -120,7 +120,7 @@
             $rootScope.$apply();
             window = queue.getWindow();
             if(window){
-                queue.startTimer(5,function(){$rootScope.$apply();});
+                queue.startTimer(3,function(){$rootScope.$apply();});
                 setTimeout(function(){
                     window.close();
                     queue.setWindow(undefined);
