@@ -31,11 +31,8 @@
     };
 
     UsersList.prototype.decline = function(user){
-        console.log(user);
         var self = this, u;
         u = self.get(user.id);
-
-        console.log('found u', u);
         if(!u) return false;
         return u.accepted = false;
     };

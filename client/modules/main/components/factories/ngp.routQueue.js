@@ -114,9 +114,7 @@
         RoutQueueFactory.prototype.decline = function(q){
             var window;
             var queue = Queues.getByPropName('_room', q.room);
-            console.log('queue', queue);
             queue.users.decline(q.user);
-            console.log(queue.users);
             $rootScope.$apply();
             window = queue.getWindow();
             if(window){
@@ -125,7 +123,7 @@
                     window.close();
                     queue.setWindow(undefined);
                     queue.users.clear();
-                },5000);
+                },3000);
             }
         };
 
