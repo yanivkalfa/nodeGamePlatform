@@ -55,7 +55,6 @@
             });
             queue.setRoom(q.room);
 
-
             window = $modal.open({
                 templateUrl: ngp.const.app.url + '/tpl/directives/queuePopUp.html',
                 controller: 'queueReadyController',
@@ -80,7 +79,6 @@
             game = Games.get(q.name);
             if(game.isQueued()) {
                 game.setBusy(false);
-                Notify.error('You cannot queue to the same game twice');
                 return false;
             }
             queue = Queues.add(q);

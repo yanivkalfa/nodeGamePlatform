@@ -179,7 +179,6 @@ module.exports = function(_s){
             , qName = msg.name
             ;
 
-        console.log('queue msg,', msg);
         if(noStore){
             queueOut.join(spark, msg);
             return self.checkQueues(spark,msg);
