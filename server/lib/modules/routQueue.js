@@ -236,6 +236,7 @@ module.exports = function(_s){
 
     RoutQueue.prototype.accept = function(spark, q){
         var self = this, queue;
+        console.log('accepting');
         QueuesApi.fetch(q.id).then(function(queues){
             if(!_.isArray(queues)) return false;
             queue = queues[0];
@@ -257,6 +258,7 @@ module.exports = function(_s){
 
     RoutQueue.prototype.decline = function(spark, q){
         var self = this, queue;
+        console.log('declining');
         QueuesApi.fetch(q.id).then(function(queues){
             if(!_.isArray(queues)) return false;
             var queue = queues[0];
