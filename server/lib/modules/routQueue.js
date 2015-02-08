@@ -218,10 +218,19 @@ module.exports = function(_s){
         });
     };
 
+
+    RoutQueue.prototype.checkAccepted = function(spark, q){
+
+        QueuesApi.fetch({room: q.room}).then(function(queues){
+           console.log(queues);
+        });
+    };
+
     RoutQueue.prototype.accept = function(spark, q){
+        var self = this, queue;
         QueuesApi.fetch(q.id).then(function(queues){
             if(!_.isArray(queues)) return false;
-            var queue = queues[0];
+            queue = queues[0];
             queue.accepted = true;
             queue.save();
             queue.save(function (err, queue) {
@@ -233,14 +242,13 @@ module.exports = function(_s){
                 };
                 _s.primus.room(q.room).write({"m": "queue", "d":data});
 
-                // checkAccepted
-
+                self.checkAccepted(spark, q)
             });
         });
     };
 
     RoutQueue.prototype.decline = function(spark, q){
-
+        var self = this, queue;
         QueuesApi.fetch(q.id).then(function(queues){
             if(!_.isArray(queues)) return false;
             var queue = queues[0];
@@ -255,8 +263,7 @@ module.exports = function(_s){
                 };
                 _s.primus.room(q.room).write({"m": "queue", "d":data});
 
-                // checkAccepted
-
+                self.checkAccepted(spark, q)
             });
         });
     };
