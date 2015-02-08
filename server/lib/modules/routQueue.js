@@ -109,6 +109,7 @@ module.exports = function(_s){
             _(queues).forEach(function(queue){
                 queue.room = roomName;
                 queue.occupied = true;
+                queue.accepted = false;
                 queue.save();
             });
 
@@ -116,6 +117,7 @@ module.exports = function(_s){
                 _(queues).forEach(function(queue){
                     queue.room = '';
                     queue.occupied = false;
+                    queue.accepted = false;
                     queue.save();
                 });
 

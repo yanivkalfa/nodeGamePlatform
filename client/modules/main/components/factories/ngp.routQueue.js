@@ -47,7 +47,7 @@
 
             window = queue.getWindow();
             if(window) return false;
-
+            queue.clearTimers();
             _.isArray(q.users) && _(q.users).forEach(function(user){
                 user = new QueueUser(user);
                 user.setIsMe(authorizedUser.id == user.id);
@@ -113,18 +113,19 @@
         };
 
         RoutQueueFactory.prototype.decline = function(q){
-            var window;
+            var window, apply, close;
             var queue = Queues.getByPropName('_room', q.room);
             queue.users.decline(q.user);
             $rootScope.$apply();
             window = queue.getWindow();
             if(window){
-                queue.startTimer(3,function(){$rootScope.$apply();});
-                setTimeout(function(){
+                apply = function(){ $rootScope.$apply(); };
+                close = function(){
                     window.close();
                     queue.setWindow(undefined);
                     queue.users.clear();
-                },3000);
+                };
+                queue.startTimer(3,apply, close);
             }
         };
 

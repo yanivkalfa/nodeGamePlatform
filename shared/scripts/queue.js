@@ -19,6 +19,7 @@
         EventEmitter.apply(this, arguments);
         this._startTime = Date.now();
         this._endTime = undefined;
+        this._interval = undefined;
         this.timer = '';
         this._window = undefined;
         this._room = undefined;
@@ -43,18 +44,23 @@
         self.setMinDetails();
     };
 
-    Queue.prototype.startTimer = function(seconds, fn){
+    Queue.prototype.startTimer = function(seconds, perSecFn, endFn){
         var self = this;
         if(seconds <=0) return false;
         self.timer = seconds;
-        var interval = setInterval(function(){
-            if('function' === typeof fn) fn();
+        self._interval = setInterval(function(){
+            if('function' === typeof perSecFn) perSecFn();
             self.timer--;
             if(self.timer <= 0){
                 self.timer = '';
-                clearInterval(interval)
+                self.clearTimers();
+                if('function' === typeof endFn) endFn();
             }
         }, 1000);
+    };
+
+    Queue.prototype.clearTimers = function(){
+        clearInterval(this._interval);
     };
 
     Queue.prototype.setRoom = function(room){
