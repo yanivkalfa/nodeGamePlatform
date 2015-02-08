@@ -70,7 +70,7 @@
             window.result.then(function () {
                 self.decline(queue);
             }, function () {
-                console.log('something happened');
+                self.decline(queue);
             });
         };
 
