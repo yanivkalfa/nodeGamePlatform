@@ -1,10 +1,29 @@
 /**
  * Created by Yaniv-Kalfa on 1/2/15.
  */
-angular.module(ngp.const.app.name)
-    .factory('User', [function(){
-        return ngp.oFns.User;
-    }]);
+(function(){
+    angular.module(ngp.const.app.name)
+        .factory('User', [
+            User
+        ]);
+
+    function User(){
+
+        function UserFactory(user){
+            this.id = user.id || undefined;
+            this.username = user.username || undefined;
+        }
+
+        UserFactory.prototype =  {
+            getId: function() { return this.id; },
+            getUsername: function() { return this.username; },
+            setId: function(id) { this.id = id; },
+            setUsername: function(username) { this.username = username; }
+        };
+
+        return UserFactory;
+    }
+})();
 
 
 /*

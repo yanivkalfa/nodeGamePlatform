@@ -1,16 +1,13 @@
 (function(){
 
-    var UtilFunc
-        , EventEmitter
+    var EventEmitter
         , UsersList
         ;
 
     if (typeof module !== 'undefined' && module.exports) {
-        UtilFunc = require('./utilFunc.js');
         EventEmitter = require('./eventEmitter.js');
         UsersList = require('./usersList.js');
     }else{
-        UtilFunc = window.ngp.oFns.UtilFunc;
         EventEmitter = window.ngp.oFns.EventEmitter;
         UsersList = window.ngp.oFns.UsersList;
     }

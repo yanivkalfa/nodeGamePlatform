@@ -1,7 +1,47 @@
 /**
  * Created by Yaniv-Kalfa on 1/2/15.
  */
-angular.module(ngp.const.app.name)
-    .service('Queues', [function(){
-        return new ngp.oFns.Queues();
-    }]);
+(function(){
+    angular.module(ngp.const.app.name)
+        .service('Queues', [
+            'List',
+            'Queue',
+            Queues
+        ]);
+
+    function Queues(
+        List,
+        Queue
+        ){
+
+        function QueuesService(){
+            List.apply(this,arguments);
+        }
+
+        QueuesService.prototype = Object.create(List.prototype);
+        QueuesService.prototype.constructor = QueuesService;
+
+        QueuesService.prototype.add =  function(q){
+            var self = this;
+            var args = Array.prototype.slice.call(arguments, -1,-1);
+            args.push(new Queue(q));
+            return List.prototype.add.apply(self, args);
+        };
+
+        QueuesService.prototype.remove =  function(id){
+            var self = this;
+            if(_.isEmpty(this.list[id])) return false;
+            this.list[id].end('Queue removed');
+            return delete self.list[id];
+        };
+
+        QueuesService.prototype.reset =  function(id){
+            var self = this;
+            if(_.isEmpty(this.list[id])) return false;
+            this.list[id].end('Queue removed');
+            return delete self.list[id];
+        };
+
+        return new QueuesService();
+    }
+})();
