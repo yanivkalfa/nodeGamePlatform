@@ -116,6 +116,7 @@
             var queue = Queues.getByPropName('_room', q.room);
             console.log('queue', queue);
             queue.users.decline(q.user);
+            console.log(queue.users);
             $rootScope.$apply();
             window = queue.getWindow();
             if(window){
