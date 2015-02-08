@@ -241,7 +241,6 @@ module.exports = function(_s){
             if(!_.isArray(queues)) return false;
             queue = queues[0];
             queue.accepted = true;
-            queue.save();
             queue.save(function (err, queue) {
                 if(err) return console.log(err);
                 q.accepted = true;
