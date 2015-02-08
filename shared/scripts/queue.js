@@ -48,8 +48,8 @@
         var self = this;
         if(seconds <=0) return false;
         self.timer = seconds;
+        if('function' === typeof perSecFn) perSecFn();
         self._interval = setInterval(function(){
-            if('function' === typeof perSecFn) perSecFn();
             self.timer--;
             if('function' === typeof perSecFn) perSecFn();
             if(self.timer <= 0){
@@ -59,10 +59,10 @@
         }, 1000);
     };
 
-    Queue.prototype.clearTimers = function(){
+    Queue.prototype.clearTimers = function(endFn){
         clearInterval(this._interval);
         this.timer = '';
-        console.log('aaaaaaaaaaaaaaa');
+        if('function' === typeof endFn) endFn();
     };
 
     Queue.prototype.setRoom = function(room){
