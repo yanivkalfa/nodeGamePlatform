@@ -59,6 +59,7 @@
                 templateUrl: ngp.const.app.url + '/tpl/directives/queuePopUp.html',
                 controller: 'queueReadyController',
                 controllerAs : 'qready',
+                backdrop : 'static',
                 resolve: {
                     queue: function () {
                         return queue;
