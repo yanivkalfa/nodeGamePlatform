@@ -45,8 +45,8 @@
                 , window
                 ;
 
-            window = queue.getWindow();
-            if(window) return false;
+            //window = queue.getWindow();
+            //if(window) return false;
 
             _.isArray(q.users) && _(q.users).forEach(function(user){
                 user = new QueueUser(user);
