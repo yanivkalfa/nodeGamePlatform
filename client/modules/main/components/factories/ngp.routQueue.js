@@ -39,7 +39,8 @@
             if(q.warrning) return Notify.error(q.warrning);
         };
         RoutQueueFactory.prototype.ready = function(q){
-            var queue = Queues.getByPropName('game', q.game)
+            var self = this
+                , queue = Queues.getByPropName('game', q.game)
                 , authorizedUser = Authorization.getUser()
                 ;
 
@@ -49,6 +50,7 @@
                 queue.users.add(user);
             });
             queue.setRoom(q.room);
+            queue.getWindow().close();
 
             var modalInstance = $modal.open({
                 templateUrl: ngp.const.app.url + '/tpl/directives/queuePopUp.html',
@@ -62,20 +64,13 @@
             });
             queue.setWindow(modalInstance);
 
-            modalInstance.result.then(function (close) {
-                queue.end(close);
+            modalInstance.result.then(function () {
+                self.decline(queue);
             }, function () {
                 console.log('something happened');
             });
         };
 
-
-        //user
-        //var authorizedUser = Authorization.getUser();
-        //q.user.accepted = false;
-        //user = new QueueUser(q.user);
-        //user.setIsMe(authorizedUser.id == q.user.id);
-        //queue.users.add(user);
         RoutQueueFactory.prototype.join = function(q){
             var self = this , game, queue;
             game = Games.get(q.name);
