@@ -51,6 +51,7 @@
         self._interval = setInterval(function(){
             if('function' === typeof perSecFn) perSecFn();
             self.timer--;
+            if('function' === typeof perSecFn) perSecFn();
             if(self.timer <= 0){
                 self.timer = '';
                 self.clearTimers();
