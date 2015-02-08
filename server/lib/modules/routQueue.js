@@ -238,9 +238,9 @@ module.exports = function(_s){
     };
 
     RoutQueue.prototype.accept = function(spark, q){
-        var self = this
+        var self = this;
         console.log('accepting', q);
-        QueuesApi.fetch(q.id).then(function(queues){
+        QueuesApi.fetch({"_id" : q.id}).then(function(queues){
             var queue;
             if(!_.isArray(queues)) return false;
             console.log('fetched', queues);
