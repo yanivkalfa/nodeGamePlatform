@@ -124,6 +124,7 @@
                 setTimeout(function(){
                     window.close();
                     queue.setWindow(undefined);
+                    queue.users.clear();
                 },5000);
             }
         };
