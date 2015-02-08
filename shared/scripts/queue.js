@@ -51,6 +51,7 @@
             self.timer--;
             if('function' === typeof fn) fn();
             if(self.timer <= 0){
+                self.timer = undefined;
                 clearInterval(interval)
             }
         }, 1000);

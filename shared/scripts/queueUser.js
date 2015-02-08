@@ -5,7 +5,7 @@
 
     function QueueUser(user){
         User.apply(this,arguments);
-        this.accepted = user.accepted || false;
+        this.accepted = user.accepted || undefined;
         this.isMe = user.isMe || false;
     }
 

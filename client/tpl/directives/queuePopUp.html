@@ -15,7 +15,7 @@
                 <span class="queue-window-username">{{user.username}}:</span>
             </td>
             <td>
-                <span class="queue-window-accepted">{{ user.accepted ? 'O.K' : 'waiting...' }}</span>
+                <span class="queue-window-accepted">{{ user.accepted ? 'O.K' : user.accepted === undefined ? 'Waiting...' : 'Declined' }}</span>
             </td>
         </tr>
         </tbody>
