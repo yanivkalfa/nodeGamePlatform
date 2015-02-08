@@ -42,6 +42,7 @@
             var self = this
                 , queue = Queues.getByPropName('game', q.game)
                 , authorizedUser = Authorization.getUser()
+                , window
                 ;
 
             _.isArray(q.users) && _(q.users).forEach(function(user){
@@ -50,9 +51,11 @@
                 queue.users.add(user);
             });
             queue.setRoom(q.room);
-            queue.getWindow().close();
+            window = queue.getWindow();
 
-            var modalInstance = $modal.open({
+            if(window) return false;
+
+            window = $modal.open({
                 templateUrl: ngp.const.app.url + '/tpl/directives/queuePopUp.html',
                 controller: 'queueReadyController',
                 controllerAs : 'qready',
@@ -62,9 +65,9 @@
                     }
                 }
             });
-            queue.setWindow(modalInstance);
+            queue.setWindow(window);
 
-            modalInstance.result.then(function () {
+            window.result.then(function () {
                 self.decline(queue);
             }, function () {
                 console.log('something happened');
