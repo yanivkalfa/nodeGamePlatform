@@ -214,7 +214,7 @@ module.exports = function(_s){
     };
 
     RoutQueue.prototype.leave = function(spark, q){
-        QueuesApi.remove(q.id).then(function(success){
+        QueuesApi.remove({"_id" : q.id}).then(function(success){
             console.log(success);
             if(success) queueOut.leave(spark, q);
         });
@@ -238,17 +238,12 @@ module.exports = function(_s){
     };
 
     RoutQueue.prototype.accept = function(spark, q){
-        var self = this;
-        console.log('accepting', q);
+        var self = this, queue;
         QueuesApi.fetch({"_id" : q.id}).then(function(queues){
-            var queue;
             if(!_.isArray(queues)) return false;
-            console.log('fetched', queues);
             queue = queues[0];
             queue.accepted = true;
-            console.log('queue before save', queue);
             queue.save(function (err, queue) {
-                console.log('saved', queue);
                 if(err) return console.log(err);
                 q.accepted = true;
                 var data = {
@@ -265,7 +260,7 @@ module.exports = function(_s){
     RoutQueue.prototype.decline = function(spark, q){
         var self = this, queue;
         console.log('declining');
-        QueuesApi.fetch(q.id).then(function(queues){
+        QueuesApi.fetch({"_id" : q.id}).then(function(queues){
             if(!_.isArray(queues)) return false;
             var queue = queues[0];
             queue.accepted = false;
