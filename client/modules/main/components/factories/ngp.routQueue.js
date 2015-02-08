@@ -102,8 +102,9 @@
         };
 
         RoutQueueFactory.prototype.accept = function(q){
-            var queue = Queues.getByPropName('_room',q.room);
+            var queue = Queues.get(q.id);
             queue.users.accept(q.user);
+            $rootScope.$apply();
             if(queue.usersReady()){
                 queue.getWindow().close('Starting game');
                 Notify.success('Starting game');
@@ -111,8 +112,9 @@
         };
 
         RoutQueueFactory.prototype.decline = function(q){
-            var queue = Queues.getByPropName('_room',q.room);
+            var queue = Queues.get(q.id);
             queue.users.decline(q.user);
+            Queues.get(q.id);
             Queues.remove(q.id);
             queue.getWindow().close('Decline game');
             Notify.success('Declined game');
