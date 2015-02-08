@@ -19,7 +19,7 @@
         EventEmitter.apply(this, arguments);
         this._startTime = Date.now();
         this._endTime = undefined;
-        this._timer = undefined;
+        this.timer = undefined;
         this._window = undefined;
         this._room = undefined;
 
@@ -28,7 +28,7 @@
         this.id = queue.id || undefined;
         this.name = queue.name || undefined;
         this.game = queue.game || undefined;
-        this.maxWaitTime = queue.maxWaitTime || 3600000;
+        //this.maxWaitTime = queue.maxWaitTime || 3600000;
         this.userCount = queue.userCount || 2;
         this.minDetails = {};
 
@@ -41,7 +41,19 @@
     Queue.prototype.init = function(){
         var self = this;
         self.setMinDetails();
-        this._timer = setTimeout(_.bind(self.timedOut,self), self.maxWaitTime);
+    };
+
+    Queue.prototype.startTimer = function(seconds, fn){
+        var self = this;
+        if(seconds <=0) return false;
+        self.timer = seconds;
+        var interval = setInterval(function(){
+            self.timer--;
+            if('function' === typeof fn) fn();
+            if(self.timer <= 0){
+                clearInterval(interval)
+            }
+        }, 1000);
     };
 
     Queue.prototype.setRoom = function(room){

@@ -8,6 +8,7 @@
             '$modalInstance',
             'queue',
             'QueueOut',
+            'closeTimer',
             queueReadyController
         ]);
 
@@ -15,7 +16,8 @@
         $scope,
         $modalInstance,
         queue,
-        QueueOut
+        QueueOut,
+        closeTimer
         ) {
         function QueueReadyController(){
             this.queue = queue;

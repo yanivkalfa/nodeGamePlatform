@@ -116,12 +116,15 @@
             var queue = Queues.getByPropName('_room', q.room);
             console.log('queue', queue);
             queue.users.decline(q.user);
+            $rootScope.$apply();
             window = queue.getWindow();
             if(window){
-                window.close();
-                queue.setWindow(undefined);
+                queue.startTimer(5,function(){$rootScope.$apply();});
+                setTimeout(function(){
+                    window.close();
+                    queue.setWindow(undefined);
+                },5000);
             }
-            Notify.success('Declined game');
         };
 
         return RoutQueueFactory;
