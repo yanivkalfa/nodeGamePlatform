@@ -53,7 +53,6 @@
             self.timer--;
             if('function' === typeof perSecFn) perSecFn();
             if(self.timer <= 0){
-                self.timer = '';
                 self.clearTimers();
                 if('function' === typeof endFn) endFn();
             }
@@ -61,8 +60,9 @@
     };
 
     Queue.prototype.clearTimers = function(){
-        console.log('aaaaaaaaaaa');
         clearInterval(this._interval);
+        this.timer = '';
+        console.log('aaaaaaaaaaaaaaa');
     };
 
     Queue.prototype.setRoom = function(room){
