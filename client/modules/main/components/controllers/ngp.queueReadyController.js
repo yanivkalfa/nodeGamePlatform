@@ -23,6 +23,8 @@
             this.queue = queue;
             this.myId = queue.users.getMyIndex();
             this.user = queue.users.get(this.myId);
+
+            console.log(this);
         }
 
         QueueReadyController.prototype.accept = function(){
