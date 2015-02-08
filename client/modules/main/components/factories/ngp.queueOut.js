@@ -33,38 +33,35 @@
                 return this.queue("leave", q);
             },
 
-            queue : function(action, q){
+            queue : function(method, q){
                 var data  = {
                     "m" : 'queue',
                     "d" : {
-                        "m" : action,
+                        "m" : method,
                         "d" : q
                     }
                 };
                 WebSocket.Primus.write(data);
             },
 
-            accept : function(args){
-                return this.updateQueue(args, "accept");
+            accept : function(q, u){
+                return this.updateQueue("accept", q, u);
             },
 
-            decline : function(args){
-                return this.updateQueue(args, "decline");
+            decline : function(q, u){
+                return this.updateQueue("decline", q, u);
             },
 
-            updateQueue : function(args, action){
-                var queue = Queues.get(args[0])
-                    , user = queue.users.get(args[1])
-                    , room = queue.getRoom()
-                    ;
+            updateQueue : function(method, q, u){
+                var room = q.getRoom();
 
-                if(!queue) return {"success":false, "msg" : 'Queue was not found'};
-                if(!user) return {"success":false, "msg" : 'User was not found'};
+                if(!q) return {"success":false, "msg" : 'Queue was not found'};
+                if(!u) return {"success":false, "msg" : 'User was not found'};
                 if(!room) return {"success":false, "msg" : 'Room was not found'};
 
                 var data  = {
-                    "m" : action,
-                    "d" : {"id":queue.id, "user" : user }
+                    "m" : method,
+                    "d" : {"id":q.id, "room" : room, "user" : { id : u.id, username : u.username } }
                 };
 
                 WebSocket.Primus.write({"m":"queue", "d": data});

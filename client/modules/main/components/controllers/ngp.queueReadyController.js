@@ -8,7 +8,6 @@
             '$modalInstance',
             'queue',
             'QueueOut',
-            'Notify',
             queueReadyController
         ]);
 
@@ -16,29 +15,20 @@
         $scope,
         $modalInstance,
         queue,
-        QueueOut,
-        Notify
+        QueueOut
         ) {
         function QueueReadyController(){
             this.queue = queue;
             this.myId = queue.users.getMyIndex();
             this.user = queue.users.get(this.myId);
-
-            console.log(this);
         }
 
         QueueReadyController.prototype.accept = function(){
-            var analysed = QueueOut.analyseMessage("accept " + queue.id + " " + this.myId);
-            if(!analysed.success){
-                Notify.error(analysed.msg);
-            }
+            QueueOut.accept(this.queue,this.user);
         };
 
         QueueReadyController.prototype.leaveQueue = function(){
-            var analysed = QueueOut.analyseMessage("decline " + queue.id +" " + this.myId);
-            if(!analysed.success){
-                Notify.error(analysed.msg);
-            }
+            var analysed = QueueOut.decline(this.queue,this.user);
         };
 
         $scope.qready = new QueueReadyController();
