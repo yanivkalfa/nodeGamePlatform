@@ -61,6 +61,7 @@
     };
 
     Queue.prototype.clearTimers = function(){
+        console.log('aaaaaaaaaaa');
         clearInterval(this._interval);
     };
 
