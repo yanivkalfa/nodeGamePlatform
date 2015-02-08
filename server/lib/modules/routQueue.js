@@ -2,12 +2,8 @@ module.exports = function(_s){
 
     var pathsList = _s.oConfig.pathsList
         , router = require(pathsList.Router)
-        , QueueUser = require(pathsList.QueueUser)
         , GamesApi = require(pathsList.GamesApi)(_s)
-        , GetRoom = require(pathsList.GetRoom)(_s)
-        , getRoom = new GetRoom()
         , QueuesApi = require(pathsList.QueuesApi)(_s)
-        , User = require(pathsList.User)(_s)
         , QueueOut = require(pathsList.QueueOut)(_s)
         , queueOut = new QueueOut()
         , SocketAjax = _s.oSocketAjax

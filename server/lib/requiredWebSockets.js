@@ -4,9 +4,7 @@ module.exports = function(_s){
         , pathsList = _s.oConfig.pathsList
         , Authorization = require(pathsList.Authorization)(_s)
         , RoutSocket = require(pathsList.RoutSocket)(_s)
-        , RoutRoom = require(pathsList.RoutRoom)(_s)
         , User = require(pathsList.User)(_s)
-        , Queues = require(pathsList.Queues)
         , QueuesApi = require(pathsList.QueuesApi)(_s)
         , sessCon = _s.oConfig.session.connection
         , sessSecret = _s.oConfig.session.secret
@@ -147,16 +145,21 @@ module.exports = function(_s){
         if(!spark) return false;
         try{
             if(spark.user.uType != 'user') return;
-            var routRoom = new RoutRoom();
             var routSocket = new RoutSocket();
             User.fetchUser({"id":spark.user.id}).then(function(user){
                 _.isArray(user.rooms) && _(user.rooms).forEach(function(room){
-                    var aRoom  = {
-                        "id" : room,
-                        "type" : 'chat',
-                        "users" : {}
+                    var data  = {
+                        "m" : 'room',
+                        "d": {
+                            "m" : '_leave',
+                            "d" : {
+                                "id" : room,
+                                "type" : 'chat',
+                                "users" : {}
+                            }
+                        }
                     };
-                    routRoom._leave(spark, aRoom)
+                    routSocket.rout({"m" : 'chat', "d": data});
                 });
 
                 user.spark = undefined;
