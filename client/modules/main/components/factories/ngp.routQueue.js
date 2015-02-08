@@ -112,6 +112,7 @@
         };
 
         RoutQueueFactory.prototype.decline = function(q){
+            console.log('q', q);
             var queue = Queues.get(q.id);
             queue.users.decline(q.user);
             Queues.get(q.id);

@@ -169,9 +169,12 @@ module.exports = function(_s){
                     var data  = {
                         "m" : 'decline',
                         "d" : {
-                            id : queue.id,
-                            user : {id:queue.user.id,username : queue.user.username}
+                            "id":queue.id,
+                            "room" : queue.room,
+                            "user" : { id : queue.user.id, username : queue.user.username }
                         }
+
+
                     };
                     routSocket.queue(spark,data);
                     queue.start = new Date();
