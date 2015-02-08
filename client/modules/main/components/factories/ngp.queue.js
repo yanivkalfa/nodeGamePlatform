@@ -4,12 +4,14 @@
 (function(){
     angular.module(ngp.const.app.name)
         .factory('Queue', [
+            '$rootScope',
             'EventEmitter',
             'UsersList',
             Queue
         ]);
 
     function Queue(
+        $rootScope,
         EventEmitter,
         UsersList
         ){
@@ -19,9 +21,9 @@
             this._startTime = Date.now();
             this._endTime = undefined;
             this._interval = undefined;
-            this.timer = '';
             this._window = undefined;
             this._room = undefined;
+            this.timer = '';
 
             this.users = new UsersList();
 
@@ -43,14 +45,38 @@
             self.setMinDetails();
         };
 
-        QueueFactory.prototype.startTimer = function(seconds, perSecFn, endFn){
+        QueueFactory.prototype.reset = function(){
+            var self = this;
+            this._endTime = undefined;
+
+            clearInterval(this._interval);
+            this._interval = undefined;
+
+            if(this._window) this._window.close();
+            this._window = undefined;
+
+            this._room = undefined;
+            this.timer = '';
+
+            self.users.clear();
+            $rootScope.$apply();
+        };
+
+        QueueFactory.prototype.queueStart = function(time){
+            this._startTime = time || Date.now();
+        };
+        QueueFactory.prototype.queueEnd = function(time){
+            this._endTime = time || Date.now();
+        };
+
+        QueueFactory.prototype.startTimer = function(seconds, endFn){
             var self = this;
             if(seconds <=0) return false;
             self.timer = seconds;
-            if('function' === typeof perSecFn) perSecFn();
+            $rootScope.$apply();
             self._interval = setInterval(function(){
                 self.timer--;
-                if('function' === typeof perSecFn) perSecFn();
+                $rootScope.$apply();
                 if(self.timer <= 0){
                     self.clearTimers();
                     if('function' === typeof endFn) endFn();
@@ -58,10 +84,10 @@
             }, 1000);
         };
 
-        QueueFactory.prototype.clearTimers = function(endFn){
+        QueueFactory.prototype.clearTimers = function(){
             clearInterval(this._interval);
             this.timer = '';
-            if('function' === typeof endFn) endFn();
+            $rootScope.$apply();
         };
 
         QueueFactory.prototype.setRoom = function(room){

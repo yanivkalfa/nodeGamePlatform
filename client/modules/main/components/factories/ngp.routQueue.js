@@ -120,16 +120,18 @@
             var queue = Queues.getByPropName('_room', q.room);
             queue.users.decline(q.user);
             $rootScope.$apply();
-            window = queue.getWindow();
-            if(window){
-                apply = function(){ $rootScope.$apply(); };
+            //window = queue.getWindow();
+            //if(window){
+                /*
                 close = function(){
                     window.close();
                     queue.setWindow(undefined);
                     queue.users.clear();
                 };
-                queue.startTimer(3,apply, close);
-            }
+                */
+
+            //}
+            queue.startTimer(3, _.bind(queue.reset, queue));
         };
 
         return RoutQueueFactory;
