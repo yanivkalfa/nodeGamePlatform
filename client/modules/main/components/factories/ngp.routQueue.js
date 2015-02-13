@@ -116,7 +116,6 @@
             var queue = Queues.getByPropName('_room', q.room);
             if(queue.users.length > 0){
                 queue.users.decline(q.user);
-                $rootScope.$apply();
             }
             queue.startTimer(3, _.bind(queue.reset, queue));
         };

@@ -14,8 +14,8 @@
 
     function webSocket($rootScope, $q, Authorization, RoutChat, RoutQueue) {
 
-        var RoutChat = new RoutChat();
-        var RoutQueue = new RoutQueue();
+        var routChat = new RoutChat();
+        var routQueue = new RoutQueue();
 
         function WebSocketService(){
             this.Primus = false;
@@ -61,11 +61,11 @@
             },
 
             chat : function(msg){
-                RoutChat.rout(msg);
+                routChat.rout(msg);
             },
 
             queue : function(msg){
-                RoutQueue.rout(msg);
+                routQueue.rout(msg);
             },
 
             end : function(){ this.Primus.end(); },

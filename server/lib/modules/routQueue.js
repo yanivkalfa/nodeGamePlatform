@@ -71,9 +71,8 @@ module.exports = function(_s){
         var self = this
             , qName = q.name
             ;
-        QueuesApi.fetchSortLimit({"name" : qName}, 'date', q.userCount).then(function(queues){
+        QueuesApi.fetchSortLimit({"name" : qName, occupied : false}, 'date', q.userCount).then(function(queues){
             if(_.isArray(queues) && queues.length < q.userCount) return false;
-            console.log('enough people queued');
 
             var users = []
                 , remoteUsers = []
@@ -218,15 +217,31 @@ module.exports = function(_s){
 
 
     RoutQueue.prototype.checkAccepted = function(spark, q){
+        var self = this, fail;
 
         GamesApi.fetch(q.game).then(function(games){
             if(!games) return false;
-            QueuesApi.fetch({room: q.room, accepted : true}).then(function(queues){
-                console.log('all accepted queues');
-                console.log(queues);
-                if(_.isArray(queues) && queues.length < games[0].userCount) return false;
+            QueuesApi.fetch({room: q.room}).then(function(queues){
+                if(!_.isArray(queues)) return false;
+                var neededCount = games[0].userCount
+                    , acceptedUsers = 0;
+                _(queues).forEach(function(queue){
+                    if(queue.accepted) acceptedUsers++;
+                });
 
-                console.log('enough accepted go a head and redirect to game server');
+                fail = function(){
+                    _(queues).forEach(function(queue){
+                        queue.room = '';
+                        queue.occupied = false;
+                        queue.accepted = false;
+                        queue.save();
+                    });
+                };
+
+                if(acceptedUsers != neededCount) fail();
+
+
+                // get available
 
             });
         });
@@ -260,7 +275,7 @@ module.exports = function(_s){
             if(!_.isArray(queues)) return false;
             var queue = queues[0];
             queue.accepted = false;
-            queue.save();
+            queue.start = new Date();
             queue.save(function (err, queue) {
                 if(err) return console.log(err);
                 q.accepted = false;
