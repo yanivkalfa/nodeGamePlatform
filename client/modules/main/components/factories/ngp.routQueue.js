@@ -81,8 +81,6 @@
             WebSocket.end();
             var game = Games.get(g.name);
             console.log(game);
-
-            throw new Error('aasdasd');
             game.setGameDetails(g);
             $state.go('game', {"game":g.name});
         };
