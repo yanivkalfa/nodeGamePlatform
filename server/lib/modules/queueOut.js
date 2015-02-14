@@ -76,6 +76,26 @@ module.exports = function(_s){
         return _s.primus.room(q.room).write({"m": "queue", "d":data});
     };
 
+
+    QueueOut.prototype.queueEnd = function(spark, q, warrning){
+        if(warrning) q.warrning = warrning;
+        var data = {
+            "m" : 'queueEnd',
+            "d" : q
+        };
+
+        return _s.primus.room(q.room).write({"m": "queue", "d":data});
+    };
+
+    QueueOut.prototype.gameReady = function(spark, game){
+        var data = {
+            "m" : 'gameReady',
+            "d" : game
+        };
+
+        return _s.primus.room(game.room).write({"m": "queue", "d":data});
+    };
+
     return QueueOut;
 
 };

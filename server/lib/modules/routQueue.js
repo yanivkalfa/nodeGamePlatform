@@ -236,6 +236,7 @@ module.exports = function(_s){
                     , details
                     , gameName
                     , serverDetails
+                    , queueLeave
                     ;
 
                 fail = function(){
@@ -275,9 +276,18 @@ module.exports = function(_s){
                     "pot" : 8001
                 };
 
+                queueLeave = function(warrning){
+                    queueOut.queueEnd(spark, {"name" : q.game, room: q.room}, warrning);
+                    _(queues).forEach(function(queue){
+                        queue.remove();
+                    });
+                };
+
                 Servers.startGame(serverDetails, details).then(function(gameDetails){
-                    console.log(gameDetails);
-                });
+                    queueLeave();
+                    gameDetails.serverDetails = serverDetails;
+                    queueOut.gameReady(spark, gameDetails);
+                }).catch(queueLeave.bind('There was a problem creating the game'));
             });
         });
 

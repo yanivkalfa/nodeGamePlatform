@@ -69,6 +69,16 @@
 
                 WebSocket.Primus.write({"m":"queue", "d": data});
                 return {"success":true};
+            },
+
+
+            leaveGameRoom : function(room){
+                var data  = {
+                    "m" : 'leaveGameRoom',
+                    "d" : room
+                };
+
+                WebSocket.Primus.write({"m":"queue", "d": data});
             }
         };
 

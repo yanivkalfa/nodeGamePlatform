@@ -10,6 +10,7 @@
             'Games',
             'Queues',
             'QueueUser',
+            'QueueOut',
             'Notify',
             'Authorization',
             RoutQueue
@@ -22,6 +23,7 @@
         Games,
         Queues,
         QueueUser,
+        QueueOut,
         Notify,
         Authorization
         ) {
@@ -75,6 +77,12 @@
             });
         };
 
+        RoutQueueFactory.prototype.queueEnd = function(q){
+            var queue = Queues.getByPropName('_room', q.room);
+            this.leave(queue);
+            QueueOut.leaveGameRoom(queue.room);
+        };
+
         RoutQueueFactory.prototype.join = function(q){
             var self = this , game, queue;
             game = Games.get(q.name);
@@ -117,10 +125,12 @@
         };
 
         RoutQueueFactory.prototype.decline = function(q){
+            console.log(q);
             var queue = Queues.getByPropName('_room', q.room);
             if(queue.users.length > 0){
                 queue.users.decline(q.user);
             }
+
             queue.startTimer(3, _.bind(queue.reset, queue));
         };
 
