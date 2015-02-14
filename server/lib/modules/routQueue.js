@@ -75,6 +75,8 @@ module.exports = function(_s){
         QueuesApi.fetchSortLimit({"name" : qName, occupied : false}, 'date', q.userCount).then(function(queues){
             if(_.isArray(queues) && queues.length < q.userCount) return false;
 
+            console.log('queues : ', queues);
+
             var users = []
                 , remoteUsers = []
                 , localUsers = []
@@ -146,6 +148,7 @@ module.exports = function(_s){
             if(userOffline) return fail();
 
             _(localUsers).forEach(function(localUser){
+                console.log('sending queues to: ', localUser);
                 joinedPromises.push(self.joinGameRoom(localUser.spark, roomName));
             });
 
@@ -288,9 +291,10 @@ module.exports = function(_s){
         QueuesApi.fetch({"_id" : q.id}).then(function(queues){
             if(!_.isArray(queues)) return false;
             var queue = queues[0];
-            queue.occupied = false;
+            //queue.occupied = false;
+            //queue.accepted = false;
+            //queue.start = new Date();
             queue.accepted = false;
-            queue.start = new Date();
             queue.save(function (err, queue) {
                 if(err) return console.log(err);
                 q.accepted = false;
