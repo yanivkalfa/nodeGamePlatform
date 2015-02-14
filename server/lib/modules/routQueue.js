@@ -200,6 +200,8 @@ module.exports = function(_s){
                     "room" : "",
                     "start" : new Date(),
                     "end" : "",
+                    "accepted" : false,
+                    "occupied" : false,
                     "game" : game.id,
                     "user" : spark.user.id
                 };
