@@ -78,12 +78,11 @@
         };
 
         RoutQueueFactory.prototype.gameReady = function(g, WebSocket){
+            console.log(g);
             WebSocket.end();
             var game = Games.get(g.name);
             console.log(game);
             game.setGameDetails(g);
-
-            throw new Error();
             $state.go('game', {"game":g.name});
         };
 
