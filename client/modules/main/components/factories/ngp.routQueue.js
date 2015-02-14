@@ -110,6 +110,7 @@
         RoutQueueFactory.prototype.leave = function(q){
             var game;
             game = Games.get(q.name);
+            console.log(game);
             if(!game.isQueued()) return false;
             Queues.remove(q.id);
             game.setQueue(undefined);
