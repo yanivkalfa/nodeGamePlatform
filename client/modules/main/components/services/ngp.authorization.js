@@ -22,7 +22,6 @@
 
         function AuthorizationService(){
             this._user = undefined;
-            //this._dependencies = [{cName : WebSocket, 'async' :true }, {cName : Latency, 'async' :false }];
             this._authenticated = false;
             this.api = Api.createNewApi();
         }

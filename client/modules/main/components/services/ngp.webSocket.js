@@ -65,7 +65,7 @@
             },
 
             queue : function(msg){
-                routQueue.rout(msg);
+                routQueue.rout(msg, this);
             },
 
             end : function(){ this.Primus.end(); },

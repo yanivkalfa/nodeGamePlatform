@@ -75,14 +75,14 @@
             });
         };
 
-        RoutQueueFactory.prototype.queueEnd = function(q){
+        RoutQueueFactory.prototype.queueEnd = function(q, WebSocket){
             var queue = Queues.getByPropName('_room', q.room);
             this.leave(queue);
             //QueueOut.leaveGameRoom(queue.room);
 
             var data  = {
                 "m" : 'leaveGameRoom',
-                "d" : room
+                "d" : q.room
             };
 
             WebSocket.Primus.write({"m":"queue", "d": data});
