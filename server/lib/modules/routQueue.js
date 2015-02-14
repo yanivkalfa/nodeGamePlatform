@@ -123,7 +123,6 @@ module.exports = function(_s){
                     queue.save();
                 });
 
-                console.log(localUsers, remoteUsers);
                 _(localUsers).forEach(function(localUser){
                     self.leaveGameRoom(localUser.spark, roomName).catch(console.log);
                 });
