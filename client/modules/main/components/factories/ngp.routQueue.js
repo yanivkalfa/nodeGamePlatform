@@ -80,7 +80,8 @@
         RoutQueueFactory.prototype.gameReady = function(g, WebSocket){
             WebSocket.end();
             var game = Games.get(g.name);
-            game.setQueueImage(g);
+            console.log(game);
+            game.setGameDetails(g);
             $state.go('game', {"game":g.name});
         };
 
