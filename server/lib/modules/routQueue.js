@@ -299,7 +299,7 @@ module.exports = function(_s){
             var queue = queues[0];
             queue.accepted = false;
             queue.start = new Date();
-            queue.room = '';
+            //queue.room = '';
             queue.save(function (err, queue) {
                 if(err) return console.log(err);
                 q.accepted = false;
