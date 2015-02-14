@@ -71,8 +71,13 @@ module.exports = function(_s){
         var self = this
             , qName = q.name
             ;
+
+        console.log('check Queues', q);
+        // getting all un occupied queues that fit a certain name sorting by data and limiting to game amount.
         QueuesApi.fetchSortLimit({"name" : qName, occupied : false}, 'date', q.userCount).then(function(queues){
             if(_.isArray(queues) && queues.length < q.userCount) return false;
+
+            console.log('queues : ', queues);
 
             var users = []
                 , remoteUsers = []
@@ -101,7 +106,7 @@ module.exports = function(_s){
             };
 
             _(queues).forEach(handleQueue);
-            console.log('queue foreach');
+            console.log('queue foreach' );
             _(queues).forEach(function(queue){
                 queue.room = roomName;
                 queue.occupied = true;
@@ -122,6 +127,7 @@ module.exports = function(_s){
                     self.leaveGameRoom(localUser.spark, roomName).catch(console.log);
                 });
 
+                console.log('forEach remoteUsers');
                 _(remoteUsers).forEach(function(remoteUser){
                     var sjaxDetails = {
                         "server" : remoteUser.user.server,
