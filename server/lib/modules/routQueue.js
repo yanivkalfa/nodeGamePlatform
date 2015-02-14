@@ -244,11 +244,10 @@ module.exports = function(_s){
                     if(queue.accepted) acceptedUsers++;
                     users[queue.user.id] = true;
                 });
-;
 
                 console.log('acceptedUsers, neededCount',acceptedUsers, neededCount);
 
-                if(acceptedUsers != neededCount) return false;
+                if(acceptedUsers != neededCount) return fail();
 
                 gameDetails = {
                     name : gameName,
