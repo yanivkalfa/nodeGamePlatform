@@ -75,10 +75,13 @@
             });
         };
 
+        RoutQueueFactory.prototype.gameReady = function(g, WebSocket){
+            console.log(g);
+        };
+
         RoutQueueFactory.prototype.queueEnd = function(q, WebSocket){
             var queue = Queues.getByPropName('_room', q.room);
             this.leave(queue);
-            //QueueOut.leaveGameRoom(queue.room);
 
             var data  = {
                 "m" : 'leaveGameRoom',
@@ -130,7 +133,6 @@
         };
 
         RoutQueueFactory.prototype.decline = function(q){
-            console.log(q);
             var queue = Queues.getByPropName('_room', q.room);
             if(queue.users.length > 0){
                 queue.users.decline(q.user);

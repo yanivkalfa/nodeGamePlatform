@@ -61,6 +61,7 @@ module.exports = function(_s){
     };
 
     RoutQueue.prototype.leaveGameRoom = function(spark, room){
+        console.log('leaveing : ', room);
         return new _s.oReq.Promise(function(resolve, reject) {
             spark.leave(room, function(err, succ){
                 return resolve(succ);
