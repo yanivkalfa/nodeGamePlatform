@@ -13,10 +13,10 @@
 
         RouterFactory.prototype =  {
 
-            rout: function(msg){
+            rout: function(msg, a1, a2, a3, a4, a5){
                 var self = this;
                 console.log(msg);
-                self[msg.m](msg.d);
+                self[msg.m](msg.d, a1, a2, a3, a4, a5);
             }
 
         };
