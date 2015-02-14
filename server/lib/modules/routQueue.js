@@ -237,15 +237,6 @@ module.exports = function(_s){
                     , gameName
                     ;
 
-                neededCount = games[0].userCount;
-                gameName = games[0].name;
-                acceptedUsers = 0;
-
-                _(queues).forEach(function(queue){
-                    if(queue.accepted) acceptedUsers++;
-                    users[queue.user.id] = true;
-                });
-
                 fail = function(){
                     console.log('Refresh or decline');
                     _(queues).forEach(function(queue){
@@ -256,9 +247,18 @@ module.exports = function(_s){
                     });
                 };
 
-                console.log('acceptedUsers, neededCount',acceptedUsers, neededCount);
+                if(!q.accepted) return fail();
 
-                if(acceptedUsers != neededCount && !q.accepted) return fail();
+                neededCount = games[0].userCount;
+                gameName = games[0].name;
+                acceptedUsers = 0;
+
+                _(queues).forEach(function(queue){
+                    if(queue.accepted) acceptedUsers++;
+                    users[queue.user.id] = true;
+                });
+
+                console.log('acceptedUsers, neededCount',acceptedUsers, neededCount);
 
                 gameDetails = {
                     name : gameName,
