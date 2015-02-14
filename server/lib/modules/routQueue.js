@@ -247,6 +247,7 @@ module.exports = function(_s){
                 });
 
                 fail = function(){
+                    console.log('Refresh or decline');
                     _(queues).forEach(function(queue){
                         queue.room = '';
                         queue.occupied = false;
