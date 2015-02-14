@@ -14,7 +14,7 @@ module.exports = {
         },
 
         userCount : {
-            type :String,
+            type :Number,
             required : true
         },
 
