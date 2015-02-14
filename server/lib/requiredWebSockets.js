@@ -4,6 +4,7 @@ module.exports = function(_s){
         , pathsList = _s.oConfig.pathsList
         , Authorization = require(pathsList.Authorization)(_s)
         , RoutSocket = require(pathsList.RoutSocket)(_s)
+        , routSocket = new RoutSocket()
         , User = require(pathsList.User)(_s)
         , QueuesApi = require(pathsList.QueuesApi)(_s)
         , sessCon = _s.oConfig.session.connection
@@ -47,8 +48,6 @@ module.exports = function(_s){
                         // Attaching user to spark - for logout and maybe future needs
                         spark.user = user;
                         //spark.Queues = new Queues();
-
-                        var routSocket = new RoutSocket();
 
                         // Update user's spark id in database - in-case its needed
                         var updateSpark = function(user){
@@ -145,7 +144,6 @@ module.exports = function(_s){
         if(!spark) return false;
         try{
             if(spark.user.uType != 'user') return;
-            var routSocket = new RoutSocket();
             User.fetchUser({"id":spark.user.id}).then(function(user){
                 _.isArray(user.rooms) && _(user.rooms).forEach(function(room){
                     var data  = {
@@ -159,7 +157,7 @@ module.exports = function(_s){
                             }
                         }
                     };
-                    routSocket.rout({"m" : 'chat', "d": data});
+                    routSocket.rout(spark, {"m" : 'chat', "d": data});
                 });
 
                 user.spark = undefined;
@@ -179,7 +177,7 @@ module.exports = function(_s){
                     };
                     //routSocket.queue(spark,data);
 
-                    routSocket.rout({"m" : 'queue', "d": data});
+                    routSocket.rout(spark, {"m" : 'queue', "d": data});
                     queue.start = new Date();
                     queue.save();
                 });

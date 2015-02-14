@@ -11,7 +11,6 @@ module.exports = function(_s){
 
     function RoutSocket (){
         router.apply(this,arguments);
-
     }
 
     RoutSocket.prototype = Object.create(router.prototype);
