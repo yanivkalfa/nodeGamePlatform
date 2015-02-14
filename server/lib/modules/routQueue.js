@@ -72,7 +72,7 @@ module.exports = function(_s){
             , qName = q.name
             ;
         // getting all un occupied queues that fit a certain name sorting by data and limiting to game amount.
-        QueuesApi.fetchSortLimit({"name" : qName, occupied : false}, 'start', q.userCount).then(function(queues){
+        QueuesApi.fetchSortLimit({"name" : qName/*, occupied : false*/}, 'start', q.userCount).then(function(queues){
             console.log('queues : ', queues, 'q.userCount', q.userCount);
             if(_.isArray(queues) && queues.length < q.userCount) return false;
 
@@ -294,7 +294,7 @@ module.exports = function(_s){
             var queue = queues[0];
             //
             //queue.accepted = false;
-            //queue.start = new Date();
+            queue.start = new Date();
             queue.occupied = false;
             queue.accepted = false;
             queue.save(function (err, queue) {
