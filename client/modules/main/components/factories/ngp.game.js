@@ -36,6 +36,7 @@
             },
 
             setGameDetails : function(gameDetails){
+                console.log('aaaaaaaaaa');
                 this.gameDetails = gameDetails;
             },
 
