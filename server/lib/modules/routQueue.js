@@ -5,6 +5,7 @@ module.exports = function(_s){
         , GamesApi = require(pathsList.GamesApi)(_s)
         , QueuesApi = require(pathsList.QueuesApi)(_s)
         , QueueOut = require(pathsList.QueueOut)(_s)
+        , Servers = require(_s.oConfig.pathsList.Servers)(_s)
         , queueOut = new QueueOut()
         , SocketAjax = _s.oSocketAjax
         , _ = _s.oReq.lodash
@@ -73,7 +74,6 @@ module.exports = function(_s){
             ;
         // getting all un occupied queues that fit a certain name sorting by data and limiting to game amount.
         QueuesApi.fetchSortLimit({"name" : qName, occupied : false}, 'start', q.userCount).then(function(queues){
-            console.log('queues:', queues.length);
             if(_.isArray(queues) && queues.length < q.userCount) return false;
 
             var users = []
@@ -233,12 +233,12 @@ module.exports = function(_s){
                 var neededCount
                     , acceptedUsers
                     , users = {}
-                    , gameDetails = {}
+                    , details
                     , gameName
+                    , serverDetails
                     ;
 
                 fail = function(){
-                    console.log('Refresh or decline');
                     _(queues).forEach(function(queue){
                         queue.room = '';
                         queue.occupied = false;
@@ -259,16 +259,25 @@ module.exports = function(_s){
                 });
 
                 if(acceptedUsers != neededCount ) return false;
-                console.log('acceptedUsers, neededCount',acceptedUsers, neededCount);
 
-                gameDetails = {
-                    name : gameName,
-                    type : gameName,
-                    room : q.room,
-                    expectingPlayers : users
+                details = {
+                    userDetails : {},
+                    gameDetails : {
+                        name : gameName,
+                        type : gameName,
+                        room : q.room,
+                        expectingPlayers : users
+                    }
                 };
 
-                console.log(gameDetails);
+                serverDetails = {
+                    "address" : "54.165.132.121",
+                    "pot" : 8001
+                };
+
+                Servers.startGame(serverDetails, details).then(function(gameDetails){
+                    console.log(gameDetails);
+                });
             });
         });
 
@@ -296,7 +305,6 @@ module.exports = function(_s){
 
     RoutQueue.prototype.decline = function(spark, q){
         var self = this, queue;
-        console.log('declining');
         QueuesApi.fetch({"_id" : q.id}).then(function(queues){
             if(!_.isArray(queues)) return false;
             var queue = queues[0];

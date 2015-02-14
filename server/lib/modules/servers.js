@@ -52,8 +52,46 @@ module.exports = function(_s){
                     return reject(err);
                 });
             });
-        }
+        },
 
+        startGame : function(server, details){
+
+            details.userDetails = {"email" : _s.details.user.email, "password" : _s.details.user.password};
+
+            var options = {
+                    "hostname" : server.address,
+                    "port" : server.port
+                }
+                , params = {
+                    "method" : 'startGame',
+                    "status" : 0,
+                    "success" : false,
+                    "data" :details
+                }
+                , self = this
+                ;
+
+
+
+            options = HttpTransit.prepareRequest(options, false, params);
+            return new _s.oReq.Promise(function(resolve, reject) {
+                HttpTransit.doRequest(options, params).then(function(resp){
+                    try{
+                        var response = JSON.parse(resp);
+                    }catch(e){
+                        return reject(e);
+                    }
+                    if(response.success){
+                        return resolve(response.data);
+                    }else{
+                        var err = new Error(response.data);
+                        return reject(err);
+                    }
+                }).catch(function(err){
+                    return reject(err);
+                });
+            });
+        }
     };
 
 

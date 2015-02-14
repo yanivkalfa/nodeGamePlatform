@@ -81,17 +81,13 @@ module.exports = function(_s){
 
             toSpark = _s.primus.spark(user.spark);
             if(toSpark){
-                console.log('spark on server');
                 spark.write({"m": "chat", "d":data});
                 toSpark.write({"m": "chat", "d":data});
                 return true;
             }
 
-            console.log('user.spark', user.spark);
-
             serverDetails = user.server;
             if(!serverDetails || !serverDetails.port || !serverDetails.address) return self.warningMsg(spark, 'We were unable to find this user');
-            console.log('spark found in: ', serverDetails);
 
             localData = _.cloneDeep(data);
             data.m = 'rmMsg';
