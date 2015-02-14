@@ -12,7 +12,6 @@
             'QueueUser',
             'Notify',
             'Authorization',
-            'WebSocket',
             RoutQueue
         ]);
 
@@ -24,8 +23,7 @@
         Queues,
         QueueUser,
         Notify,
-        Authorization,
-        WebSocket
+        Authorization
         ) {
 
         function RoutQueueFactory(){
