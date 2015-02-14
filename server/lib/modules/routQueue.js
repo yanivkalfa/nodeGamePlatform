@@ -258,6 +258,7 @@ module.exports = function(_s){
                     users[queue.user.id] = true;
                 });
 
+                if(acceptedUsers != neededCount ) return false;
                 console.log('acceptedUsers, neededCount',acceptedUsers, neededCount);
 
                 gameDetails = {
