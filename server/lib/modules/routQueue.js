@@ -75,7 +75,6 @@ module.exports = function(_s){
             ;
         // getting all un occupied queues that fit a certain name sorting by data and limiting to game amount.
         QueuesApi.fetchSortLimit({"name" : qName, occupied : false}, 'start', q.userCount).then(function(queues){
-            console.log('qeueueueueue:', queues);
             if(_.isArray(queues) && queues.length < q.userCount) return false;
 
             var users = []
@@ -289,6 +288,7 @@ module.exports = function(_s){
 
                 Servers.startGame(serverDetails, details).then(function(gameDetails){
                     queueLeave();
+                    console.log('gameDetails', gameDetails);
                     gameDetails.serverDetails = serverDetails;
                     queueOut.gameReady(spark, gameDetails);
                 }).catch(queueLeave.bind('There was a problem creating the game'));
