@@ -177,8 +177,6 @@ module.exports = function(_s){
                     };
 
                     routSocket.rout(spark, {"m" : 'queue', "d": data});
-                    queue.start = new Date();
-                    queue.save();
                 });
             });
         }catch(e){console.log(e)}

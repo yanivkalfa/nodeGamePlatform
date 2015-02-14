@@ -244,19 +244,11 @@ module.exports = function(_s){
                     if(queue.accepted) acceptedUsers++;
                     users[queue.user.id] = true;
                 });
-
-                fail = function(){
-                    _(queues).forEach(function(queue){
-                        queue.room = '';
-                        queue.occupied = false;
-                        queue.accepted = false;
-                        queue.save();
-                    });
-                };
+;
 
                 console.log('acceptedUsers, neededCount',acceptedUsers, neededCount);
 
-                if(acceptedUsers != neededCount) return fail();
+                if(acceptedUsers != neededCount) return false;
 
                 gameDetails = {
                     name : gameName,
@@ -297,6 +289,7 @@ module.exports = function(_s){
         QueuesApi.fetch({"_id" : q.id}).then(function(queues){
             if(!_.isArray(queues)) return false;
             var queue = queues[0];
+            queue.occupied = false;
             queue.accepted = false;
             queue.start = new Date();
             queue.save(function (err, queue) {
