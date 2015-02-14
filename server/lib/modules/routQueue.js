@@ -75,6 +75,7 @@ module.exports = function(_s){
             ;
         // getting all un occupied queues that fit a certain name sorting by data and limiting to game amount.
         QueuesApi.fetchSortLimit({"name" : qName, occupied : false}, 'start', q.userCount).then(function(queues){
+            console.log('qeueueueueue:', queues);
             if(_.isArray(queues) && queues.length < q.userCount) return false;
 
             var users = []
