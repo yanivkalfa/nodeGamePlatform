@@ -239,7 +239,7 @@ module.exports = function(_s){
                 };
 
                 if(acceptedUsers != neededCount) fail();
-
+                console.log('got here although one cancled');
 
                 // get available
 
