@@ -115,16 +115,13 @@
             return  this.minDetails;
         };
 
-
         QueueFactory.prototype.usersReady = function(){
             var self = this, id, len, list;
             len = self.users.listLength();
-            console.log(len, self.userCount);
             if(len !== self.userCount) return false;
 
             list = self.users.get();
             for(id in list) {
-                console.log(list[id]);
                 if(!list.hasOwnProperty(id)) continue;
                 if(!list[id].accepted) return false;
             }

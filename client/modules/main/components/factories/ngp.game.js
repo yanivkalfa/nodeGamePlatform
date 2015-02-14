@@ -18,6 +18,8 @@
             this.queueName = queueName || undefined;
             this.userCount = userCount || 2;
             this.img = img || this.name + '.png' || undefined;
+
+            this.gameDetails = undefined;
         }
 
         GameFactory.prototype =  {
@@ -33,6 +35,10 @@
                 this.img = 'queueSearching.gif';
             },
 
+            setGameDetails : function(gameDetails){
+                this.gameDetails = gameDetails;
+            },
+
             resetQueueImage : function(){
                 this.img = this.name + '.png';
             },
@@ -43,6 +49,10 @@
 
             getId : function(){
                 return this.id;
+            },
+
+            getGameDetails : function(){
+                return this.gameDetails;
             },
 
             isBusy : function(){

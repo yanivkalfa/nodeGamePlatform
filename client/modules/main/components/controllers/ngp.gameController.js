@@ -15,10 +15,7 @@
         ) {
 
         function GameController(){
-            console.log(
-                $stateParams,
-                Authorization
-            );
+            console.log( $stateParams, Authorization );
         }
 
         return new GameController();

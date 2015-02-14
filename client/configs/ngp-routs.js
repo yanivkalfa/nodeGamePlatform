@@ -90,7 +90,7 @@
             }
         }).state('game', {
             parent: 'admin',
-            url: '/game',
+            url: '/game/:game',
             data: {
                 roles: ['registered']
             },
