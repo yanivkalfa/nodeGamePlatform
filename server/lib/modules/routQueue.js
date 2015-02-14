@@ -292,9 +292,10 @@ module.exports = function(_s){
         QueuesApi.fetch({"_id" : q.id}).then(function(queues){
             if(!_.isArray(queues)) return false;
             var queue = queues[0];
-            //queue.occupied = false;
+            //
             //queue.accepted = false;
             //queue.start = new Date();
+            queue.occupied = false;
             queue.accepted = false;
             queue.save(function (err, queue) {
                 if(err) return console.log(err);
