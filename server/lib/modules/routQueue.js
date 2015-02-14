@@ -71,13 +71,9 @@ module.exports = function(_s){
         var self = this
             , qName = q.name
             ;
-
-        console.log('check Queues', q);
         // getting all un occupied queues that fit a certain name sorting by data and limiting to game amount.
         QueuesApi.fetchSortLimit({"name" : qName, occupied : false}, 'date', q.userCount).then(function(queues){
             if(_.isArray(queues) && queues.length < q.userCount) return false;
-
-            console.log('queues : ', queues);
 
             var users = []
                 , remoteUsers = []
@@ -105,8 +101,10 @@ module.exports = function(_s){
                 }
             };
 
+            // iterating over queues  to set up user / queue
             _(queues).forEach(handleQueue);
-            console.log('queue foreach' );
+
+            // iterating over queues  set room name / if room occupied or accepted.
             _(queues).forEach(function(queue){
                 queue.room = roomName;
                 queue.occupied = true;
@@ -114,8 +112,10 @@ module.exports = function(_s){
                 queue.save();
             });
 
+
+            // if a user is offline or for some reason is un reachable we reset their
+            // queue, and let everyone else know they need to leave game room
             fail = function(){
-                console.log('fail queue foreach');
                 _(queues).forEach(function(queue){
                     queue.room = '';
                     queue.occupied = false;
@@ -127,7 +127,6 @@ module.exports = function(_s){
                     self.leaveGameRoom(localUser.spark, roomName).catch(console.log);
                 });
 
-                console.log('forEach remoteUsers');
                 _(remoteUsers).forEach(function(remoteUser){
                     var sjaxDetails = {
                         "server" : remoteUser.user.server,
@@ -139,6 +138,7 @@ module.exports = function(_s){
                             }
                         }
                     };
+                    // if server is offline or un reachable - we will get connect ECONNREFUSED - not an error
                     SocketAjax.sJax(sjaxDetails).catch(console.log);
                 });
             };
