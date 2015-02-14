@@ -12,7 +12,7 @@
             'QueueUser',
             'Notify',
             'Authorization',
-            'QueueOut',
+            'WebSocket',
             RoutQueue
         ]);
 
@@ -25,7 +25,7 @@
         QueueUser,
         Notify,
         Authorization,
-        QueueOut
+        WebSocket
         ) {
 
         function RoutQueueFactory(){
@@ -80,7 +80,14 @@
         RoutQueueFactory.prototype.queueEnd = function(q){
             var queue = Queues.getByPropName('_room', q.room);
             this.leave(queue);
-            QueueOut.leaveGameRoom(queue.room);
+            //QueueOut.leaveGameRoom(queue.room);
+
+            var data  = {
+                "m" : 'leaveGameRoom',
+                "d" : room
+            };
+
+            WebSocket.Primus.write({"m":"queue", "d": data});
         };
 
         RoutQueueFactory.prototype.join = function(q){

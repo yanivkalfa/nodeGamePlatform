@@ -9,8 +9,6 @@
             '$rootScope',
             '$state',
             'Api',
-            //'WebSocket',
-            //'Latency',
             Authorization
         ]);
 
@@ -20,8 +18,6 @@
         $rootScope,
         $state,
         Api
-        //WebSocket,
-        //Latency
         ) {
 
         function AuthorizationService(){
