@@ -177,7 +177,9 @@ module.exports = function(_s){
                             "user" : { id : queue.user.id, username : queue.user.username }
                         }
                     };
-                    routSocket.queue(spark,data);
+                    //routSocket.queue(spark,data);
+
+                    routSocket.rout({"m" : 'queue', "d": data});
                     queue.start = new Date();
                     queue.save();
                 });
