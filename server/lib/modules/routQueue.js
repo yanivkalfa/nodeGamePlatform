@@ -254,6 +254,8 @@ module.exports = function(_s){
                     });
                 };
 
+                console.log('acceptedUsers, neededCount',acceptedUsers, neededCount);
+
                 if(acceptedUsers != neededCount) return fail();
 
                 gameDetails = {
