@@ -299,6 +299,7 @@ module.exports = function(_s){
             if(!_.isArray(queues)) return false;
             var queue = queues[0];
             queue.start = new Date();
+            queue.occupied = false;
             queue.accepted = false;
             queue.save(function (err, queue) {
                 if(err) return console.log(err);
