@@ -65,7 +65,6 @@
             },
 
             queue : function(msg){
-                console.log(this);
                 routQueue.rout(msg, this);
             },
 
