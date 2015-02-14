@@ -4,12 +4,22 @@
 (function(){
     angular.module(ngp.const.app.name)
         .controller('gameController', [
+            '$stateParams',
+            'Authorization',
             gameController
         ]);
 
-    function gameController() {
+    function gameController(
+        $stateParams,
+        Authorization
+        ) {
 
-        function GameController(){ }
+        function GameController(){
+            console.log(
+                $stateParams,
+                Authorization
+            );
+        }
 
         return new GameController();
 

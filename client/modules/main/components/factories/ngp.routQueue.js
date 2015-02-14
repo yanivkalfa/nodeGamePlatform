@@ -5,6 +5,7 @@
     angular.module(ngp.const.app.name)
         .factory('RoutQueue', [
             '$rootScope',
+            '$state',
             '$modal',
             'Router',
             'Games',
@@ -17,6 +18,7 @@
 
     function RoutQueue(
         $rootScope,
+        $state,
         $modal,
         Router,
         Games,
@@ -76,11 +78,11 @@
         };
 
         RoutQueueFactory.prototype.gameReady = function(g, WebSocket){
-            console.log(g);
+            WebSocket.end();
+            $state.go('game', g);
         };
 
         RoutQueueFactory.prototype.queueEnd = function(q, WebSocket){
-            console.log(WebSocket);
             var queue = Queues.getByPropName('_room', q.room);
             this.leave(queue);
 
@@ -110,7 +112,6 @@
         RoutQueueFactory.prototype.leave = function(q){
             var game;
             game = Games.get(q.name);
-            console.log(game);
             if(!game.isQueued()) return false;
             Queues.remove(q.id);
             game.setQueue(undefined);
@@ -125,13 +126,9 @@
             queue.users.accept(q.user);
             $rootScope.$apply();
 
-
-            /*
             if(queue.usersReady()){
-                queue.getWindow().close('Starting game');
-                Notify.success('Starting game');
+                queue.reset();
             }
-            */
         };
 
         RoutQueueFactory.prototype.decline = function(q){
