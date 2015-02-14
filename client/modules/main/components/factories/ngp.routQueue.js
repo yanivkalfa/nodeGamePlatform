@@ -80,6 +80,7 @@
         };
 
         RoutQueueFactory.prototype.queueEnd = function(q, WebSocket){
+            console.log(WebSocket);
             var queue = Queues.getByPropName('_room', q.room);
             this.leave(queue);
 
