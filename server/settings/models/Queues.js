@@ -23,8 +23,14 @@ module.exports = {
 
         end :Date,
 
-        occupied : Boolean,
-        accepted : Boolean,
+        occupied : {
+            type :Boolean,
+            default : false
+        },
+        accepted : {
+            type :Boolean,
+            default : false
+        },
 
         game : { type: Schema.Types.ObjectId, ref: 'Games' },
         user : { type: Schema.Types.ObjectId, ref: 'Users' }
