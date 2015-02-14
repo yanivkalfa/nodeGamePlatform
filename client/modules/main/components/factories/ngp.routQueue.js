@@ -10,9 +10,9 @@
             'Games',
             'Queues',
             'QueueUser',
-            //'QueueOut',
             'Notify',
             'Authorization',
+            'QueueOut',
             RoutQueue
         ]);
 
@@ -23,9 +23,9 @@
         Games,
         Queues,
         QueueUser,
-        //QueueOut,
         Notify,
-        Authorization
+        Authorization,
+        QueueOut
         ) {
 
         function RoutQueueFactory(){

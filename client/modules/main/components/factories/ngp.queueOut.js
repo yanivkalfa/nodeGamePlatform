@@ -7,14 +7,12 @@
         .factory('QueueOut', [
             'Terminal',
             'WebSocket',
-            'Queues',
             QueueOut
         ]);
 
     function QueueOut(
         Terminal,
-        WebSocket,
-        Queues
+        WebSocket
         ) {
 
         function QueueOutFactory(){
