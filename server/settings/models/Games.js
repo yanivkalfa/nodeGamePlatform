@@ -20,6 +20,10 @@ module.exports = {
 
         queueName : {
             type :String
+        },
+
+        canvas : {
+            type :Object
         }
     }
 };

@@ -33,14 +33,8 @@
 
                 this.user = Authorization.getUser();
                 this.Primus = Primus.connect('ws://' + ngp.const.app.domain + '/?token=' + this.user.token);
-
-                this.Primus2 = Primus.connect('ws://54.165.132.121:8001/?token=' + this.user.token);
                 this.Primus.on('data', function(msg){
                     self[msg.m](msg.d);
-                });
-
-                this.Primus2.on('open', function open() {
-                    console.log('connected to second server');
                 });
 
                 this.Primus.on('open', function open() {
