@@ -10,7 +10,7 @@
             'Games',
             'Queues',
             'QueueUser',
-            'QueueOut',
+            //'QueueOut',
             'Notify',
             'Authorization',
             RoutQueue
@@ -23,7 +23,7 @@
         Games,
         Queues,
         QueueUser,
-        QueueOut,
+        //QueueOut,
         Notify,
         Authorization
         ) {
