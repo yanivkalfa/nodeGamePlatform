@@ -247,7 +247,7 @@ module.exports = function(_s){
 
                 console.log('acceptedUsers, neededCount',acceptedUsers, neededCount);
 
-                if(acceptedUsers != neededCount) return fail();
+                if(acceptedUsers != neededCount) return false;
 
                 gameDetails = {
                     name : gameName,
