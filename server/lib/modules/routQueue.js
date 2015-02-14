@@ -72,11 +72,9 @@ module.exports = function(_s){
             , qName = q.name
             ;
         // getting all un occupied queues that fit a certain name sorting by data and limiting to game amount.
-        QueuesApi.fetchSortLimit({"name" : qName/*, occupied : false*/}, 'start', q.userCount).then(function(queues){
-            console.log('queues : ', queues, 'q.userCount', q.userCount);
+        QueuesApi.fetchSortLimit({"name" : qName, occupied : false}, 'start', q.userCount).then(function(queues){
+            console.log('queues:', queues);
             if(_.isArray(queues) && queues.length < q.userCount) return false;
-
-            console.log('queues : ', queues);
 
             var users = []
                 , remoteUsers = []
@@ -149,7 +147,6 @@ module.exports = function(_s){
             if(userOffline) return fail();
 
             _(localUsers).forEach(function(localUser){
-                console.log('sending queues to: ', localUser);
                 joinedPromises.push(self.joinGameRoom(localUser.spark, roomName));
             });
 
@@ -249,9 +246,17 @@ module.exports = function(_s){
                     users[queue.user.id] = true;
                 });
 
+                fail = function(){
+                    _(queues).forEach(function(queue){
+                        queue.occupied = false;
+                        queue.accepted = false;
+                        queue.save();
+                    });
+                };
+
                 console.log('acceptedUsers, neededCount',acceptedUsers, neededCount);
 
-                if(acceptedUsers != neededCount) return false;
+                if(acceptedUsers != neededCount) return fail();
 
                 gameDetails = {
                     name : gameName,
@@ -292,11 +297,9 @@ module.exports = function(_s){
         QueuesApi.fetch({"_id" : q.id}).then(function(queues){
             if(!_.isArray(queues)) return false;
             var queue = queues[0];
-            //
-            //queue.accepted = false;
-            queue.start = new Date();
-            queue.occupied = false;
             queue.accepted = false;
+            queue.start = new Date();
+            queue.room = '';
             queue.save(function (err, queue) {
                 if(err) return console.log(err);
                 q.accepted = false;
