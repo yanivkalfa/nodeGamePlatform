@@ -229,10 +229,20 @@ module.exports = function(_s){
             if(!games) return false;
             QueuesApi.fetch({room: q.room}).then(function(queues){
                 if(!_.isArray(queues)) return false;
-                var neededCount = games[0].userCount
-                    , acceptedUsers = 0;
+                var neededCount
+                    , acceptedUsers
+                    , users = {}
+                    , gameDetails = {}
+                    , gameName
+                    ;
+
+                neededCount = games[0].userCount;
+                gameName = games[0].name;
+                acceptedUsers = 0;
+
                 _(queues).forEach(function(queue){
                     if(queue.accepted) acceptedUsers++;
+                    users[queue.user.id] = true;
                 });
 
                 fail = function(){
@@ -244,11 +254,16 @@ module.exports = function(_s){
                     });
                 };
 
-                if(acceptedUsers != neededCount) fail();
-                console.log('got here although one cancled');
+                if(acceptedUsers != neededCount) return fail();
 
-                // get available
+                gameDetails = {
+                    name : gameName,
+                    type : gameName,
+                    room : q.room,
+                    expectingPlayers : users
+                };
 
+                console.log(gameDetails);
             });
         });
 

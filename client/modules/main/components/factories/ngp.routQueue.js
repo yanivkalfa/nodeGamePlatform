@@ -106,10 +106,14 @@
             var queue = Queues.getByPropName('_room', q.room);
             queue.users.accept(q.user);
             $rootScope.$apply();
+
+
+            /*
             if(queue.usersReady()){
                 queue.getWindow().close('Starting game');
                 Notify.success('Starting game');
             }
+            */
         };
 
         RoutQueueFactory.prototype.decline = function(q){
