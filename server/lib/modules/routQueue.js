@@ -288,8 +288,8 @@ module.exports = function(_s){
 
                 Servers.startGame(serverDetails, details).then(function(gameDetails){
                     queueLeave();
-                    console.log('gameDetails', gameDetails);
                     gameDetails.serverDetails = serverDetails;
+                    gameDetails.name = gameName;
                     queueOut.gameReady(spark, gameDetails);
                 }).catch(queueLeave.bind('There was a problem creating the game'));
             });
