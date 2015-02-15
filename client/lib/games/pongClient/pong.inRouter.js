@@ -23,20 +23,17 @@
 
     PongInRouter.prototype.pr = function(players){
 
-        console.log('got  players', players);
         for(var pId in players){
             if(!players.hasOwnProperty(pId)) continue;
             players[pId].local = (players[pId].local==true);
             this.game.joinPlayer(players[pId]);
         }
 
-        console.log('game load');
         this.game.load();
     };
 
 
     PongInRouter.prototype.gs = function(msg){
-        console.log('got Game start', msg);
         this.game.countDown = msg;
         this.game.startCountDown();
     };

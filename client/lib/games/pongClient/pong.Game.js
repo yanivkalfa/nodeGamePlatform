@@ -191,13 +191,14 @@
             self.$scope.$apply();
 
             if(self.countDown <= 0){
+                clearInterval(interval);
+                console.log('counter is low');
 
                 self.countDownWindow.close();
                 self.gameReady = true;
                 setTimeout(function(){
                     self.start();
                 }, 100);
-                clearInterval(interval);
             }
         }, 1000);
 
