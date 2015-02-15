@@ -40,7 +40,9 @@
             console.log(wsAddress);
 
             primus = Primus.connect(wsAddress);
-            primus.on('data', function(msg){});
+            primus.on('data', function(msg){
+                console.log(msg);
+            });
             primus.on('open', function open() {});
             primus.on('error', function error(err) {});
             primus.on('end', function end() {});
