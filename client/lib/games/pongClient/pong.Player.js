@@ -58,7 +58,7 @@
          * @type {Boolean}
          * @api public
          */
-        this.local = opts.local || undefined;
+        this.local = opts.local || false;
 
         /**
          * Holds attributes

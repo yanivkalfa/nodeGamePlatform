@@ -28,6 +28,7 @@
 
             winner = (lPlayer.attributes.score >= 10) ? 'left' : 'right';
 
+            console.log(this.mySide);
             if(this.mySide == winner){
                 console.log('You won !!'); // will be changed with something else
             }else{

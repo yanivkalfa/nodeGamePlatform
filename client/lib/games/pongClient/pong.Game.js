@@ -206,6 +206,8 @@
         var self = this, interval;
 
         this.setMySide();
+
+        console.log(this.mySide);
         this.countDownWindow = this.$modal.open({
             templateUrl: ngp.const.app.url + '/tpl/directives/gameCountDown.html',
             controller: 'gameCountDownController',

@@ -24,7 +24,6 @@
 
         for(var pId in players){
             if(!players.hasOwnProperty(pId)) continue;
-            players[pId].local = (players[pId].local==true);
             this.game.joinPlayer(players[pId]);
         }
 
