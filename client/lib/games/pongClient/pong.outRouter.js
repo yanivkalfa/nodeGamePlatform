@@ -21,7 +21,6 @@
      * @api public
      */
     PongOutRouter.prototype.pr = function(){
-        console.log('Sending player ready');
         this.game.primus.write({"m":'pr', "d": 'playerReady'});
     };
 
