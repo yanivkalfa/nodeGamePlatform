@@ -39,11 +39,14 @@
         l = snapShots.length;
         i = 0;
 
-        console.log(l);
+
         this.now = Date.now() - 40;
 
         for (i; i < l; i++) {
+
             past = snapShots[i];
+            console.log(this.now, past.t);
+            console.log(this.now - past.t);
             future = snapShots[i+1];
 
             uL = past.u.length;
