@@ -25,7 +25,6 @@
     InRouter.prototype.init = function(){
         var self = this;
         this.game.primus.on('data', function(msg){
-            console.log(msg);
             self[msg.m](msg.d);
         });
     };
