@@ -14,6 +14,8 @@
      */
     function PongLoop(game , opts){
         window.game.class.Loop.apply(this,arguments);
+
+        console.log(this.cycleEvery);
     }
 
     PongLoop.prototype = Object.create(window.game.class.Loop.prototype);
@@ -33,10 +35,11 @@
             , x1,x2,y1,y2, entity
             ;
 
+
         l = snapShots.length;
         i = 0;
-
-        this.now = Date.now() - 20;
+        console.log('snap shot length',l);
+        this.now = Date.now() - 40;
 
         for (i; i < l; i++) {
             past = snapShots[i];
