@@ -349,7 +349,6 @@
      * @api public
      */
     PongGame.prototype.start = function(){
-        console.log('loop start');
         this.mainLoop.start();
     };
 
@@ -360,7 +359,6 @@
      * @api public
      */
     PongGame.prototype.stop = function(){
-        console.log('loop start');
         this.mainLoop.stop();
     };
 
@@ -385,11 +383,9 @@
         this.inRouter.kill();
         this.primus.end();
         this.stop();
-        /*
         for(var prop in this){
             if(this.hasOwnProperty(prop)) delete this[prop];
         }
-        */
     };
 
     if(!window.game) window.game = {};
