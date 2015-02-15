@@ -14,8 +14,8 @@
 
     function gameController(
         $stateParams,
-        $scope,
         $modal,
+        $scope,
         Games,
         Authorization
         ) {
