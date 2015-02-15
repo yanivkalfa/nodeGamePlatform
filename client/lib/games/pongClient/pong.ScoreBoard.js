@@ -8,6 +8,24 @@
     function PongScoreBoard(game){
         window.game.class.ScoreBoard.apply(this,arguments);
 
+
+        /**
+         * winner is
+         *
+         * @type {String}
+         * @api public
+         */
+        this.winnerIs = undefined;
+
+
+        /**
+         * winner node
+         *
+         * @type {Node}
+         * @api public
+         */
+        this.winnerIsNode = undefined;
+
     }
 
     PongScoreBoard.prototype = Object.create(window.game.class.ScoreBoard.prototype);
@@ -47,6 +65,10 @@
             rightPlayer.node.innerText = rightPlayer.player.attributes.score;
             rightPlayer.node.textContent = rightPlayer.player.attributes.score;
         }
+
+        this.winnerIsNode.innerText = this.winnerIs;
+        this.winnerIsNode.textContent = this.winnerIs;
+
     };
 
 
@@ -57,7 +79,7 @@
      * @api public
      */
     PongScoreBoard.prototype.load = function(){
-        var player, div, span, players, aNode, playerId, aPlayer, head, id;
+        var player, div, span, players, aNode, playerId, aPlayer, head, id, lPlayer, rPlayer, winnerIs;
         players = this.game.players.get();
         div = document.createElement("div");
         span = document.createElement("span");
@@ -71,6 +93,18 @@
         head.id = head.className = 'header';
         this.node.appendChild(head);
 
+
+        lPlayer = div.cloneNode(true);
+        lPlayer.id = head.className = 'sb-player fLeft';
+        this.winnerIsNode = div.cloneNode(true);
+        this.winnerIsNode.id = head.className = 'sb-winnerIs fLeft';
+        rPlayer = div.cloneNode(true);
+        rPlayer.id = head.className = 'sb-player fLeft';
+
+        head.appendChild(lPlayer);
+        head.appendChild(this.winnerIsNode);
+        head.appendChild(rPlayer);
+
         for(playerId in players ){
             if(players.hasOwnProperty(playerId)){
                 aPlayer = players[playerId];
@@ -78,8 +112,6 @@
                 player = div.cloneNode(true);
                 player.id = 'player_' + playerId;
                 player.className = 'pong_player';
-                if(aPlayer.local) player.className += ' fLeft';
-                else player.className += ' fRight';
 
                 aNode = span.cloneNode(true);
                 aNode.id = aNode.className = 'player_title';
@@ -91,15 +123,17 @@
                 aNode.id = aNode.className = 'player_score';
                 aNode.innerText = 0;
                 aNode.textContent = 0;
+                player.appendChild(aNode);
 
-                id = 'right';
                 if(aPlayer.local){
                     id = 'left';
+                    lPlayer.appendChild(player);
+                }else{
+                    id = 'right';
+                    rPlayer.appendChild(player);
                 }
-                this.players.add({id:id, player : aPlayer, node : aNode});
 
-                player.appendChild(aNode);
-                head.appendChild(player);
+                this.players.add({id:id, player : aPlayer, node : aNode});
             }
         }
 

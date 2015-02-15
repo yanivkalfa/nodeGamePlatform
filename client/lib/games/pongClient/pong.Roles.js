@@ -19,20 +19,27 @@
      * @api public
      */
     PongRoles.prototype.check = function(){
-        var toReturn = false, lPlayer, rPlayer, winner;
+        var toReturn = false, lPlayer, rPlayer, winner, winnerName;
 
         lPlayer = this.game.scoreBoard.players.list.left.player;
         rPlayer = this.game.scoreBoard.players.list.right.player;
 
         if(lPlayer.attributes.score >= 10 || rPlayer.attributes.score >= 10){
 
-            winner = (lPlayer.attributes.score >= 10) ? 'left' : 'right';
-            if(this.game.mySide == winner){
-                console.log('You won !!'); // will be changed with something else
-            }else{
-                console.log('You Lost !!'); // will be changed with something else
+            if(lPlayer.attributes.score >= 10){
+                winner =  lPlayer.name;
+                winnerName = '';
+            } else {
+                winner = 'right';
+                winnerName =  rPlayer.name;
             }
 
+            if(this.game.mySide == winner){
+                this.game.scoreBoard.winnerIs = winnerName;
+            }else{
+                this.game.scoreBoard.winnerIs = winnerName;
+            }
+            this.game.scoreBoard.render();
 
             this.game.kill();
             toReturn = true;
