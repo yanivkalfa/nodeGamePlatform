@@ -38,7 +38,7 @@
 
         l = snapShots.length;
         i = 0;
-        this.now = Date.now() - 40;
+        this.now = Date.now() - 40 - 4600;
 
         for (i; i < l; i++) {
             past = snapShots[i];
