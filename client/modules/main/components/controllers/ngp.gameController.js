@@ -28,7 +28,7 @@
             queryString = [
                 '?token=' + user.token,
                 '&room=' + gameDetails.room,
-                '&game=' + gameDetails.name
+                '&game=' + gameDetails.id
             ];
 
             wsAddress = 'ws://' + server.address + ':' + server.port + queryString.join('');
