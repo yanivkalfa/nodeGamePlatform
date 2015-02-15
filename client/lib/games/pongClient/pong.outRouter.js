@@ -22,7 +22,7 @@
      */
     PongOutRouter.prototype.pr = function(){
         console.log('Sending player ready');
-        this.game.primus.write({"m":'pr', "d": ''});
+        this.game.primus.write({"m":'pr', "d": 'playerReady'});
     };
 
 
