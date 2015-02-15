@@ -22,11 +22,13 @@
         var self = this, gs, ss;
 
         ss = function(ss){
+            console.log(ss);
             self.game.snapShots.add(ss);
             if(self.game.snapShots.get().length > 60)self.game.snapShots.get().shift();
         };
 
         gs = function(msg){
+            console.log(msg);
             if(msg.gs) {
                 self.game.countDown = msg.gs;
                 self.game.startCountDown();

@@ -160,6 +160,7 @@
     PongGame.prototype.startCountDown = function(){
         var self = this, interval;
 
+        console.log('got here');
         this.countDownWindow = this.$modal.open({
             templateUrl: ngp.const.app.url + '/tpl/directives/gameCountDown.html',
             controller: 'gameCountDownController',
@@ -184,6 +185,12 @@
                 clearInterval(interval);
             }
         }, 1000);
+
+        this.countDownWindow.result.then(function (something) {
+
+        }, function (something) {
+
+        });
     };
 
 
