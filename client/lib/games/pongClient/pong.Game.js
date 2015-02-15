@@ -388,9 +388,11 @@
         this.inRouter.kill();
         this.primus.end();
         this.stop();
+        /*
         for(var prop in this){
             if(this.hasOwnProperty(prop)) delete this[prop];
         }
+        */
     };
 
     if(!window.game) window.game = {};
