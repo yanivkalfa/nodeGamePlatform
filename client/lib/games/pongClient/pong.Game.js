@@ -149,6 +149,10 @@
      */
     PongGame.prototype.connectToServer = function(){
         this.primus = Primus.connect(this.serverDetails);
+
+        this.primus.on('data', function(ss){
+            console.log(ss);
+        });
     };
 
 
