@@ -151,6 +151,15 @@
          * @api public
          */
         this.roles = undefined;
+
+
+        /**
+         * Holds timeout
+         *
+         * @type {Number}
+         * @api public
+         */
+        this.timeout = undefined;
     }
 
 

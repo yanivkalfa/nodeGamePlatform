@@ -188,10 +188,7 @@
      * @api public
      */
     PongGame.prototype.setMySide = function(){
-        console.log('this', this);
         var player = this.players.get(this.user.id);
-        console.log('player', player);
-        console.log('this.user', this.user);
         if(!player) return false;
         this.mySide = player.local ? 'left' : 'right';
     };
@@ -206,8 +203,6 @@
         var self = this, interval;
 
         this.setMySide();
-
-        console.log(this.mySide);
         this.countDownWindow = this.$modal.open({
             templateUrl: ngp.const.app.url + '/tpl/directives/gameCountDown.html',
             controller: 'gameCountDownController',

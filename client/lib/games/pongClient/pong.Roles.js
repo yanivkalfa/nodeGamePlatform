@@ -19,7 +19,7 @@
      * @api public
      */
     PongRoles.prototype.check = function(){
-        var toReturn = false, lPlayer, rPlayer, winner, winnerName;
+        var toReturn = false, lPlayer, rPlayer, winner, winnerName, self = this;
 
         lPlayer = this.game.scoreBoard.players.list.left.player;
         rPlayer = this.game.scoreBoard.players.list.right.player;
@@ -41,7 +41,12 @@
             }
             this.game.scoreBoard.render();
 
-            this.game.kill();
+            clearTimeout(self.game.timeout);
+            self.game.timeout = setTimeout(function(){
+                self.game.kill();
+                clearTimeout(self.game.timeout);
+            },300);
+
             toReturn = true;
         }
 
