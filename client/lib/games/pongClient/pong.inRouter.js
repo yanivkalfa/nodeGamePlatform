@@ -18,7 +18,7 @@
      *
      * @api public
      */
-    InRouter.prototype.init = function(){
+    PongInRouter.prototype.init = function(){
         var self = this, gs, ss;
 
         ss = function(ss){
