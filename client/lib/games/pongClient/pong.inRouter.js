@@ -13,34 +13,23 @@
 
     PongInRouter.prototype = Object.create(window.game.class.InRouter.prototype);
     PongInRouter.prototype.constructor = PongInRouter;
-    /**
-     * Init inRouter
-     *
-     * @api public
-     */
-    PongInRouter.prototype.init = function(){
-        var self = this, gs, ss;
 
-        ss = function(ss){
-            self.game.snapShots.add(ss);
-            if(self.game.snapShots.get().length >200)self.game.snapShots.get().shift();
-        };
 
-        gs = function(msg){
-            if(msg.gs) {
-                console.log(msg.t);
-                console.log(Date.now());
-                console.log(Date.now() - msg.t);
+    PongInRouter.prototype.os = function(os){
+        this.game.mainLoop.offset = Date.now() - os;
+        console.log(this.game.mainLoop.offset);
+    };
 
-                self.game.countDown = msg.gs;
-                self.game.startCountDown();
 
-                self.game.primus.off('data', gs);
-                self.game.primus.on('data', ss);
-            }
-        };
+    PongInRouter.prototype.gs = function(msg){
+        this.game.countDown = msg;
+        this.game.startCountDown();
+    };
 
-        self.game.primus.on('data', gs);
+
+    PongInRouter.prototype.ss = function(ss){
+        this.game.snapShots.add(ss);
+        if(this.game.snapShots.get().length >200)this.game.snapShots.get().shift();
     };
 
 

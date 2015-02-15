@@ -68,6 +68,15 @@
          * @api public
          */
         this.then = undefined;
+
+
+        /**
+         * Holds offset
+         *
+         * @type {Date}
+         * @api public
+         */
+        this.offset = undefined;
     }
 
     Loop.prototype = Object.create(window.game.class.Collection.prototype);
