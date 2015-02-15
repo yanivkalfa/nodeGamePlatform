@@ -27,17 +27,17 @@
         if(lPlayer.attributes.score >= 10 || rPlayer.attributes.score >= 10){
 
             if(lPlayer.attributes.score >= 10){
-                winner =  lPlayer.name;
-                winnerName = '';
+                winner =  'left';
+                winnerName = lPlayer.name;
             } else {
                 winner = 'right';
                 winnerName =  rPlayer.name;
             }
 
             if(this.game.mySide == winner){
-                this.game.scoreBoard.winnerIs = 'Winner is: '+ winnerName;
+                this.game.scoreBoard.winnerIs = 'Winner is: ' + winnerName;
             }else{
-                this.game.scoreBoard.winnerIs = 'Winner is: '+ winnerName;
+                this.game.scoreBoard.winnerIs = 'Winner is: ' + winnerName;
             }
             this.game.scoreBoard.render();
 

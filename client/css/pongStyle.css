@@ -109,5 +109,5 @@ body{
     font-size: 16px;
 }
 
-.sb-player { width:20%; overflow: hidden }
-.sb-winnerIs { width:60%; overflow: hidden }
+.sb-player { width:30%; overflow: hidden; white-space: nowrap; }
+.sb-winnerIs { width:40%; overflow: hidden; white-space: nowrap; }
