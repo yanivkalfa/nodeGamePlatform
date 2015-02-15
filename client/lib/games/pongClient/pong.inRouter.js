@@ -24,7 +24,7 @@
         ss = function(ss){
             console.log(ss);
             self.game.snapShots.add(ss);
-            if(self.game.snapShots.get().length > 60)self.game.snapShots.get().shift();
+            if(self.game.snapShots.get().length > 150)self.game.snapShots.get().shift();
         };
 
         gs = function(msg){
