@@ -196,11 +196,13 @@
 
                 self.countDownWindow.close();
                 self.gameReady = true;
+
+                clearInterval(interval);
+                console.log('counter is low');
                 timeout = setTimeout(function(){
                     self.start();
-                    clearTimeout(timeout);
                 }, 100);
-                clearInterval(interval);
+
             }
         }, 1000);
 
