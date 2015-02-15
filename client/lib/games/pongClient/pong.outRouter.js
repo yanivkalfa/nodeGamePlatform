@@ -16,6 +16,38 @@
 
 
     /**
+     * Init inRouter
+     *
+     * @api public
+     */
+    PongOutRouter.prototype.init = function(){
+        var self = this;
+        this.game.primus.on('data', this.rout.bind(this));
+    };
+
+
+    /**
+     * kill inRouter
+     *
+     * @api public
+     */
+    PongOutRouter.prototype.kill = function(){
+        var self = this;
+        this.game.primus.off('data', this.rout.bind(this));
+    };
+
+
+    /**
+     * Init inRouter
+     *
+     * @api public
+     */
+    PongOutRouter.prototype.rout = function(msg){
+        this[msg.m](msg.d);
+    };
+
+
+    /**
      * We send key strokes
      *
      * @api public
