@@ -17,7 +17,6 @@
 
     PongInRouter.prototype.os = function(os){
         this.game.mainLoop.offset = Date.now() - os;
-        console.log(this.game.mainLoop.offset);
     };
 
 
