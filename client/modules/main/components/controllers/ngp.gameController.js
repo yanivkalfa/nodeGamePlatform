@@ -57,7 +57,8 @@
                 }
             };
 
-            Game = gameList[gameName];
+            Game = window.game.class[gameList[gameName]];
+            if(!Game) return;
             newGame = new Game(gameOptions);
             newGame.init();
 
