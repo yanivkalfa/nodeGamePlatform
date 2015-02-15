@@ -79,15 +79,6 @@
             };
             newGame.bindKey();
             newGame.loadEntities();
-
-            for(pId in players){
-                if(!players.hasOwnProperty(pId)) continue;
-                p = players[pId];
-                p.local = p.id == user.id;
-                p.name = p.username;
-                newGame.joinPlayer(p);
-            }
-            newGame.load();
         }
 
         return new GameController();

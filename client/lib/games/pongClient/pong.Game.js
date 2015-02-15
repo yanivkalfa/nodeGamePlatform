@@ -119,9 +119,10 @@
         this.inRouter = new window.game.class.PongInRouter(this);
         this.outRouter = new window.game.class.PongOutRouter(this);
 
-        this.loader = new window.game.class.PongLoader(this, function(){ self.connectToServer(); });
+        this.loader = new window.game.class.PongLoader(this, function(){ self.sendPlayerReady();});
         this.scoreBoard = new window.game.class.PongScoreBoard(this);
         this.scoreBoard.init();
+        self.connectToServer();
     };
 
     /**
@@ -139,6 +140,16 @@
         page.appendChild(gameCanvas);
         gameContainer.appendChild(page);
         this.canvas.node = gameCanvas;
+    };
+
+
+    /**
+     * Send send player ready
+     *
+     * @api public
+     */
+    PongGame.prototype.sendPlayerReady = function(){
+        this.outRouter.pr();
     };
 
 

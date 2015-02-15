@@ -21,6 +21,15 @@
     };
 
 
+    PongInRouter.prototype.pr = function(players){
+        for(var pId in players){
+            if(!players.hasOwnProperty(pId)) continue;
+            this.game.joinPlayer(players[pId]);
+        }
+        this.game.load();
+    };
+
+
     PongInRouter.prototype.gs = function(msg){
         this.game.countDown = msg;
         this.game.startCountDown();
