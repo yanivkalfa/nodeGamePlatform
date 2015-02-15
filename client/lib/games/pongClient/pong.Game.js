@@ -385,8 +385,8 @@
     PongGame.prototype.kill = function(){
         console.log('killing game');
         this.unBindKey();
-        this.stop();
         this.primus.end();
+        this.stop();
         for(var prop in this){
             if(this.hasOwnProperty(prop)) delete this[prop];
         }
