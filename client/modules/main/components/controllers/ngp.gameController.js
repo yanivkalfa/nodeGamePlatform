@@ -24,6 +24,7 @@
             game = Games.get(gameName);
             gameDetails = game.getGameDetails();
             server = gameDetails.serverDetails;
+            console.log(server);
             queryString = [
                 '?token=' + user.token,
                 '&room=' + gameDetails.room,
