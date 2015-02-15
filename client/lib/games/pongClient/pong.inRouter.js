@@ -14,6 +14,37 @@
     PongInRouter.prototype = Object.create(window.game.class.InRouter.prototype);
     PongInRouter.prototype.constructor = PongInRouter;
 
+    /**
+     * Init inRouter
+     *
+     * @api public
+     */
+    PongInRouter.prototype.init = function(){
+        var self = this;
+        this.game.primus.on('data', this.rout.bind(this));
+    };
+
+
+    /**
+     * kill inRouter
+     *
+     * @api public
+     */
+    PongInRouter.prototype.kill = function(){
+        var self = this;
+        this.game.primus.off('data', this.rout.bind(this));
+    };
+
+
+    /**
+     * Init inRouter
+     *
+     * @api public
+     */
+    PongOutRouter.prototype.rout = function(msg){
+        this[msg.m](msg.d);
+    };
+
 
     PongInRouter.prototype.os = function(os){
         this.game.mainLoop.offset = Date.now() - os;

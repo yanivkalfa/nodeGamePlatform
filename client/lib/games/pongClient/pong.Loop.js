@@ -14,8 +14,6 @@
      */
     function PongLoop(game , opts){
         window.game.class.Loop.apply(this,arguments);
-
-        console.log(this.cycleEvery);
     }
 
     PongLoop.prototype = Object.create(window.game.class.Loop.prototype);
