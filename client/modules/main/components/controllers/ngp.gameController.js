@@ -17,7 +17,7 @@
         ) {
 
         function GameController(){
-            var gameName, user, game, gameDetails, server, queryString, primus;
+            var gameName, user, game, gameDetails, server, queryString, primus, wsAddress;
 
             gameName = $stateParams.game;
             user = Authorization.getUser();
@@ -31,9 +31,11 @@
                 '&game=' + gameDetails.name
             ];
 
+            wsAddress = 'ws://' + server.address + ':' + server.port + queryString.join('');
 
+            console.log(wsAddress);
 
-            primus = Primus.connect('ws://' + server.address + ':' + server.port + queryString.join(''));
+            primus = Primus.connect(wsAddress);
             primus.on('data', function(msg){});
             primus.on('open', function open() {});
             primus.on('error', function error(err) {});
