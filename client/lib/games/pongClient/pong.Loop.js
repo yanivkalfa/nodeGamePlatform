@@ -40,7 +40,7 @@
         i = 0;
 
 
-        this.now = Date.now() - 0 - this.offset;
+        this.now = Date.now() - 40 - this.offset;
 
         for (i; i < l; i++) {
 
