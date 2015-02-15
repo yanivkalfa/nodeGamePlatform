@@ -217,6 +217,17 @@
      *
      * @api public
      */
+    /*
+    PongGame.prototype.setPrimus = function(primus){
+        this.primus = primus;
+    };*/
+
+
+    /**
+     * On set primus/socket
+     *
+     * @api public
+     */
     PongGame.prototype.setPrimus = function(primus){
         this.primus = primus;
     };
