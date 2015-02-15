@@ -171,7 +171,7 @@
      * @api public
      */
     PongGame.prototype.startCountDown = function(){
-        var self = this, interval, timeout;
+        var self = this, interval;
 
         console.log('got here');
         this.countDownWindow = this.$modal.open({
@@ -192,17 +192,13 @@
 
             if(self.countDown <= 0){
 
-                console.log('counter is low');
-
                 self.countDownWindow.close();
                 self.gameReady = true;
 
-                clearInterval(interval);
-                console.log('counter is low');
-                timeout = setTimeout(function(){
+                setTimeout(function(){
                     self.start();
                 }, 100);
-
+                clearInterval(interval);
             }
         }, 1000);
 
@@ -213,17 +209,6 @@
         });
 
     };
-
-
-    /**
-     * On set primus/socket
-     *
-     * @api public
-     */
-    /*
-    PongGame.prototype.setPrimus = function(primus){
-        this.primus = primus;
-    };*/
 
 
     /**
