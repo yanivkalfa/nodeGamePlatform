@@ -182,7 +182,9 @@
 
                 self.countDownWindow.close();
                 self.gameReady = true;
-                self.start();
+                setTimeout(function(){
+                    self.start();
+                }, 100);
                 clearInterval(interval);
             }
         }, 1000);

@@ -22,16 +22,15 @@
         var self = this, gs, ss;
 
         ss = function(ss){
-            console.log(ss);
             self.game.snapShots.add(ss);
-            if(self.game.snapShots.get().length > 150)self.game.snapShots.get().shift();
+            if(self.game.snapShots.get().length > 300)self.game.snapShots.get().shift();
         };
 
         gs = function(msg){
-            console.log(msg);
             if(msg.gs) {
                 console.log(msg.t);
                 console.log(Date.now());
+                console.log(Date.now() - msg.t);
 
                 self.game.countDown = msg.gs;
                 self.game.startCountDown();
