@@ -144,16 +144,6 @@
 
 
     /**
-     * Send send player ready
-     *
-     * @api public
-     */
-    PongGame.prototype.sendPlayerReady = function(){
-        this.outRouter.pr();
-    };
-
-
-    /**
      * Connect to Server - join player
      *
      * @api public
@@ -161,6 +151,17 @@
     PongGame.prototype.connectToServer = function(){
         this.primus = Primus.connect(this.serverDetails);
         this.inRouter.init();
+    };
+
+
+    /**
+     * Send send player ready
+     *
+     * @api public
+     */
+    PongGame.prototype.sendPlayerReady = function(){
+        console.log('done loading');
+        this.outRouter.pr();
     };
 
 

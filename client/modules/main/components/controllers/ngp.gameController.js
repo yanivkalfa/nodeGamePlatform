@@ -34,7 +34,6 @@
             user = Authorization.getUser();
             game = Games.get(gameName);
             gameDetails = game.getGameDetails();
-            players = gameDetails.expectingPlayers;
             server = gameDetails.serverDetails;
             queryString = [
                 '?token=' + user.token,
