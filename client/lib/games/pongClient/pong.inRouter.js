@@ -23,7 +23,7 @@
 
         ss = function(ss){
             self.game.snapShots.add(ss);
-            if(self.game.snapShots.get().length > 300)self.game.snapShots.get().shift();
+            if(self.game.snapShots.get().length >5000)self.game.snapShots.get().shift();
         };
 
         gs = function(msg){
