@@ -73,7 +73,7 @@
                     entity.render();
 
                     //if player score is set and is different from previous value then render and check score.
-                    if(future.u[uI].s && past.u[uI].s != future.u[uI].s){
+                    if(future.u[uI].s && past.u[uI].s  && past.u[uI].s != future.u[uI].s){
                         entity.attributes.score = past.u[uI].s;
                         this.game.scoreBoard.render();
                         this.game.roles.check();
