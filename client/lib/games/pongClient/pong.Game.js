@@ -171,7 +171,7 @@
      * @api public
      */
     PongGame.prototype.startCountDown = function(){
-        var self = this, interval;
+        var self = this, interval, timeout;
 
         console.log('got here');
         this.countDownWindow = this.$modal.open({
@@ -191,14 +191,16 @@
             self.$scope.$apply();
 
             if(self.countDown <= 0){
-                clearInterval(interval);
+
                 console.log('counter is low');
 
                 self.countDownWindow.close();
                 self.gameReady = true;
-                setTimeout(function(){
+                timeout = setTimeout(function(){
                     self.start();
+                    clearTimeout(timeout);
                 }, 100);
+                clearInterval(interval);
             }
         }, 1000);
 
