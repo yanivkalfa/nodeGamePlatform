@@ -40,12 +40,13 @@
         i = 0;
 
 
-        this.now = Date.now() - 40 - this.offset;
+        this.now = Date.now() - 20 - this.offset;
 
         for (i; i < l; i++) {
 
             past = snapShots[i];
             future = snapShots[i+1];
+            if(!future) break;
 
             uL = past.u.length;
             // we are in between 2 points within our timeframe

@@ -53,7 +53,7 @@
                 },
 
                 cycle : {
-                    cycleEvery : 100
+                    cycleEvery : 10
                 }
             };
 
