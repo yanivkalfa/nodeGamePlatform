@@ -213,7 +213,7 @@
     PongGame.prototype.keydown = function(e){
         if(!this.gameReady) return false;
         this.keysPressed[e.which || e.keyCode] = true;
-        this.outRouter.k(this.keysPressed);
+        this.outRouter.ks(this.keysPressed);
     };
 
 
@@ -225,7 +225,7 @@
     PongGame.prototype.keyup = function(e){
         if(!this.gameReady) return false;
         this.keysPressed[e.which || e.keyCode] = false;
-        this.outRouter.k(this.keysPressed);
+        this.outRouter.ks(this.keysPressed);
     };
 
 

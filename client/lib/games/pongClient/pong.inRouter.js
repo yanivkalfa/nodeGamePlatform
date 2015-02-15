@@ -30,6 +30,9 @@
         gs = function(msg){
             console.log(msg);
             if(msg.gs) {
+                console.log(msg.t);
+                console.log(Date.now());
+
                 self.game.countDown = msg.gs;
                 self.game.startCountDown();
 
