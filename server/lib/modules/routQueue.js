@@ -276,7 +276,7 @@ module.exports = function(_s){
 
                 serverDetails = {
                     "address" : "54.165.132.121",
-                    "pot" : 8001
+                    "port" : 8001
                 };
 
                 queueLeave = function(warrning){
