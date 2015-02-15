@@ -95,11 +95,14 @@
 
 
         lPlayer = div.cloneNode(true);
-        lPlayer.id = head.className = 'sb-player fLeft';
-        this.winnerIsNode = div.cloneNode(true);
-        this.winnerIsNode.id = head.className = 'sb-winnerIs fLeft';
+        lPlayer.id = lPlayer.className = 'sb-player fLeft';
+
         rPlayer = div.cloneNode(true);
-        rPlayer.id = head.className = 'sb-player fLeft';
+        rPlayer.id = rPlayer.className = 'sb-player fLeft';
+
+        this.winnerIsNode = div.cloneNode(true);
+        this.winnerIsNode.id = this.winnerIsNode.className = 'sb-winnerIs fLeft';
+
 
         head.appendChild(lPlayer);
         head.appendChild(this.winnerIsNode);

@@ -35,9 +35,9 @@
             }
 
             if(this.game.mySide == winner){
-                this.game.scoreBoard.winnerIs = winnerName;
+                this.game.scoreBoard.winnerIs = 'Winner is: '+ winnerName;
             }else{
-                this.game.scoreBoard.winnerIs = winnerName;
+                this.game.scoreBoard.winnerIs = 'Winner is: '+ winnerName;
             }
             this.game.scoreBoard.render();
 
