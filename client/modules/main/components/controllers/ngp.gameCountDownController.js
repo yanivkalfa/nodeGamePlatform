@@ -3,14 +3,14 @@
  */
 (function(){
     angular.module(ngp.const.app.name)
-        .controller('queueReadyController', [
+        .controller('gameCountDownController', [
             '$scope',
             '$modalInstance',
             'game',
-            queueReadyController
+            gameCountDownController
         ]);
 
-    function queueReadyController(
+    function gameCountDownController(
         $scope,
         $modalInstance,
         game
