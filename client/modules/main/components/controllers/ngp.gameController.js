@@ -42,8 +42,10 @@
             ];
 
             gameOptions = {
+                user : user,
                 $modal : $modal,
                 $scope : $scope,
+                name : gameName,
                 serverDetails : 'ws://' + server.address + ':' + server.port + queryString.join(''),
                 canvas : {
                     node : '',

@@ -10,6 +10,24 @@
         window.game.class.Game.apply(this, arguments);
 
         /**
+         * authorized user
+         *
+         * @type {String}
+         * @api public
+         */
+        this.user = this.opts.user || {};
+
+
+        /**
+         * Holds my side
+         *
+         * @type {String}
+         * @api public
+         */
+        this.mySide = undefined;
+
+
+        /**
          * is Game Ready ?
          *
          * @type {Boolean}
@@ -160,8 +178,19 @@
      * @api public
      */
     PongGame.prototype.sendPlayerReady = function(){
-        console.log('done loading');
         this.outRouter.pr();
+    };
+
+
+    /**
+     * Send send player ready
+     *
+     * @api public
+     */
+    PongGame.prototype.setMySide = function(){
+        var player = this.players.get(this.user.id);
+        if(!player) return false;
+        this.mySide = player.local ? 'left' : 'right';
     };
 
 
@@ -173,7 +202,7 @@
     PongGame.prototype.startCountDown = function(){
         var self = this, interval;
 
-        console.log('got here');
+        this.setMySide();
         this.countDownWindow = this.$modal.open({
             templateUrl: ngp.const.app.url + '/tpl/directives/gameCountDown.html',
             controller: 'gameCountDownController',

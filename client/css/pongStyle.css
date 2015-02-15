@@ -101,3 +101,9 @@ body{
     background-color:yellow;
     position: relative;
 }
+
+.gameCountDownHolder {
+    text-align: center;
+    padding:10px 0px;
+    font-weight: bold;
+}
