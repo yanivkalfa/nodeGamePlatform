@@ -43,8 +43,6 @@
         for (i; i < l; i++) {
             past = snapShots[i];
             future = snapShots[i+1];
-            //console.log(Date.now() - msg.t);
-
 
             uL = past.u.length;
             // we are in between 2 points within our timeframe
