@@ -188,7 +188,10 @@
      * @api public
      */
     PongGame.prototype.setMySide = function(){
+        console.log('this', this);
         var player = this.players.get(this.user.id);
+        console.log('player', player);
+        console.log('this.user', this.user);
         if(!player) return false;
         this.mySide = player.local ? 'left' : 'right';
     };
@@ -378,6 +381,7 @@
      * @api public
      */
     PongGame.prototype.kill = function(){
+        console.log('killing game');
         this.unBindKey();
         this.stop();
         this.primus.end();
