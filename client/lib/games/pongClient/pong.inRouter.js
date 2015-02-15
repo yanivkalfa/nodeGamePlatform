@@ -13,45 +13,34 @@
 
     PongInRouter.prototype = Object.create(window.game.class.InRouter.prototype);
     PongInRouter.prototype.constructor = PongInRouter;
-
-
     /**
-     * server sent game ready - and gave us entities details
+     * Init inRouter
      *
-     * @param {Object} msg
      * @api public
      */
-    PongInRouter.prototype.gr = function(msg){
-        // adding entities/players and sending ready back
+    InRouter.prototype.init = function(){
+        var self = this, gs, ss;
 
+        ss = function(ss){
+            self.game.snapShots.add(ss);
+            if(self.game.snapShots.get().length > 60)self.game.snapShots.get().shift();
+        };
+
+        gs = function(msg){
+            if(msg.gs) {
+                self.game.countDown = msg.gs;
+                self.game.startCountDown();
+
+                self.game.primus.off('data', gs);
+                self.game.primus.on('data', ss);
+            }
+        };
+
+        self.game.primus.on('data', gs);
     };
 
-
-    /**
-     * server sent game starting in ... seconds
-     *
-     * @param {Object} msg
-     * @api public
-     */
-    PongInRouter.prototype.gs = function(msg){
-        // we start counter.
-
-    };
-
-
-    /**
-     * server sends snapShots
-     *
-     * @param {Object} msg
-     * @api public
-     */
-    PongInRouter.prototype.ss = function(msg){
-
-    };
-
-    // on game end server kills socket. and game, we kill game and go back to chat menu.
 
     if(!window.game) window.game = {};
     if(!window.game.class) window.game.class = {};
-    window.game.class.InRouter = InRouter;
+    window.game.class.PongInRouter = PongInRouter;
 })();

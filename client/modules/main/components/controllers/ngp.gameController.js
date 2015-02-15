@@ -5,6 +5,8 @@
     angular.module(ngp.const.app.name)
         .controller('gameController', [
             '$stateParams',
+            '$modal',
+            '$scope',
             'Games',
             'Authorization',
             gameController
@@ -12,41 +14,78 @@
 
     function gameController(
         $stateParams,
+        $scope,
+        $modal,
         Games,
         Authorization
         ) {
 
         function GameController(){
-            var gameName, user, game, gameDetails, server, queryString, primus, wsAddress, gameList;
+            var gameName, user, game, gameDetails, server, Game, newGame
+                , queryString, gameList, gameOptions
+                , keyup, keydown, players, pId, p
+                ;
 
             gameList = {
-              "pong" : 'pong.Game'
+              "pong" : 'PongGame'
             };
 
             gameName = $stateParams.game;
             user = Authorization.getUser();
             game = Games.get(gameName);
             gameDetails = game.getGameDetails();
+            players = gameDetails.expectingPlayers;
             server = gameDetails.serverDetails;
-            console.log(gameDetails);
             queryString = [
                 '?token=' + user.token,
                 '&room=' + gameDetails.room,
                 '&game=' + gameDetails.id
             ];
 
-            wsAddress = 'ws://' + server.address + ':' + server.port + queryString.join('');
+            gameOptions = {
+                $modal : $modal,
+                $scope : $scope,
+                serverDetails : 'ws://' + server.address + ':' + server.port + queryString.join(''),
+                canvas : {
+                    node : '',
+                    width : 900,
+                    height : 500
+                },
 
-            console.log(wsAddress);
+                cycle : {
+                    cycleEvery : 10
+                }
+            };
 
-            primus = Primus.connect(wsAddress);
-            primus.on('data', function(msg){
-                console.log(msg);
-            });
-            primus.on('open', function open() {});
-            primus.on('error', function error(err) {});
-            primus.on('end', function end() {});
+            Game = gameList[gameName];
+            newGame = new Game(gameOptions);
+            newGame.init();
 
+            keyup = function(e){
+                newGame.keyup(e);
+            };
+            keydown = function(e){
+                newGame.keydown(e);
+            };
+
+            newGame.bindKey = function(){
+                document.addEventListener("keyup", keyup);
+                document.addEventListener("keydown", keydown);
+            };
+            newGame.unBindKey = function(){
+                document.removeEventListener("keyup", keyup);
+                document.removeEventListener("keydown", keydown);
+            };
+            newGame.bindKey();
+            newGame.loadEntities();
+
+            for(pId in players){
+                if(!players.hasOwnProperty(pId)) continue;
+                p = players[pId];
+                p.local = p.id == user.id;
+                newGame.joinPlayer(p);
+            }
+            newGame.load();
         }
 
         return new GameController();

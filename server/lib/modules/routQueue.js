@@ -259,7 +259,7 @@ module.exports = function(_s){
 
                 _(queues).forEach(function(queue){
                     if(queue.accepted) acceptedUsers++;
-                    users[queue.user.id] = true;
+                    users[queue.user.id] = {id:queue.user.id, username: queue.user.username};
                 });
 
                 if(acceptedUsers != neededCount ) return false;

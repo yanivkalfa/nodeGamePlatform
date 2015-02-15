@@ -14,38 +14,14 @@
     PongOutRouter.prototype = Object.create(window.game.class.OutRouter.prototype);
     PongOutRouter.prototype.constructor = PongOutRouter;
 
-
-    /**
-     * We send game join with out details.
-     *
-     * @param {Object} msg
-     * @api public
-     */
-    PongOutRouter.prototype.j = function(msg){
-
-    };
-
-
-    /**
-     * We send loaded ones done loading and adding entities
-     *
-     * @param {Object} msg
-     * @api public
-     */
-    PongOutRouter.prototype.l = function(msg){
-        // server remove queues/ we remove queues from JS
-
-    };
-
-
     /**
      * We send key strokes
      *
-     * @param {Object} msg
+     * @param {Object} k
      * @api public
      */
-    PongOutRouter.prototype.ks = function(msg){
-        console.log(msg);
+    PongOutRouter.prototype.ks = function(k){
+        this.game.primus.write(k);
     };
 
     if(!window.game) window.game = {};
