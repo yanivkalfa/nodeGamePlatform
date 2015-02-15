@@ -41,7 +41,7 @@
      *
      * @api public
      */
-    PongOutRouter.prototype.rout = function(msg){
+    PongInRouter.prototype.rout = function(msg){
         this[msg.m](msg.d);
     };
 
