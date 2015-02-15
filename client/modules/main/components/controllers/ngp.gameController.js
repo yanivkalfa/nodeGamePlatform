@@ -17,7 +17,11 @@
         ) {
 
         function GameController(){
-            var gameName, user, game, gameDetails, server, queryString, primus, wsAddress;
+            var gameName, user, game, gameDetails, server, queryString, primus, wsAddress, gameList;
+
+            gameList = {
+              "pong" : 'pong.Game'
+            };
 
             gameName = $stateParams.game;
             user = Authorization.getUser();

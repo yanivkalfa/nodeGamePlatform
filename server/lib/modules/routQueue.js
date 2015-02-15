@@ -280,6 +280,7 @@ module.exports = function(_s){
                 };
 
                 queueLeave = function(warrning){
+                    console.log(arguments);
                     queueOut.queueEnd(spark, {"name" : q.game, room: q.room}, warrning);
                     _(queues).forEach(function(queue){
                         queue.remove();
