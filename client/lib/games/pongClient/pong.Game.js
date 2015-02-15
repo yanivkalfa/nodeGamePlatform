@@ -354,6 +354,7 @@
      * @api public
      */
     PongGame.prototype.start = function(){
+        console.log('loop start');
         this.mainLoop.start();
     };
 
@@ -364,6 +365,7 @@
      * @api public
      */
     PongGame.prototype.stop = function(){
+        console.log('loop start');
         this.mainLoop.stop();
     };
 
