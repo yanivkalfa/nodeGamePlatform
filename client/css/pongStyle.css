@@ -111,3 +111,6 @@ body{
 
 .sb-player { width:30%; overflow: hidden; white-space: nowrap; }
 .sb-winnerIs { width:40%; overflow: hidden; white-space: nowrap; margin-top: 10px; color: white; font-weight: bold;}
+
+.modal-header{z-index: 99999999;}
+.modal-title {z-index: 99999999;}
