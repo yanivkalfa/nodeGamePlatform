@@ -31,7 +31,6 @@
             , i, l, future, past
             , uI, uL
             , x1,x2,y1,y2, entity
-            , game = this.game
             ;
 
 
@@ -56,7 +55,7 @@
                 //iterate over update array
                 for (uI; uI < uL; uI++) {
                     // entity to update
-                    entity = game.entities.get(future.u[uI].id);
+                    entity = this.game.entities.get(future.u[uI].id);
                     x1 = past.u[uI].p.x;
                     y1 = past.u[uI].p.y;
 
@@ -69,16 +68,15 @@
 
                     // set entity's new pos and render
                     entity.move(nPos);
+                    entity.render();
 
                     //if player score is set and is different from previous value then render and check score.
                     if(past.u[uI].s){
                         entity.attributes.score = past.u[uI].s;
-                        game.scoreBoard.render();
-                        game.roles.check();
+                        this.game.scoreBoard.render();
+                        this.game.roles.check();
                     }
                 }
-
-                game.renderer.render(game.scene, game.camera);
 
             }
         }

@@ -58,7 +58,7 @@
          * @type {Boolean}
          * @api public
          */
-        this.local = opts.local || false;
+        this.local = opts.local || undefined;
 
         /**
          * Holds attributes
@@ -91,7 +91,6 @@
      * @api public
      */
     PongPlayer.prototype.load = function(){
-        /*
         this.node = document.createElement("div");
         this.node.className = 'playerBox gameObject';
         this.node.id = 'entity_' + this.id;
@@ -103,8 +102,6 @@
         this.node.style.backgroundColor = this.background;
 
         this.game.canvas.node.appendChild(this.node);
-
-        */
         this.game.loader.loaded(this);
     };
 
@@ -118,8 +115,8 @@
      */
     PongPlayer.prototype.move = function(newPoint){
         // calculating time difference and where the point is
-        this.mesh.position.x = newPoint.x;
-        this.mesh.position.y = newPoint.y;
+        this.position.x = newPoint.x;
+        this.position.y = newPoint.y;
         return this;
     };
 
