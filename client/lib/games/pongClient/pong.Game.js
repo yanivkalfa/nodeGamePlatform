@@ -167,7 +167,7 @@
         bgGeometry = new THREE.BoxGeometry( this.canvas.width, this.canvas.height, 0 );
         bgMaterial = new THREE.MeshBasicMaterial( { color: 0xFFFF00 } );
         bg = new THREE.Mesh( bgGeometry, bgMaterial );
-        this.scene..add( bg );
+        this.scene.add( bg );
         bg.position.z = -5 ;
 
         var self = this;
