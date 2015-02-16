@@ -18,6 +18,14 @@
      */
     function PongEntity(opts, game){
         window.game.class.Entity.apply(this,arguments);
+
+        /**
+         * holds mesh
+         *
+         * @type {Object}
+         * @api public
+         */
+        this.mesh = opts.mesh || {};
     }
 
     PongEntity.prototype = Object.create(window.game.class.Entity.prototype);

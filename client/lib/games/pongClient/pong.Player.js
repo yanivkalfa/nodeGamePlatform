@@ -115,8 +115,8 @@
      */
     PongPlayer.prototype.move = function(newPoint){
         // calculating time difference and where the point is
-        this.position.x = newPoint.x;
-        this.position.y = newPoint.y;
+        this.mesh.position.x = newPoint.x;
+        this.mesh.position.y = newPoint.y;
         return this;
     };
 

@@ -50,8 +50,8 @@ body{
 
 #tempCanvas{width:100px; height:100px;}
 
-.headerBackGround{position:absolute;background-color: black; opacity: 0.6; left:30%; top:5px;  height:40px; width:40%; border:1px solid black;}
-.header{position:absolute; left:30%; top:5px;  height:40px; width:40%; border:1px solid black;}
+.headerBackGround{position:absolute;background-color: black; opacity: 0.6; left:30%; top:5px;  height:40px; width:40%; border:1px solid black; z-index: 99999;}
+.header{position:absolute; left:30%; top:5px;  height:40px; width:40%; border:1px solid black; z-index: 99999;}
 #playerOne{float:left; margin-left:20px; margin-top:10px; color:lightgrey;}
 #PlayerTwo{float:right; margin-right:20px;margin-top:10px; color:lightgrey;}
 #playerOneScore, #playerTwoScore{color: white; font-weight: bold;}
