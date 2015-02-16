@@ -367,6 +367,8 @@
         this.scene.add( pongPlayer.mesh );
         pongPlayer.mesh.position.x = pongPlayer.position.x;
         pongPlayer.mesh.position.y = pongPlayer.position.y;
+
+        console.log(pongPlayer);
     };
 
     /**
