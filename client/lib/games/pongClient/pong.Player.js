@@ -103,8 +103,9 @@
         this.node.style.backgroundColor = this.background;
 
         this.game.canvas.node.appendChild(this.node);
-        this.game.loader.loaded(this);
+
         */
+        this.game.loader.loaded(this);
     };
 
 
