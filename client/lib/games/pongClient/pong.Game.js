@@ -363,12 +363,11 @@
         pongPlayer.init();
         this.addPlayer(pongPlayer);
 
-        pongPlayer.mesh = new THREE.Mesh( new THREE.BoxGeometry( pongPlayer.dimensions.width, pongPlayer.dimensions.height, 0 ), new THREE.MeshBasicMaterial( { color: 0xFFFFFF } ) );
-        this.scene.add( pongPlayer.mesh );
-        pongPlayer.mesh.position.x = pongPlayer.position.x;
-        pongPlayer.mesh.position.y = pongPlayer.position.y;
-
-        console.log(pongPlayer);
+        var mesh = new THREE.Mesh( new THREE.BoxGeometry( pongPlayer.dimensions.width, pongPlayer.dimensions.height, 0 ), new THREE.MeshBasicMaterial( { color: 0xFFFFFF } ) );
+        this.scene.add( mesh );
+        mesh.position.x = pongPlayer.position.x;
+        mesh.position.y = pongPlayer.position.y;
+        pongPlayer.mesh = mesh;
     };
 
     /**
