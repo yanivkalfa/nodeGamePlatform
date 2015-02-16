@@ -91,6 +91,7 @@
      * @api public
      */
     PongPlayer.prototype.load = function(){
+        /*
         this.node = document.createElement("div");
         this.node.className = 'playerBox gameObject';
         this.node.id = 'entity_' + this.id;
@@ -103,6 +104,7 @@
 
         this.game.canvas.node.appendChild(this.node);
         this.game.loader.loaded(this);
+        */
     };
 
 

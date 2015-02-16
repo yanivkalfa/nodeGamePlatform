@@ -223,6 +223,7 @@
      * @api public
      */
     PongGame.prototype.sendPlayerReady = function(){
+        this.renderer.render(this.scene, this.camera);
         this.outRouter.pr();
     };
 
