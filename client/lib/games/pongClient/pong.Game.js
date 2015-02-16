@@ -161,6 +161,9 @@
         cWidth = this.canvas.width/2;
         cHeight = this.canvas.height/2;
         this.camera = new THREE.OrthographicCamera( -cWidth, cWidth, cHeight , -cHeight, 0.1, 1000 );
+        this.camera.position.x = -400 ;
+        this.camera.position.y = -250 ;
+        this.camera.position.z = 10 ;
         this.renderer = new THREE.WebGLRenderer();
         this.renderer.setSize( this.canvas.width, this.canvas.height );
 
@@ -168,6 +171,8 @@
         bgMaterial = new THREE.MeshBasicMaterial( { color: 0xFFFF00 } );
         bg = new THREE.Mesh( bgGeometry, bgMaterial );
         this.scene.add( bg );
+        bg.position.x = -400 ;
+        bg.position.y = -450 ;
         bg.position.z = -5 ;
 
         var self = this;
