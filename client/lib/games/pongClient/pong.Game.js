@@ -226,7 +226,6 @@
         var self = this, interval;
 
         this.setMySide();
-        /*
         this.countDownWindow = this.$modal.open({
             templateUrl: ngp.const.app.url + '/tpl/directives/gameCountDown.html',
             controller: 'gameCountDownController',
@@ -238,7 +237,6 @@
                 }
             }
         });
-        */
 
         interval = setInterval(function(){
             self.countDown--;
@@ -246,7 +244,7 @@
 
             if(self.countDown <= 0){
 
-                //self.countDownWindow.close();
+                self.countDownWindow.close();
                 self.gameReady = true;
 
                 setTimeout(function(){
