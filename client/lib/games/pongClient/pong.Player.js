@@ -16,15 +16,6 @@
 
 
         /**
-         * holds mesh
-         *
-         * @type {Object}
-         * @api public
-         */
-        this.mesh = undefined;
-
-
-        /**
          * Holds position relative in canvas.
          *
          * @type {Point}
