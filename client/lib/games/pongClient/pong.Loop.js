@@ -73,12 +73,12 @@
                     //if player score is set and is different from previous value then render and check score.
                     if(past.u[uI].s){
                         entity.attributes.score = past.u[uI].s;
-                        game.scoreBoard.render();
-                        game.roles.check();
+                        //game.scoreBoard.render();
+                        //game.roles.check();
                     }
                 }
 
-                //game.renderer.render(game.stage);
+                game.renderer.render(game.stage);
             }
         }
     };
