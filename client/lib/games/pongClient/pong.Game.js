@@ -159,8 +159,8 @@
         this.outRouter = new window.game.class.PongOutRouter(this);
 
         this.loader = new window.game.class.PongLoader(this, function(){ self.sendPlayerReady();});
-        //this.scoreBoard = new window.game.class.PongScoreBoard(this);
-        //this.scoreBoard.init();
+        this.scoreBoard = new window.game.class.PongScoreBoard(this);
+        this.scoreBoard.init();
         self.connectToServer();
     };
 
