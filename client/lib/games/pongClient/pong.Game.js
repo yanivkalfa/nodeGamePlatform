@@ -356,7 +356,8 @@
      * @api public
      */
     PongGame.prototype.joinPlayer = function(p){
-        var position = new window.game.class.Point(20, (this.game.canvas.height/2) - 50);
+        console.log(p);
+        var position = new window.game.class.Point(20, (this.canvas.height/2) - 50);
         if(!p.local){
             position = new window.game.class.Point((this.canvas.width-40), (this.canvas.height/2) - 50)
         }
@@ -366,6 +367,7 @@
             new THREE.MeshBasicMaterial( { color: 0xFFFFFF } )
         );
 
+
         this.scene.add( p.mesh );
         p.mesh.position.x = position.x;
         p.mesh.position.y = position.y;
@@ -373,6 +375,7 @@
         var pongPlayer = new window.game.class.PongPlayer(p,this);
         this.addPlayer(pongPlayer);
         pongPlayer.init();
+        console.log(pongPlayer);
     };
 
     /**
