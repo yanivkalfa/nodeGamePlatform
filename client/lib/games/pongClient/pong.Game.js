@@ -339,10 +339,10 @@
         this.addPlayer(pongPlayer);
         pongPlayer.init();
 
-        pongPlayer.mash = new PIXI.Graphics();
-        pongPlayer.mash.beginFill(0xFFFFFF);
-        pongPlayer.mash.drawRect(pongPlayer.position.x, pongPlayer.position.y, pongPlayer.dimensions.width, pongPlayer.dimensions.height);
-        this.stage.addChild(pongPlayer.mash);
+        pongPlayer.mesh = new PIXI.Graphics();
+        pongPlayer.mesh.beginFill(0xFFFFFF);
+        pongPlayer.mesh.drawRect(pongPlayer.position.x, pongPlayer.position.y, pongPlayer.dimensions.width, pongPlayer.dimensions.height);
+        this.stage.addChild(pongPlayer.mesh);
     };
 
     /**

@@ -25,7 +25,7 @@
          * @type {Object}
          * @api public
          */
-        this.mesh = opts.mesh || {};
+        this.mesh = undefined;
     }
 
     PongEntity.prototype = Object.create(window.game.class.Entity.prototype);
