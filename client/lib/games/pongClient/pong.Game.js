@@ -146,7 +146,7 @@
      */
     PongGame.prototype.init = function(){
         this.stage = new PIXI.Stage(0xFFFF00);
-        this.renderer = PIXI.CanvasRenderer(this.canvas.width, this.canvas.height);
+        this.renderer = PIXI.autoDetectRenderer(this.canvas.width, this.canvas.height);
 
         var self = this;
         this.createGameContainer();
@@ -226,6 +226,7 @@
         var self = this, interval;
 
         this.setMySide();
+        /*
         this.countDownWindow = this.$modal.open({
             templateUrl: ngp.const.app.url + '/tpl/directives/gameCountDown.html',
             controller: 'gameCountDownController',
@@ -237,6 +238,7 @@
                 }
             }
         });
+        */
 
         interval = setInterval(function(){
             self.countDown--;
@@ -244,7 +246,7 @@
 
             if(self.countDown <= 0){
 
-                self.countDownWindow.close();
+                //self.countDownWindow.close();
                 self.gameReady = true;
 
                 setTimeout(function(){
