@@ -114,3 +114,9 @@ body{
 
 .modal-header{z-index: 99999999;}
 .modal-title {z-index: 99999999;}
+
+canvas{
+    position: fixed;
+    top:20px;
+    left:0;
+}
