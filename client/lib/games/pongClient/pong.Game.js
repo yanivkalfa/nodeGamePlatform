@@ -311,8 +311,6 @@
         ball.mesh = new PIXI.Graphics();
         ball.mesh.beginFill(0x0066FF);
         ball.mesh.drawCircle (ball.position.x, ball.position.y, 5);
-        ball.mesh.anchor.x = 0;
-        ball.mesh.anchor.y = 0;
         this.stage.addChild(ball.mesh);
     };
 
@@ -344,8 +342,6 @@
         pongPlayer.mesh = new PIXI.Graphics();
         pongPlayer.mesh.beginFill(0xFFFFFF);
         pongPlayer.mesh.drawRect(pongPlayer.position.x, pongPlayer.position.y, pongPlayer.dimensions.width, pongPlayer.dimensions.height);
-        pongPlayer.mesh.anchor.x = 0;
-        pongPlayer.mesh.anchor.y = 0;
         this.stage.addChild(pongPlayer.mesh);
     };
 
