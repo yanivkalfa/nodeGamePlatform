@@ -376,6 +376,7 @@
         var pongPlayer = new window.game.class.PongPlayer(p,this);
         this.addPlayer(pongPlayer);
         pongPlayer.init();
+        pongPlayer.mesh = mesh;
     };
 
     /**
