@@ -64,14 +64,12 @@
                     y2 = future.u[uI].p.y;
 
                     // middle point between the past/future point
-                    entity.mesh.x = (x2-x1) * 0.5 + x1;
-                    entity.mesh.y = (y2-y1) * 0.5 + y1;
+                    nPos.x = (x2-x1) * 0.5 + x1;
+                    nPos.y = (y2-y1) * 0.5 + y1;
 
                     // set entity's new pos and render
-                    //entity.move(nPos);
-
-                    //this.mesh.position.x = newPoint.x;
-                    //this.mesh.position.y = newPoint.y;
+                    if(entity.id == 'ball') console.log(nPos);
+                    entity.move(nPos);
 
                     //if player score is set and is different from previous value then render and check score.
                     if(past.u[uI].s){
