@@ -77,6 +77,8 @@
                         game.roles.check();
                     }
                 }
+
+                game.renderer.render(game.stage);
             }
         }
     };

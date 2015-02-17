@@ -145,22 +145,10 @@
      * @api public
      */
     PongGame.prototype.init = function(){
-        var self = this;
         this.stage = new PIXI.Stage(0xFFFF00);
-        this.renderer = PIXI.autoDetectRenderer(this.canvas.width, this.canvas.height);
+        this.renderer = PIXI.CanvasRenderer(this.canvas.width, this.canvas.height);
 
-
-
-        animate();
-
-        function animate() {
-
-            requestAnimFrame( animate );
-
-            // render the stage
-            self.renderer.render(self.stage);
-        }
-
+        var self = this;
         this.createGameContainer();
         this.entities = new window.game.class.List();
         this.snapShots = new window.game.class.Collection();
