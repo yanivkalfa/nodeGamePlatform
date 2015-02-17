@@ -68,7 +68,6 @@
                     nPos.y = (y2-y1) * 0.5 + y1;
 
                     // set entity's new pos and render
-                    console.log(nPos);
                     entity.move(nPos);
 
                     //if player score is set and is different from previous value then render and check score.
@@ -78,8 +77,6 @@
                         game.roles.check();
                     }
                 }
-
-                game.renderer.render(game.stage);
             }
         }
     };
