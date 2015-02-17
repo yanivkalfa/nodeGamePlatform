@@ -117,24 +117,13 @@
         this.primus = undefined;
 
 
-
         /**
-         * Holds camera
+         * Holds stage
          *
          * @type {Object}
          * @api public
          */
-        this.camera = undefined;
-
-
-
-        /**
-         * Holds scene
-         *
-         * @type {Object}
-         * @api public
-         */
-        this.scene =  undefined;
+        this.stage =  undefined;
 
 
         /**
@@ -156,24 +145,8 @@
      * @api public
      */
     PongGame.prototype.init = function(){
-        var cWidth, cHeight, bgGeometry, bgMaterial, bg;
-        this.scene = new THREE.Scene();
-        cWidth = this.canvas.width/2;
-        cHeight = this.canvas.height/2;
-        this.camera = new THREE.OrthographicCamera( -cWidth, cWidth, cHeight , -cHeight, 0.1, 1000 );
-        this.camera.position.x = 400 ;
-        this.camera.position.y = 250 ;
-        this.camera.position.z = 10 ;
-        this.renderer = new THREE.WebGLRenderer();
-        this.renderer.setSize( this.canvas.width, this.canvas.height );
-
-        bgGeometry = new THREE.BoxGeometry( this.canvas.width, this.canvas.height, 0 );
-        bgMaterial = new THREE.MeshBasicMaterial( { color: 0xFFFF00 } );
-        bg = new THREE.Mesh( bgGeometry, bgMaterial );
-        this.scene.add( bg );
-        bg.position.x = 400 ;
-        bg.position.y = 250 ;
-        bg.position.z = -5 ;
+        this.stage = new PIXI.Stage(0xFFFF00);
+        this.renderer = PIXI.autoDetectRenderer(this.canvas.width, this.canvas.height);
 
         var self = this;
         this.createGameContainer();
@@ -206,7 +179,7 @@
         page.appendChild(gameCanvas);
         gameContainer.appendChild(page);
         this.canvas.node = gameCanvas;
-        this.canvas.node.appendChild( this.renderer.domElement );
+        this.canvas.node.appendChild( this.renderer.view );
     };
 
 
@@ -334,10 +307,11 @@
         var ball = new window.game.class.PongBall({id:'ball'},this);
         ball.init();
         this.entities.add(ball);
-        ball.mesh = new THREE.Mesh( new THREE.SphereGeometry( 5, 10, 20), new THREE.MeshBasicMaterial( { color: 0x0066FF } ) );
-        this.scene.add( ball.mesh );
-        ball.mesh.position.x = ball.position.x;
-        ball.mesh.position.y = ball.position.y;
+
+        ball.mesh = new PIXI.Graphics();
+        ball.mesh.beginFill(0x0066FF);
+        ball.mesh.drawCircle (ball.position.x, ball.position.y, 5);
+        this.stage.addChild(ball.mesh);
     };
 
     /**
@@ -357,26 +331,18 @@
      */
     PongGame.prototype.joinPlayer = function(p){
 
-        var position = new window.game.class.Point(20, (this.canvas.height/2) - 50);
         if(!p.local){
-            position = new window.game.class.Point((this.canvas.width-40), (this.canvas.height/2) - 50)
+            p.position = new window.game.class.Point((this.canvas.width-40), (this.canvas.height/2) - 50)
         }
 
-        var mesh = new THREE.Mesh(
-            new THREE.BoxGeometry( 20, 100, 0 ),
-            new THREE.MeshBasicMaterial( { color: 0xFFFFFF } )
-        );
-
-
-        this.scene.add( mesh );
-        mesh.position.x = position.x;
-        mesh.position.y = position.y;
-
-        p.mesh = mesh;
         var pongPlayer = new window.game.class.PongPlayer(p,this);
         this.addPlayer(pongPlayer);
         pongPlayer.init();
-        pongPlayer.mesh = mesh;
+
+        pongPlayer.mash = new PIXI.Graphics();
+        pongPlayer.mash.beginFill(0xFFFFFF);
+        pongPlayer.mash.drawRect(pongPlayer.position.x, pongPlayer.position.y, pongPlayer.dimensions.width, pongPlayer.dimensions.height);
+        this.stage.addChild(pongPlayer.mash);
     };
 
     /**

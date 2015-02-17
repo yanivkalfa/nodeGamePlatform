@@ -78,7 +78,7 @@
                     }
                 }
 
-                game.renderer.render(game.scene, game.camera);
+                game.renderer.render(game.stage);
 
             }
         }
