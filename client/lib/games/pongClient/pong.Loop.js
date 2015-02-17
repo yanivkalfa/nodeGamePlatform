@@ -79,7 +79,6 @@
                 }
 
                 game.renderer.render(game.stage);
-
             }
         }
     };
